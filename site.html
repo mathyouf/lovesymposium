@@ -1,0 +1,435 @@
+
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="og:image"
+    content="https://substackcdn.com/image/fetch/w_1456,c_limit,f_webp,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe1d30ccd-bb3c-465d-8f6b-5b85f12a755a_926x679.avif">
+  <meta property="twitter:image:src"
+    content="https://substackcdn.com/image/fetch/w_1456,c_limit,f_webp,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe1d30ccd-bb3c-465d-8f6b-5b85f12a755a_926x679.avif">
+  <link rel="stylesheet" href="reset.css">
+  <link rel="stylesheet" href="styles.css">
+  <!-- <link rel="stylesheet" href="manifest-style.css"> -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://use.typekit.net/tlf2euo.css">
+  <link rel="shortcut icon" type="image/jpg"
+    href="logo2.png" />
+  <title>Relationship Search Symposium</title>
+  <script>
+    var APP_ID = "wtb8z7sj";
+    window.intercomSettings = {
+      app_id: APP_ID
+    };
+  </script>
+  <script>(function () { var w = window; var ic = w.Intercom; if (typeof ic === "function") { ic('reattach_activator'); ic('update', w.intercomSettings); } else { var d = document; var i = function () { i.c(arguments); }; i.q = []; i.c = function (args) { i.q.push(args); }; w.Intercom = i; var l = function () { var s = d.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = 'https://widget.intercom.io/widget/' + APP_ID; var x = d.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x); }; if (w.attachEvent) { w.attachEvent('onload', l); } else { w.addEventListener('load', l, false); } } })();</script>
+  <script defer src="modal.js"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NP786MY8K9"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-NP786MY8K9');
+  </script>
+  <script src="blogList.js" defer></script>
+  <script>
+    fetch('faq.html')
+      .then(response => response.text())
+      .then(html => {
+        document.getElementById('faqContent').innerHTML = html;
+        attachEventListenersToFaqItems();
+      })
+      .catch(error => {
+        console.error('Error loading the FAQ content:', error);
+      });
+    function attachEventListenersToFaqItems() {
+      const faqItems = document.querySelectorAll('.faq-item');
+      console.log(faqItems);
+
+      faqItems.forEach(item => {
+        const faqItem = item.querySelector('.faq-item');
+        const faqIconDiv = item.querySelector('.faqIcon');
+        const faqIcon = item.querySelector('.fas');
+        const question = item.querySelector('.question');
+        const answer = item.querySelector('.answer');
+        console.log(answer.textContent)
+
+        faqIconDiv.addEventListener('click', () => {
+          answer.classList.toggle('hidden');
+          faqIcon.classList.toggle('down');
+        });
+
+        question.addEventListener('click', () => {
+          answer.classList.toggle('hidden');
+          faqIcon.classList.toggle('down');
+        });
+      });
+    }
+  </script>
+  <script>
+    fetch('timeline.html')
+      .then(response => response.text())
+      .then(html => {
+        const host = document.querySelector("#timeline-section");
+        const shadow = host.attachShadow({ mode: "open" });
+        const content = document.createElement("div");
+        content.innerHTML = html;
+        shadow.appendChild(content);
+        fetch('manifest.css')
+          .then(response => response.text())
+          .then(css => {
+            const sheet = new CSSStyleSheet();
+            sheet.replaceSync(css);
+            shadow.adoptedStyleSheets = [sheet];
+          })
+          .catch(error => {
+            console.error('Error loading the FAQ content:', error);
+        });
+      })
+      .catch(error => {
+        console.error('Error loading the FAQ content:', error);
+      });
+  </script>
+</head>
+
+<body>
+  <div class="content-area  background-image">
+    <navigation>
+      <a href="#writing">Writings</a>
+      <a href="#housing">Housing</a>
+      <a href="#FAQ">FAQ</a>
+    </navigation>
+
+    <section class="splash-section">
+      <div class="splash-text">
+        <h1>Relationship Search Symposium</h1>
+        <div class="subtitle">
+          <em>9 day event for people trying to solve modern relationships</em>
+        </div>
+        <div class="info"><em>Berkeley, CA, Lighthaven: November 8 - 17</em>
+        </div>
+        <div class="cta-row">
+            <a href="#" onclick="scrollToTicketsSection()" class="CTA-button third center"
+              target="_blank">
+              Register Attendance
+            </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="blogroll-section">
+      <div class="event-description">
+        <div style="color: black; font-size: 36px">What is the Relationship Search Symposium?</div>
+        <h2>November 8 - 17, 2024</h2>
+        <h4><a href="https://www.lighthaven.space/" target="_blank">Lighthaven Campus, Berkeley, CA</a></h4>
+        <p>
+        <div>
+          The First Annual Relationship Search Symposium is meant to bring together the worlds experts and passionate devotees to understanding how science and technology may help solve some of the hardest problems related to our relationships.
+          <br /><br />
+          Relationship outcomes between people can be predicted and is therefore a search problem which if made more efficient would dramatically improve the quality of human life.
+          <br /><br />
+          This is the impetus of this symposium. It has become a common enough belief among smart people that with the advances in data science and AI, we now have the capability of drastically improving the quality of search for friendship.
+          <br /><br />
+          Here is a question to ask yourself: Why can’t you search for friends on Facebook *that you haven’t made yet* based on a set of criteria you are looking for, combined with what Facebook already knows about your personality and existing relationships? My belief is that it is only because we haven’t yet decided it is possible. My hope is this symposium will be the first to inspire and pave the way towards us taking this capability seriously.
+          <br /><br />
+          Why? The reason is no less than that relationships between humans are the sources of our greatest happiness and suffering, and that what we feel in them can be radically improved by access to people more innately compatible with us. Families, friendships, companies, communities, research, life lessons, are all created between groups of people, and we think that being able to search for those people can create a life of social luxury for many more people on the planet.
+          <br /><br />
+          The weekends will be filled with talks, workshops, hackathons, paper readings, and late-night conversations around the fireside. If you have a session or activity you might like to 
+          run at the symposium, <a href='https://docs.google.com/forms/d/e/1FAIpQLSe8I4z4VvVRVtdk2Nl2ovdDWa5cCihxIlYOeT5cujv_T_l_zw/viewform' target="_blank">let us know!</a><br /><br />
+        </div>
+        <div class="quote">
+          <br>
+          <i>Eros will have naked bodies; Friendship naked personalities.</i>
+          <br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &mdash;&mdash;C.S. Lewis, The Four Loves
+              <br>
+        </div>
+        </p>
+      </div>
+      <div class="blogosphere" id="blogosphere">
+        <div class="blogroll-title-info">
+          <h3 class="blogroll-title">Writings we love</h3>
+          <h4 class="blogroll-subtitle">
+            These sites, papers, and books contain some of the best work we've seen on the subjects we want to cover. We're offering free tickets to everyone whose site is listed below.
+          </h4>
+        </div>
+        <div class="attendees-key">
+          <label class="blog-checkbox"><input type="checkbox" id="toggleCheckbox"> Only show authors confirmed attending</label>
+        </div>
+        <div class="blogs" id="blog-list">
+        </div>
+      </div>
+    </section>
+    <h2 class="guests-title ">Some attending guests</h2>
+    <section class="guests">
+      <div class="guest-photo-wrapper">
+        <img class="guest-photo" src="https://pbs.twimg.com/profile_images/1826076828785655808/2OGjKi1a_400x400.jpg" />
+        <div class="guest-name">Matthew Fisher</div>
+        <a class="guest-name-subtitle" href="https://x.com/MathYouF" target="_blank">billionaire genius cultural data viz interviewer        </a>
+      </div>
+      <div class="guest-photo-wrapper">
+        <img class="guest-photo" src="https://cdn.discordapp.com/attachments/1039387506849890334/1287451023031406743/mathyouf_Profile_picture_portrait_of_Cupid_as_a_famous_writer_2a40660a-109b-4583-afd4-9fc76a92fd9f.png?ex=66f197b3&is=66f04633&hm=b3a30ee2d29429132b69e9ea369e775a7c4fd6e8aa6b7e7a669773cbc198abd6&" />
+        <div class="guest-name">Authors</div>
+        <a class="guest-name-subtitle" href="https://x.com/MathYouF" target="_blank">billionaire genius cultural data viz interviewer        </a>
+      </div>
+      <div class="guest-photo-wrapper">
+        <img class="guest-photo" src="https://cdn.discordapp.com/attachments/1039387506849890334/1287452560176840734/mathyouf_Profile_picture_portrait_of_Cupid_as_a_merchant_starin_9b286d84-e734-410f-b2ad-efc66aebb66f.png?ex=66f19922&is=66f047a2&hm=a6e76b00504aae4f78bf265b0ce450f1eca2a629777dcc150bbbe8fcc32cae93&" />
+        <div class="guest-name">Founders</div>
+        <a class="guest-name-subtitle" href="https://x.com/MathYouF" target="_blank">billionaire genius cultural data viz interviewer        </a>
+      </div>
+      <div class="guest-photo-wrapper">
+        <img class="guest-photo" src="https://cdn.discordapp.com/attachments/1039387506849890334/1287448955378073856/mathyouf_Profile_picture_portrait_of_Cupid_as_a_programmer_ca62bf46-8200-4d0e-b8bf-7251810f9a7e.png?ex=66f195c6&is=66f04446&hm=5ddbdd27dab8789e26c5957aaaad028078743273a904ecfc4a173cf8a6bc750f&" />
+        <div class="guest-name">Programmers</div>
+        <a class="guest-name-subtitle" href="https://x.com/MathYouF" target="_blank">billionaire genius cultural data viz interviewer        </a>
+      </div>
+      <div class="guest-photo-wrapper">
+        <img class="guest-photo" src="https://cdn.discordapp.com/attachments/1039387506849890334/1287453869852590211/mathyouf_Profile_picture_portrait_of_Cupid_coding_next_to_a_sup_ba056568-613a-4f5c-92ee-dab609f3eaae.png?ex=66f19a5a&is=66f048da&hm=faac26a5ede39f885b66eb41fbcf4682a69ceafd75a30ce784ead1631e7bd2b6&" />
+        <div class="guest-name">Researchers</div>
+        <a class="guest-name-subtitle" href="https://x.com/MathYouF" target="_blank">billionaire genius cultural data viz interviewer        </a>
+      </div>
+      <div class="guest-photo-wrapper">
+        <img class="guest-photo" src="https://cdn.discordapp.com/attachments/1039387506849890334/1287450294799827055/mathyouf_Profile_picture_portrait_of_Cupid_as_a_scientist_in_a__d891bbdf-1850-470d-a3e2-7f0fdc92e6ab.png?ex=66f19705&is=66f04585&hm=1819c84ef50ab2db89b5302b81a9802fe8ca25df68c6e3af2df9dacf33c3c728&" />
+        <div class="guest-name">Scientists</div>
+        <a class="guest-name-subtitle" href="https://x.com/MathYouF" target="_blank">billionaire genius cultural data viz interviewer        </a>
+      </div>
+      <div class="guest-photo-wrapper">
+        <img class="guest-photo" src="https://cdn.discordapp.com/attachments/1039387506849890334/1287457671393579129/mathyouf_Profile_picture_portrait_of_Cupid_sitting_at_a_compute_1ce44126-dae1-4904-b4fd-d9cd4ad8f3c6.png?ex=66f19de4&is=66f04c64&hm=59d94255ce8c92dd441971964233e6e3324dffd6fefc081f879429a18fe726de&" />
+        <div class="guest-name">Designers</div>
+        <a class="guest-name-subtitle" href="https://x.com/MathYouF" target="_blank">billionaire genius cultural data viz interviewer        </a>
+      </div>
+      <div class="guest-photo-wrapper">
+        <img class="guest-photo" src="https://cdn.discordapp.com/attachments/1039387506849890334/1287448336642609273/mathyouf_Profile_picture_portrait_of_Cupid_as_a_psychologist_si_43971034-5666-4294-b953-eb80aacfc560.png?ex=66f19533&is=66f043b3&hm=3d70f533e532d1769375dd581aecea8a567189103fe6644dff0a328a88b14c37&" />
+        <div class="guest-name">Psychologists</div>
+        <a class="guest-name-subtitle" href="https://x.com/MathYouF" target="_blank">billionaire genius cultural data viz interviewer        </a>
+      </div>
+      <div class="guest-photo-wrapper">
+        <img class="guest-photo" src="https://cdn.discordapp.com/attachments/1039387506849890334/1287455936436506797/mathyouf_Profile_picture_portrait_of_Cupid_in_masquerade_mask_s_712d9d32-6271-401e-90af-04b3a48d3cfd.png?ex=66f19c47&is=66f04ac7&hm=b62670745c2ee054f78b4a51b19d371236d3d8410b06c73b0795b8a1ca8639db&" />
+        <div class="guest-name">Maybe you?</div>
+        <a class="guest-name-subtitle" href="https://x.com/MathYouF" target="_blank">Attending speakers being announced soon!</a>
+      </div>
+    </section>
+    <h2 class="guests-title">Four Main Topics</h2>
+    <section class="sessions">
+      
+      <div class="session">
+        <img src="https://images.fineartamerica.com/images/artworkimages/medium/1/signing-the-register-edmund-blair-leighton.jpg"/>
+        <h3>History of Marriage</h3>
+        <p>In depth talks and discussion<br/>on how we got here.</p>
+      </div>
+      <div class="session">
+        <img src="https://www.northwindprints.com/p/473/courtship-woodland-setting-1800s-5881957.jpg.webp"/>
+        <h3>Relationship Goals</h3>
+        <p>Is it evolutionary psychology or romance?</p>
+      </div>
+      <div class="session">
+        <img src="https://images.immediate.co.uk/production/volatile/sites/7/2018/01/GettyImages-641351486-f8dd321.jpg?quality=90&crop=2px,330px,1624px,1082px&resize=980,654"/>
+        <h3>Personality Embeddings</h3>
+        <p>How can we represent the entire human soul as a vector?</p>
+      </div>
+      <div class="session">
+        <img src="https://eclecticlight.co/wp-content/uploads/2016/04/thumannthreefates.jpg"/>
+        <h3>Relationship Outcome Prediction</h3>
+        <p>How can we predict the destiny between you and any other person in the world?</p>
+      </div>
+    </section>
+    <section class="center">
+      <h3>See more on <a href="https://schedule.less.online/LessOnline" target="_blank">the schedule</a>.</h3>
+    </section>
+    <section class="gallery">
+        <img class="gallery-photo large" src="https://www.lighthaven.space/public/8x5/40-print-Rose_Garden_Inn-10.jpg"/>
+      <img class="gallery-photo large" src="https://www.lighthaven.space/public/crowd-stuart-park-square.jpg"/>
+      <img class="gallery-photo large" src="https://www.lighthaven.space/public/bayes-house-lobby.jpg"/>
+      <img class="gallery-photo large" src="https://www.lighthaven.space/public/8x5/44-print-Rose_Garden_Inn-14.jpg"/>
+      <img class="gallery-photo large" src="https://www.lighthaven.space/public/WardGardens/Ward-Gardens-Cabin-4b.jpg"/>
+      <img class="gallery-photo large" src="https://res.cloudinary.com/cea/image/upload/f_auto,q_auto/v1/mirroredImages/oP8YDDJtTGjnH8Nnj/jqeelvnnn0kg7uriwlzo"/>
+      <img class="gallery-photo large" src="https://www.lighthaven.space/public/bayes-house.jpg"/>
+
+    </section> 
+    <section class="center-section">
+      <div id="timeline-section"></div>
+    </section>
+    <section class="FAQ-section" id="housing">
+      <div class="campus-map">
+        <img class="campus-image" src="https://res.cloudinary.com/lesswrong-2-0/image/upload/f_auto,q_auto/v1/mirroredImages/memqyjNCpeDrveayx/nayoukfloiwauxknwahp" />
+      </div>
+      <div class="faq-text">
+        <h2 class="title">Stay at Lighthaven</h2>
+        <p>A limited number of rooms are available on-site at Lighthaven as part of their Eternal September housing offer for people to visit during the entire Fall of 2024.</p> <br>
+
+        <a href="https://www.havenbookings.space/events/eternal-september" class="CTA-button third"
+          target="_blank">
+          Book rooms
+        </a>
+      </div>
+    </section>
+
+    <section class="FAQ-section" id="FAQ">
+      <div class="campus-map">
+        <img class="campus-image" src="https://less.online/public/splash_image_campus_map.jpg" />
+      </div>
+      <div class="faq-text">
+        <h2 class="title">FAQ</h2>
+        <div id="faqContent"></div>
+      </div>
+    </section>
+    <section class="center-section">
+      <h2 class="title">Contact</h2>
+      <p>If you have any questions or comments,<br/>
+        please email <a href="mailto:mattallenfisher@gmail.com" target="_blank" class="green">mattallenfisher@gmail.com</a></p>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+    </section>
+  </div>
+  <script>
+    var checkbox = document.getElementById('toggleCheckbox');
+    var content = document.getElementsByClassName('not');
+    checkbox.addEventListener('change', function () {
+      Array.from(content).forEach(div => {
+        div.classList.toggle('hidden');
+      });
+    });
+
+  </script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var lessOnlineCheckbox = document.getElementById('lessOnlineCheckbox');
+      var buyTicketsLink = document.getElementById('buyTicketsLink');
+      var ticketPriceDisplay = document.getElementById('ticketPrice'); // Assuming you have an element to display the price
+
+      function updateTicketLink() {
+
+        var price = 0;
+
+        var manifestTicketLink = 'https://www.tickettailor.com/events/manifoldmarketsinc/1166167';
+        var lessOnlineTicketLink = 'https://buy.stripe.com/bIY7w96ua9fbfVmbIL';
+        var lessOnlineManifestTicketLink = 'https://www.tickettailor.com/events/manifoldmarketsinc/1166167';
+        var lessOnlineSummerCampTicketLink = 'https://buy.stripe.com/4gw17LbOu1MJ24wcMN';
+        var allThreeTicketLink = 'https://www.tickettailor.com/events/manifoldmarketsinc/1166167';
+
+        var lo = lessOnlineCheckbox.checked;
+        var sc = summerCampCheckbox.checked;
+        var m = manifestCheckbox.checked;
+
+        var link = 'https://www.tickettailor.com/events/manifoldmarketsinc/1166167';
+        if (lo && !sc && !m) {
+          link = lessOnlineTicketLink;
+          price = 500;
+        } else if (lo && !sc && m) {
+          link = lessOnlineManifestTicketLink;
+          price = 850;
+        } else if (lo && sc && !m) {
+          link = lessOnlineSummerCampTicketLink;
+          price = 1000;
+        } else if (lo && sc && m) {
+          link = allThreeTicketLink;
+          price = 1200;
+        } else if (sc && m) {
+          link = manifestTicketLink;
+          price = 1000;
+        } else if (sc) {
+          price = 500;
+        } else if (m) {
+          price = 500;
+        } else if (!lo && !sc && !m) {
+          link = '#';
+          
+        }
+
+        // Update the displayed price
+        if (ticketPriceDisplay) {
+          ticketPriceDisplay.textContent = price > 0 ?`Buy Tickets: $${price}` : 'Select your ticket(s)';
+        }
+
+        buyTicketsLink.href = link;
+
+        buyTicketsLink.onclick = function(event) {
+          if (!lo && !sc && !m) {
+            event.preventDefault(); // Prevent navigating
+            alert("You must select your ticket(s) before buying them");
+          }
+        };
+      }
+
+      lessOnlineCheckbox.addEventListener('change', updateTicketLink);
+      summerCampCheckbox.addEventListener('change', updateTicketLink);
+      manifestCheckbox.addEventListener('change', updateTicketLink);
+
+      // Initialize the link based on the default checkbox states
+      updateTicketLink();
+    });
+  </script>
+
+  <script>
+    // Childcare
+    document.addEventListener('DOMContentLoaded', function () {
+      var childcare3Checkbox = document.getElementById('childcare3Checkbox');
+      var childcare10Checkbox = document.getElementById('childcare10Checkbox');
+      var buyChildcareLink = document.getElementById('buyChildcareLink');
+      var childCarePriceDisplay = document.getElementById('childCarePrice'); // Assuming you have an element to display the price
+
+      function updateChildcareLink() {
+
+        var link = '#';
+        var price = 0;
+
+        var childcare3TicketLink = 'https://buy.stripe.com/3cs7w96ua8b7aB24gl';
+        var childcare10TicketLink = 'https://buy.stripe.com/28o9Eh4m2fDz8sU14a';
+
+        var c3 = childcare3Checkbox.checked;
+        var c10 = childcare10Checkbox.checked;
+
+        if (c3 && !c10) {
+          link = childcare3TicketLink;
+          price = 150;
+        } else if (c10) {
+          link = childcare10TicketLink;
+          price = 300;
+        }
+
+        // Update the displayed price
+        if (childCarePriceDisplay) {
+          childCarePriceDisplay.textContent = `$${price}`;
+        }
+
+        buyChildcareLink.href = link;
+      }
+
+      childcare3Checkbox.addEventListener('change', updateChildcareLink);
+      childcare10Checkbox.addEventListener('change', updateChildcareLink);
+
+      // Initialize the link based on the default checkbox states
+      updateChildcareLink();
+    });
+  </script>  
+
+  <script>
+    function scrollToTicketsSection() {
+      // Prevent the default anchor behavior
+      event.preventDefault();
+      
+      // Find the tickets-section element
+      const ticketsSection = document.getElementById('tickets-section');
+      
+      // Scroll to the tickets-section smoothly
+      ticketsSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>  <script>
+    function updatePriceNote() {
+      const ticketPriceNoteDate = new Date("2024-05-15");
+      const daysRemaining = Math.round((ticketPriceNoteDate - new Date()) / (1000 * 60 * 60 * 24));
+      if (daysRemaining > 1) {
+        document.getElementById('ticket-price-note-date').innerHTML = `in ${daysRemaining} days`;
+      } else {
+        document.getElementById('ticket-price-note-date').innerHTML = `in 1 day`;
+      }
+    }
+    updatePriceNote();
+  </script>
+</body>
+
+</html>
