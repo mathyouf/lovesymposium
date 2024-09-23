@@ -16,7 +16,7 @@
   }
   
   body {
-    font-family: 'Cormorant', serif;
+    font-family: 'Cormorant', serif !important;
 
     /* max-width: 1100px; */
     margin-left: auto;
