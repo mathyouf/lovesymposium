@@ -46,7 +46,8 @@
     line-height: 1.4;
     margin-bottom: 2px; /* or 2px? */
     text-shadow: 0px 0px 5px rgba(0,0,0,.5), 0px 0px 100px rgba(50,0,0,1), 0px 0px 100px rgba(50,0,0,1);
-    padding: 5%;
+    padding-left: 5%;
+    padding-right: 5%;
   }
   
   li {
@@ -1269,7 +1270,8 @@
   .info {
     font-size: 20px;
     text-shadow: 0px 0px 5px rgba(0,0,0,.5), 0px 0px 50px rgba(0,0,0,1), 0px 0px 50px rgba(0,0,0,1);
-    padding: 5%;
+    padding-left: 5%;
+    padding-right: 5%;
   }
   
   .height-shorten {
