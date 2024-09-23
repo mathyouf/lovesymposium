@@ -1,6 +1,5 @@
 
 <html>
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,7 +9,6 @@
     content="https://substackcdn.com/image/fetch/w_1456,c_limit,f_webp,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe1d30ccd-bb3c-465d-8f6b-5b85f12a755a_926x679.avif">
   <link rel="stylesheet" href="reset.css">
   <link rel="stylesheet" href="styles.css">
-  <!-- <link rel="stylesheet" href="manifest-style.css"> -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,20 +17,19 @@
     href="logo2.png" />
   <title>Relationship Search Symposium</title>
   <script>
-    var APP_ID = "wtb8z7sj";
-    window.intercomSettings = {
-      app_id: APP_ID
-    };
+    // var APP_ID = "wtb8z7sj";
+    // window.intercomSettings = {
+    //   app_id: APP_ID
+    // };
   </script>
-  <script>(function () { var w = window; var ic = w.Intercom; if (typeof ic === "function") { ic('reattach_activator'); ic('update', w.intercomSettings); } else { var d = document; var i = function () { i.c(arguments); }; i.q = []; i.c = function (args) { i.q.push(args); }; w.Intercom = i; var l = function () { var s = d.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = 'https://widget.intercom.io/widget/' + APP_ID; var x = d.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x); }; if (w.attachEvent) { w.attachEvent('onload', l); } else { w.addEventListener('load', l, false); } } })();</script>
-  <script defer src="modal.js"></script>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NP786MY8K9"></script>
+  <!-- <script>(function () { var w = window; var ic = w.Intercom; if (typeof ic === "function") { ic('reattach_activator'); ic('update', w.intercomSettings); } else { var d = document; var i = function () { i.c(arguments); }; i.q = []; i.c = function (args) { i.q.push(args); }; w.Intercom = i; var l = function () { var s = d.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = 'https://widget.intercom.io/widget/' + APP_ID; var x = d.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x); }; if (w.attachEvent) { w.attachEvent('onload', l); } else { w.addEventListener('load', l, false); } } })();</script> -->
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-NP786MY8K9"></script> -->
   <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
+    // window.dataLayer = window.dataLayer || [];
+    // function gtag() { dataLayer.push(arguments); }
+    // gtag('js', new Date());
 
-    gtag('config', 'G-NP786MY8K9');
+    // gtag('config', 'G-NP786MY8K9');
   </script>
   <script src="blogList.js" defer></script>
   <script>
@@ -68,30 +65,6 @@
         });
       });
     }
-  </script>
-  <script>
-    fetch('timeline.html')
-      .then(response => response.text())
-      .then(html => {
-        const host = document.querySelector("#timeline-section");
-        const shadow = host.attachShadow({ mode: "open" });
-        const content = document.createElement("div");
-        content.innerHTML = html;
-        shadow.appendChild(content);
-        fetch('manifest.css')
-          .then(response => response.text())
-          .then(css => {
-            const sheet = new CSSStyleSheet();
-            sheet.replaceSync(css);
-            shadow.adoptedStyleSheets = [sheet];
-          })
-          .catch(error => {
-            console.error('Error loading the FAQ content:', error);
-        });
-      })
-      .catch(error => {
-        console.error('Error loading the FAQ content:', error);
-      });
   </script>
 </head>
 
@@ -295,141 +268,6 @@
 
   </script>
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      var lessOnlineCheckbox = document.getElementById('lessOnlineCheckbox');
-      var buyTicketsLink = document.getElementById('buyTicketsLink');
-      var ticketPriceDisplay = document.getElementById('ticketPrice'); // Assuming you have an element to display the price
-
-      function updateTicketLink() {
-
-        var price = 0;
-
-        var manifestTicketLink = 'https://www.tickettailor.com/events/manifoldmarketsinc/1166167';
-        var lessOnlineTicketLink = 'https://buy.stripe.com/bIY7w96ua9fbfVmbIL';
-        var lessOnlineManifestTicketLink = 'https://www.tickettailor.com/events/manifoldmarketsinc/1166167';
-        var lessOnlineSummerCampTicketLink = 'https://buy.stripe.com/4gw17LbOu1MJ24wcMN';
-        var allThreeTicketLink = 'https://www.tickettailor.com/events/manifoldmarketsinc/1166167';
-
-        var lo = lessOnlineCheckbox.checked;
-        var sc = summerCampCheckbox.checked;
-        var m = manifestCheckbox.checked;
-
-        var link = 'https://www.tickettailor.com/events/manifoldmarketsinc/1166167';
-        if (lo && !sc && !m) {
-          link = lessOnlineTicketLink;
-          price = 500;
-        } else if (lo && !sc && m) {
-          link = lessOnlineManifestTicketLink;
-          price = 850;
-        } else if (lo && sc && !m) {
-          link = lessOnlineSummerCampTicketLink;
-          price = 1000;
-        } else if (lo && sc && m) {
-          link = allThreeTicketLink;
-          price = 1200;
-        } else if (sc && m) {
-          link = manifestTicketLink;
-          price = 1000;
-        } else if (sc) {
-          price = 500;
-        } else if (m) {
-          price = 500;
-        } else if (!lo && !sc && !m) {
-          link = '#';
-          
-        }
-
-        // Update the displayed price
-        if (ticketPriceDisplay) {
-          ticketPriceDisplay.textContent = price > 0 ?`Buy Tickets: $${price}` : 'Select your ticket(s)';
-        }
-
-        buyTicketsLink.href = link;
-
-        buyTicketsLink.onclick = function(event) {
-          if (!lo && !sc && !m) {
-            event.preventDefault(); // Prevent navigating
-            alert("You must select your ticket(s) before buying them");
-          }
-        };
-      }
-
-      lessOnlineCheckbox.addEventListener('change', updateTicketLink);
-      summerCampCheckbox.addEventListener('change', updateTicketLink);
-      manifestCheckbox.addEventListener('change', updateTicketLink);
-
-      // Initialize the link based on the default checkbox states
-      updateTicketLink();
-    });
-  </script>
-
-  <script>
-    // Childcare
-    document.addEventListener('DOMContentLoaded', function () {
-      var childcare3Checkbox = document.getElementById('childcare3Checkbox');
-      var childcare10Checkbox = document.getElementById('childcare10Checkbox');
-      var buyChildcareLink = document.getElementById('buyChildcareLink');
-      var childCarePriceDisplay = document.getElementById('childCarePrice'); // Assuming you have an element to display the price
-
-      function updateChildcareLink() {
-
-        var link = '#';
-        var price = 0;
-
-        var childcare3TicketLink = 'https://buy.stripe.com/3cs7w96ua8b7aB24gl';
-        var childcare10TicketLink = 'https://buy.stripe.com/28o9Eh4m2fDz8sU14a';
-
-        var c3 = childcare3Checkbox.checked;
-        var c10 = childcare10Checkbox.checked;
-
-        if (c3 && !c10) {
-          link = childcare3TicketLink;
-          price = 150;
-        } else if (c10) {
-          link = childcare10TicketLink;
-          price = 300;
-        }
-
-        // Update the displayed price
-        if (childCarePriceDisplay) {
-          childCarePriceDisplay.textContent = `$${price}`;
-        }
-
-        buyChildcareLink.href = link;
-      }
-
-      childcare3Checkbox.addEventListener('change', updateChildcareLink);
-      childcare10Checkbox.addEventListener('change', updateChildcareLink);
-
-      // Initialize the link based on the default checkbox states
-      updateChildcareLink();
-    });
-  </script>  
-
-  <script>
-    function scrollToTicketsSection() {
-      // Prevent the default anchor behavior
-      event.preventDefault();
-      
-      // Find the tickets-section element
-      const ticketsSection = document.getElementById('tickets-section');
-      
-      // Scroll to the tickets-section smoothly
-      ticketsSection.scrollIntoView({ behavior: 'smooth' });
-    }
-  </script>  <script>
-    function updatePriceNote() {
-      const ticketPriceNoteDate = new Date("2024-05-15");
-      const daysRemaining = Math.round((ticketPriceNoteDate - new Date()) / (1000 * 60 * 60 * 24));
-      if (daysRemaining > 1) {
-        document.getElementById('ticket-price-note-date').innerHTML = `in ${daysRemaining} days`;
-      } else {
-        document.getElementById('ticket-price-note-date').innerHTML = `in 1 day`;
-      }
-    }
-    updatePriceNote();
-  </script>
 </body>
 
 </html>
