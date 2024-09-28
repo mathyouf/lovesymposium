@@ -235,9 +235,13 @@
   
   .guests-title {
     text-align: center;
-    margin: 75px 0 25px 0;
+    margin: 75px 0 -25px 0;
   }
   
+  .papers-title {
+    text-align: center;
+    margin: 75px 0 25px 0;
+  }
   
   p a.green {
     color: var(--green);
@@ -372,6 +376,18 @@
     }
   }
   
+    
+  .paper-gallery {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding: 0%;
+    /* flex-wrap:wrap; */
+    width: 100%;
+    overflow: hidden;
+    margin: 0 0;
+    overflow: auto;
+  }
   
   .gallery {
     display: flex;
