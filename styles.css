@@ -379,24 +379,21 @@
     
   .paper-gallery {
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: flex-end;
     padding: 0%;
     /* flex-wrap:wrap; */
-    width: 100%;
-    overflow: hidden;
-    margin: 0 0;
+    margin: 0 auto;
     overflow: auto;
   }
   
   .gallery {
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: flex-end;
     /* flex-wrap:wrap; */
-    width: 100%;
-    overflow: hidden;
-    margin: 100px 0;
+    /* width: 100%; */
+    margin: 100px auto;
     overflow: auto;
   }
   
