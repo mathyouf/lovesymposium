@@ -1283,7 +1283,7 @@
   }
   
   .info {
-    padding-bottom: 1em;
+    padding-bottom: 1.25em;
     font-size: 20px;
     text-shadow: 0px 0px 5px rgba(0,0,0,.5), 0px 0px 50px rgba(0,0,0,1), 0px 0px 50px rgba(0,0,0,1);
     padding-left: 5%;
