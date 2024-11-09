@@ -156,7 +156,6 @@
     margin-right: 10px;
     background: white;;
   }
-  
   .CTA-button.third {
     background: var(--goldish);
     color: white;
@@ -164,23 +163,55 @@
     padding: 12px 18px;
     opacity: 100%;
     display: block;
-  }
-  
-  @media screen and (max-width: 750px) {
-    .CTA-button.third {
-      max-width: 250px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-  }
-  
-  .CTA-button.third:hover {
+    position: relative;  /* Added for heart positioning */
+    transition: all 0.3s ease;  /* Added for smooth transitions */
+    overflow: hidden;  /* Added for heart animation */
+}
+
+/* Heart decoration */
+.CTA-button.third::before {
+    content: '♥';
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%);
+    font-size: 0;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+/* Hover effects - combined with your existing hover */
+.CTA-button.third:hover {
     background: var(--light-goldish);
-  }
-  a.CTA-button.third {
+    padding-left: 40px;
+    animation: pulse 1.5s infinite;
+}
+
+.CTA-button.third:hover::before {
+    font-size: 18px;
+    opacity: 1;
+}
+
+/* Keep your existing styles */
+@media screen and (max-width: 750px) {
+    .CTA-button.third {
+        max-width: 250px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+a.CTA-button.third {
     display: block;
     margin-bottom: 10px;
-  }
+}
+
+/* Add animation keyframes */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
   
   .button-series {
     margin-top: 10px;
