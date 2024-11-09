@@ -156,80 +156,31 @@
     margin-right: 10px;
     background: white;;
   }
-.CTA-button.third {
+  
+  .CTA-button.third {
     background: var(--goldish);
     color: white;
     font-size: 24px;
     padding: 12px 18px;
     opacity: 100%;
     display: block;
-    position: relative;
-    transition: all 0.3s ease;
-    overflow: hidden;
-}
-
-/* Left heart */
-.CTA-button.third::before {
-    content: '♥';
-    position: absolute;
-    top: 50%;
-    left: -30px; /* Start outside the button */
-    transform: translateY(-50%);
-    font-size: 24px;
-    opacity: 0;
-    transition: all 0.3s ease;
-}
-
-/* Right heart */
-.CTA-button.third::after {
-    content: '♥';
-    position: absolute;
-    top: 50%;
-    right: -30px; /* Start outside the button */
-    transform: translateY(-50%);
-    font-size: 24px;
-    opacity: 0;
-    transition: all 0.3s ease;
-}
-
-/* Hover effects */
-.CTA-button.third:hover {
-    background: rgba(0, 0, 0, 0.2); /* Darkening overlay */
-    padding-left: 45px;
-    padding-right: 45px;
-    animation: pulse 1.5s infinite;
-}
-
-.CTA-button.third:hover::before {
-    left: 15px; /* Squeeze in from left */
-    opacity: 1;
-}
-
-.CTA-button.third:hover::after {
-    right: 15px; /* Squeeze in from right */
-    opacity: 1;
-}
-
-/* Keep your existing styles */
-@media screen and (max-width: 750px) {
+  }
+  
+  @media screen and (max-width: 750px) {
     .CTA-button.third {
-        max-width: 250px;
-        margin-left: auto;
-        margin-right: auto;
+      max-width: 250px;
+      margin-left: auto;
+      margin-right: auto;
     }
-}
-
-a.CTA-button.third {
+  }
+  
+  .CTA-button.third:hover {
+    background: var(--light-goldish);
+  }
+  a.CTA-button.third {
     display: block;
     margin-bottom: 10px;
-}
-
-/* Animation keyframes */
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
-}
+  }
   
   .button-series {
     margin-top: 10px;
