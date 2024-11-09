@@ -232,6 +232,12 @@
     /* height: 800px; */
     position: relative;
   }
+
+  @media (max-width: 920px) {
+      .background-image {
+        background-size: auto;
+      }
+  }
   
   .guests-title {
     text-align: center;
