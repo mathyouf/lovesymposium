@@ -102,9 +102,7 @@
 
         <!-- Speaker Grid -->
         <main id="speakers-section" class="container mx-auto px-4 pt-16 pb-12 relative z-10">
-            <div id="speaker-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-6 md:gap-8">
-                <!-- Speaker profiles inserted here -->
-            </div>
+            <!-- Speaker profiles inserted here -->
         </main>
         
         <!-- Interspersed Image Divider -->
@@ -211,12 +209,22 @@
         let showTeaserMode = true; 
 
         // =====================================================================
-        // DATA URLs (From Google Sheets)
+        // DATA URLs
         // =====================================================================
         const dataUrls = {
             speakers: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQuSLC5kKYfcrLYQIi7IqgpXY5I-t2lu7ztNicu3bcpHFtgWrJPvIo9L0fR05GH3WMJO540vTi5wWXl/pub?gid=0&single=true&output=csv',
             schedule: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQuSLC5kKYfcrLYQIi7IqgpXY5I-t2lu7ztNicu3bcpHFtgWrJPvIo9L0fR05GH3WMJO540vTi5wWXl/pub?gid=737105267&single=true&output=csv',
         };
+        const fallbackUrls = {
+            speakers: 'symv2imgs/speakers.csv',
+            schedule: 'symv2imgs/schedule.csv',
+        };
+
+        // =====================================================================
+        // GLOBAL DATA VARIABLES
+        // =====================================================================
+        let allSpeakers = [];
+        let allScheduleData = [];
 
         // =====================================================================
         // LOCAL DATA SOURCES (FALLBACKS & OTHERS)
@@ -264,30 +272,78 @@
         // DATA FETCHING & PARSING
         // =====================================================================
 
-        async function fetchCsvData(url, startRow) {
+        async function fetchAndParseCsv(primaryUrl, fallbackUrl, parser) {
             try {
-                const response = await fetch(url);
-                if (!response.ok) throw new Error(`Network response was not ok: ${response.statusText}`);
+                const response = await fetch(primaryUrl);
+                if (!response.ok) throw new Error('Primary URL fetch failed');
                 const csvText = await response.text();
-                const lines = csvText.trim().split('\n');
-                const headers = lines[startRow - 1].split(',').map(h => h.trim().replace(/"/g, ''));
-                const data = lines.slice(startRow).map(line => {
-                    const values = line.split(','); // Simple split, assuming no commas in data
-                    return headers.reduce((obj, header, i) => {
-                        if (header) obj[header] = (values[i] || '').trim().replace(/"/g, '');
-                        return obj;
-                    }, {});
-                });
-                return data;
-            } catch (error) {
-                console.error(`Failed to fetch or parse CSV data from ${url}:`, error);
-                return []; 
+                console.log(`Successfully fetched data from PRIMARY source: ${primaryUrl}`);
+                console.log("Raw CSV:\n", csvText);
+                return parser(csvText);
+            } catch (e) {
+                console.warn(`Primary fetch failed: ${e.message}. Trying fallback URL: ${fallbackUrl}`);
+                try {
+                    const response = await fetch(fallbackUrl);
+                    if (!response.ok) throw new Error('Fallback URL fetch failed');
+                    const csvText = await response.text();
+                    console.log(`Successfully fetched data from FALLBACK source: ${fallbackUrl}`);
+                    console.log("Raw CSV:\n", csvText);
+                    return parser(csvText);
+                } catch (e2) {
+                    console.error(`Fallback fetch also failed: ${e2.message}.`);
+                    return [];
+                }
             }
         }
 
+        function parseSpeakersCsv(csvText) {
+            const lines = csvText.trim().split('\n');
+            const headers = lines[1].split(',').map(h => h.trim().replace(/"/g, ''));
+            const data = lines.slice(2).map(line => {
+                const values = line.split(',');
+                return headers.reduce((obj, header, i) => {
+                    if (header) obj[header] = (values[i] || '').trim().replace(/"/g, '');
+                    return obj;
+                }, {});
+            });
+            console.log("Parsed Speakers Data:", data);
+            return data;
+        }
+
+        function parseScheduleCsv(csvText) {
+            const lines = csvText.trim().split('\n').slice(2); // Skip first two header rows
+            const data = [];
+            let currentDate = '';
+            lines.forEach(line => {
+                const values = line.split(',');
+                if (values[0]) currentDate = values[0].trim(); // Update date if present
+                if (!values[1]) return; // Skip empty rows
+
+                data.push({
+                    Date: currentDate,
+                    Time: values[1].trim(),
+                    'Talk Name': values[4].trim(),
+                    'Speaker Index': values[5].trim(),
+                    'Talk Name_1': values[10].trim(),
+                    'Speaker Index_1': values[11].trim(),
+                });
+            });
+            console.log("Parsed Schedule Data:", data);
+            return data;
+        }
+
         // =====================================================================
-        // DOM POPULATION FUNCTIONS
+        // DOM POPULATION & RENDERING
         // =====================================================================
+
+        function renderPage() {
+            populateSpeakers(allSpeakers);
+            populateSchedule(allScheduleData, allSpeakers);
+            populateHosts(hosts);
+            populateReviews(reviews);
+            populateTickets(tickets);
+            populateFaq(faqData);
+        }
 
         function populateSpeakers(speakers) {
             const speakersSection = document.getElementById('speakers-section'); 
@@ -382,7 +438,7 @@
             if (!container) return;
             container.innerHTML = '';
 
-            if (showTeaserMode) {
+            if (showTeaserMode || !schedule || schedule.length === 0) {
                 container.innerHTML = `
                     <div class="text-center py-24 bg-blue-50 rounded-lg">
                         <h3 class="text-4xl font-romantic text-[#5c323e] mb-4">The Full Schedule</h3>
@@ -397,15 +453,18 @@
                 const date = row.Date || acc.lastDate;
                 if (!acc[date]) acc[date] = { date, slots: [] };
                 
-                const getSpeaker = (id) => speakers[parseInt(id)];
+                const getSpeaker = (id) => {
+                    if (id === 'host_0') return hosts[0];
+                    if (id === 'host_1') return hosts[1];
+                    return speakers.find(s => s.Index === id);
+                };
 
                 acc[date].slots.push({
                     time: row.Time,
                     rooms: [
                         { speaker: getSpeaker(row['Speaker Index']), talk: row['Talk Name'] },
-                        { speaker: getSpeaker(row['Speaker Index_1']), talk: row['Talk Name_1'] },
-                        { speaker: getSpeaker(row['Speaker Index_2']), talk: row['Talk Name_2'] }
-                    ].slice(0, 2) // We only have 2 rooms now
+                        { speaker: getSpeaker(row['Speaker Index_1']), talk: row['Talk Name_1'] }
+                    ]
                 });
                 acc.lastDate = date;
                 return acc;
@@ -432,7 +491,7 @@
                             <div class="p-2 rounded-lg w-full flex flex-col justify-center ${talk && talk.talk ? 'bg-blue-50' : ''}">
                                 ${talk && talk.talk ? `
                                     <p class="font-semibold text-[#5c323e] text-sm">${talk.talk}</p>
-                                    ${talk.speaker ? `<p class="text-xs text-gray-500 mt-1">${talk.speaker.Name}<br><span class="italic">${talk.speaker.Title}</span></p>` : ''}
+                                    ${talk.speaker ? `<p class="text-xs text-gray-500 mt-1">${talk.speaker.Name || talk.speaker.name}<br><span class="italic">${talk.speaker.Title || talk.speaker.title}</span></p>` : ''}
                                 ` : '' }
                             </div>
                         </div>`;
@@ -458,31 +517,24 @@
 
             document.getElementById('toggle-teaser').addEventListener('click', () => {
                 showTeaserMode = !showTeaserMode;
-                populateAllData();
+                renderPage();
             });
         }
 
-        async function populateAllData() {
+        async function initializePage() {
             const [speakersData, scheduleData] = await Promise.all([
-                fetchCsvData(dataUrls.speakers, 2),
-                fetchCsvData(dataUrls.schedule, 2)
+                fetchAndParseCsv(dataUrls.speakers, fallbackUrls.speakers, parseSpeakersCsv),
+                fetchAndParseCsv(dataUrls.schedule, fallbackUrls.schedule, parseScheduleCsv)
             ]);
             
-            // Use fetched data if available, otherwise fall back to local data
-            const finalSpeakers = speakersData.length ? speakersData : localSpeakers;
-            const finalSchedule = scheduleData.length ? scheduleData : localSchedule;
+            allSpeakers = speakersData.length ? speakersData : localSpeakers;
+            allScheduleData = scheduleData.length ? scheduleData : localSchedule;
 
-            // Populate sections
-            populateSpeakers(finalSpeakers);
-            populateSchedule(finalSchedule, finalSpeakers);
-            populateHosts(hosts);
-            populateReviews(reviews);
-            populateTickets(tickets);
-            populateFaq(faqData);
+            renderPage();
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            populateAllData();
+            initializePage();
             setupDebugToggles();
         });
     </script>
