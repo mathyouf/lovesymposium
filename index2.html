@@ -213,7 +213,7 @@
         // =====================================================================
         const dataUrls = {
             speakers: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQuSLC5kKYfcrLYQIi7IqgpXY5I-t2lu7ztNicu3bcpHFtgWrJPvIo9L0fR05GH3WMJO540vTi5wWXl/pub?gid=0&single=true&output=csv',
-            schedule: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQuSLC5kKYfcrLYQIi7IqgpXY5I-t2lu7ztNicu3bcpHFtgWrJPvIo9L0fR05GH3WMJO540vTi5wWXl/pub?gid=737105267&single=true&output=csv',
+            schedule: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQuSLC5kKYfcrLYQIi7IqgpXY5I-t2lu7ztNicu3bcpHFtgWrJPvIo9L0fR05GH3WMJO540vTi5wWXl/pub?gid=1770951979&single=true&output=csv',
         };
         const fallbackUrls = {
             speakers: 'symv2imgs/speakers.csv',
@@ -311,22 +311,14 @@
         }
 
         function parseScheduleCsv(csvText) {
-            const lines = csvText.trim().split('\n').slice(2); // Skip first two header rows
-            const data = [];
-            let currentDate = '';
-            lines.forEach(line => {
+            const lines = csvText.trim().split('\n');
+            const headers = lines[0].split(',').map(h => h.trim().replace(/"/g, ''));
+            const data = lines.slice(1).map(line => {
                 const values = line.split(',');
-                if (values[0]) currentDate = values[0].trim(); // Update date if present
-                if (!values[1]) return; // Skip empty rows
-
-                data.push({
-                    Date: currentDate,
-                    Time: values[1].trim(),
-                    'Talk Name': values[4].trim(),
-                    'Speaker Index': values[5].trim(),
-                    'Talk Name_1': values[10].trim(),
-                    'Speaker Index_1': values[11].trim(),
-                });
+                return headers.reduce((obj, header, i) => {
+                    if (header) obj[header] = (values[i] || '').trim().replace(/"/g, '');
+                    return obj;
+                }, {});
             });
             console.log("Parsed Schedule Data:", data);
             return data;
@@ -449,35 +441,44 @@
             }
 
             const scheduleByDay = schedule.reduce((acc, row) => {
-                if (!row.Date && !acc.lastDate) return acc; // Skip empty rows
-                const date = row.Date || acc.lastDate;
+                if (!row.Date) return acc; 
+                const date = row.Date;
                 if (!acc[date]) acc[date] = { date, slots: [] };
                 
                 const getSpeaker = (id) => {
+                    if (!id) return null;
                     if (id === 'host_0') return hosts[0];
                     if (id === 'host_1') return hosts[1];
                     return speakers.find(s => s.Index === id);
                 };
 
+                const parseContent = (content) => {
+                    if (!content || !content.includes('|')) return { talk: content, speaker: null };
+                    const [talk, speakerIndex] = content.split('|');
+                    return { talk, speaker: getSpeaker(speakerIndex) };
+                };
+
                 acc[date].slots.push({
                     time: row.Time,
                     rooms: [
-                        { speaker: getSpeaker(row['Speaker Index']), talk: row['Talk Name'] },
-                        { speaker: getSpeaker(row['Speaker Index_1']), talk: row['Talk Name_1'] }
+                        { ...parseContent(row['Room 1 Content']), name: row['Room 1 Name'] },
+                        { ...parseContent(row['Room 2 Content']), name: row['Room 2 Name'] }
                     ]
                 });
-                acc.lastDate = date;
                 return acc;
             }, {});
 
             Object.values(scheduleByDay).forEach(day => {
+                const room1Name = day.slots[0]?.rooms[0]?.name || 'Room 1';
+                const room2Name = day.slots[0]?.rooms[1]?.name || 'Room 2';
+
                 let dayHtml = `<div class="day-schedule">
                         <div class="sticky top-0 bg-white z-20">
                             <h3 class="text-3xl font-bold pt-4 pb-2 text-center text-[#5c323e]">${day.date}</h3>
                             <div class="grid grid-cols-[60px_1fr_1fr] gap-x-4 border-b-2 font-bold text-center text-gray-500">
                                 <div class="py-3">Time</div>
-                                <div class="py-3">Full Studio</div>
-                                <div class="py-3">South Studio</div>
+                                <div class="py-3">${room1Name}</div>
+                                <div class="py-3">${room2Name}</div>
                             </div>
                         </div>
                         <div class="schedule-body">`;
