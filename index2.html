@@ -79,7 +79,7 @@
             Love Symposium
         </h1>
         <p class="z-10 mt-4 text-lg md:text-xl lg:text-2xl tracking-wider text-gray-200">
-            The Weekend of November 14-16 at 
+            The Weekend of November 14-16, 2025 at 
             <a href="https://www.google.com/maps/search/?api=1&query=The+Commons,San+Francisco,CA" target="_blank" rel="noopener noreferrer" class="inline-block bg-white/20 hover:bg-white/40 text-white font-semibold px-4 py-1 rounded-full transition duration-300 mx-1">The Commons, San Francisco</a>
         </p>
     </header>
@@ -242,7 +242,7 @@
         // =====================================================================
         const dataUrls = {
             speakers: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQuSLC5kKYfcrLYQIi7IqgpXY5I-t2lu7ztNicu3bcpHFtgWrJPvIo9L0fR05GH3WMJO540vTi5wWXl/pub?gid=0&single=true&output=csv',
-            schedule: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQuSLC5kKYfcrLYQIi7IqgpXY5I-t2lu7ztNicu3bcpHFtgWrJPvIo9L0fR05GH3WMJO540vTi5wWXl/pub?gid=737105267&single=true&output=csv',
+            schedule: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQuSLC5kKYfcrLYQIi7IqgpXY5I-t2lu7ztNicu3bcpHFtgWrJPvIo9L0fR05GH3WMJO540vTi5wWXl/pub?gid=1770951979&single=true&output=csv',
         };
         const fallbackUrls = {
             speakers: 'symv2imgs/speakers.csv',
@@ -472,6 +472,13 @@
             if (!container) return;
             container.innerHTML = '';
 
+            const trackColors = {
+                'Business & Tech': 'bg-rose-50',
+                'Psychology & Statistics': 'bg-blue-50',
+                'Philosophy & Art': 'bg-yellow-50',
+                'Host': 'bg-gray-100',
+            };
+
             const scheduleByDay = schedule.reduce((acc, row) => {
                 if (!row.Date) return acc; 
                 const date = row.Date;
@@ -479,8 +486,8 @@
                 
                 const getSpeaker = (id) => {
                     if (!id) return null;
-                    if (id === 'host_0' || id === '97') return hosts[0];
-                    if (id === 'host_1' || id === '98') return hosts[1];
+                    if (id === 'host_0' || id === '97') return {...hosts[0], Track: 'Host'};
+                    if (id === 'host_1' || id === '98') return {...hosts[1], Track: 'Host'};
                     return speakers.find(s => s.Index === id);
                 };
 
@@ -515,8 +522,9 @@
                         <div class="py-4 text-center font-bold text-gray-400 text-sm">${slot.time}</div>`;
                     
                     slot.rooms.forEach(talk => {
+                        const bgColor = talk.speaker ? (trackColors[talk.speaker.Track] || 'bg-gray-50') : '';
                         dayHtml += `<div class="py-2 flex items-stretch">
-                            <div class="p-2 rounded-lg w-full flex flex-col justify-center ${talk && talk.talk ? 'bg-blue-50' : ''}">
+                            <div class="p-2 rounded-lg w-full flex flex-col justify-center ${bgColor}">
                                 ${talk && talk.talk ? `
                                     <p class="font-semibold text-[#5c323e] text-sm">${talk.talk}</p>
                                     ${talk.speaker ? `<p class="text-xs text-gray-500 mt-1">${talk.speaker.Name || talk.speaker.name}<br><span class="italic">${talk.speaker.Title || talk.speaker.title}</span></p>` : ''}
