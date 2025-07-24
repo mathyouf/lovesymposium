@@ -447,30 +447,25 @@
                 
                 const getSpeaker = (id) => {
                     if (!id) return null;
-                    if (id === 'host_0') return hosts[0];
-                    if (id === 'host_1') return hosts[1];
+                    if (id === 'host_0' || id === '97') return hosts[0];
+                    if (id === 'host_1' || id === '98') return hosts[1];
                     return speakers.find(s => s.Index === id);
-                };
-
-                const parseContent = (content) => {
-                    if (!content || !content.includes('|')) return { talk: content, speaker: null };
-                    const [talk, speakerIndex] = content.split('|');
-                    return { talk, speaker: getSpeaker(speakerIndex) };
                 };
 
                 acc[date].slots.push({
                     time: row.Time,
                     rooms: [
-                        { ...parseContent(row['Room 1 Content']), name: row['Room 1 Name'] },
-                        { ...parseContent(row['Room 2 Content']), name: row['Room 2 Name'] }
+                        { name: row['Room 1 Name'], talk: row['Room 1 Talk Name'], speaker: getSpeaker(row['Room 1 Speaker Index']) },
+                        { name: row['Room 2 Name'], talk: row['Room 2 Talk Name'], speaker: getSpeaker(row['Room 2 Speaker Index']) }
                     ]
                 });
                 return acc;
             }, {});
 
             Object.values(scheduleByDay).forEach(day => {
-                const room1Name = day.slots[0]?.rooms[0]?.name || 'Room 1';
-                const room2Name = day.slots[0]?.rooms[1]?.name || 'Room 2';
+                if (!day.slots.length) return;
+                const room1Name = day.slots[0].rooms[0].name || 'Room 1';
+                const room2Name = day.slots[0].rooms[1].name || 'Room 2';
 
                 let dayHtml = `<div class="day-schedule">
                         <div class="sticky top-0 bg-white z-20">
