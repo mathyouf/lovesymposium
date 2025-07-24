@@ -11,7 +11,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;500;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;500;700&family=Caveat:wght@700&display=swap" rel="stylesheet">
     
     <style>
         /* Custom styles */
@@ -28,7 +28,7 @@
             letter-spacing: 0.1em;
         }
         .font-cursive {
-            font-family: 'Dancing Script', cursive;
+            font-family: 'Caveat', cursive;
         }
         .hero-section {
             background-image: url('symv2imgs/img.jpg');
@@ -223,29 +223,35 @@
 
         <!-- Contact Form Section -->
         <section class="container mx-auto px-4 py-16 md:py-24">
-            <h2 class="text-4xl md:text-5xl font-romantic text-center mb-12 text-[#5c323e]">Get In Touch</h2>
-            <div class="max-w-2xl mx-auto relative p-8">
-                <!-- Envelope back -->
-                <div class="absolute inset-0 bg-[#5c323e] rounded-lg shadow-2xl transform -rotate-1"></div>
-                <div class="absolute inset-0 bg-[#6c424e] rounded-lg shadow-2xl transform rotate-1"></div>
-                <!-- Envelope front flaps -->
-                <div class="absolute top-0 left-0 w-full h-full rounded-lg overflow-hidden">
-                    <div class="absolute top-0 left-0 w-1/2 h-full bg-[#5c323e] transform -skew-y-12 origin-top-right"></div>
-                    <div class="absolute top-0 right-0 w-1/2 h-full bg-[#5c323e] transform skew-y-12 origin-top-left"></div>
+            <h2 class="text-4xl md:text-5xl font-romantic text-center mb-12 text-[#5c323e]">Send a Letter</h2>
+            <div class="max-w-2xl mx-auto relative p-2">
+                <!-- Envelope -->
+                <div class="relative bg-[#5c323e] shadow-2xl" style="padding-bottom: 75%;">
+                    <div class="absolute inset-0 overflow-hidden">
+                        <!-- Top Flap -->
+                        <div class="absolute top-0 left-0 w-full h-1/2 bg-[#6c424e]" style="clip-path: polygon(0 0, 100% 0, 50% 100%);"></div>
+                        <!-- Left Flap -->
+                        <div class="absolute top-0 left-0 w-1/2 h-full bg-[#522f38]" style="clip-path: polygon(0 0, 100% 50%, 0 100%);"></div>
+                        <!-- Right Flap -->
+                        <div class="absolute top-0 right-0 w-1/2 h-full bg-[#522f38]" style="clip-path: polygon(100% 0, 0 50%, 100% 100%);"></div>
+                    </div>
                 </div>
+
                 <!-- Paper -->
-                <form class="relative z-10 bg-[#fdfbf7] p-8 rounded-lg shadow-lg">
+                <form class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-11/12 bg-[#fdfbf7] p-8 shadow-lg">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 mb-6">
                         <input type="text" placeholder="Your Name" class="font-cursive text-2xl w-full p-2 bg-transparent border-b-2 border-gray-200 focus:outline-none focus:border-[#8dafb9]">
                         <input type="email" placeholder="Your Email" class="font-cursive text-2xl w-full p-2 bg-transparent border-b-2 border-gray-200 focus:outline-none focus:border-[#8dafb9]">
                     </div>
                     <textarea placeholder="Your Message..." rows="6" class="font-cursive text-2xl w-full p-2 bg-transparent border-b-2 border-gray-200 mb-6 focus:outline-none focus:ring-0 focus:border-[#8dafb9]"></textarea>
                     <div class="flex justify-end">
-                         <button type="submit" class="relative group w-24 h-24 flex items-center justify-center">
-                            <svg class="absolute w-full h-full text-[#5c323e]" viewBox="0 0 100 100">
-                                <path d="M50 0 L100 50 L50 100 L0 50 Z" fill="currentColor"/>
-                            </svg>
-                            <span class="relative z-10 text-white font-romantic text-xl group-hover:scale-110 transition-transform">Send</span>
+                         <button type="submit" class="group w-24 h-24 p-2 bg-white border-2 border-dashed border-[#8dafb9] hover:border-[#5c323e] transition">
+                            <div class="w-full h-full flex flex-col items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-[#5c323e] group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                                </svg>
+                                <span class="text-xs font-bold text-[#5c323e] mt-1">SEND</span>
+                            </div>
                         </button>
                     </div>
                 </form>
