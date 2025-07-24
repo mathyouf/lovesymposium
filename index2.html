@@ -100,9 +100,49 @@
             <a href="#schedule" class="inline-block mx-2 px-8 py-4 bg-[#5c323e] text-white font-bold rounded-full text-lg hover:bg-opacity-80 transition duration-300 shadow-lg">Schedule</a>
         </div>
 
-        <!-- Speaker Grid -->
-        <main id="speakers-section" class="container mx-auto px-4 pt-16 pb-12 relative z-10">
-            <!-- Speaker profiles inserted here -->
+        <!-- Themed Speaker Sections -->
+        <main class="container mx-auto px-4 pt-16 pb-12 relative z-10 space-y-24">
+            <!-- Industry Section -->
+            <section id="industry-section" class="text-center">
+                <div class="flex justify-center items-center gap-8 mb-8">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/TinderLogo-2017.svg/1200px-TinderLogo-2017.svg.png" alt="Tinder Logo" class="w-24 h-24 rounded-full object-contain bg-white p-2 shadow-lg" onerror="this.onerror=null;this.src='https://placehold.co/100x100/ffffff/000000?text=Tinder'">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Hinge_logo.svg" alt="Hinge Logo" class="w-24 h-24 rounded-full object-contain bg-white p-2 shadow-lg" onerror="this.onerror=null;this.src='https://placehold.co/100x100/ffffff/000000?text=Hinge'">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Bumble_logo_2023.svg/1200px-Bumble_logo_2023.svg.png" alt="Bumble Logo" class="w-24 h-24 rounded-full object-contain bg-white p-2 shadow-lg" onerror="this.onerror=null;this.src='https://placehold.co/100x100/ffffff/000000?text=Bumble'">
+                </div>
+                <h2 class="text-4xl md:text-5xl font-romantic text-[#5c323e]">Industry</h2>
+                <p class="text-2xl mt-4 font-bold text-gray-700">Who will be next?</p>
+                <div id="industry-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 md:gap-8 mt-12">
+                    <!-- Industry speakers go here -->
+                </div>
+            </section>
+
+            <!-- Psychometrics Section -->
+            <section id="psychometrics-section" class="text-center">
+                 <div class="flex justify-center items-center gap-8 mb-8">
+                    <img src="https://placehold.co/100x100/8dafb9/ffffff?text=Mind" alt="Abstract mind" class="w-24 h-24 rounded-full object-cover shadow-lg">
+                    <img src="https://placehold.co/100x100/8dafb9/ffffff?text=Data" alt="Abstract data" class="w-24 h-24 rounded-full object-cover shadow-lg">
+                    <img src="https://placehold.co/100x100/8dafb9/ffffff?text=Heart" alt="Abstract heart" class="w-24 h-24 rounded-full object-cover shadow-lg">
+                </div>
+                <h2 class="text-4xl md:text-5xl font-romantic text-[#5c323e]">Psychometrics</h2>
+                <p class="text-2xl mt-4 font-bold text-gray-700">What will it take to achieve the relationship singularity?</p>
+                <div id="psychometrics-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 md:gap-8 mt-12">
+                    <!-- Psychometrics speakers go here -->
+                </div>
+            </section>
+
+            <!-- Philosophy Section -->
+            <section id="philosophy-section" class="text-center">
+                 <div class="flex justify-center items-center gap-8 mb-8">
+                    <img src="https://placehold.co/100x100/d9bb89/ffffff?text=Seek" alt="Abstract art" class="w-24 h-24 rounded-full object-cover shadow-lg">
+                    <img src="https://placehold.co/100x100/d9bb89/ffffff?text=Find" alt="Abstract art" class="w-24 h-24 rounded-full object-cover shadow-lg">
+                    <img src="https://placehold.co/100x100/d9bb89/ffffff?text=Love" alt="Abstract art" class="w-24 h-24 rounded-full object-cover shadow-lg">
+                </div>
+                <h2 class="text-4xl md:text-5xl font-romantic text-[#5c323e]">Philosophy</h2>
+                <p class="text-2xl mt-4 font-bold text-gray-700">What do we seek when we seek love?</p>
+                <div id="philosophy-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 md:gap-8 mt-12">
+                    <!-- Philosophy speakers go here -->
+                </div>
+            </section>
         </main>
         
         <!-- Interspersed Image Divider -->
@@ -196,24 +236,13 @@
         <p>© 2025 Love Symposium. All Rights Reserved.</p>
     </footer>
 
-    <!-- Debug Toggles -->
-    <div id="debug-panel" class="fixed bottom-4 right-4 z-50"></div>
-
-
     <script>
-        // =====================================================================
-        // SETTINGS
-        // =====================================================================
-        
-        let debugMode = true; 
-        let showTeaserMode = true; 
-
         // =====================================================================
         // DATA URLs
         // =====================================================================
         const dataUrls = {
             speakers: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQuSLC5kKYfcrLYQIi7IqgpXY5I-t2lu7ztNicu3bcpHFtgWrJPvIo9L0fR05GH3WMJO540vTi5wWXl/pub?gid=0&single=true&output=csv',
-            schedule: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQuSLC5kKYfcrLYQIi7IqgpXY5I-t2lu7ztNicu3bcpHFtgWrJPvIo9L0fR05GH3WMJO540vTi5wWXl/pub?gid=1770951979&single=true&output=csv',
+            schedule: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQuSLC5kKYfcrLYQIi7IqgpXY5I-t2lu7ztNicu3bcpHFtgWrJPvIo9L0fR05GH3WMJO540vTi5wWXl/pub?gid=737105267&single=true&output=csv',
         };
         const fallbackUrls = {
             speakers: 'symv2imgs/speakers.csv',
@@ -231,8 +260,10 @@
         // =====================================================================
         
         const localSpeakers = [
-            { "Index": "0", "Name": "Whitney Wolfe Herd", "Title": "Tinder and Bumble Founder", "Image URL": "https://i.insider.com/602d50a25843000018456a23?width=1136&format=jpeg", "Social Media Link": "#", "Confirmed?": "1" },
-            { "Index": "1", "Name": "Justin McLeod", "Title": "Founder & CEO, Hinge", "Image URL": "https://cdn.sanity.io/images/z342s4t3/production/d34a6e3e117f0845347204b759639f77f0c13745-1200x800.jpg?w=1200&h=800&auto=format", "Social Media Link": "#", "Confirmed?": "1" },
+            { "Index": "0", "Name": "Whitney Wolfe Herd", "Title": "Tinder and Bumble Founder", "Image URL": "https://i.insider.com/602d50a25843000018456a23?width=1136&format=jpeg", "Social Media Link": "#", "Confirmed?": "1", "Track": "Business & Tech" },
+            { "Index": "1", "Name": "Justin McLeod", "Title": "Founder & CEO, Hinge", "Image URL": "https://cdn.sanity.io/images/z342s4t3/production/d34a6e3e117f0845347204b759639f77f0c13745-1200x800.jpg?w=1200&h=800&auto=format", "Social Media Link": "#", "Confirmed?": "1", "Track": "Business & Tech" },
+            { "Index": "3", "Name": "Dr. John M. Gottman", "Title": "The Gottman Institute", "Image URL": "https://www.gottman.com/wp-content/uploads/2021/10/Drs-John-and-Julie-Gottman-1-1.jpg", "Social Media Link": "#", "Confirmed?": "1", "Track": "Psychology & Statistics" },
+            { "Index": "7", "Name": "Alain de Botton", "Title": "Founder, The School of Life", "Image URL": "https://www.theschooloflife.com/wp-content/uploads/2019/07/Alain-de-Botton-2.jpg", "Social Media Link": "#", "Confirmed?": "1", "Track": "Philosophy & Art" },
         ];
 
         const localSchedule = [];
@@ -296,7 +327,6 @@
             }
         }
         
-        // A more robust CSV parser that correctly handles quoted fields containing commas.
         function parseCsv(csvText, headerRowIndex, dataRowStart) {
             const lines = csvText.trim().replace(/\r/g, '').split('\n');
             if (lines.length < dataRowStart) {
@@ -306,16 +336,13 @@
             
             const headers = lines[headerRowIndex].split(',').map(h => h.trim().replace(/"/g, ''));
             
-            return lines.slice(dataRowStart).map((line, index) => {
-                // Regex to split by comma but ignore commas inside double quotes.
+            return lines.slice(dataRowStart).map((line) => {
                 const values = line.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
-                
                 const rowObject = {};
                 for (let i = 0; i < headers.length; i++) {
                     const header = headers[i];
-                    if (header) { // Only process if the header is not empty
+                    if (header) { 
                         let value = (values[i] || '').trim();
-                        // Clean up quotes from the value
                         if (value.startsWith('"') && value.endsWith('"')) {
                             value = value.slice(1, -1).replace(/""/g, '"');
                         }
@@ -352,28 +379,29 @@
         }
 
         function populateSpeakers(speakers) {
-            const speakersSection = document.getElementById('speakers-section'); 
-            if (!speakersSection) return; 
+            const industryGrid = document.getElementById('industry-grid');
+            const psychometricsGrid = document.getElementById('psychometrics-grid');
+            const philosophyGrid = document.getElementById('philosophy-grid');
+
+            if (!industryGrid || !psychometricsGrid || !philosophyGrid) return;
+
+            industryGrid.innerHTML = '';
+            psychometricsGrid.innerHTML = '';
+            philosophyGrid.innerHTML = '';
 
             const confirmedSpeakers = speakers.filter(s => s['Confirmed?'] === '1');
 
-            if (showTeaserMode || confirmedSpeakers.length === 0) {
-                speakersSection.innerHTML = `
-                    <div class="text-center py-24 bg-blue-50 rounded-lg">
-                        <h3 class="text-4xl font-romantic text-[#5c323e] mb-4">World-Renowned Speakers</h3>
-                        <p class="text-2xl text-gray-500">are being confirmed.</p>
-                        <p class="text-lg text-gray-500 mt-2">Check back soon for our incredible lineup of thinkers and builders!</p>
-                    </div>`;
-            } else {
-                speakersSection.innerHTML = `<div id="speaker-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-6 md:gap-8"></div>`;
-                const grid = document.getElementById('speaker-grid');
-                if (!grid) return;
-                grid.innerHTML = ''; 
-                confirmedSpeakers.forEach(speaker => { 
-                    const card = `<div class="flex flex-col items-center text-center"><img src="${speaker['Image URL']}" alt="Profile of ${speaker.Name}" class="w-24 h-24 md:w-28 md:h-28 rounded-full object-cover border-4 border-white shadow-lg" onerror="this.onerror=null;this.src='https://placehold.co/200x200/cccccc/ffffff?text=Image+Not+Found'"><a href="${speaker['Social Media Link'] || '#'}" class="mt-4 font-bold text-[#5c323e] hover:text-[#8dafb9] transition">${speaker.Name}</a><p class="text-sm text-gray-500">${speaker.Title}</p></div>`; 
-                    grid.innerHTML += card; 
-                });
-            }
+            confirmedSpeakers.forEach(speaker => {
+                const card = `<div class="flex flex-col items-center text-center"><img src="${speaker['Image URL']}" alt="Profile of ${speaker.Name}" class="w-24 h-24 md:w-28 md:h-28 rounded-full object-cover border-4 border-white shadow-lg" onerror="this.onerror=null;this.src='https://placehold.co/200x200/cccccc/ffffff?text=Image+Not+Found'"><a href="${speaker['Social Media Link'] || '#'}" class="mt-4 font-bold text-[#5c323e] hover:text-[#8dafb9] transition">${speaker.Name}</a><p class="text-sm text-gray-500">${speaker.Title}</p></div>`;
+                
+                if (speaker.Track === 'Business & Tech') {
+                    industryGrid.innerHTML += card;
+                } else if (speaker.Track === 'Psychology & Statistics') {
+                    psychometricsGrid.innerHTML += card;
+                } else if (speaker.Track === 'Philosophy & Art') {
+                    philosophyGrid.innerHTML += card;
+                }
+            });
         }
         
         function populateHosts(hostsData) {
@@ -444,16 +472,6 @@
             if (!container) return;
             container.innerHTML = '';
 
-            if (showTeaserMode || !schedule || schedule.length === 0) {
-                container.innerHTML = `
-                    <div class="text-center py-24 bg-blue-50 rounded-lg">
-                        <h3 class="text-4xl font-romantic text-[#5c323e] mb-4">The Full Schedule</h3>
-                        <p class="text-2xl text-gray-500">is being perfected.</p>
-                        <p class="text-lg text-gray-500 mt-2">Check back soon for the full lineup of talks and workshops!</p>
-                    </div>`;
-                return;
-            }
-
             const scheduleByDay = schedule.reduce((acc, row) => {
                 if (!row.Date) return acc; 
                 const date = row.Date;
@@ -515,22 +533,6 @@
             });
         }
 
-        function setupDebugToggles() {
-            const panel = document.getElementById('debug-panel');
-            if (!debugMode || !panel) return;
-
-            panel.innerHTML = `
-                <div class="flex flex-col gap-2">
-                    <button id="toggle-teaser" class="px-3 py-1 text-xs bg-gray-700 text-white rounded">Toggle Teaser</button>
-                </div>
-            `;
-
-            document.getElementById('toggle-teaser').addEventListener('click', () => {
-                showTeaserMode = !showTeaserMode;
-                renderPage();
-            });
-        }
-
         async function initializePage() {
             const [speakersData, scheduleData] = await Promise.all([
                 fetchAndParseCsv(dataUrls.speakers, fallbackUrls.speakers, parseSpeakersCsv),
@@ -545,7 +547,6 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             initializePage();
-            setupDebugToggles();
         });
     </script>
 
