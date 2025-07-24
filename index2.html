@@ -322,14 +322,14 @@
         }
 
         function parseSpeakersCsv(csvText) {
-            // Correctly call the parser. Headers are on row 2 (index 1), data starts on row 3 (index 2).
-            const data = parseCsv(csvText, 1, 2); 
+            // Corrected: Headers are on line 1 (index 0), data starts on line 2 (index 1).
+            const data = parseCsv(csvText, 0, 1); 
             console.log("Parsed Speakers Data:", data);
             return data;
         }
 
         function parseScheduleCsv(csvText) {
-            // Correctly call the parser. Headers on row 1 (index 0), data starts on row 2 (index 1).
+            // Corrected: Headers on row 1 (index 0), data starts on row 2 (index 1).
             const data = parseCsv(csvText, 0, 1);
             console.log("Parsed Schedule Data:", data);
             return data;
