@@ -28,7 +28,7 @@
             letter-spacing: 0.1em;
         }
         .hero-section {
-            background-image: url('img.jpg');
+            background-image: url('symv2imgs/img.jpg');
             background-size: cover;
             background-position: center;
             filter: brightness(1.1); /* Brighten the background image */
@@ -92,10 +92,9 @@
     <!-- Main Content Container -->
     <div class="bg-[#fdfbf7] relative">
         <!-- Decorative Divider -->
-        <div class="absolute top-0 left-0 right-0 h-24 -translate-y-1/2 z-10 flex items-center justify-center pointer-events-none">
-            <svg class="h-full text-[#5c323e]" viewBox="0 0 1200 120" preserveAspectRatio="none" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path d="M0,50 C150,120 350,0 600,50 C850,100 1050,-20 1200,50 L1200,120 L0,120 Z" fill="#fdfbf7"></path>
-                <path d="M0,60 C150,130 350,10 600,60 C850,110 1050,-10 1200,60 L1200,120 L0,120 Z" opacity="0.5" fill="#fdfbf7"></path>
+        <div class="absolute top-0 left-0 right-0 h-20 -translate-y-1/2 z-10 flex items-center justify-center pointer-events-none">
+            <svg class="w-full h-full" viewBox="0 0 1200 80" preserveAspectRatio="none" fill="#fdfbf7" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0,80 C150,0 250,80 400,60 C550,40 650,100 800,60 C950,20 1050,100 1200,80 L1200,0 L0,0 Z"/>
             </svg>
         </div>
 
@@ -114,7 +113,7 @@
         
         <!-- Interspersed Image Divider -->
         <div class="flex justify-center py-16">
-            <img src="1.png" alt="Decorative flourish" class="max-w-xs md:max-w-sm" onerror="this.onerror=null;this.src='https://placehold.co/600x200/fdfbf7/666666?text=Flourish'">
+            <img src="symv2imgs/1.png" alt="Decorative flourish" class="max-w-xs md:max-w-sm" onerror="this.onerror=null;this.src='https://placehold.co/600x200/fdfbf7/666666?text=Flourish'">
         </div>
 
         <!-- Letter from the Hosts Section -->
@@ -127,7 +126,7 @@
 
         <!-- Interspersed Image Divider -->
         <div class="flex justify-center py-16">
-            <img src="2.png" alt="Decorative flourish" class="max-w-xs md:max-w-sm" onerror="this.onerror=null;this.src='https://placehold.co/600x200/fdfbf7/666666?text=Flourish'">
+            <img src="symv2imgs/2.png" alt="Decorative flourish" class="max-w-xs md:max-w-sm" onerror="this.onerror=null;this.src='https://placehold.co/600x200/fdfbf7/666666?text=Flourish'">
         </div>
 
         <!-- Scrolling Reviews Section -->
@@ -145,7 +144,7 @@
 
         <!-- Interspersed Image Divider -->
         <div class="flex justify-center py-16">
-            <img src="3.png" alt="Decorative flourish" class="max-w-xs md:max-w-sm" onerror="this.onerror=null;this.src='https://placehold.co/600x200/fdfbf7/666666?text=Flourish'">
+            <img src="symv2imgs/3.png" alt="Decorative flourish" class="max-w-xs md:max-w-sm" onerror="this.onerror=null;this.src='https://placehold.co/600x200/fdfbf7/666666?text=Flourish'">
         </div>
 
         <!-- Tickets Section -->
@@ -158,7 +157,7 @@
 
         <!-- Interspersed Image Divider -->
         <div class="flex justify-center py-16">
-            <img src="4.png" alt="Decorative flourish" class="max-w-xs md:max-w-sm" onerror="this.onerror=null;this.src='https://placehold.co/600x200/fdfbf7/666666?text=Flourish'">
+            <img src="symv2imgs/4.png" alt="Decorative flourish" class="max-w-xs md:max-w-sm" onerror="this.onerror=null;this.src='https://placehold.co/600x200/fdfbf7/666666?text=Flourish'">
         </div>
 
         <!-- FAQ Section -->
@@ -171,7 +170,7 @@
         
         <!-- Interspersed Image Divider -->
         <div class="flex justify-center py-16">
-            <img src="5.png" alt="Decorative flourish" class="max-w-xs md:max-w-sm" onerror="this.onerror=null;this.src='https://placehold.co/600x200/fdfbf7/666666?text=Flourish'">
+            <img src="symv2imgs/5.png" alt="Decorative flourish" class="max-w-xs md:max-w-sm" onerror="this.onerror=null;this.src='https://placehold.co/600x200/fdfbf7/666666?text=Flourish'">
         </div>
 
         <!-- Schedule Section -->
@@ -231,16 +230,13 @@
         const localSpeakers = [
             { "Index": "0", "Name": "Whitney Wolfe Herd", "Title": "Tinder and Bumble Founder", "Image URL": "https://i.insider.com/602d50a25843000018456a23?width=1136&format=jpeg", "Social Media Link": "#", "Confirmed?": "1" },
             { "Index": "1", "Name": "Justin McLeod", "Title": "Founder & CEO, Hinge", "Image URL": "https://cdn.sanity.io/images/z342s4t3/production/d34a6e3e117f0845347204b759639f77f0c13745-1200x800.jpg?w=1200&h=800&auto=format", "Social Media Link": "#", "Confirmed?": "1" },
-            // Add more local speakers as needed for a robust fallback
         ];
 
-        const localSchedule = [
-            // Add a minimal local schedule as a fallback if needed
-        ];
+        const localSchedule = [];
 
         const hosts = [
-            { name: 'Ann Pierce', image: 'ann.jpg', statement: 'Our mission is to create a space where modern love can be explored in all its facets. We believe that by bringing together diverse voices and fostering open dialogue, we can all learn to love more deeply and authentically.' },
-            { name: 'Matthew Fisher', image: 'matt.jpg', statement: 'Love is the cornerstone of the human experience, yet we rarely give it the academic and intentional focus it deserves. This symposium is our answer—a chance to learn, share, and grow together in our understanding of connection.' }
+            { name: 'Ann Pierce', image: 'symv2imgs/ann.jpg', statement: 'Our mission is to create a space where modern love can be explored in all its facets. We believe that by bringing together diverse voices and fostering open dialogue, we can all learn to love more deeply and authentically.' },
+            { name: 'Matthew Fisher', image: 'symv2imgs/matt.jpg', statement: 'Love is the cornerstone of the human experience, yet we rarely give it the academic and intentional focus it deserves. This symposium is our answer—a chance to learn, share, and grow together in our understanding of connection.' }
         ];
 
         const reviews = [
@@ -365,7 +361,8 @@
                 const highlight = String(ticket.highlight).toLowerCase() === 'true';
                 const highlightClass = highlight ? 'border-[#d9bb89] border-2' : 'border-gray-200'; 
                 const buttonClass = highlight ? 'bg-[#d9bb89] text-[#5c323e]' : 'bg-[#5c323e] text-white'; 
-                const card = `<div class="rounded-lg shadow-lg p-8 flex flex-col bg-white border ${highlightClass}"><h3 class="text-2xl font-bold text-center text-[#5c323e]">${ticket.name}</h3><p class="text-5xl font-bold text-center my-4 text-gray-800">$${ticket.price}</p><ul class="my-4 space-y-2 flex-grow text-gray-600">${ticket.features.split(';').map(feature => `<li class="flex items-center"><svg class="w-5 h-5 text-[#8dafb9] mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>${feature}</li>`).join('')}</ul><a href="#" class="w-full text-center font-bold py-3 px-6 rounded-lg ${buttonClass} hover:bg-opacity-80 transition duration-300 mt-6">${ticket.cta}</a></div>`; 
+                const featuresArray = Array.isArray(ticket.features) ? ticket.features : (ticket.features || '').split(';');
+                const card = `<div class="rounded-lg shadow-lg p-8 flex flex-col bg-white border ${highlightClass}"><h3 class="text-2xl font-bold text-center text-[#5c323e]">${ticket.name}</h3><p class="text-5xl font-bold text-center my-4 text-gray-800">$${ticket.price}</p><ul class="my-4 space-y-2 flex-grow text-gray-600">${featuresArray.map(feature => `<li class="flex items-center"><svg class="w-5 h-5 text-[#8dafb9] mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>${feature}</li>`).join('')}</ul><a href="#" class="w-full text-center font-bold py-3 px-6 rounded-lg ${buttonClass} hover:bg-opacity-80 transition duration-300 mt-6">${ticket.cta}</a></div>`; 
                 grid.innerHTML += card; 
             });
         }
