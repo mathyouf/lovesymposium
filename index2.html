@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Symposium</title>
+    
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts for a romantic feel -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Custom styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fdf8f8; /* Reverted: Soft, romantic background */
+            color: #333; /* Reverted: Dark gray text */
+            overscroll-behavior-y: contain; /* Prevents scroll bounce at top/bottom */
+        }
+        .font-romantic {
+            font-family: 'Playfair Display', serif;
+        }
+        .hero-section {
+            background-image: url('img.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        /* On screens wider than 1000px, shift the background image position down slightly */
+        @media (min-width: 1001px) {
+            .hero-section {
+                background-position: center 20%; /* Pulls the image up, cutting off a bit of the top */
+            }
+        }
+        
+        /* Animation for the scrolling reviews */
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .scrolling-wrapper-fast {
+            display: flex;
+            animation: scroll 35s linear infinite;
+        }
+
+        .scrolling-wrapper-slow {
+            display: flex;
+            animation: scroll 55s linear infinite;
+            animation-delay: -10s; /* Offset the start */
+        }
+        
+        /* Faster scrolling on mobile */
+        @media (max-width: 768px) {
+            .scrolling-wrapper-fast {
+                animation-duration: 20s;
+            }
+            .scrolling-wrapper-slow {
+                animation-duration: 35s;
+            }
+        }
+
+        /* Grayscale mode toggle style */
+        .grayscale-mode {
+            filter: grayscale(100%);
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Hero Section -->
+    <header class="hero-section relative flex flex-col items-center justify-center text-white text-center p-4 h-[80vh] md:h-[95vh]">
+        <div class="absolute inset-0 bg-black opacity-40"></div>
+        <h1 class="font-romantic text-6xl md:text-8xl lg:text-9xl z-10" style="text-shadow: 2px 2px 8px rgba(0,0,0,0.7);">
+            Love Symposium
+        </h1>
+        <p class="z-10 mt-4 text-lg md:text-xl lg:text-2xl tracking-wider text-gray-200">
+            The Weekend of November 14-16 at 
+            <a href="https://www.google.com/maps/search/?api=1&query=The+Commons,San+Francisco,CA" target="_blank" rel="noopener noreferrer" class="inline-block bg-white/20 hover:bg-white/40 text-white font-semibold px-4 py-1 rounded-full transition duration-300 mx-1">The Commons, San Francisco</a>
+        </p>
+    </header>
+
+    <!-- Main Content Container -->
+    <div class="bg-[#fdf8f8]">
+        <!-- Buttons Section -->
+        <div class="text-center -mt-10 relative z-20">
+            <a href="#tickets" class="inline-block mx-2 px-8 py-4 bg-white text-gray-800 font-bold rounded-full text-lg hover:bg-gray-200 transition duration-300 shadow-lg">Buy Tickets</a>
+            <a href="#schedule" class="inline-block mx-2 px-8 py-4 bg-gray-800 text-white font-bold rounded-full text-lg hover:bg-gray-700 transition duration-300 shadow-lg">Schedule</a>
+        </div>
+
+        <!-- Speaker Grid -->
+        <main id="speakers-section" class="container mx-auto px-4 pt-16 pb-12 relative z-10">
+            <div id="speaker-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-6 md:gap-8">
+                <!-- Speaker profiles inserted here -->
+            </div>
+        </main>
+
+        <!-- Letter from the Hosts Section -->
+        <section class="container mx-auto px-4 py-16 md:py-24">
+            <h2 class="text-4xl md:text-5xl font-romantic text-center mb-16">A Letter From The Hosts</h2>
+            <div id="hosts-section" class="flex flex-col md:flex-row gap-12 md:gap-8 items-start">
+                <!-- Hosts content inserted here -->
+            </div>
+        </section>
+
+        <!-- Scrolling Reviews Section -->
+        <section class="py-16 md:py-24 bg-white">
+            <h2 class="text-4xl md:text-5xl font-romantic text-center mb-12">Words of Love</h2>
+            <div class="relative w-full overflow-hidden space-y-4" style="mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);">
+                 <div id="reviews-container-top" class="scrolling-wrapper-fast">
+                    <!-- Reviews inserted here -->
+                 </div>
+                 <div id="reviews-container-bottom" class="scrolling-wrapper-slow">
+                    <!-- Reviews inserted here -->
+                 </div>
+            </div>
+        </section>
+
+        <!-- Tickets Section -->
+        <section id="tickets" class="container mx-auto px-4 py-16 md:py-24">
+            <h2 class="text-4xl md:text-5xl font-romantic text-center mb-12">Tickets</h2>
+            <div id="tickets-grid" class="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <!-- Ticket options inserted here -->
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="container mx-auto px-4 py-16 md:py-24 max-w-4xl">
+            <h2 class="text-4xl md:text-5xl font-romantic text-center mb-12">Frequently Asked Questions</h2>
+            <div id="faq-container" class="space-y-8">
+                <!-- FAQ items inserted here -->
+            </div>
+        </section>
+
+        <!-- Schedule Section -->
+        <section id="schedule" class="bg-white py-16 md:py-24">
+            <div class="container mx-auto px-4">
+                <h2 class="text-4xl md:text-5xl font-romantic text-center mb-12">Symposium Schedule</h2>
+                <div id="schedule-container" class="space-y-16">
+                    <!-- Schedule days inserted here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Form Section -->
+        <section class="container mx-auto px-4 py-16 md:py-24">
+            <h2 class="text-4xl md:text-5xl font-romantic text-center mb-12">Get In Touch</h2>
+            <form class="max-w-xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <input type="text" placeholder="Your Name" class="w-full p-3 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-300">
+                    <input type="email" placeholder="Your Email" class="w-full p-3 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-300">
+                </div>
+                <textarea placeholder="Your Message" rows="6" class="w-full p-3 bg-white border border-gray-300 rounded-lg mb-6 focus:outline-none focus:ring-2 focus:ring-rose-300"></textarea>
+                <button type="submit" class="w-full text-center text-white font-bold py-3 px-6 rounded-lg bg-gray-800 hover:bg-gray-900 transition duration-300">Send Message</button>
+            </form>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white text-center p-8">
+        <p>&copy; 2025 Love Symposium. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Debug Toggles -->
+    <div id="debug-panel" class="fixed bottom-4 right-4 z-50"></div>
+
+
+    <script>
+        // =====================================================================
+        // SETTINGS
+        // =====================================================================
+        
+        // Set to true to see the debug toggles
+        let debugMode = true; 
+        // Set to true to enable grayscale mode for the entire site
+        let enableGrayscale = false;
+        // Set to true to show "Coming Soon" teasers instead of full details
+        let showTeaserMode = true; 
+
+        // =====================================================================
+        // DATA SOURCES (Easily Editable)
+        // =====================================================================
+
+        const speakers = [
+            { name: 'Whitney Wolfe Herd', title: 'Founder, Bumble', image: 'https://i.insider.com/602d50a25843000018456a23?width=1136&format=jpeg', link: '#' },
+            { name: 'Justin McLeod', title: 'Founder & CEO, Hinge', image: 'https://cdn.sanity.io/images/z342s4t3/production/d34a6e3e117f0845347204b759639f77f0c13745-1200x800.jpg?w=1200&h=800&auto=format', link: '#' },
+            { name: 'Sean Rad', title: 'Founder, Tinder', image: 'https://www.thewrap.com/wp-content/uploads/2015/11/Sean-Rad-Tinder.jpg', link: '#' },
+            { name: 'Dr. John M. Gottman', title: 'The Gottman Institute', image: 'https://www.gottman.com/wp-content/uploads/2021/10/Drs-John-and-Julie-Gottman-1-1.jpg', link: '#' },
+            { name: 'Amanda Bradford', title: 'Founder & CEO, The League', image: 'https://media.theleaguemobile.com/press/amanda-bradford-the-league-ceo-founder-headshot.jpg', link: '#' },
+            { name: 'Joel Simkhai', title: 'Founder, Grindr', image: 'https://www.thefamouspeople.com/profiles/images/joel-simkhai-1.jpg', link: '#' },
+            { name: 'Christian Rudder', title: 'Co-Founder, OkCupid', image: 'https://media.npr.org/assets/img/2014/09/01/christian-rudder_sq-e27600739989911c7593c613040e1434c4491986.jpg', link: '#' },
+            { name: 'Alain de Botton', title: 'Founder, The School of Life', image: 'https://www.theschooloflife.com/wp-content/uploads/2019/07/Alain-de-Botton-2.jpg', link: '#' },
+            { name: 'Sam Yagan', title: 'Co-Founder, OkCupid', image: 'https://images.wsj.net/im-344498?width=1280&size=1', link: '#' },
+            { name: 'Ana Kirova', title: 'CEO, Feeld', image: 'https://images.prismic.io/feeld/16010411-d007-4251-a9f8-79532455c179_Ana+Kirova_Feeld+CEO_Portrait.jpg?auto=compress,format', link: '#' },
+            { name: 'The Kang Sisters', title: 'Founders, Coffee Meets Bagel', image: 'https://fortune.com/img-assets/wp-content/uploads/2015/05/467843652.jpg', link: '#' },
+            { name: 'Alex Tew', title: 'Co-Founder, Calm', image: 'https://www.incimages.com/uploaded_files/image/1920x1080/Alex-Tew-panoramic_35832.jpg', link: '#' },
+            { name: 'Roni Frank', title: 'Co-Founder, Talkspace', image: 'https://images.squarespace-cdn.com/content/v1/5c2e2c6a5cfd796273b37a53/1546554832599-YQ520N2711M9ECB41K70/Roni+Frank+Headshot.jpg', link: '#' },
+            { name: 'Spencer Greenberg', title: 'Founder, ClearerThinking.org', image: 'https://images.squarespace-cdn.com/content/v1/53edc431e4b09f7a0b72398c/1603837424003-9Y1CA8AHXV10Y1B976C0/Spencer+Greenberg+headshot.jpg', link: '#' },
+            { name: 'Henrik Karlsson', title: 'Author & Researcher', image: 'https://www.henrikkarlsson.xyz/static/henrik.a5f8a29a.jpg', link: '#' },
+            { name: 'David Stillwell', title: 'myPersonality Project', image: 'https://www.jbs.cam.ac.uk/wp-content/uploads/2020/08/david-stillwell-2017-400x400.jpg', link: '#' },
+        ];
+
+        const hosts = [
+            { name: 'Ann Pierce', image: 'https://placehold.co/300x300/6B4226/FFFFFF?text=A.P.', statement: 'Our mission is to create a space where modern love can be explored in all its facets. We believe that by bringing together diverse voices and fostering open dialogue, we can all learn to love more deeply and authentically.' },
+            { name: 'Matthew Fisher', image: 'https://placehold.co/300x300/4A2C2A/FFFFFF?text=M.F.', statement: 'Love is the cornerstone of the human experience, yet we rarely give it the academic and intentional focus it deserves. This symposium is our answer—a chance to learn, share, and grow together in our understanding of connection.' }
+        ];
+
+        const reviews = [
+            { name: 'Humberto Moreira', image: 'https://placehold.co/100x100/ffb6c1/FFFFFF?text=H', text: 'An absolutely transformative experience. I left with a new perspective on my relationships.' },
+            { name: 'Alex Chen', image: 'https://placehold.co/100x100/87ceeb/FFFFFF?text=A', text: 'The quality of speakers was phenomenal. So much wisdom in one place.' },
+            { name: 'Alok Singh', image: 'https://placehold.co/100x100/98fb98/FFFFFF?text=A', text: 'I attended with my partner, and it was the best decision we\'ve made for our relationship all year.' },
+            { name: 'Thomas Vu', image: 'https://placehold.co/100x100/dda0dd/FFFFFF?text=T', text: 'Finally, a conference that treats love with the intellectual respect it deserves.' },
+            { name: 'Kincaid O\'Neil', image: 'https://placehold.co/100x100/f0e68c/FFFFFF?text=K', text: 'I felt so seen and understood. The sense of community was palpable.' },
+            { name: 'Suzie Antal', image: 'https://placehold.co/100x100/add8e6/FFFFFF?text=S', text: 'Incredibly well-organized and profoundly insightful. I will be back next year!' },
+            { name: 'Ari Zerner', image: 'https://placehold.co/100x100/b0c4de/FFFFFF?text=A', text: 'A must-attend for anyone interested in the future of human connection.' },
+            { name: 'Ben Carter', image: 'https://placehold.co/100x100/A9A9A9/FFFFFF?text=B.C.', text: 'The best investment I\'ve made in my personal growth this year.' },
+            { name: 'Olivia Kim', image: 'https://placehold.co/100x100/696969/FFFFFF?text=O.K.', text: 'The topics were so relevant and the discussions were incredibly engaging.' },
+            { name: 'Gabriel Santos', image: 'https://placehold.co/100x100/808080/FFFFFF?text=G.S.', text: 'A truly inspiring weekend. I can\'t wait for the next one.' },
+        ];
+
+        const tickets = [
+            { name: 'Early Bird', price: 99, features: ['Full Access to All Talks', 'Digital Welcome Packet', 'Community Forum Access'], cta: 'Buy Now', highlight: false },
+            { name: 'Late In Love', price: 150, features: ['Full Access to All Talks', 'Digital Welcome Packet', 'Community Forum Access', 'Recording of All Sessions'], cta: 'Buy Now', highlight: true },
+            { name: 'Sponsor', price: 2000, features: ['All-Access VIP Pass', 'Special Mention in Program', 'Private Q&A with Hosts', 'Logo Placement on Site'], cta: 'Become a Sponsor', highlight: false }
+        ];
+
+        const faqData = [
+            { question: "What is the venue for the symposium?", answer: "The symposium will be held at <strong>The Commons</strong>, a beautiful and spacious venue perfect for fostering connection and learning." },
+            { question: "What catering is provided?", answer: "We are pleased to offer the following catering: <ul><li class='ml-4 list-disc'>Friday: Lunch</li><li class='ml-4 list-disc'>Saturday: Breakfast and Lunch</li><li class='ml-4 list-disc'>Sunday: Breakfast</li></ul>" },
+            { question: "Is there a dress code?", answer: "We recommend smart casual attire. Comfort is key, as the days will be full of learning and interaction." },
+            { question: "Can I get a refund on my ticket?", answer: "Tickets are non-refundable but are transferable. Please contact us with the new attendee's information at least one week prior to the event." }
+        ];
+
+        const scheduleData = {
+            day1: {
+                date: "Friday, November 14",
+                slots: [
+                    { time: "16:00", rooms: [ { speaker: speakers[7], talk: "Opening Keynote: On Love" }, {} ] },
+                    { time: "17:00", rooms: [ { speaker: speakers[0], talk: "The First Move: A New Era of Connection" }, { speaker: speakers[2], talk: "The Swipe Right Economy" } ] },
+                    { time: "18:00", rooms: [ { speaker: speakers[4], talk: "Curating Your Community: The Niche App" }, { speaker: speakers[1], talk: "Designing for Deeper Conversations" } ] },
+                    { time: "19:00", rooms: [ { speaker: speakers[12], talk: "The ROI of Mental Wellness in Dating" }, { speaker: hosts[0], talk: "Welcome Mixer & Host Remarks" } ] },
+                ]
+            },
+            day2: {
+                date: "Saturday, November 15",
+                slots: [
+                    { time: "10:00", rooms: [ { speaker: speakers[3], talk: "The Four Horsemen of Relationship Apocalypse" }, { speaker: speakers[13], talk: "Thinking Styles & Compatibility" } ] },
+                    { time: "11:00", rooms: [ { speaker: speakers[6], talk: "Data-Driven Dating: Insights from OkCupid" }, { speaker: speakers[15], talk: "Personality, Data, and You" } ] },
+                    { time: "12:00", rooms: [ { speaker: speakers[10], talk: "Building a Community: The Story of Coffee Meets Bagel" }, { speaker: speakers[9], talk: "Beyond the Binary: Designing for Fluidity" } ] },
+                    { time: "13:00", rooms: [ { talk: "Lunch Break" }, { talk: "Lunch Break" } ] },
+                    { time: "14:00", rooms: [ { speaker: speakers[11], talk: "Mindfulness in the Digital Age" }, { speaker: speakers[5], talk: "The Grindr Story: Building a Movement" } ] },
+                    { time: "15:00", rooms: [ { speaker: hosts[1], talk: "Workshop: The Science of Trust" }, { speaker: speakers[8], talk: "From Spark to IPO: A Founder's Journey" } ] },
+                    { time: "16:00", rooms: [ { speaker: speakers[0], talk: "Panel: The Future of Dating Apps" }, { speaker: speakers[1], talk: "Panel: The Future of Dating Apps" } ] },
+                    { time: "17:00", rooms: [ {}, {} ] },
+                    { time: "18:00", rooms: [ { talk: "Evening Social & Networking Event" }, {} ] },
+                ]
+            },
+            day3: {
+                date: "Sunday, November 16",
+                slots: [
+                    { time: "10:00", rooms: [ { speaker: hosts[0], talk: "Morning Philosophy: A More Considerate Love" }, {} ] },
+                    { time: "11:00", rooms: [ { speaker: speakers[14], talk: "Escaping the Algorithm: Serendipity & AI" }, { speaker: speakers[13], talk: "How to Think, Better" } ] },
+                    { time: "12:00", rooms: [ { speaker: speakers[3], talk: "Making Love Last: A Scientific Approach" }, { speaker: speakers[12], talk: "The Business of BetterHelp" } ] },
+                    { time: "13:00", rooms: [ { talk: "Lunch Break" }, { talk: "Lunch Break" } ] },
+                    { time: "14:00", rooms: [ { speaker: speakers[6], talk: "Fireside Chat with Christian Rudder" }, { speaker: speakers[4], talk: "Fireside Chat with Amanda Bradford" } ] },
+                    { time: "15:00", rooms: [ { speaker: speakers[1], talk: "The Hinge Case Study: Designed to be Deleted" }, { speaker: hosts[1], talk: "Final Panel: Integrating Learnings" } ] },
+                    { time: "16:00", rooms: [ { speaker: hosts[0], talk: "Closing Keynote: A More Loving World" }, {} ] },
+                ]
+            }
+        };
+
+        // =====================================================================
+        // DOM POPULATION FUNCTIONS
+        // =====================================================================
+
+        function populateSpeakers() {
+            const speakersSection = document.getElementById('speakers-section'); 
+            if (!speakersSection) return; 
+
+            if (showTeaserMode) {
+                speakersSection.innerHTML = `
+                    <div class="text-center py-24 bg-rose-50 rounded-lg">
+                        <h3 class="text-4xl font-romantic text-gray-700 mb-4">World-Renowned Speakers</h3>
+                        <p class="text-2xl text-gray-500">are being confirmed.</p>
+                        <p class="text-lg text-gray-500 mt-2">Check back soon for our incredible lineup of thinkers and builders!</p>
+                    </div>`;
+            } else {
+                speakersSection.innerHTML = `<div id="speaker-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-6 md:gap-8"></div>`;
+                const grid = document.getElementById('speaker-grid');
+                if (!grid) return;
+                grid.innerHTML = ''; 
+                speakers.forEach(speaker => { 
+                    const card = `<div class="flex flex-col items-center text-center"><img src="${speaker.image}" alt="Profile of ${speaker.name}" class="w-24 h-24 md:w-28 md:h-28 rounded-full object-cover border-4 border-white shadow-lg" onerror="this.onerror=null;this.src='https://placehold.co/200x200/cccccc/ffffff?text=Image+Not+Found'"><a href="${speaker.link}" class="mt-4 font-bold text-gray-800 hover:text-rose-800 transition">${speaker.name}</a><p class="text-sm text-gray-600">${speaker.title}</p></div>`; 
+                    grid.innerHTML += card; 
+                });
+            }
+        }
+        
+        function populateHosts() {
+            const section = document.getElementById('hosts-section');
+            if (!section) return;
+            section.innerHTML = '';
+            hosts.forEach((host, index) => {
+                const alignmentClass = index === 0 
+                    ? 'md:items-end md:text-right' 
+                    : 'md:items-start md:text-left';
+
+                const content = `
+                    <div class="flex flex-col items-center text-center w-full md:w-1/2 ${alignmentClass}">
+                        <img src="${host.image}" alt="Photo of ${host.name}" class="w-32 h-32 rounded-full object-cover border-4 border-white shadow-xl mb-6" onerror="this.onerror=null;this.src='https://placehold.co/300x300/cccccc/ffffff?text=Image+Not+Found'">
+                        <h3 class="text-2xl font-bold mb-2">${host.name}</h3>
+                        <p class="text-gray-600 leading-relaxed max-w-md">${host.statement}</p>
+                    </div>
+                `;
+                section.innerHTML += content;
+            });
+        }
+
+        function populateReviews() {
+            const topContainer = document.getElementById('reviews-container-top');
+            const bottomContainer = document.getElementById('reviews-container-bottom');
+            if (!topContainer || !bottomContainer) return; 
+            
+            const allReviews = [...reviews, ...reviews, ...reviews, ...reviews]; // Duplicate for seamless loop
+            topContainer.innerHTML = '';
+            bottomContainer.innerHTML = '';
+
+            allReviews.forEach(review => { 
+                const card = `<div class="flex-shrink-0 w-80 mx-4 p-6 bg-gray-50 rounded-lg shadow-md flex items-start"><img src="${review.image}" alt="Photo of ${review.name}" class="w-12 h-12 rounded-full object-cover mr-4 border-2 border-white" onerror="this.onerror=null;this.src='https://placehold.co/100x100/cccccc/ffffff?text=Error'"><div><p class="font-semibold">${review.name}</p><p class="text-gray-600 italic">"${review.text}"</p></div></div>`; 
+                topContainer.innerHTML += card;
+                bottomContainer.innerHTML += card;
+            });
+        }
+
+        function populateTickets() {
+            const grid = document.getElementById('tickets-grid'); if (!grid) return; grid.innerHTML = '';
+            tickets.forEach(ticket => { const highlightClass = ticket.highlight ? 'border-rose-500 border-2' : 'border-gray-200'; const buttonClass = ticket.highlight ? 'bg-rose-500 hover:bg-rose-600 text-white' : 'bg-gray-800 hover:bg-gray-900 text-white'; const card = `<div class="rounded-lg shadow-lg p-8 flex flex-col bg-white border ${highlightClass}"><h3 class="text-2xl font-bold text-center">${ticket.name}</h3><p class="text-5xl font-bold text-center my-4">$${ticket.price}</p><ul class="my-4 space-y-2 flex-grow text-gray-600">${ticket.features.map(feature => `<li class="flex items-center"><svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>${feature}</li>`).join('')}</ul><a href="#" class="w-full text-center font-bold py-3 px-6 rounded-lg ${buttonClass} transition duration-300 mt-6">${ticket.cta}</a></div>`; grid.innerHTML += card; });
+        }
+        
+        function populateFaq() {
+            const container = document.getElementById('faq-container');
+            if (!container) return;
+            container.innerHTML = '';
+            faqData.forEach(item => {
+                const faqItem = `
+                    <div>
+                        <h3 class="text-xl font-bold mb-2">${item.question}</h3>
+                        <div class="text-gray-600 leading-relaxed">${item.answer}</div>
+                    </div>
+                `;
+                container.innerHTML += faqItem;
+            });
+        }
+
+        function populateSchedule() {
+            const container = document.getElementById('schedule-container');
+            if (!container) return;
+            container.innerHTML = '';
+
+            if (showTeaserMode) {
+                container.innerHTML = `
+                    <div class="text-center py-24 bg-rose-50 rounded-lg">
+                        <h3 class="text-4xl font-romantic text-gray-700 mb-4">The Full Schedule</h3>
+                        <p class="text-2xl text-gray-500">is being perfected.</p>
+                        <p class="text-lg text-gray-500 mt-2">Check back soon for the full lineup of talks and workshops!</p>
+                    </div>`;
+            } else {
+                for (const dayKey in scheduleData) {
+                    const day = scheduleData[dayKey];
+                    
+                    let dayHtml = `<div class="day-schedule">
+                        <div class="sticky top-0 bg-white z-20">
+                            <h3 class="text-3xl font-bold pt-4 pb-2 text-center">${day.date}</h3>
+                            <div class="grid grid-cols-[60px_1fr_1fr] gap-x-4 border-b-2 font-bold text-center">
+                                <div class="py-3">Time</div>
+                                <div class="py-3">Room 1</div>
+                                <div class="py-3">Room 2</div>
+                            </div>
+                        </div>
+                        <div class="schedule-body">`;
+
+                    day.slots.forEach(slot => {
+                        dayHtml += `<div class="grid grid-cols-[60px_1fr_1fr] gap-x-4 border-b min-h-[100px]">
+                            <div class="py-4 text-center font-bold text-gray-500 text-sm">${slot.time}</div>`;
+                        
+                        slot.rooms.forEach(talk => {
+                            dayHtml += `<div class="py-2 flex items-stretch">
+                                <div class="p-2 rounded-lg w-full flex flex-col justify-center ${talk.talk ? 'bg-rose-50' : ''}">
+                                    ${talk.talk ? `
+                                        <p class="font-semibold text-rose-800 text-sm">${talk.talk}</p>
+                                        ${talk.speaker ? `<p class="text-xs text-gray-600 mt-1">${talk.speaker.name}<br><span class="italic">${talk.speaker.title}</span></p>` : ''}
+                                    ` : '' }
+                                </div>
+                            </div>`;
+                        });
+
+                        dayHtml += `</div>`; // Close row
+                    });
+
+                    dayHtml += `</div></div>`; // Close body and day-schedule
+                    container.innerHTML += dayHtml;
+                }
+            }
+        }
+
+        function setupDebugToggles() {
+            const panel = document.getElementById('debug-panel');
+            if (!debugMode || !panel) return;
+
+            panel.innerHTML = `
+                <div class="flex flex-col gap-2">
+                    <button id="toggle-grayscale" class="px-3 py-1 text-xs bg-slate-700 text-white rounded">Toggle Grayscale</button>
+                    <button id="toggle-teaser" class="px-3 py-1 text-xs bg-slate-700 text-white rounded">Toggle Teaser</button>
+                </div>
+            `;
+
+            document.getElementById('toggle-grayscale').addEventListener('click', () => {
+                enableGrayscale = !enableGrayscale;
+                document.documentElement.classList.toggle('grayscale-mode', enableGrayscale);
+            });
+
+            document.getElementById('toggle-teaser').addEventListener('click', () => {
+                showTeaserMode = !showTeaserMode;
+                populateSpeakers();
+                populateSchedule();
+            });
+        }
+
+        // Run all population functions when the page content has loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            // Apply grayscale mode if enabled
+            if (enableGrayscale) {
+                document.documentElement.classList.add('grayscale-mode');
+            }
+
+            populateSpeakers();
+            populateHosts();
+            populateReviews();
+            populateTickets();
+            populateFaq();
+            populateSchedule();
+            setupDebugToggles();
+        });
+    </script>
+
+</body>
+</html>
