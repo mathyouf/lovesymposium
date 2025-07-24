@@ -224,20 +224,30 @@
         <!-- Contact Form Section -->
         <section class="container mx-auto px-4 py-16 md:py-24">
             <h2 class="text-4xl md:text-5xl font-romantic text-center mb-12 text-[#5c323e]">Get In Touch</h2>
-            <div class="max-w-2xl mx-auto p-4 sm:p-8 bg-[#5c323e] rounded-lg shadow-2xl relative">
-                <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 bg-[#5c323e] rounded-full flex items-center justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white" viewBox="0 0 20 20" fill="currentColor">
-                        <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
-                        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
-                    </svg>
+            <div class="max-w-2xl mx-auto relative p-8">
+                <!-- Envelope back -->
+                <div class="absolute inset-0 bg-[#5c323e] rounded-lg shadow-2xl transform -rotate-1"></div>
+                <div class="absolute inset-0 bg-[#6c424e] rounded-lg shadow-2xl transform rotate-1"></div>
+                <!-- Envelope front flaps -->
+                <div class="absolute top-0 left-0 w-full h-full rounded-lg overflow-hidden">
+                    <div class="absolute top-0 left-0 w-1/2 h-full bg-[#5c323e] transform -skew-y-12 origin-top-right"></div>
+                    <div class="absolute top-0 right-0 w-1/2 h-full bg-[#5c323e] transform skew-y-12 origin-top-left"></div>
                 </div>
-                <form class="mt-12 bg-white p-8 rounded-lg shadow-inner">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                        <input type="text" placeholder="Your Name" class="font-cursive text-xl w-full p-3 bg-transparent border-b-2 border-gray-300 focus:outline-none focus:border-[#8dafb9]">
-                        <input type="email" placeholder="Your Email" class="font-cursive text-xl w-full p-3 bg-transparent border-b-2 border-gray-300 focus:outline-none focus:border-[#8dafb9]">
+                <!-- Paper -->
+                <form class="relative z-10 bg-[#fdfbf7] p-8 rounded-lg shadow-lg">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 mb-6">
+                        <input type="text" placeholder="Your Name" class="font-cursive text-2xl w-full p-2 bg-transparent border-b-2 border-gray-200 focus:outline-none focus:border-[#8dafb9]">
+                        <input type="email" placeholder="Your Email" class="font-cursive text-2xl w-full p-2 bg-transparent border-b-2 border-gray-200 focus:outline-none focus:border-[#8dafb9]">
                     </div>
-                    <textarea placeholder="Your Message..." rows="6" class="font-cursive text-xl w-full p-3 bg-transparent border-b-2 border-gray-300 mb-6 focus:outline-none focus:ring-0 focus:border-[#8dafb9]"></textarea>
-                    <button type="submit" class="w-full text-center text-white font-bold py-3 px-6 rounded-lg bg-[#5c323e] hover:bg-opacity-80 transition duration-300 font-romantic text-2xl">Send</button>
+                    <textarea placeholder="Your Message..." rows="6" class="font-cursive text-2xl w-full p-2 bg-transparent border-b-2 border-gray-200 mb-6 focus:outline-none focus:ring-0 focus:border-[#8dafb9]"></textarea>
+                    <div class="flex justify-end">
+                         <button type="submit" class="relative group w-24 h-24 flex items-center justify-center">
+                            <svg class="absolute w-full h-full text-[#5c323e]" viewBox="0 0 100 100">
+                                <path d="M50 0 L100 50 L50 100 L0 50 Z" fill="currentColor"/>
+                            </svg>
+                            <span class="relative z-10 text-white font-romantic text-xl group-hover:scale-110 transition-transform">Send</span>
+                        </button>
+                    </div>
                 </form>
             </div>
         </section>
