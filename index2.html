@@ -213,7 +213,7 @@
         // =====================================================================
         const dataUrls = {
             speakers: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQuSLC5kKYfcrLYQIi7IqgpXY5I-t2lu7ztNicu3bcpHFtgWrJPvIo9L0fR05GH3WMJO540vTi5wWXl/pub?gid=0&single=true&output=csv',
-            schedule: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQuSLC5kKYfcrLYQIi7IqgpXY5I-t2lu7ztNicu3bcpHFtgWrJPvIo9L0fR05GH3WMJO540vTi5wWXl/pub?gid=737105267&single=true&output=csv',
+            schedule: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQuSLC5kKYfcrLYQIi7IqgpXY5I-t2lu7ztNicu3bcpHFtgWrJPvIo9L0fR05GH3WMJO540vTi5wWXl/pub?gid=1770951979&single=true&output=csv',
         };
         const fallbackUrls = {
             speakers: 'symv2imgs/speakers.csv',
@@ -268,7 +268,7 @@
             { question: "Can I get a refund on my ticket?", answer: "Tickets are non-refundable but are transferable. Please contact us with the new attendee's information at least one week prior to the event." }
         ];
 
-// =====================================================================
+        // =====================================================================
         // DATA FETCHING & PARSING
         // =====================================================================
 
@@ -296,44 +296,48 @@
             }
         }
         
-        // A more robust CSV parser that correctly handles quoted commas.
+        // A more robust CSV parser that correctly handles quoted fields containing commas.
         function parseCsv(csvText, headerRowIndex, dataRowStart) {
             const lines = csvText.trim().replace(/\r/g, '').split('\n');
-            if (lines.length < dataRowStart) return [];
+            if (lines.length < dataRowStart) {
+                console.error("CSV has fewer rows than the specified data start row.");
+                return [];
+            }
             
             const headers = lines[headerRowIndex].split(',').map(h => h.trim().replace(/"/g, ''));
             
-            return lines.slice(dataRowStart).map(line => {
-                // Regex to split by comma but ignore commas inside double quotes
+            return lines.slice(dataRowStart).map((line, index) => {
+                // Regex to split by comma but ignore commas inside double quotes.
                 const values = line.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
-                const row = {};
+                
+                const rowObject = {};
                 for (let i = 0; i < headers.length; i++) {
-                    if (headers[i]) {
+                    const header = headers[i];
+                    if (header) { // Only process if the header is not empty
                         let value = (values[i] || '').trim();
-                        // Clean up quotes
+                        // Clean up quotes from the value
                         if (value.startsWith('"') && value.endsWith('"')) {
                             value = value.slice(1, -1).replace(/""/g, '"');
                         }
-                        row[headers[i]] = value;
+                        rowObject[header] = value;
                     }
                 }
-                return row;
+                return rowObject;
             });
         }
 
         function parseSpeakersCsv(csvText) {
-            // Corrected: Headers are on line 2 (index 1), data starts on line 3 (index 2).
-            const data = parseCsv(csvText, 1, 2); 
+            const data = parseCsv(csvText, 0, 1);
             console.log("Parsed Speakers Data:", data);
             return data;
         }
 
         function parseScheduleCsv(csvText) {
-            // Corrected: Headers on row 1 (index 0), data starts on row 2 (index 1).
             const data = parseCsv(csvText, 0, 1);
             console.log("Parsed Schedule Data:", data);
             return data;
         }
+
         // =====================================================================
         // DOM POPULATION & RENDERING
         // =====================================================================
