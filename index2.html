@@ -71,6 +71,20 @@
                 animation-duration: 40s;
             }
         }
+        
+        /* Custom clip-path for themed sections */
+        .clip-wave {
+            clip-path: polygon(0 0, 100% 5%, 100% 100%, 0 95%);
+        }
+        
+        /* Hide scrollbar for photo gallery */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
     </style>
 </head>
 <body class="text-gray-800">
@@ -107,53 +121,54 @@
         <!-- Themed Speaker Sections -->
         <main class="container mx-auto px-4 pt-16 pb-12 relative z-10 space-y-24">
             <!-- Industry Section -->
-            <section id="industry-section" class="text-center">
-                <div class="flex justify-center items-center gap-8 mb-8">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/TinderLogo-2017.svg/1200px-TinderLogo-2017.svg.png" alt="Tinder Logo" class="w-24 h-24 rounded-full object-contain bg-white p-2 shadow-lg" onerror="this.onerror=null;this.src='https://placehold.co/100x100/ffffff/000000?text=Tinder'">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Hinge_logo.svg" alt="Hinge Logo" class="w-24 h-24 rounded-full object-contain bg-white p-2 shadow-lg" onerror="this.onerror=null;this.src='https://placehold.co/100x100/ffffff/000000?text=Hinge'">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Bumble_logo_2023.svg/1200px-Bumble_logo_2023.svg.png" alt="Bumble Logo" class="w-24 h-24 rounded-full object-contain bg-white p-2 shadow-lg" onerror="this.onerror=null;this.src='https://placehold.co/100x100/ffffff/000000?text=Bumble'">
-                </div>
-                <h2 class="text-4xl md:text-5xl font-romantic text-[#5c323e]">Industry</h2>
-                <p class="text-2xl mt-4 font-bold text-gray-700">Who will be next?</p>
-                <div id="industry-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 md:gap-8 mt-12">
-                    <!-- Industry speakers go here -->
-                </div>
-            </section>
+            <div class="bg-[#fdeced] py-20 clip-wave">
+                <section id="industry-section" class="text-center">
+                    <div class="flex justify-center items-center gap-8 mb-8">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/TinderLogo-2017.svg/1200px-TinderLogo-2017.svg.png" alt="Tinder Logo" class="w-24 h-24 rounded-full object-contain bg-white p-2 shadow-lg" onerror="this.onerror=null;this.src='https://placehold.co/100x100/ffffff/000000?text=Tinder'">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Hinge_logo.svg" alt="Hinge Logo" class="w-24 h-24 rounded-full object-contain bg-white p-2 shadow-lg" onerror="this.onerror=null;this.src='https://placehold.co/100x100/ffffff/000000?text=Hinge'">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Bumble_logo_2023.svg/1200px-Bumble_logo_2023.svg.png" alt="Bumble Logo" class="w-24 h-24 rounded-full object-contain bg-white p-2 shadow-lg" onerror="this.onerror=null;this.src='https://placehold.co/100x100/ffffff/000000?text=Bumble'">
+                    </div>
+                    <h2 class="text-4xl md:text-5xl font-romantic text-[#5c323e]">Industry</h2>
+                    <p class="text-2xl mt-4 font-bold text-gray-700">Who will be next?</p>
+                    <div id="industry-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 md:gap-8 mt-12 justify-center">
+                        <!-- Industry speakers go here -->
+                    </div>
+                </section>
+            </div>
 
             <!-- Psychometrics Section -->
-            <section id="psychometrics-section" class="text-center">
-                 <div class="flex justify-center items-center gap-8 mb-8">
-                    <img src="https://placehold.co/100x100/8dafb9/ffffff?text=Mind" alt="Abstract mind" class="w-24 h-24 rounded-full object-cover shadow-lg">
-                    <img src="https://placehold.co/100x100/8dafb9/ffffff?text=Data" alt="Abstract data" class="w-24 h-24 rounded-full object-cover shadow-lg">
-                    <img src="https://placehold.co/100x100/8dafb9/ffffff?text=Heart" alt="Abstract heart" class="w-24 h-24 rounded-full object-cover shadow-lg">
-                </div>
-                <h2 class="text-4xl md:text-5xl font-romantic text-[#5c323e]">Psychometrics</h2>
-                <p class="text-2xl mt-4 font-bold text-gray-700">What will it take to achieve the relationship singularity?</p>
-                <div id="psychometrics-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 md:gap-8 mt-12">
-                    <!-- Psychometrics speakers go here -->
-                </div>
-            </section>
+            <div class="bg-[#e6f4f1] py-20 clip-wave">
+                <section id="psychometrics-section" class="text-center">
+                     <div class="flex justify-center items-center gap-8 mb-8">
+                        <img src="https://placehold.co/100x100/8dafb9/ffffff?text=Mind" alt="Abstract mind" class="w-24 h-24 rounded-full object-cover shadow-lg">
+                        <img src="https://placehold.co/100x100/8dafb9/ffffff?text=Data" alt="Abstract data" class="w-24 h-24 rounded-full object-cover shadow-lg">
+                        <img src="https://placehold.co/100x100/8dafb9/ffffff?text=Heart" alt="Abstract heart" class="w-24 h-24 rounded-full object-cover shadow-lg">
+                    </div>
+                    <h2 class="text-4xl md:text-5xl font-romantic text-[#5c323e]">Psychometrics</h2>
+                    <p class="text-2xl mt-4 font-bold text-gray-700">What will it take to achieve the relationship singularity?</p>
+                    <div id="psychometrics-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 md:gap-8 mt-12 justify-center">
+                        <!-- Psychometrics speakers go here -->
+                    </div>
+                </section>
+            </div>
 
             <!-- Philosophy Section -->
-            <section id="philosophy-section" class="text-center">
-                 <div class="flex justify-center items-center gap-8 mb-8">
-                    <img src="https://placehold.co/100x100/d9bb89/ffffff?text=Seek" alt="Abstract art" class="w-24 h-24 rounded-full object-cover shadow-lg">
-                    <img src="https://placehold.co/100x100/d9bb89/ffffff?text=Find" alt="Abstract art" class="w-24 h-24 rounded-full object-cover shadow-lg">
-                    <img src="https://placehold.co/100x100/d9bb89/ffffff?text=Love" alt="Abstract art" class="w-24 h-24 rounded-full object-cover shadow-lg">
-                </div>
-                <h2 class="text-4xl md:text-5xl font-romantic text-[#5c323e]">Philosophy</h2>
-                <p class="text-2xl mt-4 font-bold text-gray-700">What do we seek when we seek love?</p>
-                <div id="philosophy-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 md:gap-8 mt-12">
-                    <!-- Philosophy speakers go here -->
-                </div>
-            </section>
+            <div class="bg-[#fff9e6] py-20 clip-wave">
+                <section id="philosophy-section" class="text-center">
+                     <div class="flex justify-center items-center gap-8 mb-8">
+                        <img src="https://placehold.co/100x100/d9bb89/ffffff?text=Seek" alt="Abstract art" class="w-24 h-24 rounded-full object-cover shadow-lg">
+                        <img src="https://placehold.co/100x100/d9bb89/ffffff?text=Find" alt="Abstract art" class="w-24 h-24 rounded-full object-cover shadow-lg">
+                        <img src="https://placehold.co/100x100/d9bb89/ffffff?text=Love" alt="Abstract art" class="w-24 h-24 rounded-full object-cover shadow-lg">
+                    </div>
+                    <h2 class="text-4xl md:text-5xl font-romantic text-[#5c323e]">Philosophy</h2>
+                    <p class="text-2xl mt-4 font-bold text-gray-700">What do we seek when we seek love?</p>
+                    <div id="philosophy-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 md:gap-8 mt-12 justify-center">
+                        <!-- Philosophy speakers go here -->
+                    </div>
+                </section>
+            </div>
         </main>
         
-        <!-- Interspersed Image Divider -->
-        <div class="flex justify-center py-16">
-            <img src="symv2imgs/1.png" alt="Decorative flourish" class="max-w-xs md:max-w-sm" onerror="this.onerror=null;this.src='https://placehold.co/600x200/fdfbf7/666666?text=Flourish'">
-        </div>
-
         <!-- Letter from the Hosts Section -->
         <section class="container mx-auto px-4 py-16 md:py-24">
             <h2 class="text-4xl md:text-5xl font-romantic text-center mb-16 text-[#5c323e]">A Letter From The Hosts</h2>
@@ -162,28 +177,16 @@
             </div>
         </section>
 
-        <!-- Interspersed Image Divider -->
-        <div class="flex justify-center py-16">
-            <img src="symv2imgs/2.png" alt="Decorative flourish" class="max-w-xs md:max-w-sm" onerror="this.onerror=null;this.src='https://placehold.co/600x200/fdfbf7/666666?text=Flourish'">
-        </div>
-
-        <!-- Scrolling Reviews Section -->
-        <section class="py-16 md:py-24 bg-white">
-            <h2 class="text-4xl md:text-5xl font-romantic text-center mb-12 text-[#5c323e]">Words of Love</h2>
-            <div class="relative w-full overflow-hidden space-y-4" style="mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);">
-                 <div id="reviews-container-top" class="scrolling-wrapper-fast">
-                    <!-- Reviews inserted here -->
-                 </div>
-                 <div id="reviews-container-bottom" class="scrolling-wrapper-slow">
-                    <!-- Reviews inserted here -->
-                 </div>
+        <!-- Photo Gallery & Reviews Section -->
+        <section class="py-16 md:py-24 bg-white w-full overflow-hidden">
+            <h2 class="text-4xl md:text-5xl font-romantic text-center mb-8 text-[#5c323e]">From Love Symposium 2024</h2>
+            <div id="reviews-container-top" class="scrolling-wrapper-fast mb-4">
+                <!-- Reviews inserted here -->
+            </div>
+            <div id="photo-gallery" class="flex overflow-x-auto no-scrollbar space-x-4 p-4">
+                <!-- Photos will be inserted here -->
             </div>
         </section>
-
-        <!-- Interspersed Image Divider -->
-        <div class="flex justify-center py-16">
-            <img src="symv2imgs/3.png" alt="Decorative flourish" class="max-w-xs md:max-w-sm" onerror="this.onerror=null;this.src='https://placehold.co/600x200/fdfbf7/666666?text=Flourish'">
-        </div>
 
         <!-- Tickets Section -->
         <section id="tickets" class="container mx-auto px-4 py-16 md:py-24">
@@ -193,11 +196,6 @@
             </div>
         </section>
 
-        <!-- Interspersed Image Divider -->
-        <div class="flex justify-center py-16">
-            <img src="symv2imgs/4.png" alt="Decorative flourish" class="max-w-xs md:max-w-sm" onerror="this.onerror=null;this.src='https://placehold.co/600x200/fdfbf7/666666?text=Flourish'">
-        </div>
-
         <!-- FAQ Section -->
         <section class="container mx-auto px-4 py-16 md:py-24 max-w-4xl">
             <h2 class="text-4xl md:text-5xl font-romantic text-center mb-12 text-[#5c323e]">Frequently Asked Questions</h2>
@@ -206,11 +204,6 @@
             </div>
         </section>
         
-        <!-- Interspersed Image Divider -->
-        <div class="flex justify-center py-16">
-            <img src="symv2imgs/5.png" alt="Decorative flourish" class="max-w-xs md:max-w-sm" onerror="this.onerror=null;this.src='https://placehold.co/600x200/fdfbf7/666666?text=Flourish'">
-        </div>
-
         <!-- Schedule Section -->
         <section id="schedule" class="bg-white py-16 md:py-24">
             <div class="container mx-auto px-4">
@@ -221,41 +214,13 @@
             </div>
         </section>
 
-        <!-- Contact Form Section -->
-        <section class="container mx-auto px-4 py-16 md:py-24">
-            <h2 class="text-4xl md:text-5xl font-romantic text-center mb-12 text-[#5c323e]">Send a Letter</h2>
-            <div class="max-w-2xl mx-auto relative p-2">
-                <!-- Envelope -->
-                <div class="relative bg-[#5c323e] shadow-2xl" style="padding-bottom: 75%;">
-                    <div class="absolute inset-0 overflow-hidden">
-                        <!-- Top Flap -->
-                        <div class="absolute top-0 left-0 w-full h-1/2 bg-[#6c424e]" style="clip-path: polygon(0 0, 100% 0, 50% 100%);"></div>
-                        <!-- Left Flap -->
-                        <div class="absolute top-0 left-0 w-1/2 h-full bg-[#522f38]" style="clip-path: polygon(0 0, 100% 50%, 0 100%);"></div>
-                        <!-- Right Flap -->
-                        <div class="absolute top-0 right-0 w-1/2 h-full bg-[#522f38]" style="clip-path: polygon(100% 0, 0 50%, 100% 100%);"></div>
-                    </div>
-                </div>
-
-                <!-- Paper -->
-                <form class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-11/12 bg-[#fdfbf7] p-8 shadow-lg">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 mb-6">
-                        <input type="text" placeholder="Your Name" class="font-cursive text-2xl w-full p-2 bg-transparent border-b-2 border-gray-200 focus:outline-none focus:border-[#8dafb9]">
-                        <input type="email" placeholder="Your Email" class="font-cursive text-2xl w-full p-2 bg-transparent border-b-2 border-gray-200 focus:outline-none focus:border-[#8dafb9]">
-                    </div>
-                    <textarea placeholder="Your Message..." rows="6" class="font-cursive text-2xl w-full p-2 bg-transparent border-b-2 border-gray-200 mb-6 focus:outline-none focus:ring-0 focus:border-[#8dafb9]"></textarea>
-                    <div class="flex justify-end">
-                         <button type="submit" class="group w-24 h-24 p-2 bg-white border-2 border-dashed border-[#8dafb9] hover:border-[#5c323e] transition">
-                            <div class="w-full h-full flex flex-col items-center justify-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-[#5c323e] group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-                                </svg>
-                                <span class="text-xs font-bold text-[#5c323e] mt-1">SEND</span>
-                            </div>
-                        </button>
-                    </div>
-                </form>
-            </div>
+        <!-- Contact Section -->
+        <section class="container mx-auto px-4 py-16 md:py-24 text-center">
+             <h2 class="text-3xl font-romantic text-center mb-4 text-[#5c323e]">Contact Us</h2>
+             <p class="text-lg text-gray-600">Have a question? We'd love to hear from you.</p>
+             <a href="mailto:contact@lovesymposium.com" class="inline-block mt-4 text-xl text-[#8dafb9] hover:text-[#5c323e] transition">
+                contact@lovesymposium.com
+             </a>
         </section>
     </div>
 
@@ -270,7 +235,7 @@
         // =====================================================================
         const dataUrls = {
             speakers: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQuSLC5kKYfcrLYQIi7IqgpXY5I-t2lu7ztNicu3bcpHFtgWrJPvIo9L0fR05GH3WMJO540vTi5wWXl/pub?gid=0&single=true&output=csv',
-            schedule: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQuSLC5kKYfcrLYQIi7IqgpXY5I-t2lu7ztNicu3bcpHFtgWrJPvIo9L0fR05GH3WMJO540vTi5wWXl/pub?gid=737105267&single=true&output=csv',
+            schedule: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQuSLC5kKYfcrLYQIi7IqgpXY5I-t2lu7ztNicu3bcpHFtgWrJPvIo9L0fR05GH3WMJO540vTi5wWXl/pub?gid=1770951979&single=true&output=csv',
         };
         const fallbackUrls = {
             speakers: 'symv2imgs/speakers.csv',
@@ -297,8 +262,8 @@
         const localSchedule = [];
 
         const hosts = [
-            { name: 'Ann Pierce', image: 'symv2imgs/ann.jpg', statement: 'Our mission is to create a space where modern love can be explored in all its facets. We believe that by bringing together diverse voices and fostering open dialogue, we can all learn to love more deeply and authentically.' },
-            { name: 'Matthew Fisher', image: 'symv2imgs/matt.jpg', statement: 'Love is the cornerstone of the human experience, yet we rarely give it the academic and intentional focus it deserves. This symposium is our answer—a chance to learn, share, and grow together in our understanding of connection.' }
+            { name: 'Ann Pierce', image: 'symv2imgs/ann.jpg', statement: 'Our mission is to create a space where modern love can be explored in all its facets. We believe that by bringing together diverse voices and fostering open dialogue, we can all learn to love more deeply and authentically.', x_account: 'https://x.com/annpierce' },
+            { name: 'Matthew Fisher', image: 'symv2imgs/matt.jpg', statement: 'Love is the cornerstone of the human experience, yet we rarely give it the academic and intentional focus it deserves. This symposium is our answer—a chance to learn, share, and grow together in our understanding of connection.', x_account: 'https://x.com/matthewfisher' }
         ];
 
         const reviews = [
@@ -315,7 +280,7 @@
         ];
 
         const tickets = [
-            { name: 'Early Bird', price: 99, features: ['Full Access to All Talks', 'Digital Welcome Packet', 'Community Forum Access'], cta: 'Buy Now', highlight: false },
+            { name: 'Early Bird', price: 100, features: ['Full Access to All Talks', 'Digital Welcome Packet', 'Community Forum Access', 'Sale ends September 1st'], cta: 'Buy Now', highlight: false },
             { name: 'Late In Love', price: 150, features: ['Full Access to All Talks', 'Digital Welcome Packet', 'Community Forum Access', 'Recording of All Sessions'], cta: 'Buy Now', highlight: false },
             { name: 'Sponsor', price: 2000, features: ['All-Access VIP Pass', 'Special Mention in Program', 'Private Q&A with Hosts', 'Logo Placement on Site'], cta: 'Become a Sponsor', highlight: true }
         ];
@@ -323,6 +288,7 @@
         const faqData = [
             { question: "What is the venue for the symposium?", answer: "The symposium will be held at <strong>The Commons</strong>, a beautiful and spacious venue perfect for fostering connection and learning." },
             { question: "What catering is provided?", answer: "We are pleased to offer the following catering: <ul><li class='ml-4 list-disc'>Friday: Lunch</li><li class='ml-4 list-disc'>Saturday: Breakfast and Lunch</li><li class='ml-4 list-disc'>Sunday: Breakfast</li></ul>" },
+            { question: "Is this a dating event? Or only for singles?", answer: "This is not a dating or singles event. The Love Symposium is an educational conference for everyone—singles, couples, and individuals in any relationship status—who is interested in the science, philosophy, and future of modern relationships." },
             { question: "Is there a dress code?", answer: "We recommend smart casual attire. Comfort is key, as the days will be full of learning and interaction." },
             { question: "Can I get a refund on my ticket?", answer: "Tickets are non-refundable but are transferable. Please contact us with the new attendee's information at least one week prior to the event." }
         ];
@@ -404,6 +370,7 @@
             populateReviews(reviews);
             populateTickets(tickets);
             populateFaq(faqData);
+            populatePhotoGallery();
         }
 
         function populateSpeakers(speakers) {
@@ -440,12 +407,14 @@
                 const alignmentClass = index === 0 
                     ? 'md:items-end md:text-right' 
                     : 'md:items-start md:text-left';
+                const xAccountLink = host.x_account ? `<a href="${host.x_account}" target="_blank" rel="noopener noreferrer" class="text-sm text-[#8dafb9] hover:text-[#5c323e] transition mt-1">@${host.x_account.split('/').pop()}</a>` : '';
 
                 const content = `
                     <div class="flex flex-col items-center text-center w-full md:w-1/2 ${alignmentClass}">
                         <img src="${host.image}" alt="Photo of ${host.name}" class="w-32 h-32 rounded-full object-cover border-4 border-white shadow-xl mb-6" onerror="this.onerror=null;this.src='https://placehold.co/300x300/cccccc/ffffff?text=Image+Not+Found'">
                         <h3 class="text-2xl font-bold mb-2 text-[#5c323e]">${host.name}</h3>
-                        <p class="text-gray-600 leading-relaxed max-w-md">${host.statement}</p>
+                        ${xAccountLink}
+                        <p class="text-gray-600 leading-relaxed max-w-md mt-4">${host.statement}</p>
                     </div>
                 `;
                 section.innerHTML += content;
@@ -454,18 +423,29 @@
 
         function populateReviews(reviewsData) {
             const topContainer = document.getElementById('reviews-container-top');
-            const bottomContainer = document.getElementById('reviews-container-bottom');
-            if (!topContainer || !bottomContainer) return; 
+            if (!topContainer) return; 
             
             const allReviews = [...reviewsData, ...reviewsData, ...reviewsData, ...reviewsData]; 
             topContainer.innerHTML = '';
-            bottomContainer.innerHTML = '';
 
             allReviews.forEach(review => { 
                 const card = `<div class="flex-shrink-0 w-80 mx-4 p-6 bg-gray-50 rounded-lg shadow-md flex items-start"><img src="${review.image}" alt="Photo of ${review.name}" class="w-12 h-12 rounded-full object-cover mr-4 border-2 border-white" onerror="this.onerror=null;this.src='https://placehold.co/100x100/cccccc/ffffff?text=Error'"><div><p class="font-semibold text-[#5c323e]">${review.name}</p><p class="text-gray-600 italic">"${review.text}"</p></div></div>`; 
                 topContainer.innerHTML += card;
-                bottomContainer.innerHTML += card;
             });
+        }
+
+        function populatePhotoGallery() {
+            const gallery = document.getElementById('photo-gallery');
+            if (!gallery) return;
+            gallery.innerHTML = '';
+            for (let i = 1; i <= 10; i++) {
+                const photoCard = `
+                    <div class="flex-shrink-0 w-64 h-48">
+                        <img src="symv2imgs/2024-${i}.jpg" class="w-full h-full object-cover rounded-lg shadow-md" onerror="this.onerror=null;this.src='https://placehold.co/400x300/cccccc/ffffff?text=Event+Photo'">
+                    </div>
+                `;
+                gallery.innerHTML += photoCard;
+            }
         }
 
         function populateTickets(ticketsData) {
