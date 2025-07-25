@@ -20,6 +20,7 @@
             background-color: #fdfbf7; /* Light, airy off-white */
             color: #666666; /* Soft grey text */
             overscroll-behavior-y: contain; /* Prevents scroll bounce */
+            overflow-x: hidden; /* Prevents horizontal scroll/white sliver on mobile */
         }
         .font-romantic {
             font-family: 'Cormorant', serif;
@@ -45,29 +46,38 @@
             }
         }
         
-        /* Animation for the scrolling reviews */
+        /* Animation for the scrolling sections */
         @keyframes scroll {
             0% { transform: translateX(0); }
             100% { transform: translateX(-50%); }
         }
 
-        .scrolling-wrapper-fast {
+        .scrolling-container {
+            position: relative;
+            width: 100%;
+            overflow-x: auto; /* Allows manual scrolling */
+        }
+        .scrolling-content {
             display: flex;
+            width: fit-content; /* Let the content define the width */
+            animation-play-state: running;
+        }
+        .scrolling-container:hover .scrolling-content {
+            animation-play-state: paused;
+        }
+        .scrolling-content.fast {
             animation: scroll 35s linear infinite;
         }
-
-        .scrolling-wrapper-slow {
-            display: flex;
+        .scrolling-content.slow {
             animation: scroll 55s linear infinite;
-            animation-delay: -10s; /* Offset the start */
         }
         
         /* Faster scrolling on mobile */
         @media (max-width: 768px) {
-            .scrolling-wrapper-fast {
+            .scrolling-content.fast {
                 animation-duration: 25s;
             }
-            .scrolling-wrapper-slow {
+            .scrolling-content.slow {
                 animation-duration: 40s;
             }
         }
@@ -77,13 +87,33 @@
             clip-path: polygon(0 0, 100% 5%, 100% 100%, 0 95%);
         }
         
-        /* Hide scrollbar for photo gallery */
+        /* Hide scrollbar */
         .no-scrollbar::-webkit-scrollbar {
             display: none;
         }
         .no-scrollbar {
             -ms-overflow-style: none;  /* IE and Edge */
             scrollbar-width: none;  /* Firefox */
+        }
+        
+        /* New fade effect for scrolling sections */
+        .fade-edges::before,
+        .fade-edges::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            z-index: 2;
+            width: 10%;
+            pointer-events: none; /* Allows scrolling through the gradient */
+        }
+        .fade-edges::before {
+            left: 0;
+            background: linear-gradient(to right, white, transparent);
+        }
+        .fade-edges::after {
+            right: 0;
+            background: linear-gradient(to left, white, transparent);
         }
     </style>
 </head>
@@ -92,11 +122,11 @@
     <!-- Hero Section -->
     <header class="hero-section flex flex-col items-center justify-center text-white text-center p-4 h-[80vh] md:h-[95vh]">
         <div class="absolute inset-0 bg-black opacity-30"></div>
-        <h1 class="font-romantic text-6xl md:text-8xl lg:text-9xl z-10" style="text-shadow: 2px 2px 8px rgba(0,0,0,0.7);">
+        <h1 class="font-romantic text-5xl sm:text-6xl md:text-8xl lg:text-9xl z-10" style="text-shadow: 2px 2px 8px rgba(0,0,0,0.7);">
             Love Symposium
         </h1>
-        <p class="z-10 mt-2 text-xl md:text-2xl font-bold tracking-wider text-gray-100">A conference for people trying to solve modern relationships</p>
-        <p class="z-10 mt-4 text-lg md:text-xl lg:text-2xl tracking-wider text-gray-200">
+        <p class="z-10 mt-2 text-lg sm:text-xl md:text-2xl font-bold tracking-wider text-gray-100">A conference for people trying to solve modern relationships</p>
+        <p class="z-10 mt-4 text-base sm:text-lg md:text-xl lg:text-2xl tracking-wider text-gray-200">
             The Weekend of November 14-16, 2025 at 
             <a href="https://www.google.com/maps/search/?api=1&query=The+Commons,San+Francisco,CA" target="_blank" rel="noopener noreferrer" class="inline-block bg-white/20 hover:bg-white/40 text-white font-semibold px-4 py-1 rounded-full transition duration-300 mx-1">The Commons, San Francisco</a>
         </p>
@@ -130,7 +160,7 @@
                     </div>
                     <h2 class="text-4xl md:text-5xl font-romantic text-[#5c323e]">Industry</h2>
                     <p class="text-2xl mt-4 font-bold text-gray-700">Who will be next?</p>
-                    <div id="industry-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 md:gap-8 mt-12 justify-center">
+                    <div id="industry-grid" class="flex flex-wrap justify-center gap-6 md:gap-8 mt-12">
                         <!-- Industry speakers go here -->
                     </div>
                 </section>
@@ -146,7 +176,7 @@
                     </div>
                     <h2 class="text-4xl md:text-5xl font-romantic text-[#5c323e]">Psychometrics</h2>
                     <p class="text-2xl mt-4 font-bold text-gray-700">What will it take to achieve the relationship singularity?</p>
-                    <div id="psychometrics-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 md:gap-8 mt-12 justify-center">
+                    <div id="psychometrics-grid" class="flex flex-wrap justify-center gap-6 md:gap-8 mt-12">
                         <!-- Psychometrics speakers go here -->
                     </div>
                 </section>
@@ -162,7 +192,7 @@
                     </div>
                     <h2 class="text-4xl md:text-5xl font-romantic text-[#5c323e]">Philosophy</h2>
                     <p class="text-2xl mt-4 font-bold text-gray-700">What do we seek when we seek love?</p>
-                    <div id="philosophy-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 md:gap-8 mt-12 justify-center">
+                    <div id="philosophy-grid" class="flex flex-wrap justify-center gap-6 md:gap-8 mt-12">
                         <!-- Philosophy speakers go here -->
                     </div>
                 </section>
@@ -179,12 +209,20 @@
 
         <!-- Photo Gallery & Reviews Section -->
         <section class="py-16 md:py-24 bg-white w-full overflow-hidden">
-            <h2 class="text-4xl md:text-5xl font-romantic text-center mb-8 text-[#5c323e]">From Love Symposium 2024</h2>
-            <div id="reviews-container-top" class="scrolling-wrapper-fast mb-4">
-                <!-- Reviews inserted here -->
+            <div class="container mx-auto px-4">
+                <h2 class="text-4xl md:text-5xl font-romantic text-center mb-8 text-[#5c323e]">From Love Symposium 2024</h2>
             </div>
-            <div id="photo-gallery" class="flex overflow-x-auto no-scrollbar space-x-4 p-4">
-                <!-- Photos will be inserted here -->
+            <div class="scrolling-container relative fade-edges">
+                 <div id="reviews-container-top" class="scrolling-content fast no-scrollbar">
+                    <!-- Reviews inserted here -->
+                 </div>
+            </div>
+            
+            <!-- Photo Gallery -->
+            <div class="mt-12 scrolling-container relative fade-edges">
+                 <div id="photo-gallery" class="scrolling-content slow flex space-x-4 p-4 no-scrollbar">
+                     <!-- Photos will be inserted here -->
+                 </div>
             </div>
         </section>
 
