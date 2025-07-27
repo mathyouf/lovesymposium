@@ -515,17 +515,20 @@
   top: 22px;
   left: -56px;
   
-  /* Styling adjustments for a thinner banner */
-  background-color: var(--dark-greyish);
-  color: white;
+  /* New "Parchment" Styling */
+  background-color: bba57b;         /* A creamy, parchment-like off-white */
+  color: var(--goldish);              /* Uses your theme's dark color for an "ink" look */
+  border: 1px solid rgba(92, 50, 62, 0.4); /* A subtle border using your --goldish color */
+  
+  /* Retained sizing and font styles */
   font-family: 'Cormorant', serif;
-  font-size: 13px;          /* Reduced from 14px */
+  font-size: 13px;
   font-weight: 600;
   text-align: center;
   text-transform: uppercase;
   letter-spacing: 1px;
-  padding: 2px 50px;        /* Vertical padding reduced from 4px */
-  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  padding: 2px 50px;
+  box-shadow: 0 2px 3px rgba(0,0,0,0.2); /* Softened shadow for depth */
 }
   
   .campus-section {
