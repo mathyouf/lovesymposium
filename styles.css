@@ -508,26 +508,23 @@
   border-radius: 5px; /* Matches the border-radius on your .CTA-button */
 }
 
-/* This creates the diagonal banner */
 .luma-button-wrapper::before {
   content: '2024 EVENT';
   position: absolute;
   transform: rotate(-45deg);
-
-  /* Positioning values may need minor tweaks to look perfect */
   top: 22px;
   left: -45px;
   
-  /* Banner styling using your theme's variables */
+  /* Styling adjustments for a thinner banner */
   background-color: var(--dark-greyish);
   color: white;
-  font-family: 'Cormorant', serif; /* Ensures font consistency */
-  font-size: 14px;
+  font-family: 'Cormorant', serif;
+  font-size: 13px;          /* Reduced from 14px */
   font-weight: 600;
   text-align: center;
   text-transform: uppercase;
   letter-spacing: 1px;
-  padding: 4px 50px; /* Controls the height and length */
+  padding: 2px 50px;        /* Vertical padding reduced from 4px */
   box-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
   
