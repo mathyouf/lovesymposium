@@ -157,14 +157,14 @@
     background: white;;
   }
   
-  .CTA-button.third {
-    background: var(--goldish);
-    color: white;
-    font-size: 24px;
-    padding: 12px 18px;
-    opacity: 100%;
-    display: block;
-  }
+.CTA-button.third {
+  background: var(--goldish);
+  color: white;
+  font-size: 24px;
+  padding: 12px 25px; /* Increased horizontal padding from 18px */
+  opacity: 100%;
+  display: block;
+}
   
   @media screen and (max-width: 750px) {
     .CTA-button.third {
@@ -493,11 +493,43 @@
     display: "flex",
   }
   
+.cta-row {
+  z-index: 2;
+  margin-top: 4em; /* Changed from 10% to a font-relative unit for more consistent spacing */
+}
+
+/* Add this new CSS to your stylesheet */
+
+/* This wrapper contains the button and anchors the banner */
+.luma-button-wrapper {
+  position: relative; /* Required for positioning the ::before pseudo-element */
+  display: inline-block; /* Makes the wrapper fit the button's content */
+  overflow: hidden; /* Hides the parts of the banner that stick out */
+  border-radius: 5px; /* Matches the border-radius on your .CTA-button */
+}
+
+/* This creates the diagonal banner */
+.luma-button-wrapper::before {
+  content: '2024 EVENT';
+  position: absolute;
+  transform: rotate(-45deg);
+
+  /* Positioning values may need minor tweaks to look perfect */
+  top: 22px;
+  left: -45px;
   
-  .cta-row {
-    z-index: 2;
-    margin-top: 10%;
-  }
+  /* Banner styling using your theme's variables */
+  background-color: var(--dark-greyish);
+  color: white;
+  font-family: 'Cormorant', serif; /* Ensures font consistency */
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 4px 50px; /* Controls the height and length */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
   
   .campus-section {
     display: flex;
