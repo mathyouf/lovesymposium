@@ -32,7 +32,7 @@
             font-family: 'Caveat', cursive;
         }
         .hero-section {
-            background-image: url('symv2imgs/img.jpg');
+            background-image: url('assets/images/hero/img.jpg');
             background-size: cover;
             background-position: center;
             filter: brightness(1.1); /* Brighten the background image */
@@ -285,8 +285,8 @@
             schedule: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQuSLC5kKYfcrLYQIi7IqgpXY5I-t2lu7ztNicu3bcpHFtgWrJPvIo9L0fR05GH3WMJO540vTi5wWXl/pub?gid=1770951979&single=true&output=csv',
         };
         const fallbackUrls = {
-            speakers: 'symv2imgs/speakers.csv',
-            schedule: 'symv2imgs/schedule.csv',
+            speakers: 'assets/data/speakers.csv',
+            schedule: 'assets/data/schedule.csv',
         };
 
         // =====================================================================
@@ -309,8 +309,8 @@
         const localSchedule = [];
 
         const hosts = [
-            { name: 'Ann Pierce', image: 'symv2imgs/ann.jpg', statement: 'Our mission is to create a space where modern love can be explored in all its facets. We believe that by bringing together diverse voices and fostering open dialogue, we can all learn to love more deeply and authentically.', x_account: 'https://x.com/annpierce' },
-            { name: 'Matthew Fisher', image: 'symv2imgs/matt.jpg', statement: 'Love is the cornerstone of the human experience, yet we rarely give it the academic and intentional focus it deserves. This symposium is our answer—a chance to learn, share, and grow together in our understanding of connection.', x_account: 'https://x.com/matthewfisher' }
+            { name: 'Ann Pierce', image: 'assets/images/hosts/ann.jpg', statement: 'Our mission is to create a space where modern love can be explored in all its facets. We believe that by bringing together diverse voices and fostering open dialogue, we can all learn to love more deeply and authentically.', x_account: 'https://x.com/annpierce' },
+            { name: 'Matthew Fisher', image: 'assets/images/hosts/matt.jpg', statement: 'Love is the cornerstone of the human experience, yet we rarely give it the academic and intentional focus it deserves. This symposium is our answer—a chance to learn, share, and grow together in our understanding of connection.', x_account: 'https://x.com/matthewfisher' }
         ];
 
         const reviews = [
@@ -488,7 +488,7 @@
             for (let i = 1; i <= 10; i++) {
                 const photoCard = `
                     <div class="flex-shrink-0 w-64 h-48">
-                        <img src="symv2imgs/2024-${i}.jpg" class="w-full h-full object-cover rounded-lg shadow-md" onerror="this.onerror=null;this.src='https://placehold.co/400x300/cccccc/ffffff?text=Event+Photo'">
+                        <img src="assets/images/gallery/2024-${i}.jpg" class="w-full h-full object-cover rounded-lg shadow-md" onerror="this.onerror=null;this.src='https://placehold.co/400x300/cccccc/ffffff?text=Event+Photo'">
                     </div>
                 `;
                 gallery.innerHTML += photoCard;

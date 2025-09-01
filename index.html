@@ -1,428 +1,95 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta property="og:image"
-    content="https://substackcdn.com/image/fetch/w_1456,c_limit,f_webp,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe1d30ccd-bb3c-465d-8f6b-5b85f12a755a_926x679.avif">
-  <meta property="twitter:image:src"
-    content="https://substackcdn.com/image/fetch/w_1456,c_limit,f_webp,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe1d30ccd-bb3c-465d-8f6b-5b85f12a755a_926x679.avif">
-  <link rel="stylesheet" href="reset.css">
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://use.typekit.net/tlf2euo.css">
-  <link rel="shortcut icon" type="image/jpg"
-    href="logo2.png" />
-  <title>Love Symposium</title>
-  <script>
-    // var APP_ID = "wtb8z7sj";
-    // window.intercomSettings = {
-    //   app_id: APP_ID
-    // };
-  </script>
-  <!-- <script>(function () { var w = window; var ic = w.Intercom; if (typeof ic === "function") { ic('reattach_activator'); ic('update', w.intercomSettings); } else { var d = document; var i = function () { i.c(arguments); }; i.q = []; i.c = function (args) { i.q.push(args); }; w.Intercom = i; var l = function () { var s = d.createElement('script'); s.type = 'text/javascript'; s.async = true; s.src = 'https://widget.intercom.io/widget/' + APP_ID; var x = d.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x); }; if (w.attachEvent) { w.attachEvent('onload', l); } else { w.addEventListener('load', l, false); } } })();</script> -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7SDRRNGMNG"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-
-    gtag('config', 'G-7SDRRNGMNG');
-  </script>
-  <script src="blogList.js" defer></script>
-  <script>
-    fetch('faq.html')
-      .then(response => response.text())
-      .then(html => {
-        document.getElementById('faqContent').innerHTML = html;
-        attachEventListenersToFaqItems();
-      })
-      .catch(error => {
-        console.error('Error loading the FAQ content:', error);
-      });
-    function attachEventListenersToFaqItems() {
-      const faqItems = document.querySelectorAll('.faq-item');
-      console.log(faqItems);
-
-      faqItems.forEach(item => {
-        const faqItem = item.querySelector('.faq-item');
-        const faqIconDiv = item.querySelector('.faqIcon');
-        const faqIcon = item.querySelector('.fas');
-        const question = item.querySelector('.question');
-        const answer = item.querySelector('.answer');
-        console.log(answer.textContent)
-
-        faqIconDiv.addEventListener('click', () => {
-          answer.classList.toggle('hidden');
-          faqIcon.classList.toggle('down');
-        });
-
-        question.addEventListener('click', () => {
-          answer.classList.toggle('hidden');
-          faqIcon.classList.toggle('down');
-        });
-      });
-    }
-  </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Symposium - Redirecting...</title>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #fdfbf7 0%, #f5f1eb 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #5c323e;
+        }
+        .container {
+            text-align: center;
+            max-width: 600px;
+            padding: 2rem;
+        }
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #666;
+        }
+        .year-links {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .year-link {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: #5c323e;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+        }
+        .year-link:hover {
+            background: #8dafb9;
+            transform: translateY(-2px);
+        }
+        .current {
+            background: #8dafb9;
+        }
+        .redirect-notice {
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: #999;
+        }
+    </style>
 </head>
-
 <body>
-  <div class="content-area  background-image">
-    <navigation>
-      <a href="#writing">Writings</a>
-      <a href="#papers">Papers</a>
-      <a href="#housing">Housing</a>
-      <a href="#FAQ">FAQ</a>
-    </navigation>
-
-    <section class="splash-section">
-      <div class="splash-text">
+    <div class="container">
         <h1>Love Symposium</h1>
-        <div class="subtitle">
-          <em>An unconference style event for people trying to solve modern relationships</em>
+        <p>Welcome! Please select which year's symposium you'd like to visit:</p>
+        
+        <div class="year-links">
+            <a href="2024/" class="year-link">2024 Symposium</a>
+            <a href="2025/" class="year-link current">2025 Symposium</a>
         </div>
-        <div class="info"><em>Berkeley, CA, Lighthaven</em>   </div>
-        <div class="info"><em>November 15-17: Philosophy, Psychology, Research, & Startups</em>   </div>
-<div class="cta-row">
-    <div class="luma-button-wrapper">
-        <a href="https://lu.ma/lovesymposium" class="CTA-button third center"
-            target="_blank">
-            Luma Calendar Registration
-        </a>
+        
+        <div class="redirect-notice">
+            <p>Automatically redirecting to 2025 in <span id="countdown">5</span> seconds...</p>
+        </div>
     </div>
-</div>
 
-
-      </div>
-    </section>
-
-    <section class="blogroll-section" id="writing">
-      <div class="event-description">
-        <div style="color: black; font-size: 36px">What is the Love Symposium?</div>
-        <h2>November 15 - 17, 2024</h2>
-        <h4><a href="https://www.lighthaven.space/" target="_blank">Lighthaven Campus, Berkeley, CA</a></h4>
-        <p>
-        <div>
-          The Love Symposium is meant to bring together the world's experts and passionate devotees to understanding how science and technology may help solve some of the hardest problems related to our relationships.
-          <br /><br />
-          Our foremost emphasis is on "the search problem" (which will be explained shortly), but anyone working on dating apps, writing and thinking about love and relationships, or who thinks we can make way better technology for this and that it is really important are exactly who should attend.
-          <br /><br />
-          Regarding the search problem specifically:
-          <br /><br />
-          Relationship outcomes between people can be predicted and is therefore a search problem which if made more efficient would dramatically improve the quality of human life.
-          <br /><br />
-          Here is a question to ask yourself: Why can’t you search for friends on Facebook that you haven’t made yet based on a set of criteria you are looking for, combined with what Facebook already knows about your personality and existing relationships? My belief is that it is only because we haven’t yet decided it is possible. My hope is this symposium will be the first to inspire and pave the way towards us taking this capability seriously.
-          <br /><br />
-          Why? The reason is no less than that relationships between humans are the sources of our greatest happiness and suffering, and that what we feel in them can be radically improved by access to people more innately compatible with us. Families, friendships, companies, communities, research, life lessons, are all created between groups of people, and we think that being able to search for those people can create a life of social luxury for many more people on the planet.
-          <br /><br />
-          This event will be filled with talks, workshops, hackathons, paper readings, and late-night conversations around the fireside.
-          <br /><br />
-          Our hope is to inspire teams to form or augment and to create lasting community around this annual event.
-          <br /><br />
-          If you have a session or activity you might like to run at the symposium, <a href='https://docs.google.com/forms/d/e/1FAIpQLSe8I4z4VvVRVtdk2Nl2ovdDWa5cCihxIlYOeT5cujv_T_l_zw/viewform' target="_blank">let us know!</a>
-          <br /><br />
-        </div>
-        <div class="quote">
-          <br>
-          <i>Eros will have naked bodies; Friendship naked personalities.</i>
-          <br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &mdash;&mdash;C.S. Lewis, The Four Loves
-              <br>
-        </div>
-        </p>
-      </div>
-      <div class="blogosphere" id="blogosphere">
-        <div class="blogroll-title-info">
-          <h3 class="blogroll-title">Writings we love</h3>
-          <h4 class="blogroll-subtitle">
-            These sites, papers, and books contain some of the best work we've seen on the subjects we want to cover. We're inviting everyone whose site is listed below.
-          </h4>
-        </div>
-        <div class="attendees-key">
-          <label class="blog-checkbox"><input type="checkbox" id="toggleCheckbox"> Only show authors confirmed attending</label>
-        </div>
-        <div class="blogs" id="blog-list">
-        </div>
-      </div>
-    </section>
-    <h2 class="guests-title ">Some attending guests</h2>
-    <section class="guests">
-      <div class="guest-photo-wrapper">
-        <img class="guest-photo" src="speakers/matthewfisher.jpg" />
-        <div class="guest-name">Matthew Fisher - Co-host</div>
-        <a class="guest-name-subtitle" href="https://x.com/MathYouF" target="_blank">The research roadmap to finding you your soul mate</a>
-      </div>
-      <div class="guest-photo-wrapper">
-        <img class="guest-photo" src="imgs/ann.jpg" />
-        <div class="guest-name">Ann Pierce - Co-host</div>
-        <a class="guest-name-subtitle" href="https://x.com/itsannpierce" target="_blank">New Ideas for Relationship Startups</a>
-      </div>
-      <div class="guest-photo-wrapper">
-        <img class="guest-photo" src="speakers/andrewcutler.jpg" />
-        <div class="guest-name">Andrew Cutler - Co-host</div>
-        <a class="guest-name-subtitle" href="https://x.com/AndrewCutler13" target="_blank">Deep Lexical Hypothesis</a>
-      </div>
-      <div class="guest-photo-wrapper">
-        <img class="guest-photo" src="imgs/christine.jpg" />
-        <div class="guest-name">Christine Peterson</div>
-        <a class="guest-name-subtitle" href="https://x.com/lifeext" target="_blank">Cofounder and Senior Fellow at Foresight Institute</a>
-      </div>
-      <div class="guest-photo-wrapper">
-        <img class="guest-photo" src="speakers/aella.jpg" />
-        <div class="guest-name">Aella </div>
-        <a class="guest-name-subtitle" href="https://knowingless.com/popular-posts/" target="_blank">Sex & Culture Data Scientist</a>
-      </div>
-      <div class="guest-photo-wrapper">
-        <img class="guest-photo" src="speakers/jakek.jpg" />
-        <div class="guest-name">Jake Kozloski</div>
-        <a class="guest-name-subtitle" href="https://x.com/jakozloski" target="_blank">Founder & CEO at Keeper</a>
-      </div>
-      <div class="guest-photo-wrapper">
-        <img class="guest-photo" src="speakers/shreeda.jpg" />
-        <div class="guest-name">Shreeda Segan</div>
-        <a class="guest-name-subtitle" href="https://x.com/freeshreeda" target="_blank">Founder of Off/ine</a>
-      </div>
-      <div class="guest-photo-wrapper">
-        <img class="guest-photo" src="speakers/ava.jpg" />
-        <div class="guest-name">Ava</div>
-        <a class="guest-name-subtitle" href="https://x.com/noampomsky" target="_blank">The Book Bear</a>
-      </div>
-      <div class="guest-photo-wrapper">
-        <img class="guest-photo" src="speakers/chase.jpg" />
-        <div class="guest-name">Chase Denecke</div>
-        <a class="guest-name-subtitle" href="https://x.com/DeneckeChase" target="_blank">Creating super babies for your future family</a>
-      </div>
-      <div class="guest-photo-wrapper">
-        <img class="guest-photo" src="imgs/suzie.jpg" />
-        <div class="guest-name">Suzie Antal</div>
-        <a class="guest-name-subtitle" href="https://www.linkedin.com/in/suzieantal" target="_blank">Founder of Spectra</a>
-      </div>
-      <div class="guest-photo-wrapper">
-        <img class="guest-photo" src="imgs/eric.jpg" />
-        <div class="guest-name">Eric Lin, MD</div>
-        <a class="guest-name-subtitle" href="https://bakerlab.mclean.harvard.edu/eric-lin-md/" target="_blank">Research Fellow
- - Personality Disorders and Attachment Styles</a>
-      </div>
-      <div class="guest-photo-wrapper">
-        <img class="guest-photo" src="speakers/eneasz.jpg" />
-        <div class="guest-name">Eneasz Brodski</div>
-        <a class="guest-name-subtitle" href="https://x.com/EneaszWrites" target="_blank">Marriage Contract Law</a>
-      </div>
-      <div class="guest-photo-wrapper">
-        <img class="guest-photo" src="imgs/lydia.jpg" />
-        <div class="guest-name">Lydia Laurenson</div>
-        <a class="guest-name-subtitle" href="https://x.com/lydialaurenson" target="_blank">Romantic philosopher ranging through every subculture</a>
-      </div>
-      <div class="guest-photo-wrapper">
-        <img class="guest-photo" src="speakers/jeyk.jpg" />
-        <div class="guest-name">Jey Kottalam</div>
-        <a class="guest-name-subtitle" href="https://x.com/jeyjey" target="_blank">Founder Rarebird</a>
-      </div>
-      <div class="guest-photo-wrapper">
-        <img class="guest-photo" src="speakers/mark.jpg" />
-        <div class="guest-name">Mark Meleka</div>
-        <a class="guest-name-subtitle" href="https://x.com/deepthinkMark" target="_blank">The Art and Strategy of Finding a Life Partner</a>
-      </div>
-      <div class="guest-photo-wrapper">
-        <img class="guest-photo" src="imgs/piper.jpg" />
-        <div class="guest-name">Piper Early</div>
-        <a class="guest-name-subtitle" href="https://x.com/TomboyTesting" target="_blank">The Sci-fi future of human relationships</a>
-      </div>
-      <div class="guest-photo-wrapper">
-        <img class="guest-photo" src="speakers/damon.jpg" />
-        <div class="guest-name">Damon Sasi</div>
-        <a class="guest-name-subtitle" href="https://x.com/DaystarEld" target="_blank">Romantic Epistemology</a>
-      </div>
-      <div class="guest-photo-wrapper">
-        <img class="guest-photo" src="speakers/malcolm.jpg" />
-        <div class="guest-name">Malcolm Ocean</div>
-        <a class="guest-name-subtitle" href="https://x.com/Malcolm_Ocean" target="_blank">Panarchist 🤸 FeralFreeAgent 🎶 Singer-songwriter 💃 Trust-dancer 👁 Systems designer</a>
-      </div>
-      <div class="guest-photo-wrapper">
-        <img class="guest-photo" src="imgs/rachel2.jpg" />
-        <div class="guest-name">Rachel Clifton</div>
-        <a class="guest-name-subtitle" href="https://x.com/rachelclif" target="_blank">Mystery experience</a>
-      </div>
-      <div class="guest-photo-wrapper">
-        <img class="guest-photo" src="imgs/sukhmai.jpg" />
-        <div class="guest-name">Sukhmai Kapur</div>
-        <a class="guest-name-subtitle" href="" target="_blank">How to Give Bad Relationship Advice to Strangers</a>
-      </div>
-      <div class="guest-photo-wrapper">
-        <img class="guest-photo" src="imgs/pi.png" />
-        <div class="guest-name">Pi</div>
-        <a class="guest-name-subtitle" href="" target="https://mudpi314.github.io/">Tearing Down Chesterton's Fence: The Case For Relationship Anarchy</a>
-      </div>
-<!--       <div class="guest-photo-wrapper">
-        <img class="guest-photo" src="imgs/author1.png" />
-        <div class="guest-name">Authors</div>
-        <a class="guest-name-subtitle" href="https://www.brainyquote.com/quotes/ernest_hemingway_384744" target="_blank">"All you do is sit down at a typewriter and bleed."</a>
-      </div>
-      <div class="guest-photo-wrapper">
-        <img class="guest-photo" src="imgs/founder1.png" />
-        <div class="guest-name">Founders</div>
-        <a class="guest-name-subtitle" href="https://www.netcials.com/stock-10-year-history/MTCH-Match-Group-Inc/" target="_blank">someone has to pull the bow string</a>
-      </div>
-      <div class="guest-photo-wrapper">
-        <img class="guest-photo" src="imgs/programmer3.png" />
-        <div class="guest-name">Programmers</div>
-        <a class="guest-name-subtitle" href="https://fivethirtyeight.com/features/christian-rudder-dataclysm-okcupid/" target="_blank">making the ineffable effable</a>
-      </div>
-      <div class="guest-photo-wrapper">
-        <img class="guest-photo" src="imgs/research1.png" />
-        <div class="guest-name">Researchers</div>
-        <a class="guest-name-subtitle" href="https://openpsychometrics.org/_rawdata/" target="_blank">shoving tensors into gpus</a>
-      </div>
-      <div class="guest-photo-wrapper">
-        <img class="guest-photo" src="imgs/scientist1.png" />
-        <div class="guest-name">Scientists</div>
-        <a class="guest-name-subtitle" href="https://en.wikipedia.org/wiki/The_Structure_of_Scientific_Revolutions" target="_blank">verifying the hypotheses</a>
-      </div>
-      <div class="guest-photo-wrapper">
-        <img class="guest-photo" src="imgs/design3.png" />
-        <div class="guest-name">Designers</div>
-        <a class="guest-name-subtitle" href="https://en.wikipedia.org/wiki/The_Design_of_Everyday_Things" target="_blank">turning tech into a magic wand</a>
-      </div>
-      <div class="guest-photo-wrapper">
-        <img class="guest-photo" src="imgs/psychologist1.png" />
-        <div class="guest-name">Psychologists</div>
-        <a class="guest-name-subtitle" href="https://en.wikipedia.org/wiki/Personality_psychology" target="_blank">divining the manifold of human personality</a>
-      </div> -->
-      <div class="guest-photo-wrapper">
-        <img class="guest-photo" src="imgs/you1.png" />
-        <div class="guest-name">Maybe you?</div>
-        <a class="guest-name-subtitle" href="https://forms.gle/bzC82bwyvser3fbB8" target="_blank">There's still space for speakers, click to sbumit your talk! People wanting to give impromptu day of talks will be able to as well!</a>
-      </div>
-    </section>
-    <h2 class="guests-title">Four Main Topics</h2>
-    <section class="sessions">
-      <div class="session">
-        <img src="imgs/new1.jpg"/>
-        <h3>History of Marriage</h3>
-        <p>In depth talks and discussion<br/>on how we got here.</p>
-      </div>
-      <div class="session">
-        <img src="imgs/new2.jpg"/>
-        <h3>Relationship Goals</h3>
-        <p>Is it evolutionary psychology or romance?</p>
-      </div>
-      <div class="session">
-        <img src="imgs/new3.jpg"/>
-        <h3>Personality Embeddings</h3>
-        <p>How can we represent the entire human soul as a vector?</p>
-      </div>
-      <div class="session">
-        <img src="imgs/new4.jpg"/>
-        <h3>Relationship Outcome Prediction</h3>
-        <p>How can we predict the destiny between you and any other person in the world?</p>
-      </div>
-    </section>
-    <!-- <section class="center">
-      <h3>See more on <a href="https://eternal-september.vercel.app/Thank-Haven" target="_blank">the schedule</a>.</h3>
-    </section> -->
-    <h2 class="papers-title" id="papers">Some Papers We'll Discuss</h2>
-    <section class="paper-gallery">
-      <img class="gallery-photo largester" src="imgs/papersc/55.jpg"/>
-      <img class="gallery-photo largester" src="imgs/papersc/56.jpg"/>
-      <img class="gallery-photo largester" src="imgs/papersc/1.jpg"/>
-      <img class="gallery-photo largester" src="imgs/papersc/58.jpg"/>
-      <img class="gallery-photo largester" src="imgs/papersc/20.jpg"/>
-      <img class="gallery-photo largester" src="imgs/papersc/59.jpg"/>
-      <img class="gallery-photo largester" src="imgs/papersc/67.jpg"/>
-      <img class="gallery-photo largester" src="imgs/papersc/68.jpg"/>
-      <img class="gallery-photo largester" src="imgs/papersc/62.jpg"/>
-      <img class="gallery-photo largester" src="imgs/papersc/14.jpg"/>
-
-<!--       <img class="gallery-photo largester" src="imgs/papersc/70.png"/>
-      <img class="gallery-photo largester" src="imgs/papersc/60.jpg"/>
-      <img class="gallery-photo largester" src="imgs/papersc/61.jpg"/>
-      <img class="gallery-photo largester" src="imgs/papersc/63.jpg"/>
-      <img class="gallery-photo largester" src="imgs/papersc/64.jpg"/>
-      <img class="gallery-photo largester" src="imgs/papersc/66.jpg"/>
-
-      <img class="gallery-photo largester" src="imgs/papersc/2.jpg"/>
-      <img class="gallery-photo largester" src="imgs/papersc/31.jpg"/>
-      <img class="gallery-photo largester" src="imgs/papersc/4.jpg"/>
-      <img class="gallery-photo largester" src="imgs/papersc/5.jpg"/>
-      <img class="gallery-photo largester" src="imgs/papersc/8.jpg"/>
-      <img class="gallery-photo largester" src="imgs/papersc/17.jpg"/>
-      <img class="gallery-photo largester" src="imgs/papersc/21.jpg"/>
-      <img class="gallery-photo largester" src="imgs/papersc/24.jpg"/>
-      <img class="gallery-photo largester" src="imgs/papersc/3.jpg"/>
-      <img class="gallery-photo largester" src="imgs/papersc/6.jpg"/>
-      <img class="gallery-photo largester" src="imgs/papersc/11.jpg"/>
-      <img class="gallery-photo largester" src="imgs/papersc/19.jpg"/>
-      <img class="gallery-photo largester" src="imgs/papersc/22.jpg"/>
-      <img class="gallery-photo largester" src="imgs/papersc/27.jpg"/>
-      <img class="gallery-photo largester" src="imgs/papersc/33.jpg"/>
-      <img class="gallery-photo largester" src="imgs/papersc/28.jpg"/>
-      <img class="gallery-photo largester" src="imgs/papersc/34.jpg"/>
-      <img class="gallery-photo largester" src="imgs/papersc/9.jpg"/>
-      <img class="gallery-photo largester" src="imgs/papersc/57.jpg"/>
-      <img class="gallery-photo largester" src="imgs/papersc/32.png"/> -->
-  </section> 
-    <section class="gallery">
-        <img class="gallery-photo large" src="imgs/lh1.jpg"/>
-      <img class="gallery-photo large" src="imgs/lh2.jpg"/>
-      <img class="gallery-photo large" src="imgs/lh3.jpg"/>
-      <img class="gallery-photo large" src="imgs/lh4.jpg"/>
-      <img class="gallery-photo large" src="imgs/lh5.jpg"/>
-      <img class="gallery-photo large" src="imgs/lh6.jpg"/>
-      <img class="gallery-photo large" src="imgs/lh7.jpg"/>
-
-    </section> 
-    <section class="center-section">
-      <div id="timeline-section"></div>
-    </section>
-    <section class="FAQ-section" id="housing">
-      <div class="campus-map">
-        <img class="campus-image" src="imgs/lhroom.jpg" />
-      </div>
-      <div class="faq-text">
-        <h2 class="title">Stay at Lighthaven</h2>
-        <p>A limited number of rooms are available on-site at Lighthaven as part of their Eternal September housing offer for people to visit during the entire Fall of 2024.</p> <br>
-
-        <a href="https://www.havenbookings.space/events/eternal-september" class="CTA-button third"
-          target="_blank">
-          Book rooms
-        </a>
-      </div>
-    </section>
-
-    <section class="FAQ-section" id="FAQ">
-      <div class="campus-map">
-        <img class="campus-image" src="imgs/lighthavencampusmap.jpg" />
-      </div>
-      <div class="faq-text">
-        <h2 class="title">FAQ</h2>
-        <div id="faqContent"></div>
-      </div>
-    </section>
-    <section class="center-section">
-      <h2 class="title">Contact</h2>
-      <p>If you have any questions or comments,<br/>
-        please email <a href="mailto:mattallenfisher@gmail.com" target="_blank" class="green">mattallenfisher@gmail.com</a></p>
-      <br/>
-      <h2 class="title">Disclaimer</h2>
-      <p>HTML shamelessly copied from <a href="https://less.online/">LessOnline</a></p>
-      <p>Event is not associated with LessWrong nor Lightcone Infrastructure</p>
-      <p>Event is not being run or sponsored by Lighthaven, just being held at their venue.</p>
-      <p>Event is being run independently by the hosts Matt, Ann, and Andrew</p>
-      <br/>
-      <br/>
-    </section>
-  </div>
-  <script>
-    var checkbox = document.getElementById('toggleCheckbox');
-    var content = document.getElementsByClassName('not');
-    checkbox.addEventListener('change', function () {
-      Array.from(content).forEach(div => {
-        div.classList.toggle('hidden');
-      });
-    });
-
-  </script>
-
+    <script>
+        let countdown = 5;
+        const countdownElement = document.getElementById('countdown');
+        
+        const timer = setInterval(() => {
+            countdown--;
+            countdownElement.textContent = countdown;
+            
+            if (countdown <= 0) {
+                clearInterval(timer);
+                window.location.href = '2025/';
+            }
+        }, 1000);
+    </script>
 </body>
-
 </html>
