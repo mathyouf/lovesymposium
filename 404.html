@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Symposium - Page Not Found</title>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #fdfbf7 0%, #f5f1eb 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #5c323e;
+        }
+        .container {
+            text-align: center;
+            max-width: 600px;
+            padding: 2rem;
+        }
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #666;
+        }
+        .year-links {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .year-link {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: #5c323e;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+        }
+        .year-link:hover {
+            background: #8dafb9;
+            transform: translateY(-2px);
+        }
+        .home-link {
+            background: #8dafb9;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Page Not Found</h1>
+        <p>The page you're looking for doesn't exist. Let us redirect you to the right place:</p>
+        
+        <div class="year-links">
+            <a href="/2024/" class="year-link">2024 Symposium</a>
+            <a href="/2025/" class="year-link">2025 Symposium</a>
+        </div>
+        
+        <div class="year-links">
+            <a href="/" class="year-link home-link">Home</a>
+        </div>
+    </div>
+
+    <script>
+        // Auto-redirect based on URL path
+        const path = window.location.pathname;
+        
+        // If someone tries to access /2024 or /2025 directly, redirect to the folder
+        if (path === '/2024' || path === '/2024/') {
+            window.location.href = '/2024/';
+        } else if (path === '/2025' || path === '/2025/') {
+            window.location.href = '/2025/';
+        }
+    </script>
+</body>
+</html>

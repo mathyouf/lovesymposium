@@ -92,6 +92,26 @@ cd 2025 && python3 -m http.server 8001
 python3 -m http.server 8002
 ```
 
+### GitHub Pages Configuration
+
+The site is configured for GitHub Pages with smart routing:
+
+**Configuring Default Year:**
+1. Edit `index.html` and change `const DEFAULT_YEAR = '2025'` to your preferred default
+2. Or edit `_config.yml` and change `default_year: "2025"` 
+
+**URL Routing:**
+- `yoursite.com/` → Redirects to default year after 5 seconds
+- `yoursite.com/2024/` → Direct access to 2024 site
+- `yoursite.com/2025/` → Direct access to 2025 site
+- `yoursite.com/2024` or `/2025` → 404.html handles redirect to proper folder
+
+**Files for GitHub Pages:**
+- `index.html` - Root redirect page with configurable default
+- `404.html` - Handles missing pages and URL routing
+- `_config.yml` - Jekyll configuration for GitHub Pages
+- `CNAME` - Custom domain configuration (if using custom domain)
+
 ### Data Sources
 - **2024**: Static CSV files and HTML content
 - **2025**: Google Sheets integration with local CSV fallbacks

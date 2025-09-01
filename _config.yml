@@ -1,0 +1,29 @@
+# GitHub Pages configuration for Love Symposium
+# This file configures Jekyll settings for GitHub Pages
+
+# Site settings
+title: Love Symposium
+description: A conference for people trying to solve modern relationships
+
+# GitHub Pages specific settings
+plugins:
+  - jekyll-redirect-from
+
+# Include all directories and files we want to serve
+include:
+  - 2024
+  - 2025
+  - archive
+
+# Exclude files we don't want in the build
+exclude:
+  - README.md
+  - .gitignore
+
+# Default year configuration
+# Change this value to switch the default redirect
+defaults:
+  - scope:
+      path: ""
+    values:
+      default_year: "2025"  # Change to "2024" to make 2024 the default

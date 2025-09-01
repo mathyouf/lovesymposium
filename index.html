@@ -3,93 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Love Symposium - Redirecting...</title>
-    <style>
-        body {
-            font-family: 'Georgia', serif;
-            background: linear-gradient(135deg, #fdfbf7 0%, #f5f1eb 100%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            color: #5c323e;
-        }
-        .container {
-            text-align: center;
-            max-width: 600px;
-            padding: 2rem;
-        }
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-        p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            color: #666;
-        }
-        .year-links {
-            display: flex;
-            gap: 2rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        .year-link {
-            display: inline-block;
-            padding: 1rem 2rem;
-            background: #5c323e;
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            font-size: 1.1rem;
-        }
-        .year-link:hover {
-            background: #8dafb9;
-            transform: translateY(-2px);
-        }
-        .current {
-            background: #8dafb9;
-        }
-        .redirect-notice {
-            margin-top: 2rem;
-            font-size: 0.9rem;
-            color: #999;
-        }
-    </style>
+    <title>Love Symposium</title>
+    <script>
+        // Immediate redirect - no visible page load
+        window.location.replace('2024/');
+    </script>
 </head>
 <body>
-    <div class="container">
-        <h1>Love Symposium</h1>
-        <p>Welcome! Please select which year's symposium you'd like to visit:</p>
-        
-        <div class="year-links">
-            <a href="2024/" class="year-link">2024 Symposium</a>
-            <a href="2025/" class="year-link current">2025 Symposium</a>
-        </div>
-        
-        <div class="redirect-notice">
-            <p>Automatically redirecting to 2025 in <span id="countdown">5</span> seconds...</p>
-        </div>
-    </div>
-
-    <script>
-        let countdown = 5;
-        const countdownElement = document.getElementById('countdown');
-        
-        const timer = setInterval(() => {
-            countdown--;
-            countdownElement.textContent = countdown;
-            
-            if (countdown <= 0) {
-                clearInterval(timer);
-                window.location.href = '2025/';
-            }
-        }, 1000);
-    </script>
+    <!-- Fallback for users with JavaScript disabled -->
+    <meta http-equiv="refresh" content="0; url=2024/">
+    <p>If you are not redirected automatically, <a href="2024/">click here</a>.</p>
 </body>
 </html>
