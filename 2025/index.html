@@ -197,6 +197,36 @@
             </div>
         </section>
 
+        <!-- Papers Section -->
+        <section class="py-16 md:py-24 bg-gray-50 w-full">
+            <div class="container mx-auto px-4">
+                <h2 class="text-4xl md:text-5xl font-romantic text-center mb-12 text-[#5c323e]">Research Papers</h2>
+                <p class="text-xl text-center text-gray-600 mb-12 max-w-3xl mx-auto">Explore the academic research and insights that inform our understanding of love, relationships, and human connection.</p>
+            </div>
+            
+            <!-- Papers Gallery -->
+            <div class="overflow-x-auto pb-4">
+                 <div id="papers-gallery" class="flex space-x-6 p-4 min-w-max">
+                     <!-- Papers will be inserted here -->
+                 </div>
+            </div>
+        </section>
+
+        <!-- Books Section -->
+        <section class="py-16 md:py-24 bg-white w-full">
+            <div class="container mx-auto px-4">
+                <h2 class="text-4xl md:text-5xl font-romantic text-center mb-12 text-[#5c323e]">Recommended Reading</h2>
+                <p class="text-xl text-center text-gray-600 mb-12 max-w-3xl mx-auto">Essential books that explore the science, history, and philosophy of love and relationships.</p>
+            </div>
+            
+            <!-- Books Gallery -->
+            <div class="flex justify-center">
+                 <div id="books-gallery" class="flex space-x-8 p-4">
+                     <!-- Books will be inserted here -->
+                 </div>
+            </div>
+        </section>
+
         <!-- Tickets Section - Removed, price moved to FAQ -->
 
         <!-- FAQ Section -->
@@ -385,6 +415,8 @@
             populateTickets(tickets);
             populateFaq(faqData);
             populatePhotoGallery();
+            populatePapersGallery();
+            populateBooksGallery();
             if (CONFIG.showSchedule) populateSchedule(allScheduleData, allSpeakers);
             
             // Toggle schedule section visibility
@@ -475,6 +507,54 @@
                     this.style.display = 'none';
                 };
                 photoGallery.appendChild(img);
+            });
+        }
+
+        function populatePapersGallery() {
+            const papersGallery = document.getElementById('papers-gallery');
+            if (!papersGallery) return;
+            
+            // Available paper images (reversed order)
+            const paperFiles = ['58.jpg', '57.jpg', '56.jpg', '55.jpg', '20.jpg', '14.jpg', '8.jpg', '2.jpg', '1.jpg'];
+            
+            paperFiles.forEach(paperFile => {
+                const paperCard = document.createElement('div');
+                paperCard.className = 'flex-shrink-0 w-64 bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300';
+                
+                const img = document.createElement('img');
+                img.src = `assets/images/papers/${paperFile}`;
+                img.alt = `Research Paper`;
+                img.className = 'w-full h-80 object-cover';
+                img.onerror = function() {
+                    this.parentElement.style.display = 'none';
+                };
+                
+                paperCard.appendChild(img);
+                papersGallery.appendChild(paperCard);
+            });
+        }
+
+        function populateBooksGallery() {
+            const booksGallery = document.getElementById('books-gallery');
+            if (!booksGallery) return;
+            
+            // Available book images
+            const bookFiles = ['dataclysm.jpg', 'lovefortherightreasos.jpg', 'marriagehistory.jpg'];
+            
+            bookFiles.forEach(bookFile => {
+                const bookCard = document.createElement('div');
+                bookCard.className = 'flex-shrink-0 w-48 bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300';
+                
+                const img = document.createElement('img');
+                img.src = `assets/images/books/${bookFile}`;
+                img.alt = `Recommended Book`;
+                img.className = 'w-full h-72 object-cover';
+                img.onerror = function() {
+                    this.parentElement.style.display = 'none';
+                };
+                
+                bookCard.appendChild(img);
+                booksGallery.appendChild(bookCard);
             });
         }
 
