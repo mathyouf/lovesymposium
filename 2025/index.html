@@ -120,32 +120,30 @@
 <body class="text-gray-800">
 
     <!-- Hero Section -->
-    <header class="hero-section flex flex-col items-center justify-center text-white text-center p-4 h-[80vh] md:h-[95vh]">
+    <header class="hero-section flex flex-col items-center text-white text-center p-4 h-[80vh] md:h-[95vh] relative">
         <div class="absolute inset-0 bg-black opacity-30"></div>
-        <h1 class="font-romantic text-5xl sm:text-6xl md:text-8xl lg:text-9xl z-10" style="text-shadow: 2px 2px 8px rgba(0,0,0,0.7);">
-            Love Symposium
-        </h1>
-        <p class="z-10 mt-2 text-lg sm:text-xl md:text-2xl font-bold tracking-wider text-gray-100">A conference for people trying to solve modern relationships</p>
-        <p class="z-10 mt-4 text-base sm:text-lg md:text-xl lg:text-2xl tracking-wider text-gray-200">
-            The Weekend of November 14-16, 2025 at 
-            <a href="https://www.google.com/maps/search/?api=1&query=The+Commons,San+Francisco,CA" target="_blank" rel="noopener noreferrer" class="inline-block bg-white/20 hover:bg-white/40 text-white font-semibold px-4 py-1 rounded-full transition duration-300 mx-1">The Commons, San Francisco</a>
-        </p>
+        <div class="flex-1 flex flex-col justify-center">
+            <h1 class="font-romantic text-5xl sm:text-6xl md:text-8xl lg:text-9xl z-10" style="text-shadow: 2px 2px 8px rgba(0,0,0,0.7);">
+                Love Symposium
+            </h1>
+            <p class="z-10 mt-2 text-lg sm:text-xl md:text-2xl font-bold tracking-wider text-gray-100">A conference for people trying to solve modern relationships</p>
+            <p class="z-10 mt-4 text-base sm:text-lg md:text-xl lg:text-2xl tracking-wider text-gray-200">
+                The Weekend of November 14-16, 2025 at 
+                <a href="https://www.google.com/maps/search/?api=1&query=The+Commons,San+Francisco,CA" target="_blank" rel="noopener noreferrer" class="inline-block bg-white/20 hover:bg-white/40 text-white font-semibold px-4 py-1 rounded-full transition duration-300 mx-1">The Commons, San Francisco</a>
+            </p>
+        </div>
+        
+        <!-- Apply to Attend Button -->
+        <div class="z-10 mb-16">
+            <a href="https://luma.com/71lg31j5" class="inline-block px-8 py-4 bg-white text-[#5c323e] font-bold rounded-full text-lg hover:bg-gray-200 transition duration-300 shadow-lg" target="_blank">Apply to Attend</a>
+        </div>
     </header>
 
     <!-- Main Content Container -->
     <div class="bg-[#fdfbf7] relative">
-        <!-- Decorative Divider -->
-        <div class="absolute top-0 left-0 right-0 h-20 -translate-y-1/2 z-10 flex items-center justify-center pointer-events-none">
-            <svg class="w-full h-full" viewBox="0 0 1200 100" preserveAspectRatio="none">
-                <path d="M0 50 Q 150 100, 300 50 T 600 50 T 900 50 T 1200 50" stroke="#5c323e" stroke-width="2" fill="none" />
-                <path d="M0 50 Q 150 0, 300 50 T 600 50 T 900 50 T 1200 50" stroke="#5c323e" stroke-width="2" fill="none" />
-            </svg>
-        </div>
-
-        <!-- Buttons Section -->
-        <div class="text-center pt-20 relative z-20">
-            <a href="https://luma.com/71lg31j5" class="inline-block mx-2 px-8 py-4 bg-white text-[#5c323e] font-bold rounded-full text-lg hover:bg-gray-200 transition duration-300 shadow-lg" target="_blank">Apply to Attend</a>
-            <a href="#schedule" class="inline-block mx-2 px-8 py-4 bg-[#5c323e] text-white font-bold rounded-full text-lg hover:bg-opacity-80 transition duration-300 shadow-lg">Schedule</a>
+        <!-- Schedule Button Section -->
+        <div class="text-center pt-8 relative z-20">
+            <a href="#schedule" class="inline-block px-8 py-4 bg-[#5c323e] text-white font-bold rounded-full text-lg hover:bg-opacity-80 transition duration-300 shadow-lg">Schedule</a>
         </div>
 
         <!-- Main Content Section -->
