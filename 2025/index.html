@@ -197,33 +197,61 @@
             </div>
         </section>
 
-        <!-- Papers Section -->
+        <!-- Content We Love Section -->
         <section class="py-16 md:py-24 bg-gray-50 w-full">
             <div class="container mx-auto px-4">
-                <h2 class="text-4xl md:text-5xl font-romantic text-center mb-12 text-[#5c323e]">Research Papers</h2>
-                <p class="text-xl text-center text-gray-600 mb-12 max-w-3xl mx-auto">Explore the academic research and insights that inform our understanding of love, relationships, and human connection.</p>
+                <h2 class="text-4xl md:text-5xl font-romantic text-center mb-12 text-[#5c323e]">Content We Love</h2>
+                <p class="text-xl text-center text-gray-600 mb-12 max-w-3xl mx-auto">Curated papers, books, articles, and media that inspire our understanding of love and relationships.</p>
             </div>
             
-            <!-- Papers Gallery -->
-            <div class="overflow-x-auto pb-4">
-                 <div id="papers-gallery" class="flex space-x-6 p-4 min-w-max">
-                     <!-- Papers will be inserted here -->
-                 </div>
-            </div>
-        </section>
-
-        <!-- Books Section -->
-        <section class="py-16 md:py-24 bg-white w-full">
-            <div class="container mx-auto px-4">
-                <h2 class="text-4xl md:text-5xl font-romantic text-center mb-12 text-[#5c323e]">Recommended Reading</h2>
-                <p class="text-xl text-center text-gray-600 mb-12 max-w-3xl mx-auto">Essential books that explore the science, history, and philosophy of love and relationships.</p>
+            <!-- Papers Row -->
+            <div class="mb-12">
+                <h3 class="text-2xl font-romantic text-center mb-6 text-[#5c323e]">Research Papers</h3>
+                <div class="overflow-x-auto pb-4">
+                    <div id="content-papers-gallery" class="flex space-x-6 p-4 min-w-max">
+                        <!-- Papers will be inserted here -->
+                    </div>
+                </div>
             </div>
             
-            <!-- Books Gallery -->
-            <div class="overflow-x-auto pb-4">
-                 <div id="books-gallery" class="flex space-x-6 p-4 min-w-max justify-center md:justify-center">
-                     <!-- Books will be inserted here -->
-                 </div>
+            <!-- Books Row -->
+            <div class="mb-12">
+                <h3 class="text-2xl font-romantic text-center mb-6 text-[#5c323e]">Books</h3>
+                <div class="overflow-x-auto pb-4">
+                    <div id="content-books-gallery" class="flex space-x-6 p-4 min-w-max">
+                        <!-- Books will be inserted here -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Substacks Row -->
+            <div class="mb-12">
+                <h3 class="text-2xl font-romantic text-center mb-6 text-[#5c323e]">Substack Articles</h3>
+                <div class="overflow-x-auto pb-4">
+                    <div id="content-substacks-gallery" class="flex space-x-6 p-4 min-w-max">
+                        <!-- Substacks will be inserted here -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tweets Row -->
+            <div class="mb-12">
+                <h3 class="text-2xl font-romantic text-center mb-6 text-[#5c323e]">Tweets</h3>
+                <div class="overflow-x-auto pb-4">
+                    <div id="content-tweets-gallery" class="flex space-x-6 p-4 min-w-max">
+                        <!-- Tweets will be inserted here -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- YouTube Videos Row -->
+            <div class="mb-12">
+                <h3 class="text-2xl font-romantic text-center mb-6 text-[#5c323e]">YouTube Videos</h3>
+                <div class="overflow-x-auto pb-4">
+                    <div id="content-youtube-gallery" class="flex space-x-6 p-4 min-w-max">
+                        <!-- YouTube videos will be inserted here -->
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -280,6 +308,7 @@
         // =====================================================================
         let allSpeakers = [];
         let allScheduleData = [];
+        let allContentData = [];
 
         // =====================================================================
         // LOCAL DATA SOURCES (FALLBACKS & OTHERS)
@@ -393,6 +422,12 @@
             return data;
         }
 
+        function parseContentCsv(csvText) {
+            const data = parseCsv(csvText, 0, 1);
+            console.log("Parsed Content Data:", data);
+            return data;
+        }
+
         // =====================================================================
         // CONFIGURATION & TOGGLES
         // =====================================================================
@@ -417,6 +452,7 @@
             populatePhotoGallery();
             populatePapersGallery();
             populateBooksGallery();
+            populateContentSections(allContentData);
             if (CONFIG.showSchedule) populateSchedule(allScheduleData, allSpeakers);
             
             // Toggle schedule section visibility
@@ -558,6 +594,170 @@
             });
         }
 
+        function populateContentSections(contentData) {
+            if (!contentData || contentData.length === 0) return;
+            
+            // Group content by type
+            const contentByType = contentData.reduce((acc, item) => {
+                const type = item.type;
+                if (!acc[type]) acc[type] = [];
+                acc[type].push(item);
+                return acc;
+            }, {});
+            
+            // Populate each content type
+            if (contentByType.paper) populateContentPapers(contentByType.paper);
+            if (contentByType.book) populateContentBooks(contentByType.book);
+            if (contentByType.substack) populateContentSubstacks(contentByType.substack);
+            if (contentByType.twitter) populateContentTweets(contentByType.twitter);
+            if (contentByType.youtube) populateContentYoutube(contentByType.youtube);
+        }
+
+        function populateContentPapers(papers) {
+            const gallery = document.getElementById('content-papers-gallery');
+            if (!gallery) return;
+            
+            papers.forEach(paper => {
+                const paperCard = document.createElement('div');
+                paperCard.className = 'flex-shrink-0 w-36 sm:w-40 md:w-64 bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300';
+                
+                const img = document.createElement('img');
+                img.src = paper.url;
+                img.alt = paper.title || 'Research Paper';
+                img.className = 'w-full h-48 sm:h-56 md:h-80 object-cover';
+                img.onerror = function() {
+                    this.parentElement.style.display = 'none';
+                };
+                
+                paperCard.appendChild(img);
+                gallery.appendChild(paperCard);
+            });
+        }
+
+        function populateContentBooks(books) {
+            const gallery = document.getElementById('content-books-gallery');
+            if (!gallery) return;
+            
+            books.forEach(book => {
+                const bookCard = document.createElement('div');
+                bookCard.className = 'flex-shrink-0 w-36 sm:w-40 md:w-48 bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300';
+                
+                const img = document.createElement('img');
+                img.src = book.url;
+                img.alt = book.title || 'Recommended Book';
+                img.className = 'w-full h-48 sm:h-56 md:h-72 object-cover';
+                img.onerror = function() {
+                    this.parentElement.style.display = 'none';
+                };
+                
+                bookCard.appendChild(img);
+                gallery.appendChild(bookCard);
+            });
+        }
+
+        function populateContentSubstacks(substacks) {
+            const gallery = document.getElementById('content-substacks-gallery');
+            if (!gallery) return;
+            
+            substacks.forEach(substack => {
+                const substackCard = document.createElement('div');
+                substackCard.className = 'flex-shrink-0 w-80 md:w-96 bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 p-4';
+                
+                const embedDiv = document.createElement('div');
+                embedDiv.className = 'substack-post-embed';
+                
+                const titleP = document.createElement('p');
+                titleP.lang = 'en';
+                titleP.textContent = substack.title || 'Substack Article';
+                
+                const descP = document.createElement('p');
+                descP.textContent = substack.description || '';
+                
+                const link = document.createElement('a');
+                link.setAttribute('data-post-link', '');
+                link.href = substack.url;
+                link.textContent = 'Read on Substack';
+                link.target = '_blank';
+                
+                embedDiv.appendChild(titleP);
+                if (substack.description) embedDiv.appendChild(descP);
+                embedDiv.appendChild(link);
+                
+                substackCard.appendChild(embedDiv);
+                gallery.appendChild(substackCard);
+            });
+            
+            // Load Substack embed script if not already loaded
+            if (!document.querySelector('script[src*="substack.com/embedjs/embed.js"]')) {
+                const script = document.createElement('script');
+                script.async = true;
+                script.src = 'https://substack.com/embedjs/embed.js';
+                script.charset = 'utf-8';
+                document.head.appendChild(script);
+            }
+        }
+
+        function populateContentTweets(tweets) {
+            const gallery = document.getElementById('content-tweets-gallery');
+            if (!gallery) return;
+            
+            tweets.forEach(tweet => {
+                const tweetCard = document.createElement('div');
+                tweetCard.className = 'flex-shrink-0 w-80 md:w-96 bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300';
+                
+                // Extract tweet ID from URL
+                const tweetId = tweet.url.match(/status\/(\d+)/)?.[1];
+                if (!tweetId) return;
+                
+                const blockquote = document.createElement('blockquote');
+                blockquote.className = 'twitter-tweet';
+                blockquote.setAttribute('data-theme', 'light');
+                blockquote.setAttribute('data-width', '400');
+                
+                const link = document.createElement('a');
+                link.href = tweet.url;
+                link.target = '_blank';
+                link.textContent = 'View Tweet';
+                
+                blockquote.appendChild(link);
+                tweetCard.appendChild(blockquote);
+                gallery.appendChild(tweetCard);
+            });
+            
+            // Load Twitter widgets script if not already loaded
+            if (!window.twttr && !document.querySelector('script[src*="widgets.js"]')) {
+                const script = document.createElement('script');
+                script.async = true;
+                script.src = 'https://platform.twitter.com/widgets.js';
+                script.charset = 'utf-8';
+                document.head.appendChild(script);
+            } else if (window.twttr && window.twttr.widgets) {
+                window.twttr.widgets.load();
+            }
+        }
+
+        function populateContentYoutube(videos) {
+            const gallery = document.getElementById('content-youtube-gallery');
+            if (!gallery) return;
+            
+            videos.forEach(video => {
+                const videoCard = document.createElement('div');
+                videoCard.className = 'flex-shrink-0 w-80 md:w-96 bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300';
+                
+                const iframe = document.createElement('iframe');
+                iframe.src = video.url;
+                iframe.width = '100%';
+                iframe.height = '240';
+                iframe.style.border = 'none';
+                iframe.style.borderRadius = '8px';
+                iframe.setAttribute('allowfullscreen', '');
+                iframe.loading = 'lazy';
+                
+                videoCard.appendChild(iframe);
+                gallery.appendChild(videoCard);
+            });
+        }
+
         function populateTickets(ticketsData) {
             const grid = document.getElementById('tickets-grid'); if (!grid) return; grid.innerHTML = '';
             ticketsData.forEach(ticket => { 
@@ -660,13 +860,15 @@
         }
 
         async function initializePage() {
-            const [speakersData, scheduleData] = await Promise.all([
+            const [speakersData, scheduleData, contentData] = await Promise.all([
                 fetchAndParseCsv(dataUrls.speakers, fallbackUrls.speakers, parseSpeakersCsv),
-                fetchAndParseCsv(dataUrls.schedule, fallbackUrls.schedule, parseScheduleCsv)
+                fetchAndParseCsv(dataUrls.schedule, fallbackUrls.schedule, parseScheduleCsv),
+                fetchAndParseCsv('assets/data/content.csv', 'assets/data/content.csv', parseContentCsv)
             ]);
             
             allSpeakers = speakersData.length ? speakersData : localSpeakers;
             allScheduleData = scheduleData.length ? scheduleData : localSchedule;
+            allContentData = contentData.length ? contentData : [];
 
             renderPage();
         }
