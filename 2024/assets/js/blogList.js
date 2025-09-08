@@ -1,4 +1,4 @@
-fetch('blogs.csv')
+fetch('./assets/data/blogs.csv')
 .then(response => response.text())
 .then(data => {
   const rows = data.split('\n').slice(1); // Skip header row
