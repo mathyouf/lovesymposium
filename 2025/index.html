@@ -204,22 +204,12 @@
                 <p class="text-xl text-center text-gray-600 mb-12 max-w-3xl mx-auto">Curated papers, books, articles, and media that inspire our understanding of love and relationships.</p>
             </div>
             
-            <!-- Papers Row -->
+            <!-- Papers and Books Row -->
             <div class="mb-12">
-                <h3 class="text-2xl font-romantic text-center mb-6 text-[#5c323e]">Research Papers</h3>
+                <h3 class="text-2xl font-romantic text-center mb-6 text-[#5c323e]">Papers and Books</h3>
                 <div class="overflow-x-auto pb-4">
-                    <div id="content-papers-gallery" class="flex space-x-6 p-4 min-w-max">
-                        <!-- Papers will be inserted here -->
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Books Row -->
-            <div class="mb-12">
-                <h3 class="text-2xl font-romantic text-center mb-6 text-[#5c323e]">Books</h3>
-                <div class="overflow-x-auto pb-4">
-                    <div id="content-books-gallery" class="flex space-x-6 p-4 min-w-max">
-                        <!-- Books will be inserted here -->
+                    <div id="content-papers-books-gallery" class="flex space-x-6 p-4 min-w-max">
+                        <!-- Papers and Books will be inserted here -->
                     </div>
                 </div>
             </div>
@@ -596,8 +586,18 @@
             }, {});
             
             // Populate each content type
-            if (contentByType.paper) populateContentPapers(contentByType.paper);
-            if (contentByType.book) populateContentBooks(contentByType.book);
+            if (contentByType.paper || contentByType.book) {
+                const combinedPapersBooks = [
+                    ...(contentByType.paper || []),
+                    ...(contentByType.book || [])
+                ];
+                // Shuffle the combined array randomly
+                for (let i = combinedPapersBooks.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [combinedPapersBooks[i], combinedPapersBooks[j]] = [combinedPapersBooks[j], combinedPapersBooks[i]];
+                }
+                populateContentPapersAndBooks(combinedPapersBooks);
+            }
             if (contentByType.substack || contentByType.twitter) {
                 const combinedContent = [
                     ...(contentByType.substack || []),
@@ -613,45 +613,41 @@
             if (contentByType.youtube) populateContentYoutube(contentByType.youtube);
         }
 
-        function populateContentPapers(papers) {
-            const gallery = document.getElementById('content-papers-gallery');
+        function populateContentPapersAndBooks(combinedContent) {
+            const gallery = document.getElementById('content-papers-books-gallery');
             if (!gallery) return;
             
-            papers.forEach(paper => {
-                const paperCard = document.createElement('div');
-                paperCard.className = 'flex-shrink-0 w-36 sm:w-40 md:w-64 bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300';
-                
-                const img = document.createElement('img');
-                img.src = paper.url;
-                img.alt = paper.title || 'Research Paper';
-                img.className = 'w-full h-48 sm:h-56 md:h-80 object-cover';
-                img.onerror = function() {
-                    this.parentElement.style.display = 'none';
-                };
-                
-                paperCard.appendChild(img);
-                gallery.appendChild(paperCard);
-            });
-        }
-
-        function populateContentBooks(books) {
-            const gallery = document.getElementById('content-books-gallery');
-            if (!gallery) return;
-            
-            books.forEach(book => {
-                const bookCard = document.createElement('div');
-                bookCard.className = 'flex-shrink-0 w-36 sm:w-40 md:w-48 bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300';
-                
-                const img = document.createElement('img');
-                img.src = book.url;
-                img.alt = book.title || 'Recommended Book';
-                img.className = 'w-full h-48 sm:h-56 md:h-72 object-cover';
-                img.onerror = function() {
-                    this.parentElement.style.display = 'none';
-                };
-                
-                bookCard.appendChild(img);
-                gallery.appendChild(bookCard);
+            combinedContent.forEach(item => {
+                if (item.type === 'paper') {
+                    const paperCard = document.createElement('div');
+                    paperCard.className = 'flex-shrink-0 w-36 sm:w-40 md:w-56 bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300';
+                    
+                    const img = document.createElement('img');
+                    img.src = item.url;
+                    img.alt = item.title || 'Research Paper';
+                    img.className = 'w-full h-48 sm:h-56 md:h-72 object-cover';
+                    img.onerror = function() {
+                        this.parentElement.style.display = 'none';
+                    };
+                    
+                    paperCard.appendChild(img);
+                    gallery.appendChild(paperCard);
+                    
+                } else if (item.type === 'book') {
+                    const bookCard = document.createElement('div');
+                    bookCard.className = 'flex-shrink-0 w-36 sm:w-40 md:w-48 bg-white rounded shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300';
+                    
+                    const img = document.createElement('img');
+                    img.src = item.url;
+                    img.alt = item.title || 'Recommended Book';
+                    img.className = 'w-full h-48 sm:h-56 md:h-72 object-cover';
+                    img.onerror = function() {
+                        this.parentElement.style.display = 'none';
+                    };
+                    
+                    bookCard.appendChild(img);
+                    gallery.appendChild(bookCard);
+                }
             });
         }
 
