@@ -224,22 +224,12 @@
                 </div>
             </div>
             
-            <!-- Substacks Row -->
+            <!-- Tweets and Substacks Row -->
             <div class="mb-12">
-                <h3 class="text-2xl font-romantic text-center mb-6 text-[#5c323e]">Substack Articles</h3>
+                <h3 class="text-2xl font-romantic text-center mb-6 text-[#5c323e]">Tweets and Substacks</h3>
                 <div class="overflow-x-auto pb-4">
-                    <div id="content-substacks-gallery" class="flex space-x-6 p-4 min-w-max">
-                        <!-- Substacks will be inserted here -->
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Tweets Row -->
-            <div class="mb-12">
-                <h3 class="text-2xl font-romantic text-center mb-6 text-[#5c323e]">Tweets</h3>
-                <div class="overflow-x-auto pb-4">
-                    <div id="content-tweets-gallery" class="flex space-x-6 p-4 min-w-max">
-                        <!-- Tweets will be inserted here -->
+                    <div id="content-tweets-substacks-gallery" class="flex space-x-6 p-4 min-w-max">
+                        <!-- Tweets and Substacks will be inserted here -->
                     </div>
                 </div>
             </div>
@@ -608,8 +598,18 @@
             // Populate each content type
             if (contentByType.paper) populateContentPapers(contentByType.paper);
             if (contentByType.book) populateContentBooks(contentByType.book);
-            if (contentByType.substack) populateContentSubstacks(contentByType.substack);
-            if (contentByType.twitter) populateContentTweets(contentByType.twitter);
+            if (contentByType.substack || contentByType.twitter) {
+                const combinedContent = [
+                    ...(contentByType.substack || []),
+                    ...(contentByType.twitter || [])
+                ];
+                // Shuffle the combined array randomly
+                for (let i = combinedContent.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [combinedContent[i], combinedContent[j]] = [combinedContent[j], combinedContent[i]];
+                }
+                populateContentTweetsAndSubstacks(combinedContent);
+            }
             if (contentByType.youtube) populateContentYoutube(contentByType.youtube);
         }
 
@@ -655,8 +655,8 @@
             });
         }
 
-        function populateContentSubstacks(substacks) {
-            const gallery = document.getElementById('content-substacks-gallery');
+        function populateContentTweetsAndSubstacks(combinedContent) {
+            const gallery = document.getElementById('content-tweets-substacks-gallery');
             if (!gallery) return;
             
             // Define post metadata based on URLs
@@ -679,81 +679,77 @@
                 }
             };
             
-            substacks.forEach((substack, index) => {
-                const substackCard = document.createElement('div');
-                substackCard.className = 'flex-shrink-0 w-80 md:w-96 bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 p-4';
-                substackCard.style.height = '400px';
-                substackCard.style.overflow = 'hidden';
-                
-                const embedDiv = document.createElement('div');
-                embedDiv.className = 'substack-post-embed';
-                embedDiv.id = `substack-embed-${index}`;
-                embedDiv.style.maxHeight = '360px';
-                embedDiv.style.overflow = 'hidden';
-                
-                const metadata = postMetadata[substack.url] || { title: 'Substack Article', description: '' };
-                
-                const titleP = document.createElement('p');
-                titleP.lang = 'en';
-                titleP.textContent = metadata.title;
-                
-                const link = document.createElement('a');
-                link.setAttribute('data-post-link', '');
-                link.href = substack.url;
-                link.textContent = 'Read on Substack';
-                link.target = '_blank';
-                
-                embedDiv.appendChild(titleP);
-                
-                if (metadata.description) {
-                    const descP = document.createElement('p');
-                    descP.textContent = metadata.description;
-                    embedDiv.appendChild(descP);
+            combinedContent.forEach((item, index) => {
+                if (item.type === 'substack') {
+                    const substackCard = document.createElement('div');
+                    substackCard.className = 'flex-shrink-0 w-80 md:w-96 bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 p-4';
+                    substackCard.style.height = '400px';
+                    substackCard.style.overflow = 'hidden';
+                    
+                    const embedDiv = document.createElement('div');
+                    embedDiv.className = 'substack-post-embed';
+                    embedDiv.id = `substack-embed-${index}`;
+                    embedDiv.style.maxHeight = '360px';
+                    embedDiv.style.overflow = 'hidden';
+                    
+                    const metadata = postMetadata[item.url] || { title: 'Substack Article', description: '' };
+                    
+                    const titleP = document.createElement('p');
+                    titleP.lang = 'en';
+                    titleP.textContent = metadata.title;
+                    
+                    const link = document.createElement('a');
+                    link.setAttribute('data-post-link', '');
+                    link.href = item.url;
+                    link.textContent = 'Read on Substack';
+                    link.target = '_blank';
+                    
+                    embedDiv.appendChild(titleP);
+                    
+                    if (metadata.description) {
+                        const descP = document.createElement('p');
+                        descP.textContent = metadata.description;
+                        embedDiv.appendChild(descP);
+                    }
+                    
+                    embedDiv.appendChild(link);
+                    
+                    substackCard.appendChild(embedDiv);
+                    gallery.appendChild(substackCard);
+                    
+                    // Add individual script tag for each embed
+                    const script = document.createElement('script');
+                    script.async = true;
+                    script.src = 'https://substack.com/embedjs/embed.js';
+                    script.charset = 'utf-8';
+                    substackCard.appendChild(script);
+                    
+                } else if (item.type === 'twitter') {
+                    const tweetCard = document.createElement('div');
+                    tweetCard.className = 'flex-shrink-0 w-80 md:w-96 bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300';
+                    tweetCard.style.height = '400px';
+                    tweetCard.style.overflow = 'hidden';
+                    
+                    // Extract tweet ID from URL
+                    const tweetId = item.url.match(/status\/(\d+)/)?.[1];
+                    if (!tweetId) return;
+                    
+                    const blockquote = document.createElement('blockquote');
+                    blockquote.className = 'twitter-tweet';
+                    blockquote.setAttribute('data-theme', 'light');
+                    blockquote.setAttribute('data-width', '400');
+                    blockquote.style.maxHeight = '380px';
+                    blockquote.style.overflow = 'hidden';
+                    
+                    const link = document.createElement('a');
+                    link.href = item.url;
+                    link.target = '_blank';
+                    link.textContent = 'View Tweet';
+                    
+                    blockquote.appendChild(link);
+                    tweetCard.appendChild(blockquote);
+                    gallery.appendChild(tweetCard);
                 }
-                
-                embedDiv.appendChild(link);
-                
-                substackCard.appendChild(embedDiv);
-                gallery.appendChild(substackCard);
-                
-                // Add individual script tag for each embed
-                const script = document.createElement('script');
-                script.async = true;
-                script.src = 'https://substack.com/embedjs/embed.js';
-                script.charset = 'utf-8';
-                substackCard.appendChild(script);
-            });
-        }
-
-        function populateContentTweets(tweets) {
-            const gallery = document.getElementById('content-tweets-gallery');
-            if (!gallery) return;
-            
-            tweets.forEach(tweet => {
-                const tweetCard = document.createElement('div');
-                tweetCard.className = 'flex-shrink-0 w-80 md:w-96 bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300';
-                tweetCard.style.height = '400px';
-                tweetCard.style.overflow = 'hidden';
-                
-                // Extract tweet ID from URL
-                const tweetId = tweet.url.match(/status\/(\d+)/)?.[1];
-                if (!tweetId) return;
-                
-                const blockquote = document.createElement('blockquote');
-                blockquote.className = 'twitter-tweet';
-                blockquote.setAttribute('data-theme', 'light');
-                blockquote.setAttribute('data-width', '400');
-                blockquote.style.maxHeight = '380px';
-                blockquote.style.overflow = 'hidden';
-                
-                const link = document.createElement('a');
-                link.href = tweet.url;
-                link.target = '_blank';
-                link.textContent = 'View Tweet';
-                
-                blockquote.appendChild(link);
-                tweetCard.appendChild(blockquote);
-                gallery.appendChild(tweetCard);
             });
             
             // Load Twitter widgets script if not already loaded
