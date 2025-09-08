@@ -668,16 +668,28 @@
                 'https://aella.substack.com/p/how-relationships-change-over-time': {
                     title: 'How Relationships Change Over Time by Aella',
                     description: 'Survey results'
+                },
+                'https://www.secondperson.dating/p/welcome-to-second-person': {
+                    title: 'Welcome to Second Person',
+                    description: ''
+                },
+                'https://aella.substack.com/p/ill-pay-you-100k-to-get-me-married': {
+                    title: 'I\'ll pay you $100k to get me married by Aella',
+                    description: ''
                 }
             };
             
             substacks.forEach((substack, index) => {
                 const substackCard = document.createElement('div');
                 substackCard.className = 'flex-shrink-0 w-80 md:w-96 bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 p-4';
+                substackCard.style.height = '400px';
+                substackCard.style.overflow = 'hidden';
                 
                 const embedDiv = document.createElement('div');
                 embedDiv.className = 'substack-post-embed';
                 embedDiv.id = `substack-embed-${index}`;
+                embedDiv.style.maxHeight = '360px';
+                embedDiv.style.overflow = 'hidden';
                 
                 const metadata = postMetadata[substack.url] || { title: 'Substack Article', description: '' };
                 
@@ -720,6 +732,8 @@
             tweets.forEach(tweet => {
                 const tweetCard = document.createElement('div');
                 tweetCard.className = 'flex-shrink-0 w-80 md:w-96 bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300';
+                tweetCard.style.height = '400px';
+                tweetCard.style.overflow = 'hidden';
                 
                 // Extract tweet ID from URL
                 const tweetId = tweet.url.match(/status\/(\d+)/)?.[1];
@@ -729,6 +743,8 @@
                 blockquote.className = 'twitter-tweet';
                 blockquote.setAttribute('data-theme', 'light');
                 blockquote.setAttribute('data-width', '400');
+                blockquote.style.maxHeight = '380px';
+                blockquote.style.overflow = 'hidden';
                 
                 const link = document.createElement('a');
                 link.href = tweet.url;
