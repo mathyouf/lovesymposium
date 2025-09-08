@@ -659,19 +659,31 @@
             const gallery = document.getElementById('content-substacks-gallery');
             if (!gallery) return;
             
-            substacks.forEach(substack => {
+            // Define post metadata based on URLs
+            const postMetadata = {
+                'https://sashachapin.substack.com/p/what-im-looking-for-in-my-marriage': {
+                    title: 'What I\'m looking for in my marriage by Sasha Chapin',
+                    description: 'the ideal of this guy'
+                },
+                'https://aella.substack.com/p/how-relationships-change-over-time': {
+                    title: 'How Relationships Change Over Time by Aella',
+                    description: 'Survey results'
+                }
+            };
+            
+            substacks.forEach((substack, index) => {
                 const substackCard = document.createElement('div');
                 substackCard.className = 'flex-shrink-0 w-80 md:w-96 bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 p-4';
                 
                 const embedDiv = document.createElement('div');
                 embedDiv.className = 'substack-post-embed';
+                embedDiv.id = `substack-embed-${index}`;
+                
+                const metadata = postMetadata[substack.url] || { title: 'Substack Article', description: '' };
                 
                 const titleP = document.createElement('p');
                 titleP.lang = 'en';
-                titleP.textContent = substack.title || 'Substack Article';
-                
-                const descP = document.createElement('p');
-                descP.textContent = substack.description || '';
+                titleP.textContent = metadata.title;
                 
                 const link = document.createElement('a');
                 link.setAttribute('data-post-link', '');
@@ -680,21 +692,25 @@
                 link.target = '_blank';
                 
                 embedDiv.appendChild(titleP);
-                if (substack.description) embedDiv.appendChild(descP);
+                
+                if (metadata.description) {
+                    const descP = document.createElement('p');
+                    descP.textContent = metadata.description;
+                    embedDiv.appendChild(descP);
+                }
+                
                 embedDiv.appendChild(link);
                 
                 substackCard.appendChild(embedDiv);
                 gallery.appendChild(substackCard);
-            });
-            
-            // Load Substack embed script if not already loaded
-            if (!document.querySelector('script[src*="substack.com/embedjs/embed.js"]')) {
+                
+                // Add individual script tag for each embed
                 const script = document.createElement('script');
                 script.async = true;
                 script.src = 'https://substack.com/embedjs/embed.js';
                 script.charset = 'utf-8';
-                document.head.appendChild(script);
-            }
+                substackCard.appendChild(script);
+            });
         }
 
         function populateContentTweets(tweets) {
