@@ -115,6 +115,184 @@
             text-shadow: 0 0 15px rgba(254, 255, 251, 0.8);
         }
 
+        /* Themed Tweet Card */
+        .themed-tweet-card {
+            background-color: var(--off-white);
+            border: 2px solid #293E3C;
+            border-radius: 8px;
+            padding: 1.5rem; /* 24px */
+            width: 350px;
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .themed-tweet-card::before {
+            content: '';
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            right: 5px;
+            bottom: 5px;
+            border: 1px solid rgba(41, 62, 60, 0.3);
+            border-radius: 4px;
+            pointer-events: none;
+        }
+
+        .themed-tweet-card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .themed-tweet-card-header img {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            margin-right: 0.75rem;
+            border: 2px solid #293E3C;
+        }
+
+        .themed-tweet-card-author .name {
+            font-family: 'Cormorant', serif;
+            font-weight: 700;
+            color: #293E3C;
+        }
+
+        .themed-tweet-card-author .handle {
+            font-family: 'Cormorant', serif;
+            color: #666666;
+            font-size: 0.9rem;
+        }
+
+        .themed-tweet-card-body {
+            font-family: 'Cormorant', serif;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #333;
+            flex-grow: 1;
+            padding: 0.5rem 0;
+        }
+
+        .themed-tweet-card-footer {
+            text-align: center;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(41, 62, 60, 0.1);
+        }
+
+        .themed-tweet-card-footer a {
+            font-family: 'Great Vibes', cursive;
+            color: #293E3C;
+            font-size: 1.5rem;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .themed-tweet-card-footer a:hover {
+            color: #8dafb9;
+        }
+
+        .content-quadrant {
+            background-color: var(--off-white);
+            border: 1px solid rgba(41, 62, 60, 0.1);
+            border-radius: 8px;
+            padding: 1.5rem;
+            height: 500px; /* Set a fixed height */
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .content-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            overflow-y: auto; /* Allow vertical scrolling within the quadrant */
+            flex-grow: 1;
+            padding: 0.5rem;
+        }
+
+        .content-quadrant .themed-tweet-card {
+            width: 100%;
+            height: auto;
+        }
+
+        .show-more-button {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(254, 255, 251, 1) 50%, rgba(254, 255, 251, 0));
+            text-align: center;
+            padding: 2rem 0 1rem 0;
+            cursor: pointer;
+        }
+
+        .show-more-button span {
+            background: var(--off-white);
+            color: #293E3C;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            border: 1px solid #293E3C;
+            transition: all 0.3s ease;
+        }
+
+        .show-more-button:hover span {
+            background: #293E3C;
+            color: var(--off-white);
+        }
+
+        .content-quadrant.expanded {
+            height: auto;
+        }
+
+        .content-quadrant.expanded .show-more-button {
+            display: none;
+        }
+
+        .footer-container {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #293E3C;
+            height: 40px; /* Thicker line */
+            z-index: 10;
+        }
+
+        .footer-semicircle {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 280px; /* Mobile size */
+            height: 140px; /* Perfect semi-circle */
+            background-color: #293E3C;
+            border-radius: 140px 140px 0 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start; /* Align to top */
+            align-items: center;
+            padding-top: 30px; /* Push down from top */
+            transition: all 0.3s ease;
+        }
+
+        /* Larger semi-circle for desktop */
+        @media (min-width: 768px) {
+            .footer-semicircle {
+                width: 400px;
+                height: 200px; /* Perfect semi-circle */
+                border-radius: 200px 200px 0 0;
+                padding-top: 50px; /* Push down from top */
+            }
+        }
+
         .scrolling-container {
             position: relative;
             width: 100%;
@@ -329,32 +507,43 @@
                 <p class="text-xl text-center text-gray-600 mb-12 max-w-3xl mx-auto">Curated papers, books, articles, and media that inspire our understanding of love and relationships.</p>
             </div>
             
-            <!-- Papers and Books Row -->
-            <div class="mb-12">
-                <h3 class="text-2xl font-romantic text-center mb-6 text-[#293E3C]">Papers and Books</h3>
-                <div class="overflow-x-auto pb-4">
-                    <div id="content-papers-books-gallery" class="flex space-x-6 p-4 min-w-max">
-                        <!-- Papers and Books will be inserted here -->
+            <div class="container mx-auto px-4">
+                <div class="flex flex-wrap -mx-4">
+                    <!-- Papers Quadrant -->
+                    <div class="w-full md:w-1/2 px-4 mb-8">
+                        <div class="content-quadrant">
+                            <h3 class="text-2xl font-romantic text-center mb-6 text-[#293E3C]">Papers</h3>
+                            <div id="content-papers-gallery" class="content-gallery">
+                                <!-- Papers will be inserted here -->
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            
-            <!-- Tweets and Substacks Row -->
-            <div class="mb-12">
-                <h3 class="text-2xl font-romantic text-center mb-6 text-[#293E3C]">Tweets and Substacks</h3>
-                <div class="overflow-x-auto pb-4">
-                    <div id="content-tweets-substacks-gallery" class="flex space-x-6 p-4 min-w-max">
-                        <!-- Tweets and Substacks will be inserted here -->
+                    <!-- Books Quadrant -->
+                    <div class="w-full md:w-1/2 px-4 mb-8">
+                        <div class="content-quadrant">
+                            <h3 class="text-2xl font-romantic text-center mb-6 text-[#293E3C]">Books</h3>
+                            <div id="content-books-gallery" class="content-gallery">
+                                <!-- Books will be inserted here -->
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            
-            <!-- YouTube Videos Row -->
-            <div class="mb-12">
-                <h3 class="text-2xl font-romantic text-center mb-6 text-[#293E3C]">YouTube Videos</h3>
-                <div class="overflow-x-auto pb-4">
-                    <div id="content-youtube-gallery" class="flex space-x-6 p-4 min-w-max">
-                        <!-- YouTube videos will be inserted here -->
+                    <!-- Tweets Quadrant -->
+                    <div class="w-full md:w-1/2 px-4 mb-8">
+                        <div class="content-quadrant">
+                            <h3 class="text-2xl font-romantic text-center mb-6 text-[#293E3C]">Tweets</h3>
+                            <div id="content-tweets-gallery" class="content-gallery">
+                                <!-- Tweets will be inserted here -->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Substacks Quadrant -->
+                    <div class="w-full md:w-1/2 px-4 mb-8">
+                        <div class="content-quadrant">
+                            <h3 class="text-2xl font-romantic text-center mb-6 text-[#293E3C]">Substacks</h3>
+                            <div id="content-substacks-gallery" class="content-gallery">
+                                <!-- Substacks will be inserted here -->
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -382,18 +571,20 @@
 
     </div>
 
-    <!-- Image Footer -->
-    <div class="w-full">
-        <img src="assets/images/graphics/8.png" alt="Love Symposium Footer Graphic" class="w-full h-auto object-cover">
-    </div>
+    <div style="position: relative;">
+        <!-- Image Footer -->
+        <div class="w-full">
+            <img src="assets/images/graphics/8.png" alt="Love Symposium Footer Graphic" class="w-full h-auto object-cover" style="display: block;">
+        </div>
 
-    <!-- Footer -->
-    <footer class="bg-[#293E3C] text-center p-8" style="color: var(--off-white);">
-        <p class="text-lg md:text-xl mb-4">We'd love to hear from you.</p>
-        <a href="mailto:cupid@symposium.love" class="text-xl md:text-2xl hover:text-gray-200 transition font-romantic" style="color: var(--off-white);">
-            cupid@symposium.love
-        </a>
-    </footer>
+        <!-- Footer -->
+        <footer class="footer-container">
+            <div class="footer-semicircle">
+                <p class="font-cursive text-2xl md:text-3xl mb-1" style="color: var(--off-white);">We'd love to hear from you.</p>
+                <a href="mailto:hosts@symposium.love" class="font-romantic text-base md:text-lg" style="color: var(--off-white);">hosts@symposium.love</a>
+            </div>
+        </footer>
+    </div>
 
     <script>
         // =====================================================================
@@ -699,88 +890,121 @@
             });
         }
 
+        function addShowMoreButton(quadrant) {
+            const gallery = quadrant.querySelector('.content-gallery');
+            if (gallery.scrollHeight > gallery.clientHeight) {
+                const showMoreButton = document.createElement('div');
+                showMoreButton.className = 'show-more-button';
+                showMoreButton.innerHTML = '<span>Show More</span>';
+                showMoreButton.addEventListener('click', () => {
+                    quadrant.classList.add('expanded');
+                });
+                quadrant.appendChild(showMoreButton);
+            }
+        }
+
         function populateContentSections(contentData) {
             if (!contentData || contentData.length === 0) return;
             
-            // Group content by type
-            const contentByType = contentData.reduce((acc, item) => {
-                const type = item.type;
-                if (!acc[type]) acc[type] = [];
-                acc[type].push(item);
-                return acc;
-            }, {});
-            
-            // Populate each content type
-            if (contentByType.paper || contentByType.book) {
-                const combinedPapersBooks = [
-                    ...(contentByType.paper || []),
-                    ...(contentByType.book || [])
-                ];
-                // Shuffle the combined array randomly
-                for (let i = combinedPapersBooks.length - 1; i > 0; i--) {
-                    const j = Math.floor(Math.random() * (i + 1));
-                    [combinedPapersBooks[i], combinedPapersBooks[j]] = [combinedPapersBooks[j], combinedPapersBooks[i]];
-                }
-                populateContentPapersAndBooks(combinedPapersBooks);
-            }
-            if (contentByType.substack || contentByType.twitter) {
-                const combinedContent = [
-                    ...(contentByType.substack || []),
-                    ...(contentByType.twitter || [])
-                ];
-                // Shuffle the combined array randomly
-                for (let i = combinedContent.length - 1; i > 0; i--) {
-                    const j = Math.floor(Math.random() * (i + 1));
-                    [combinedContent[i], combinedContent[j]] = [combinedContent[j], combinedContent[i]];
-                }
-                populateContentTweetsAndSubstacks(combinedContent);
-            }
-            if (contentByType.youtube) populateContentYoutube(contentByType.youtube);
-        }
+            const papersGallery = document.getElementById('content-papers-gallery');
+            const booksGallery = document.getElementById('content-books-gallery');
+            const tweetsGallery = document.getElementById('content-tweets-gallery');
+            const substacksGallery = document.getElementById('content-substacks-gallery');
 
-        function populateContentPapersAndBooks(combinedContent) {
-            const gallery = document.getElementById('content-papers-books-gallery');
-            if (!gallery) return;
-            
-            combinedContent.forEach(item => {
-                if (item.type === 'paper') {
-                    const paperCard = document.createElement('div');
-                    paperCard.className = 'flex-shrink-0 w-36 sm:w-40 md:w-56 bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300';
-                    
-                    const img = document.createElement('img');
-                    img.src = item.url;
-                    img.alt = item.title || 'Research Paper';
-                    img.className = 'w-full h-48 sm:h-56 md:h-72 object-cover';
-                    img.onerror = function() {
-                        this.parentElement.style.display = 'none';
-                    };
-                    
-                    paperCard.appendChild(img);
-                    gallery.appendChild(paperCard);
-                    
-                } else if (item.type === 'book') {
-                    const bookCard = document.createElement('div');
-                    bookCard.className = 'flex-shrink-0 w-36 sm:w-40 md:w-48 bg-white rounded shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300';
-                    
-                    const img = document.createElement('img');
-                    img.src = item.url;
-                    img.alt = item.title || 'Recommended Book';
-                    img.className = 'w-full h-48 sm:h-56 md:h-72 object-cover';
-                    img.onerror = function() {
-                        this.parentElement.style.display = 'none';
-                    };
-                    
-                    bookCard.appendChild(img);
-                    gallery.appendChild(bookCard);
+            contentData.forEach(item => {
+                switch (item.type) {
+                    case 'paper':
+                        populatePaper(item, papersGallery);
+                        break;
+                    case 'book':
+                        populateBook(item, booksGallery);
+                        break;
+                    case 'twitter':
+                        populateTweet(item, tweetsGallery);
+                        break;
+                    case 'substack':
+                        populateSubstack(item, substacksGallery);
+                        break;
                 }
+            });
+
+            document.querySelectorAll('.content-quadrant').forEach(quadrant => {
+                addShowMoreButton(quadrant);
             });
         }
 
-        function populateContentTweetsAndSubstacks(combinedContent) {
-            const gallery = document.getElementById('content-tweets-substacks-gallery');
-            if (!gallery) return;
+        function populatePaper(item, gallery) {
+            const paperCard = document.createElement('div');
+            paperCard.className = 'flex-shrink-0 w-36 sm:w-40 md:w-56 bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300';
             
-            // Define post metadata based on URLs
+            const img = document.createElement('img');
+            img.src = item.url;
+            img.alt = item.title || 'Research Paper';
+            img.className = 'w-full h-48 sm:h-56 md:h-72 object-cover';
+            img.onerror = function() {
+                this.parentElement.style.display = 'none';
+            };
+            
+            paperCard.appendChild(img);
+            gallery.appendChild(paperCard);
+        }
+
+        function populateBook(item, gallery) {
+            const bookCard = document.createElement('div');
+            bookCard.className = 'flex-shrink-0 w-36 sm:w-40 md:w-48 bg-white rounded shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300';
+            
+            const img = document.createElement('img');
+            img.src = item.url;
+            img.alt = item.title || 'Recommended Book';
+            img.className = 'w-full h-48 sm:h-56 md:h-72 object-cover';
+            img.onerror = function() {
+                this.parentElement.style.display = 'none';
+            };
+            
+            bookCard.appendChild(img);
+            gallery.appendChild(bookCard);
+        }
+
+        function populateTweet(item, gallery) {
+            const tweetMetadata = {
+                'https://x.com/Aella_Girl/status/1598794839304994816': {
+                    author_name: 'Aella',
+                    author_handle: 'Aella_Girl',
+                    author_image: 'https://pbs.twimg.com/profile_images/1759721989354098688/iN52s29g_400x400.jpg',
+                    text: 'i am going to solve love by making a dating app that is just a spreadsheet'
+                },
+                'https://x.com/SashaChapin/status/1678888711412834304': {
+                    author_name: 'Sasha Chapin',
+                    author_handle: 'SashaChapin',
+                    author_image: 'https://pbs.twimg.com/profile_images/1803539344232374272/r2F2s2u7_400x400.jpg',
+                    text: 'My girlfriend and I have a weekly meeting where we talk about our relationship. We call it The Summit. It is the best thing we do.'
+                }
+            };
+
+            const metadata = tweetMetadata[item.url];
+            if (!metadata) return;
+
+            const card = `
+                <div class="themed-tweet-card">
+                    <div class="themed-tweet-card-header">
+                        <img src="${metadata.author_image}" alt="${metadata.author_name}">
+                        <div class="themed-tweet-card-author">
+                            <div class="name">${metadata.author_name}</div>
+                            <div class="handle">@${metadata.author_handle}</div>
+                        </div>
+                    </div>
+                    <div class="themed-tweet-card-body">
+                        ${metadata.text}
+                    </div>
+                    <div class="themed-tweet-card-footer">
+                        <a href="${item.url}" target="_blank" rel="noopener noreferrer">View on X</a>
+                    </div>
+                </div>
+            `;
+            gallery.innerHTML += card;
+        }
+
+        function populateSubstack(item, gallery) {
             const postMetadata = {
                 'https://sashachapin.substack.com/p/what-im-looking-for-in-my-marriage': {
                     title: 'What I\'m looking for in my marriage by Sasha Chapin',
@@ -799,90 +1023,47 @@
                     description: ''
                 }
             };
+
+            const metadata = postMetadata[item.url] || { title: 'Substack Article', description: '' };
+
+            const substackCard = document.createElement('div');
+            substackCard.className = 'flex-shrink-0 w-80 md:w-96 bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 p-4';
+            substackCard.style.height = '400px';
+            substackCard.style.overflow = 'hidden';
             
-            combinedContent.forEach((item, index) => {
-                if (item.type === 'substack') {
-                    const substackCard = document.createElement('div');
-                    substackCard.className = 'flex-shrink-0 w-80 md:w-96 bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 p-4';
-                    substackCard.style.height = '400px';
-                    substackCard.style.overflow = 'hidden';
-                    
-                    const embedDiv = document.createElement('div');
-                    embedDiv.className = 'substack-post-embed';
-                    embedDiv.id = `substack-embed-${index}`;
-                    embedDiv.style.maxHeight = '360px';
-                    embedDiv.style.overflow = 'hidden';
-                    
-                    const metadata = postMetadata[item.url] || { title: 'Substack Article', description: '' };
-                    
-                    const titleP = document.createElement('p');
-                    titleP.lang = 'en';
-                    titleP.textContent = metadata.title;
-                    
-                    const link = document.createElement('a');
-                    link.setAttribute('data-post-link', '');
-                    link.href = item.url;
-                    link.textContent = 'Read on Substack';
-                    link.target = '_blank';
-                    
-                    embedDiv.appendChild(titleP);
-                    
-                    if (metadata.description) {
-                        const descP = document.createElement('p');
-                        descP.textContent = metadata.description;
-                        embedDiv.appendChild(descP);
-                    }
-                    
-                    embedDiv.appendChild(link);
-                    
-                    substackCard.appendChild(embedDiv);
-                    gallery.appendChild(substackCard);
-                    
-                    // Add individual script tag for each embed
-                    const script = document.createElement('script');
-                    script.async = true;
-                    script.src = 'https://substack.com/embedjs/embed.js';
-                    script.charset = 'utf-8';
-                    substackCard.appendChild(script);
-                    
-                } else if (item.type === 'twitter') {
-                    const tweetCard = document.createElement('div');
-                    tweetCard.className = 'flex-shrink-0 w-80 md:w-96 bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300';
-                    tweetCard.style.height = '400px';
-                    tweetCard.style.overflow = 'hidden';
-                    
-                    // Extract tweet ID from URL
-                    const tweetId = item.url.match(/status\/(\d+)/)?.[1];
-                    if (!tweetId) return;
-                    
-                    const blockquote = document.createElement('blockquote');
-                    blockquote.className = 'twitter-tweet';
-                    blockquote.setAttribute('data-theme', 'light');
-                    blockquote.setAttribute('data-width', '400');
-                    blockquote.style.maxHeight = '380px';
-                    blockquote.style.overflow = 'hidden';
-                    
-                    const link = document.createElement('a');
-                    link.href = item.url;
-                    link.target = '_blank';
-                    link.textContent = 'View Tweet';
-                    
-                    blockquote.appendChild(link);
-                    tweetCard.appendChild(blockquote);
-                    gallery.appendChild(tweetCard);
-                }
-            });
+            const embedDiv = document.createElement('div');
+            embedDiv.className = 'substack-post-embed';
+            embedDiv.style.maxHeight = '360px';
+            embedDiv.style.overflow = 'hidden';
             
-            // Load Twitter widgets script if not already loaded
-            if (!window.twttr && !document.querySelector('script[src*="widgets.js"]')) {
-                const script = document.createElement('script');
-                script.async = true;
-                script.src = 'https://platform.twitter.com/widgets.js';
-                script.charset = 'utf-8';
-                document.head.appendChild(script);
-            } else if (window.twttr && window.twttr.widgets) {
-                window.twttr.widgets.load();
+            const titleP = document.createElement('p');
+            titleP.lang = 'en';
+            titleP.textContent = metadata.title;
+            
+            const link = document.createElement('a');
+            link.setAttribute('data-post-link', '');
+            link.href = item.url;
+            link.textContent = 'Read on Substack';
+            link.target = '_blank';
+            
+            embedDiv.appendChild(titleP);
+            
+            if (metadata.description) {
+                const descP = document.createElement('p');
+                descP.textContent = metadata.description;
+                embedDiv.appendChild(descP);
             }
+            
+            embedDiv.appendChild(link);
+            
+            substackCard.appendChild(embedDiv);
+            gallery.appendChild(substackCard);
+            
+            const script = document.createElement('script');
+            script.async = true;
+            script.src = 'https://substack.com/embedjs/embed.js';
+            script.charset = 'utf-8';
+            substackCard.appendChild(script);
         }
 
         function populateContentYoutube(videos) {
