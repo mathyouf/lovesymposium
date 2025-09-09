@@ -264,6 +264,13 @@
             background-color: #293E3C;
             height: 40px; /* Thicker line */
             z-index: 10;
+            margin-top: -80px; /* Lower the bubble on mobile */
+        }
+
+        @media (min-width: 768px) {
+            .footer-container {
+                 margin-top: -120px; /* Adjust for desktop */
+            }
         }
 
         .footer-semicircle {
@@ -277,9 +284,9 @@
             border-radius: 140px 140px 0 0;
             display: flex;
             flex-direction: column;
-            justify-content: flex-start; /* Align to top */
+            justify-content: flex-start;
             align-items: center;
-            padding-top: 30px; /* Push down from top */
+            padding-top: 45px; /* Lower the text */
             transition: all 0.3s ease;
         }
 
@@ -289,7 +296,7 @@
                 width: 400px;
                 height: 200px; /* Perfect semi-circle */
                 border-radius: 200px 200px 0 0;
-                padding-top: 50px; /* Push down from top */
+                padding-top: 70px; /* Lower the text */
             }
         }
 
@@ -580,7 +587,7 @@
         <!-- Footer -->
         <footer class="footer-container">
             <div class="footer-semicircle">
-                <p class="font-cursive text-2xl md:text-3xl mb-1" style="color: var(--off-white);">We'd love to hear from you.</p>
+                <p class="font-cursive text-base md:text-xl mb-1" style="color: var(--off-white); margin-top: 0.25rem;">We'd love to hear from you.</p>
                 <a href="mailto:hosts@symposium.love" class="font-romantic text-base md:text-lg" style="color: var(--off-white);">hosts@symposium.love</a>
             </div>
         </footer>
