@@ -552,6 +552,22 @@
         .photo-gallery-scroller .img-tall {
             height: 426px; /* Taller height for image-only columns */
         }
+
+        /* Custom styles for host and speaker cards */
+        .host-card, .speaker-card {
+            width: 12rem; /* w-48 for desktop */
+        }
+
+        @media (max-width: 767px) {
+            .host-card {
+                width: calc(50% - 1rem); /* 2 cards per row with gap */
+                margin-bottom: 1rem;
+            }
+            .speaker-card {
+                width: calc(33.333% - 1rem); /* 3 cards per row with gap */
+                margin-bottom: 1rem;
+            }
+        }
     </style>
 </head>
 <body class="text-gray-800">
@@ -598,8 +614,8 @@
     <div class="bg-[#fdfbf7] relative">
 
         <!-- Main Content Section -->
-        <main class="container mx-auto px-4 pt-16 pb-12 relative z-10">
-            <section class="text-center max-w-4xl mx-auto">
+        <main class="mx-auto  pt-16 pb-12 relative z-10">
+            <section class="text-center mx-auto">
                 <div class="mb-16">
                     <h2 class="text-4xl md:text-6xl font-romantic text-[#30391a] mb-8">If we can't RETVRN, where are we going?</h2>
                     <div class="text-xl md:text-2xl leading-relaxed text-gray-700 space-y-6">
@@ -616,7 +632,7 @@
                 <!-- Hosts Section -->
                 <div class="mt-16 mb-16">
                     <h3 class="text-2xl font-romantic text-[#30391a] mb-8">Your Hosts</h3>
-                    <div id="hosts-section" class="flex flex-col md:flex-row gap-8 justify-center items-center">
+                    <div id="hosts-section" class="flex flex-row flex-wrap gap-8 justify-center items-center">
                         <!-- Hosts will be inserted here -->
                     </div>
                 </div>
@@ -633,7 +649,7 @@
 
         <!-- Photo Gallery Section -->
         <section class="py-16 md:py-24 w-full" style="background-color: var(--off-white);">
-            <div class="container mx-auto px-4">
+            <div class="mx-auto ">
                 <h2 class="text-4xl md:text-5xl font-romantic text-center mb-8 text-[#30391a]">From Love Symposium 2024</h2>
                 
             </div>
@@ -651,7 +667,7 @@
 
         <!-- Events Section -->
         <section class="py-16 md:py-24 bg-[#fdfbf7]">
-            <div class="container mx-auto px-4 text-center">
+            <div class="mx-auto  text-center">
                 <img src="assets/images/logo-2025.png" alt="Love Symposium Logo" class="h-28 w-auto mx-auto mb-8">
                 <h2 class="text-4xl md:text-5xl font-romantic text-center mb-12 text-[#30391a]">Symposium Events</h2>
                 <div class="flex flex-wrap gap-8 justify-center items-stretch">
@@ -777,21 +793,9 @@
                 x_account: '#'
             },
             {
-                name: 'New Speaker 6',
-                title: 'Title',
-                image: 'assets/images/speakers/6.png',
-                x_account: '#'
-            },
-            {
                 name: 'New Speaker 7',
                 title: 'Title',
                 image: 'assets/images/speakers/7.png',
-                x_account: '#'
-            },
-            {
-                name: 'New Speaker 8',
-                title: 'Title',
-                image: 'assets/images/speakers/8.png',
                 x_account: '#'
             },
             {
@@ -830,25 +834,6 @@
                 image: 'assets/images/speakers/14.png',
                 x_account: '#'
             },
-            // Example Speaker. Add more following this structure.
-            { 
-                name: 'Dr. John M. Gottman',
-                title: 'The Gottman Institute',
-                image: 'https://www.gottman.com/wp-content/uploads/2021/10/Drs-John-and-Julie-Gottman-1-1.jpg',
-                x_account: 'https://twitter.com/GottmanInst'
-            },
-            {
-                name: 'Whitney Wolfe Herd',
-                title: 'Founder, Bumble',
-                image: 'https://i.insider.com/602d50a25843000018456a23?width=1136&format=jpeg',
-                x_account: 'https://twitter.com/whitney'
-            },
-            {
-                name: 'Justin McLeod',
-                title: 'Founder & CEO, Hinge',
-                image: 'https://cdn.sanity.io/images/z342s4t3/production/d34a6e3e117f0845347204b759639f77f0c13745-1200x800.jpg?w=1200&h=800&auto=format',
-                x_account: 'https://twitter.com/justinmcleod'
-            }
         ];
 
         const reviews = [
@@ -1007,7 +992,7 @@
                 const xAccountLink = host.x_account ? `<a href="${host.x_account}" target="_blank" rel="noopener noreferrer" class="text-sm text-[#8dafb9] hover:text-[#30391a] transition mt-1">@${host.x_account.split('/').pop()}</a>` : '';
 
                 const content = `
-                    <div class="flex flex-col items-center text-center">
+                    <div class="host-card flex flex-col items-center text-center">
                         <img src="${host.image}" alt="Photo of ${host.name}" class="w-48 h-48 rounded-full object-cover border-4 border-white shadow-xl mb-6" onerror="this.onerror=null;this.src='https://placehold.co/300x300/cccccc/ffffff?text=Image+Not+Found'">
                         <h3 class="text-2xl font-bold mb-2 text-[#30391a]">${host.name}</h3>
                         ${xAccountLink}
@@ -1024,9 +1009,9 @@
             speakersData.forEach(speaker => {
                 const xAccountLink = speaker.x_account ? `<a href="${speaker.x_account}" target="_blank" rel="noopener noreferrer" class="text-sm text-[#8dafb9] hover:text-[#30391a] transition">@${speaker.x_account.split('/').pop()}</a>` : '';
                 const speakerBubble = `
-                    <div class="text-center w-48">
-                        <img src="${speaker.image}" alt="Photo of ${speaker.name}" class="w-48 h-48 rounded-full object-cover border-4 border-white shadow-xl mx-auto mb-4" onerror="this.onerror=null;this.src='https://placehold.co/200x200/cccccc/ffffff?text=Image+Not+Found'">
-                        <h4 class="text-xl font-bold text-[#30391a]">${speaker.name}</h4>
+                    <div class="speaker-card flex flex-col items-center text-center">
+                        <img src="${speaker.image}" alt="Photo of ${speaker.name}" class="w-48 h-48 rounded-full object-cover border-4 border-white shadow-xl mb-6" onerror="this.onerror=null;this.src='https://placehold.co/200x200/cccccc/ffffff?text=Image+Not+Found'">
+                        <h3 class="text-2xl font-bold mb-2 text-[#30391a]">${speaker.name}</h3>
                         <p class="text-sm text-gray-500">${speaker.title}</p>
                         ${xAccountLink}
                     </div>
