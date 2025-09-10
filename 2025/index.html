@@ -5,28 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Love Symposium</title>
     
-    <!-- Tailwind CSS for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;500;700&family=Caveat:wght@700&family=Dancing+Script:wght@400;700&family=Great+Vibes&display=swap" rel="stylesheet">
     
     <style>
-        /* Custom styles */
-        /* Color history: #30391a (current) <- #30391a <- #293E3C */
+        /* --- Base Styles & Variables --- */
         :root {
             --off-white: #fefffb;
+            --brand-green: #30391a;
         }
         
         body {
             font-family: 'Cormorant', serif;
-            background-color: #fdfbf7; /* Light, airy off-white */
-            color: #666666; /* Soft grey text */
-            overscroll-behavior-y: contain; /* Prevents scroll bounce */
-            overflow-x: hidden; /* Prevents horizontal scroll/white sliver on mobile */
+            background-color: #fdfbf7;
+            color: #666666;
+            overscroll-behavior-y: contain;
+            overflow-x: hidden;
         }
+
+        /* --- Custom Typography & Reusable Components --- */
         .font-romantic {
             font-family: 'Cormorant', serif;
             font-weight: 700;
@@ -36,39 +36,47 @@
         .font-cursive {
             font-family: 'Great Vibes', cursive;
         }
+        .text-shadow-heavy {
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+        }
+        /* Replaces onmouseover/onmouseout JS events */
+        .location-link {
+            background-color: rgba(254, 255, 251, 0.2);
+            color: var(--off-white);
+            transition: background-color 0.3s ease;
+        }
+        .location-link:hover {
+            background-color: rgba(254, 255, 251, 0.4);
+        }
+
+        /* --- Page Sections --- */
         .hero-section {
             background-image: url('assets/images/graphics/robotswing.png');
             background-size: cover;
             background-position: center;
-            filter: brightness(1.1); /* Brighten the background image */
+            filter: brightness(1.1);
             position: relative;
         }
-        
-        /* On screens wider than 1000px, shift the background image position down slightly */
         @media (min-width: 1001px) {
-            .hero-section {
-                background-position: center 30%;
-            }
+            .hero-section { background-position: center 30%; }
         }
         
-        /* Animation for the scrolling sections */
+        /* --- Animations --- */
         @keyframes scroll {
             0% { transform: translateX(0); }
             100% { transform: translateX(-50%); }
         }
-        
-        /* Animation for the scrolling quotes */
         .scrolling-quotes {
             animation: scroll 60s linear infinite;
         }
         
-        /* Gentle fill animation for Apply to Attend button */
+        /* --- Apply Button Component --- */
         .apply-button {
             position: relative;
             overflow: hidden;
+            background-color: var(--off-white);
             transition: color 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), background-color 0.8s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        
         .apply-button::before {
             content: '';
             position: absolute;
@@ -76,13 +84,12 @@
             left: 50%;
             width: 0;
             height: 0;
-            background-color: #30391a;
+            background-color: var(--brand-green);
             border-radius: 50%;
             transform: translate(-50%, -50%);
             transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1), height 0.8s cubic-bezier(0.4, 0, 0.2, 1);
             z-index: -1;
         }
-        
         .apply-button::after {
             content: '❦';
             position: absolute;
@@ -98,1313 +105,354 @@
             text-shadow: 0 0 5px rgba(254, 255, 251, 0.3);
             pointer-events: none;
         }
-        
-        .apply-button:hover::before {
-            width: 300%;
-            height: 300%;
-        }
-        
-        .apply-button:hover {
-            color: transparent !important;
-            background-color: #30391a !important;
-        }
-        
-        .apply-button:hover::after {
-            opacity: 1;
-            transition: opacity 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            transition-delay: 0.2s;
-            text-shadow: 0 0 15px rgba(254, 255, 251, 0.8);
-        }
+        .apply-button:hover::before { width: 300%; height: 300%; }
+        .apply-button:hover { color: transparent !important; background-color: var(--brand-green) !important; }
+        .apply-button:hover::after { opacity: 1; transition-delay: 0.2s; text-shadow: 0 0 15px rgba(254, 255, 251, 0.8); }
 
-        /* Themed Tweet Card */
-        .themed-tweet-card {
-            background-color: var(--off-white);
-            border: 2px solid #30391a;
-            border-radius: 8px;
-            padding: 1.5rem; /* 24px */
-            width: 350px;
-            height: 400px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .themed-tweet-card::before {
-            content: '';
-            position: absolute;
-            top: 5px;
-            left: 5px;
-            right: 5px;
-            bottom: 5px;
-            border: 1px solid rgba(41, 62, 60, 0.3);
-            border-radius: 4px;
-            pointer-events: none;
-        }
-
-        .themed-tweet-card-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-
-        .themed-tweet-card-header img {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            margin-right: 0.75rem;
-            border: 2px solid #30391a;
-        }
-
-        .themed-tweet-card-author .name {
-            font-family: 'Cormorant', serif;
-            font-weight: 700;
-            color: #30391a;
-        }
-
-        .themed-tweet-card-author .handle {
-            font-family: 'Cormorant', serif;
-            color: #666666;
-            font-size: 0.9rem;
-        }
-
-        .themed-tweet-card-body {
-            font-family: 'Cormorant', serif;
-            font-size: 1.1rem;
-            line-height: 1.6;
-            color: #333;
-            flex-grow: 1;
-            padding: 0.5rem 0;
-        }
-
-        .themed-tweet-card-footer {
-            text-align: center;
-            padding-top: 1rem;
-            border-top: 1px solid rgba(41, 62, 60, 0.1);
-        }
-
-        .themed-tweet-card-footer a {
-            font-family: 'Great Vibes', cursive;
-            color: #30391a;
-            font-size: 1.5rem;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .themed-tweet-card-footer a:hover {
-            color: #8dafb9;
-        }
-
-        .content-quadrant {
-            background-color: var(--off-white);
-            border: 1px solid rgba(41, 62, 60, 0.1);
-            border-radius: 8px;
-            padding: 1.5rem;
-            height: 500px; /* Set a fixed height */
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .content-gallery {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            justify-content: center;
-            overflow-y: auto; /* Allow vertical scrolling within the quadrant */
-            flex-grow: 1;
-            padding: 0.5rem;
-        }
-
-        .content-quadrant .themed-tweet-card {
-            width: 100%;
-            height: auto;
-        }
-
-        .show-more-button {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to top, rgba(254, 255, 251, 1) 50%, rgba(254, 255, 251, 0));
-            text-align: center;
-            padding: 2rem 0 1rem 0;
-            cursor: pointer;
-        }
-
-        .show-more-button span {
-            background: var(--off-white);
-            color: #30391a;
-            padding: 0.5rem 1rem;
-            border-radius: 9999px;
-            border: 1px solid #30391a;
-            transition: all 0.3s ease;
-        }
-
-        .show-more-button:hover span {
-            background: #30391a;
-            color: var(--off-white);
-        }
-
-        .content-quadrant.expanded {
-            height: auto;
-        }
-
-        .content-quadrant.expanded .show-more-button {
-            display: none;
-        }
-
-        .footer-container {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background-color: #30391a;
-            height: 40px; /* Thicker line */
-            z-index: 10;
-            margin-top: -80px; /* Lower the bubble on mobile */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        @media (min-width: 768px) {
-            .footer-container {
-                 margin-top: -120px; /* Adjust for desktop */
-            }
-        }
-
-        .footer-semicircle {
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 240px; /* Mobile size */
-            height: 120px; /* Perfect semi-circle */
-            background-color: #30391a;
-            border-radius: 120px 120px 0 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: center;
-            padding-top: 20px; /* Adjust for logo */
-            transition: all 0.3s ease;
-        }
-
-        /* Larger semi-circle for desktop */
-        @media (min-width: 768px) {
-            .footer-semicircle {
-                width: 400px;
-                height: 200px; /* Perfect semi-circle */
-                border-radius: 200px 200px 0 0;
-                padding-top: 70px; /* Lower the text */
-            }
-        }
-
-        .scrolling-container {
-            position: relative;
-            width: 100%;
-            overflow: hidden; /* This is the viewport */
-        }
-        .scrolling-content {
-            display: flex;
-            width: fit-content; /* Let the content define the width */
-            animation-play-state: running;
-        }
-        .scrolling-container:hover .scrolling-content {
-            animation-play-state: paused;
-        }
-        .scrolling-content.fast {
-            animation: scroll 55s linear infinite; /* Slowed down */
-        }
-        .scrolling-content.slow {
-            animation: scroll 75s linear infinite; /* Slowed down */
-        }
-        
-        /* Faster scrolling on mobile */
-        @media (max-width: 768px) {
-            .scrolling-content.fast {
-                animation-duration: 40s;
-            }
-            .scrolling-content.slow {
-                animation-duration: 60s;
-            }
-        }
-        
-        /* Custom clip-path for themed sections */
-        .clip-wave {
-            clip-path: polygon(0 0, 100% 5%, 100% 100%, 0 95%);
-        }
-        
-        /* Hide scrollbar */
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-        .no-scrollbar {
-            -ms-overflow-style: none;  /* IE and Edge */
-            scrollbar-width: none;  /* Firefox */
-        }
-        
-        /* New fade effect for scrolling sections */
-        .fade-edges::before,
-        .fade-edges::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            z-index: 2;
-            width: 10%;
-            pointer-events: none; /* Allows scrolling through the gradient */
-        }
-        .fade-edges::before {
-            left: 0;
-            background: linear-gradient(to right, var(--off-white), transparent);
-        }
-        .fade-edges::after {
-            right: 0;
-            background: linear-gradient(to left, var(--off-white), transparent);
-        }
-
-        /* FAQ Newspaper Style */
-        .faq-themed {
-            max-width: 60%;
-            margin: 0 auto;
-            background-color: var(--off-white);
-            border: 1px solid rgba(41, 62, 60, 0.1);
-            padding: 1rem 2rem;
-            border-radius: 8px;
-        }
-
-        .faq-item {
-            border-bottom: 1px solid rgba(41, 62, 60, 0.1);
-            padding: 1.5rem 0;
-        }
-
-        .faq-item:last-child {
-            border-bottom: none;
-        }
-
-        .faq-question {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
-            font-family: 'Cormorant', serif;
-            font-weight: 700;
-            font-size: 1.25rem;
-            color: #30391a;
-        }
-
-        .faq-question::after {
-            content: '+';
-            font-size: 1.5rem;
-            transition: transform 0.3s ease;
-        }
-
-        .faq-item.active .faq-question::after {
-            transform: rotate(45deg);
-        }
-
-        .faq-answer {
-            display: grid;
-            grid-template-rows: 0fr;
-            transition: grid-template-rows 0.4s ease-out;
-        }
-
-        .faq-answer > div {
-            overflow: hidden;
-            color: #666666;
-            line-height: 1.7;
-            font-size: 1.1rem;
-            padding-top: 0;
-            transition: padding-top 0.4s ease-out;
-        }
-
-        .faq-item.active .faq-answer {
-            grid-template-rows: 1fr;
-        }
-
-        .faq-item.active .faq-answer > div {
-            padding-top: 1rem;
-        }
-
-        /* Event Section Styles */
+        /* --- Event Card Component --- */
         .event-card {
-            background-color: #fdfbf7; /* Same as body background */
-            border: 1px solid #dcd0c0; /* A soft, aged paper border color */
+            background-color: #fdfbf7;
+            border: 1px solid #dcd0c0;
             padding: 1.5rem;
             position: relative;
             width: 100%;
-            max-width: 350px; /* Limit card width */
+            max-width: 350px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.05);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
+        .event-card:hover { transform: translateY(-5px); box-shadow: 0 8px 16px rgba(0,0,0,0.1); }
+        .event-card::before, .event-card::after { content: ''; position: absolute; background-color: var(--brand-green); opacity: 0.5; }
+        .event-card::before { top: 1rem; left: 1rem; width: 20px; height: 1px; }
+        .event-card::after { top: 1rem; left: 1rem; width: 1px; height: 20px; }
+        .event-title { font-family: 'Cormorant', serif; font-weight: 700; font-size: 1.5rem; color: var(--brand-green); text-align: center; margin-bottom: 1.5rem; line-height: 1.2; }
+        .event-description { font-family: 'Cormorant', serif; font-size: 1rem; color: #666; line-height: 1.7; text-align: center; }
 
-        .event-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-        }
-
-        .event-card::before, .event-card::after {
-            content: '';
-            position: absolute;
-            background-color: #30391a;
-            opacity: 0.5;
-        }
-
-        /* Corner flourishes */
-        .event-card::before {
-            top: 1rem;
-            left: 1rem;
-            width: 20px;
-            height: 1px;
-        }
-        .event-card::after {
-            top: 1rem;
-            left: 1rem;
-            width: 1px;
-            height: 20px;
-        }
-
-        .event-title {
-            font-family: 'Cormorant', serif;
-            font-weight: 700;
-            font-size: 1.5rem;
-            color: #30391a;
-            text-align: center;
-            margin-bottom: 1.5rem;
-            line-height: 1.2;
-        }
-
-        .event-description {
-            font-family: 'Cormorant', serif;
-            font-size: 1rem;
-            color: #666;
-            line-height: 1.7;
-            text-align: center;
-        }
-
-        /* Auto-scrolling Photo Gallery */
-        @keyframes scroll-loop {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-
-        .photo-gallery-container {
-            height: 512px; /* Double height of h-64 (256px) */
-            overflow: hidden;
-            position: relative;
-        }
-
-        .photo-gallery-scroller {
-            display: flex;
-            width: fit-content;
-            animation: scroll-loop 60s linear infinite;
-            will-change: transform;
-            align-items: center; /* Vertically align columns */
-        }
-
-        .photo-gallery-scroller img {
-            height: 256px; /* h-64 */
-            transition: height 0.3s ease;
-            width: auto;
-            object-fit: cover;
-            border-radius: 0.5rem; /* rounded-lg */
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-lg */
-            margin: 0 0.5rem; /* space-x-4 equivalent */
-        }
-
-        .gallery-column {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin: 0 0.5rem;
-            flex-shrink: 0;
-            justify-content: center; /* Center content within the column */
-        }
-
-        .review-card-scroller {
-            width: 384px; /* w-96 */
-            background-color: #fdfbf7;
-            border: 1px solid #dcd0c0;
-            border-radius: 0.5rem;
-            padding: 1.5rem;
-            margin-top: 1rem;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-        }
-
-        .review-card-scroller blockquote {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            font-style: italic;
-            color: #3a2f2f;
-        }
-
-        .review-card-scroller cite {
-            margin-top: 1rem;
-            font-weight: 700;
-            color: #30391a;
-        }
-
-        .photo-gallery-scroller .img-tall {
-            height: 426px; /* Taller height for image-only columns */
-        }
+        /* --- FAQ Component --- */
+        .faq-themed { max-width: 60%; margin: 0 auto; background-color: var(--off-white); border: 1px solid rgba(41, 62, 60, 0.1); padding: 1rem 2rem; border-radius: 8px; }
+        .faq-item { border-bottom: 1px solid rgba(41, 62, 60, 0.1); padding: 1.5rem 0; }
+        .faq-item:last-child { border-bottom: none; }
+        .faq-question { display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-family: 'Cormorant', serif; font-weight: 700; font-size: 1.25rem; color: var(--brand-green); }
+        .faq-question::after { content: '+'; font-size: 1.5rem; transition: transform 0.3s ease; }
+        .faq-item.active .faq-question::after { transform: rotate(45deg); }
+        .faq-answer { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.4s ease-out; }
+        .faq-answer > div { overflow: hidden; color: #666666; line-height: 1.7; font-size: 1.1rem; padding-top: 0; transition: padding-top 0.4s ease-out; }
+        .faq-item.active .faq-answer { grid-template-rows: 1fr; }
+        .faq-item.active .faq-answer > div { padding-top: 1rem; }
+        
+        /* --- Auto-scrolling Photo Gallery --- */
+        @keyframes scroll-loop { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        .photo-gallery-container { height: 512px; overflow: hidden; position: relative; }
+        .photo-gallery-scroller { display: flex; width: fit-content; animation: scroll-loop 60s linear infinite; will-change: transform; align-items: center; }
+        .photo-gallery-scroller img { height: 256px; transition: height 0.3s ease; width: auto; object-fit: cover; border-radius: 0.5rem; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); margin: 0 0.5rem; }
+        .gallery-column { display: flex; flex-direction: column; align-items: center; margin: 0 0.5rem; flex-shrink: 0; justify-content: center; }
+        .review-card-scroller { width: 384px; background-color: #fdfbf7; border: 1px solid #dcd0c0; border-radius: 0.5rem; padding: 1.5rem; margin-top: 1rem; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); }
+        .review-card-scroller blockquote { font-size: 1.1rem; line-height: 1.6; font-style: italic; color: #3a2f2f; }
+        .review-card-scroller cite { margin-top: 1rem; font-weight: 700; color: var(--brand-green); }
+        .photo-gallery-scroller .img-tall { height: 426px; }
 
         @media (max-width: 768px) {
-            .photo-gallery-scroller {
-                animation-duration: 30s; /* Faster scroll on mobile */
-            }
-            .photo-gallery-scroller img {
-                height: 192px; /* h-48, smaller images on mobile */
-            }
-            .photo-gallery-scroller .img-tall {
-                height: 320px; /* Taller images also smaller on mobile */
-            }
-
-            .review-card-scroller {
-                width: 384px; /* w-96 */
-                background-color: #fdfbf7;
-                border: 1px solid #dcd0c0;
-                border-radius: 0.5rem;
-                padding: 1.5rem;
-                margin-top: 1rem;
-                box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
-            }
-
-            .review-card-scroller blockquote {
-                font-size: 1.1rem;
-                line-height: 1.6;
-                font-style: italic;
-                color: #3a2f2f;
-            }
-
-
-        /* Custom styles for host and speaker cards */
-        .host-card, .speaker-card {
-            width: 10rem; /* w-48 for desktop */
+            .photo-gallery-scroller { animation-duration: 30s; }
+            .photo-gallery-scroller img { height: 192px; }
+            .photo-gallery-scroller .img-tall { height: 320px; }
         }
 
-
+        /* --- Card Sizing --- */
+        .host-card, .speaker-card { width: 10rem; }
         @media (max-width: 767px) {
-            .host-card {
-                width: calc(50% - 1rem); /* 2 cards per row with gap */
-                margin-bottom: 1rem;
-            }
-            .speaker-card {
-                margin-bottom: 1rem;
-            }
+            .host-card { width: calc(50% - 1rem); margin-bottom: 1rem; }
+            .speaker-card { margin-bottom: 1rem; }
+        }
+
+        /* --- Footer --- */
+        .footer-container { position: absolute; bottom: 0; left: 0; right: 0; background-color: var(--brand-green); height: 40px; z-index: 10; margin-top: -80px; }
+        .footer-semicircle { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 240px; height: 120px; background-color: var(--brand-green); border-radius: 120px 120px 0 0; padding-top: 20px; }
+        @media (min-width: 768px) {
+            .footer-container { margin-top: -120px; }
+            .footer-semicircle { width: 400px; height: 200px; border-radius: 200px 200px 0 0; padding-top: 70px; }
         }
     </style>
 </head>
 <body class="text-gray-800">
 
-    <!-- Hero Section -->
-    <header class="hero-section flex flex-col items-center text-center p-4 h-[100vh] relative" style="color: var(--off-white);">
+    <header class="hero-section text-[var(--off-white)] flex flex-col items-center text-center p-4 h-[100vh]">
         <div class="absolute inset-0 bg-black opacity-30"></div>
-        <div class="flex-1 flex flex-col justify-center">
-            <h1 class="font-romantic text-5xl sm:text-6xl md:text-8xl lg:text-9xl z-10" style="text-shadow: 2px 2px 8px rgba(0,0,0,0.7);">
+        <div class="flex-1 flex flex-col justify-center z-10">
+            <h1 class="font-romantic text-5xl sm:text-6xl md:text-8xl lg:text-9xl text-shadow-heavy">
                 Love Symposium
             </h1>
-            <p class="z-10 mt-2 text-lg sm:text-xl md:text-2xl font-bold tracking-wider text-gray-100">An unconference for people trying to solve modern relationships</p>
-            <p class="z-10 mt-4 text-base sm:text-lg md:text-xl lg:text-2xl tracking-wider text-gray-200">
+            <p class="mt-2 text-lg sm:text-xl md:text-2xl font-bold tracking-wider text-gray-100">An unconference for people trying to solve modern relationships</p>
+            <p class="mt-4 text-base sm:text-lg md:text-xl lg:text-2xl tracking-wider text-gray-200">
                 The Weekend of November 14-16, 2025 at 
-                <a href="https://www.google.com/maps/search/?api=1&query=The+Commons,San+Francisco,CA" target="_blank" rel="noopener noreferrer" class="inline-block font-semibold px-4 py-1 rounded-full transition duration-300 mx-1" style="background-color: rgba(254, 255, 251, 0.2); color: var(--off-white);" onmouseover="this.style.backgroundColor='rgba(254, 255, 251, 0.4)'" onmouseout="this.style.backgroundColor='rgba(254, 255, 251, 0.2)'">The Commons, San Francisco</a>
+                <a href="https://www.google.com/maps/search/?api=1&query=The+Commons,San+Francisco,CA" target="_blank" rel="noopener noreferrer" class="location-link inline-block font-semibold px-4 py-1 rounded-full mx-1">The Commons, San Francisco</a>
             </p>
         </div>
         
-        <!-- Apply to Attend Button -->
         <div class="z-10 mb-16">
-            <a href="https://luma.com/lovesymposium25" class="apply-button inline-block px-8 py-4 text-[#30391a] font-bold rounded-full text-lg border-4 border-[#30391a] shadow-lg" target="_blank" style="background-color: var(--off-white);">Apply to Attend</a>
+            <a href="https://luma.com/lovesymposium25" class="apply-button inline-block px-8 py-4 text-[var(--brand-green)] font-bold rounded-full text-lg border-4 border-[var(--brand-green)] shadow-lg" target="_blank">Apply to Attend</a>
         </div>
     </header>
 
-    <!-- Dark Green Band at the Fold -->
-    <div class="w-full h-16 bg-[#30391a] relative overflow-hidden">
+    <div class="w-full h-16 bg-[var(--brand-green)] relative overflow-hidden">
         <div class="absolute inset-0 flex items-center">
-            <div class="scrolling-quotes flex whitespace-nowrap animate-scroll">
-                <span class="font-cursive text-lg mx-8 opacity-80" style="color: var(--off-white)">"Love is the bridge between two hearts" — Rumi</span>
-                <span class="font-cursive text-lg mx-8 opacity-80" style="color: var(--off-white)">"Being deeply loved by someone gives you strength" — Lao Tzu</span>
-                <span class="font-cursive text-lg mx-8 opacity-80" style="color: var(--off-white)">"The best love is the kind that awakens the soul" — Nicholas Sparks</span>
-                <span class="font-cursive text-lg mx-8 opacity-80" style="color: var(--off-white)">"Love is not about possession, it's about appreciation" — Osho</span>
-                <span class="font-cursive text-lg mx-8 opacity-80" style="color: var(--off-white)">"Where there is love there is life" — Gandhi</span>
-                <span class="font-cursive text-lg mx-8 opacity-80" style="color: var(--off-white)">"Love is the bridge between two hearts" — Rumi</span>
-                <span class="font-cursive text-lg mx-8 opacity-80" style="color: var(--off-white)">"Being deeply loved by someone gives you strength" — Lao Tzu</span>
-                <span class="font-cursive text-lg mx-8 opacity-80" style="color: var(--off-white)">"The best love is the kind that awakens the soul" — Nicholas Sparks</span>
-                <span class="font-cursive text-lg mx-8 opacity-80" style="color: var(--off-white)">"Love is not about possession, it's about appreciation" — Osho</span>
-                <span class="font-cursive text-lg mx-8 opacity-80" style="color: var(--off-white)">"Where there is love there is life" — Gandhi</span>
+            <div class="scrolling-quotes flex whitespace-nowrap">
+                <span class="font-cursive text-lg mx-8 opacity-80 text-[var(--off-white)]">"Love is the bridge between two hearts" — Rumi</span>
+                <span class="font-cursive text-lg mx-8 opacity-80 text-[var(--off-white)]">"Being deeply loved by someone gives you strength" — Lao Tzu</span>
+                <span class="font-cursive text-lg mx-8 opacity-80 text-[var(--off-white)]">"The best love is the kind that awakens the soul" — Nicholas Sparks</span>
+                <span class="font-cursive text-lg mx-8 opacity-80 text-[var(--off-white)]">"Love is not about possession, it's about appreciation" — Osho</span>
+                <span class="font-cursive text-lg mx-8 opacity-80 text-[var(--off-white)]">"Where there is love there is life" — Gandhi</span>
+                <span class="font-cursive text-lg mx-8 opacity-80 text-[var(--off-white)]">"Love is the bridge between two hearts" — Rumi</span>
+                <span class="font-cursive text-lg mx-8 opacity-80 text-[var(--off-white)]">"Being deeply loved by someone gives you strength" — Lao Tzu</span>
+                <span class="font-cursive text-lg mx-8 opacity-80 text-[var(--off-white)]">"The best love is the kind that awakens the soul" — Nicholas Sparks</span>
+                <span class="font-cursive text-lg mx-8 opacity-80 text-[var(--off-white)]">"Love is not about possession, it's about appreciation" — Osho</span>
+                <span class="font-cursive text-lg mx-8 opacity-80 text-[var(--off-white)]">"Where there is love there is life" — Gandhi</span>
             </div>
         </div>
     </div>
 
-    <!-- Main Content Container -->
     <div class="bg-[#fdfbf7] relative">
 
-        <!-- Main Content Section -->
-        <main class="mx-auto  pt-16 pb-12 relative z-10">
+        <main class="mx-auto pt-16 pb-12 relative z-10">
             <section class="text-center mx-auto">
                 <div class="mb-16">
-                    <h2 class="text-4xl md:text-6xl font-romantic text-[#30391a] mb-8">If we can't RETVRN, where are we going?</h2>
+                    <h2 class="text-4xl md:text-6xl font-romantic text-[var(--brand-green)] mb-8">If we can't RETVRN, where are we going?</h2>
                     <div class="text-xl md:text-2xl leading-relaxed text-gray-700 space-y-6">
                         <p>The Love Symposium is a curated event for earnest founders, experts, and intellectuals obsessed with solving our hardest relationship problems and proliferating healthy connection at scale.</p>
-                        
                         <p>There will be a weekend of interactive talks, workshops, hackathons, and late-night conversations. But our goal is to spark collaborations, action, and impact that go far beyond.</p>
-                        
                         <p>This year's topics center around the dating industry, predictive AI and psychometrics for matchmaking, and the science of healthy love.</p>
-                        
-                        <p>If you have a session or activity you might like to run at the Symposium, <a href="mailto:contact@lovesymposium.com" class="text-[#8dafb9] hover:text-[#30391a] underline">please let us know</a>.</p>
+                        <p>If you have a session or activity you might like to run at the Symposium, <a href="mailto:contact@lovesymposium.com" class="text-[#8dafb9] hover:text-[var(--brand-green)] underline">please let us know</a>.</p>
                     </div>
                 </div>
                 
-                <!-- Hosts Section -->
                 <div class="mt-16 mb-16 px-4 sm:px-0">
-                    <h3 class="text-2xl font-romantic text-[#30391a] mb-8">Hosts</h3>
+                    <h3 class="text-2xl font-romantic text-[var(--brand-green)] mb-8">Hosts</h3>
                     <div id="hosts-section" class="flex flex-row flex-wrap gap-8 justify-center items-center">
-                        <!-- Hosts will be inserted here -->
-                    </div>
+                        </div>
                 </div>
 
-                <!-- Speakers Section -->
                 <div class="mt-16 mb-16">
-                    <h3 class="text-2xl font-romantic text-[#30391a] mb-8">Speakers</h3>
+                    <h3 class="text-2xl font-romantic text-[var(--brand-green)] mb-8">Speakers</h3>
                     <div id="speakers-container" class="flex flex-wrap gap-x-4 sm:gap-x-8 gap-y-12 justify-center items-start">
-                        <!-- Speakers will be inserted here -->
-                    </div>
+                        </div>
                 </div>
             </section>
         </main>
 
-        <!-- Photo Gallery Section -->
-        <section class="py-8 md:py-12 w-full" style="background-color: var(--off-white);">
-            <div class="mx-auto ">
-                <h2 class="text-4xl md:text-5xl font-romantic text-center mb-4 text-[#30391a]">From Love Symposium 2024</h2>
-                
+        <section class="py-8 md:py-12 w-full bg-[var(--off-white)]">
+            <div class="mx-auto">
+                <h2 class="text-4xl md:text-5xl font-romantic text-center mb-4 text-[var(--brand-green)]">From Love Symposium 2024</h2>
             </div>
-            
-            <!-- Photo Gallery -->
             <div class="photo-gallery-container">
                  <div id="photo-gallery" class="photo-gallery-scroller">
-                     <!-- Photos will be inserted here -->
-                 </div>
+                     </div>
             </div>
         </section>
 
-
-        <!-- Tickets Section - Removed, price moved to FAQ -->
-
-        <!-- Events Section -->
         <section class="py-8 md:py-12 bg-[#fdfbf7]">
-            <div class="mx-auto  text-center">
+            <div class="mx-auto text-center">
                 <img src="assets/images/logo-2025.png" alt="Love Symposium Logo" class="h-28 w-auto mx-auto mb-8">
-                <h2 class="text-4xl md:text-5xl font-romantic text-center mb-8 text-[#30391a]">Symposium Events</h2>
+                <h2 class="text-4xl md:text-5xl font-romantic text-center mb-8 text-[var(--brand-green)]">Symposium Events</h2>
                 <div class="flex flex-wrap gap-8 justify-center items-stretch">
-                    
                     <div class="event-card">
                         <h3 class="event-title">The Art of the First Impression: A Workshop on Digital Courtship</h3>
                         <p class="event-description">In an age of fleeting glances and digital profiles, learn the timeless principles of making a memorable first impression. This workshop combines classic etiquette with modern dating app strategies.</p>
                     </div>
-
                     <div class="event-card">
                         <h3 class="event-title">Socratic Salon on Modern Polyamory</h3>
                         <p class="event-description">A guided discussion exploring the philosophies and practicalities of non-monogamous relationships. We invite you to question, share, and refine your understanding of love's many forms.</p>
                     </div>
-
                     <div class="event-card">
                         <h3 class="event-title">The Chemistry of Connection: A Scent & Pheromone Pairing</h3>
                         <p class="event-description">An olfactory journey into the science of attraction. Participants will explore curated scents and learn how our most primal sense shapes our romantic choices. An exquisite sensory experience.</p>
                     </div>
-
                     <div class="event-card">
                         <h3 class="event-title">AI as Matchmaker: A Debate on Algorithmic Love</h3>
                         <p class="event-description">Can an algorithm truly know your heart? Join leading technologists and relationship psychologists as they debate the future of AI in matchmaking and its potential to solve, or complicate, our quest for a partner.</p>
                     </div>
-
                     <div class="event-card">
                         <h3 class="event-title">The Love Letter Revival: A Calligraphy & Prose Workshop</h3>
                         <p class="event-description">Rediscover the lost art of the love letter. In this hands-on session, you'll learn the basics of beautiful penmanship and the craft of writing prose that captures the heart. All materials provided.</p>
                     </div>
-
                 </div>
             </div>
         </section>
 
-        <!-- FAQ Section -->
         <section class="py-16 md:py-24">
-            <h2 class="text-4xl md:text-5xl font-romantic text-center mb-12 text-[#30391a]">Frequently Asked Questions</h2>
+            <h2 class="text-4xl md:text-5xl font-romantic text-center mb-12 text-[var(--brand-green)]">Frequently Asked Questions</h2>
             <div id="faq-container" class="faq-themed">
-                <!-- FAQ items inserted here -->
-            </div>
+                </div>
         </section>
-        
-
     </div>
 
-    <div style="position: relative;">
-        <!-- Image Footer -->
+    <div class="relative">
         <div class="w-full">
-            <img src="assets/images/graphics/robots.png" alt="Love Symposium Footer Graphic" class="w-full h-auto object-cover" style="display: block;">
+            <img src="assets/images/graphics/robots.png" alt="Love Symposium Footer Graphic" class="w-full h-auto block">
         </div>
 
-        <!-- Footer -->
-        <footer class="footer-container">
-            <div class="footer-semicircle">
-                <p class="font-cursive text-base md:text-xl mb-1" style="color: var(--off-white); margin-top: 0.25rem;">We'd love to hear from you.</p>
+        <footer class="footer-container flex justify-center items-center">
+            <div class="footer-semicircle flex flex-col justify-start items-center">
+                <p class="font-cursive text-base md:text-xl mb-1 mt-1 text-[var(--off-white)]">We'd love to hear from you.</p>
             </div>
-            <a href="mailto:hosts@symposium.love" class="absolute bottom-0 mb-2 font-romantic text-base md:text-lg" style="color: var(--off-white);">hosts@symposium.love</a>
+            <a href="mailto:hosts@symposium.love" class="absolute bottom-0 mb-2 font-romantic text-base md:text-lg text-[var(--off-white)]">hosts@symposium.love</a>
         </footer>
     </div>
 
     <script>
-        // =====================================================================
-        // DATA URLs
-        // =====================================================================
-        const dataUrls = {
-            speakers: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQuSLC5kKYfcrLYQIi7IqgpXY5I-t2lu7ztNicu3bcpHFtgWrJPvIo9L0fR05GH3WMJO540vTi5wWXl/pub?gid=0&single=true&output=csv',
-        };
-        const fallbackUrls = {
-            speakers: 'assets/data/speakers.csv',
-        };
+        document.addEventListener('DOMContentLoaded', () => {
 
-        // =====================================================================
-        // GLOBAL DATA VARIABLES
-        // =====================================================================
-        let allSpeakers = [];
-        let allContentData = [];
-
-        // =====================================================================
-        // LOCAL DATA SOURCES (FALLBACKS & OTHERS)
-        // =====================================================================
-        
-        const localSpeakers = [
-            { "Index": "0", "Name": "Whitney Wolfe Herd", "Title": "Tinder and Bumble Founder", "Image URL": "https://i.insider.com/602d50a25843000018456a23?width=1136&format=jpeg", "Social Media Link": "#", "Confirmed?": "1", "Track": "Business & Tech" },
-            { "Index": "1", "Name": "Justin McLeod", "Title": "Founder & CEO, Hinge", "Image URL": "https://cdn.sanity.io/images/z342s4t3/production/d34a6e3e117f0845347204b759639f77f0c13745-1200x800.jpg?w=1200&h=800&auto=format", "Social Media Link": "#", "Confirmed?": "1", "Track": "Business & Tech" },
-            { "Index": "3", "Name": "Dr. John M. Gottman", "Title": "The Gottman Institute", "Image URL": "https://www.gottman.com/wp-content/uploads/2021/10/Drs-John-and-Julie-Gottman-1-1.jpg", "Social Media Link": "#", "Confirmed?": "1", "Track": "Psychology & Statistics" },
-            { "Index": "7", "Name": "Alain de Botton", "Title": "Founder, The School of Life", "Image URL": "https://www.theschooloflife.com/wp-content/uploads/2019/7/Alain-de-Botton-2.jpg", "Social Media Link": "#", "Confirmed?": "1", "Track": "Philosophy & Art" },
-        ];
-
-
-        const hosts = [
-            { name: 'Ann Pierce', image: 'assets/images/hosts/ann-painting.png', statement: 'Our mission is to create a space where modern love can be explored in all its facets. We believe that by bringing together diverse voices and fostering open dialogue, we can all learn to love more deeply and authentically.', x_account: 'https://x.com/itsannpierce' },
-            { name: 'Matthew Fisher', image: 'assets/images/hosts/matt-painting.png', statement: 'Love is the cornerstone of the human experience, yet we rarely give it the academic and intentional focus it deserves. This symposium is our answer—a chance to learn, share, and grow together in our understanding of connection.', x_account: 'https://x.com/MathYouF' }
-        ];
-
-        const speakers = [
-            {
-                name: 'Dr. Helen Fisher',
-                title: 'Biological Anthropologist',
-                image: 'assets/images/speakers/1.png',
-                x_account: 'https://x.com/DrHelenFisher'
-            },
-            {
-                name: 'Esther Perel',
-                title: 'Psychotherapist & Author',
-                image: 'assets/images/speakers/2.png',
-                x_account: 'https://x.com/EstherPerel'
-            },
-            {
-                name: 'Logan Ury',
-                title: 'Director of Relationship Science, Hinge',
-                image: 'assets/images/speakers/3.png',
-                x_account: 'https://x.com/loganury'
-            },
-            {
-                name: 'Dan Savage',
-                title: 'Author & Podcaster',
-                image: 'assets/images/speakers/4.png',
-                x_account: 'https://x.com/fakedansavage'
-            },
-            {
-                name: 'Geoffrey Miller',
-                title: 'Evolutionary Psychologist',
-                image: 'assets/images/speakers/5.png',
-                x_account: 'https://x.com/primalpoly'
-            },
-            {
-                name: 'Amie M. Gordon, PhD',
-                title: 'Social Psychologist, UCSF',
-                image: 'assets/images/speakers/7.png',
-                x_account: 'https://x.com/AmieMGordon'
-            },
-            {
-                name: 'David Buss',
-                title: 'Evolutionary Psychologist',
-                image: 'assets/images/speakers/9.png',
-                x_account: 'https://x.com/profdavidbuss'
-            },
-            {
-                name: 'Julie Gottman',
-                title: 'Co-founder, The Gottman Institute',
-                image: 'assets/images/speakers/10.png',
-                x_account: 'https://x.com/GottmanInst'
-            },
-            {
-                name: 'Eli Finkel',
-                title: 'Social Psychologist, Northwestern',
-                image: 'assets/images/speakers/11.png',
-                x_account: 'https://x.com/EliJFinkel'
-            },
-            {
-                name: 'Dr. Ruth Westheimer',
-                title: 'Sex Therapist & Media Personality',
-                image: 'assets/images/speakers/12.png',
-                x_account: 'https://x.com/AskDrRuth'
-            },
-            {
-                name: 'Daniel Jones',
-                title: 'Editor, Modern Love at NYT',
-                image: 'assets/images/speakers/13.png',
-                x_account: 'https://x.com/dan___jones'
-            },
-            {
-                name: 'Shaan Puri',
-                title: 'Entrepreneur & Investor',
-                image: 'assets/images/speakers/14.png',
-                x_account: 'https://x.com/ShaanVP'
-            },
-        ];
-
-        const reviews = [
-            { name: 'Humberto Moreira', image: 'https://placehold.co/100x100/ffb6c1/FFFFFF?text=H', text: 'An absolutely transformative experience. I left with a new perspective on my relationships.' },
-            { name: 'Alex Chen', image: 'https://placehold.co/100x100/87ceeb/FFFFFF?text=A', text: 'The quality of speakers was phenomenal. So much wisdom in one place.' },
-            { name: 'Alok Singh', image: 'https://placehold.co/100x100/98fb98/FFFFFF?text=A', text: 'I attended with my partner, and it was the best decision we\'ve made for our relationship all year.' },
-            { name: 'Thomas Vu', image: 'https://placehold.co/100x100/dda0dd/FFFFFF?text=T', text: 'Finally, a conference that treats love with the intellectual respect it deserves.' },
-            { name: 'Kincaid O\'Neil', image: 'https://placehold.co/100x100/f0e68c/FFFFFF?text=K', text: 'I felt so seen and understood. The sense of community was palpable.' },
-            { name: 'Suzie Antal', image: 'https://placehold.co/100x100/add8e6/FFFFFF?text=S', text: 'Incredibly well-organized and profoundly insightful. I will be back next year!' },
-            { name: 'Ari Zerner', image: 'https://placehold.co/100x100/b0c4de/FFFFFF?text=A', text: 'A must-attend for anyone interested in the future of human connection.' },
-            { name: 'Ben Carter', image: 'https://placehold.co/100x100/A9A9A9/FFFFFF?text=B.C.', text: 'The best investment I\'ve made in my personal growth this year.' },
-            { name: 'Olivia Kim', image: 'https://placehold.co/100x100/696969/FFFFFF?text=O.K.', text: 'The topics were so relevant and the discussions were incredibly engaging.' },
-            { name: 'Gabriel Santos', image: 'https://placehold.co/100x100/808080/FFFFFF?text=G.S.', text: 'A truly inspiring weekend. I can\'t wait for the next one.' },
-        ];
-
-        const tickets = [
-            { name: 'Early Bird', price: 100, features: ['Full Access to All Talks', 'Digital Welcome Packet', 'Community Forum Access', 'Sale ends September 1st'], cta: 'Buy Now', highlight: false },
-            { name: 'Late In Love', price: 150, features: ['Full Access to All Talks', 'Digital Welcome Packet', 'Community Forum Access', 'Recording of All Sessions'], cta: 'Buy Now', highlight: false },
-            { name: 'Sponsor', price: 2000, features: ['All-Access VIP Pass', 'Special Mention in Program', 'Private Q&A with Hosts', 'Logo Placement on Site'], cta: 'Become a Sponsor', highlight: true }
-        ];
-
-        const faqData = [
-            { question: "When and where?", answer: "The Love Symposium will run all day Friday 11/14, Saturday 11/15, and Sunday 11/16 at <strong>The Commons</strong>, a beautiful and cozy community space located at 550 Laguna St, San Francisco, CA 94102." },
-            { question: "What does it cost?", answer: "Due to limited space, when you apply to attend on Luma, we'll first ask a few questions to gauge fit. Once accepted, tickets are <strong>$200 each</strong>." },
-            { question: "Will food be provided?", answer: "We are pleased to offer the following: <ul><li class='ml-4 list-disc'>Friday: Lunch</li><li class='ml-4 list-disc'>Saturday: Breakfast and Lunch</li><li class='ml-4 list-disc'>Sunday: Breakfast</li></ul>" },
-            { question: "Is there a dress code?", answer: "The venue is shoes-off, and you might find yourself sitting on the floor at times, so we recommend dressing for comfort." },
-            { question: "Can I get a refund on my ticket?", answer: "Unfortunately tickets are non-refundable for the time being." },
-            { question: "If I'm coming from out of town, where should I stay?", answer: "There are many hotels, hostels, and Airbnbs within walking distance of The Commons. A few of the closest are <strong>The Annex at Hayes Valley</strong>, <strong>Hayes Valley Inn</strong>, and <strong>Inn at Grove</strong> (all a 5 minute walk to the venue)." }
-        ];
-
-        // =====================================================================
-        // DATA FETCHING & PARSING
-        // =====================================================================
-
-        async function fetchAndParseCsv(primaryUrl, fallbackUrl, parser) {
-            try {
-                const response = await fetch(primaryUrl);
-                if (!response.ok) throw new Error('Primary URL fetch failed');
-                const csvText = await response.text();
-                console.log(`Successfully fetched data from PRIMARY source: ${primaryUrl}`);
-                console.log("Raw CSV:\n", csvText);
-                return parser(csvText);
-            } catch (e) {
-                console.warn(`Primary fetch failed: ${e.message}. Trying fallback URL: ${fallbackUrl}`);
-                try {
-                    const response = await fetch(fallbackUrl);
-                    if (!response.ok) throw new Error('Fallback URL fetch failed');
-                    const csvText = await response.text();
-                    console.log(`Successfully fetched data from FALLBACK source: ${fallbackUrl}`);
-                    console.log("Raw CSV:\n", csvText);
-                    return parser(csvText);
-                } catch (e2) {
-                    console.error(`Fallback fetch also failed: ${e2.message}.`);
-                    return [];
-                }
-            }
-        }
-        
-        function parseCsv(csvText, headerRowIndex, dataRowStart) {
-            const lines = csvText.trim().replace(/\r/g, '').split('\n');
-            if (lines.length < dataRowStart) {
-                console.error("CSV has fewer rows than the specified data start row.");
-                return [];
-            }
-            
-            const headers = lines[headerRowIndex].split(',').map(h => h.trim().replace(/"/g, ''));
-            
-            return lines.slice(dataRowStart).map((line) => {
-                const values = line.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
-                const rowObject = {};
-                for (let i = 0; i < headers.length; i++) {
-                    const header = headers[i];
-                    if (header) { 
-                        let value = (values[i] || '').trim();
-                        if (value.startsWith('"') && value.endsWith('"')) {
-                            value = value.slice(1, -1).replace(/""/g, '"');
-                        }
-                        rowObject[header] = value;
-                    }
-                }
-                return rowObject;
-            });
-        }
-
-        function parseSpeakersCsv(csvText) {
-            const data = parseCsv(csvText, 0, 1);
-            console.log("Parsed Speakers Data:", data);
-            return data;
-        }
-
-
-        function parseContentCsv(csvText) {
-            const data = parseCsv(csvText, 0, 1);
-            console.log("Parsed Content Data:", data);
-            return data;
-        }
-
-        // =====================================================================
-        // CONFIGURATION & TOGGLES
-        // =====================================================================
-
-        const CONFIG = {
-            showSpeakers: true,
-            showTickets: true,
-            showHosts: true
-        };
-
-        // =====================================================================
-        // DOM POPULATION & RENDERING
-        // =====================================================================
-
-        function renderPage() {
-            if (CONFIG.showHosts) populateHosts(hosts);
-            populateSpeakers(speakers);
-            // populateReviews(reviews); // Reviews section removed
-            populateTickets(tickets);
-            populateFaq(faqData);
-            populatePhotoGallery();
-            populatePapersGallery();
-            populateBooksGallery();
-            populateContentSections(allContentData);
-            
-        }
-
-        function populateSpeakers(speakers) {
-            const industryGrid = document.getElementById('industry-grid');
-            const psychometricsGrid = document.getElementById('psychometrics-grid');
-            const philosophyGrid = document.getElementById('philosophy-grid');
-
-            if (!industryGrid || !psychometricsGrid || !philosophyGrid) return;
-
-            industryGrid.innerHTML = '';
-            psychometricsGrid.innerHTML = '';
-            philosophyGrid.innerHTML = '';
-
-            const confirmedSpeakers = speakers.filter(s => s['Confirmed?'] === '1');
-
-            confirmedSpeakers.forEach(speaker => {
-                const card = `<div class="flex flex-col items-center text-center"><img src="${speaker['Image URL']}" alt="Profile of ${speaker.Name}" class="w-24 h-24 md:w-28 md:h-28 rounded-full object-cover border-4 border-white shadow-lg" onerror="this.onerror=null;this.src='https://placehold.co/200x200/cccccc/ffffff?text=Image+Not+Found'"><a href="${speaker['Social Media Link'] || '#'}" class="mt-4 font-bold text-[#30391a] hover:text-[#8dafb9] transition">${speaker.Name}</a><p class="text-sm text-gray-500">${speaker.Title}</p></div>`;
-                
-                if (speaker.Track === 'Business & Tech') {
-                    industryGrid.innerHTML += card;
-                } else if (speaker.Track === 'Psychology & Statistics') {
-                    psychometricsGrid.innerHTML += card;
-                } else if (speaker.Track === 'Philosophy & Art') {
-                    philosophyGrid.innerHTML += card;
-                }
-            });
-        }
-        
-        function populateHosts(hostsData) {
-            const section = document.getElementById('hosts-section');
-            if (!section) return;
-            section.innerHTML = '';
-            hostsData.forEach((host, index) => {
-                const xAccountLink = host.x_account ? `<a href="${host.x_account}" target="_blank" rel="noopener noreferrer" class="text-sm text-[#8dafb9] hover:text-[#30391a] transition mt-1">@${host.x_account.split('/').pop()}</a>` : '';
-
-                const content = `
-                    <div class="host-card flex flex-col items-center text-center">
-                        <img src="${host.image}" alt="Photo of ${host.name}" class="w-[9rem] h-[12rem] rounded-full object-cover shadow-xl mb-6" onerror="this.onerror=null;this.src='https://placehold.co/300x300/cccccc/ffffff?text=Image+Not+Found'">
-                        <h3 class="text-2xl font-bold mb-2 text-[#30391a]">${host.name}</h3>
-                        ${xAccountLink}
-                    </div>
-                `;
-                section.innerHTML += content;
-            });
-        }
-
-        function populateSpeakers(speakersData) {
-            const container = document.getElementById('speakers-container');
-            if (!container) return;
-            container.innerHTML = '';
-            speakersData.forEach(speaker => {
-                const xAccountLink = speaker.x_account ? `<a href="${speaker.x_account}" target="_blank" rel="noopener noreferrer" class="text-sm text-[#8dafb9] hover:text-[#30391a] transition">@${speaker.x_account.split('/').pop()}</a>` : '';
-                const speakerBubble = `
-                    <div class="speaker-card flex flex-col items-center text-center">
-                        <img src="${speaker.image}" alt="Photo of ${speaker.name}" class="w-[9rem] h-[12rem] rounded-full object-cover shadow-xl mb-6" onerror="this.onerror=null;this.src='https://placehold.co/200x200/cccccc/ffffff?text=Image+Not+Found'">
-                        <h3 class="text-2xl font-bold mb-2 text-[#30391a]">${speaker.name}</h3>
-                        <p class="text-sm text-gray-500">${speaker.title}</p>
-                        ${xAccountLink}
-                    </div>
-                `;
-                container.innerHTML += speakerBubble;
-            });
-        }
-
-
-        function populatePhotoGallery() {
-            const photoGallery = document.getElementById('photo-gallery');
-            if (!photoGallery) return;
-
-            const photoOrder = [14, 17, 5, 6, 3, 18, 10, 4, 9, 2];
-            const imagePaths = photoOrder.map(num => `assets/images/2024/${num}.jpg`);
-
-            const reviewData = [
-                { name: 'Bjorn', text: 'The most engaging event I\'ve been to at Lighthaven.' },
-                { name: 'Humberto', text: 'This symposium helped clarify what sparks genuine bonds.' },
-                { name: 'Xyra', text: 'If anyone can see through the relational problem space and architect transformative tech, it\'s these folks.' },
-                { name: 'Ari', text: 'Interesting talks ranging from embedding personalities in vector spaces to practical tips for running an orgy.' },
-                { name: 'Suzie', text: 'The best event I attended last year.' },
-                { name: 'Alok', text: 'I attended with my partner, and it was the best decision we\'ve made for our relationship all year.' },
-                { name: 'Thomas', text: 'Finally, a conference that treats love with the intellectual respect it deserves.' },
-                { name: 'Kincaid', text: 'I felt so seen and understood. The sense of community was palpable.' },
-                { name: 'Ben', text: 'The best investment I\'ve made in my personal growth this year.' }
+            // --- PAGE CONTENT DATA ---
+            // All data is centralized here for easy updates.
+            const hosts = [
+                { name: 'Ann Pierce', image: 'assets/images/hosts/ann-painting.png', x_account: 'https://x.com/itsannpierce' },
+                { name: 'Matthew Fisher', image: 'assets/images/hosts/matt-painting.png', x_account: 'https://x.com/MathYouF' }
             ];
 
-            let galleryColumns = [];
-            let reviewIndex = 0;
-
-            for (let i = 0; i < imagePaths.length; i++) {
-                const column = document.createElement('div');
-                column.className = 'gallery-column';
-
-                const img = document.createElement('img');
-                img.src = imagePaths[i];
-                img.alt = `Love Symposium 2024 Photo`;
-                img.onerror = function() { this.style.display = 'none'; };
-                column.appendChild(img);
-
-                // If this is an image-only column, make the image taller
-                if (i % 2 !== 0) {
-                    img.classList.add('img-tall');
-                }
-
-                // Add a review to every other column, starting with the first
-                if (i % 2 === 0 && reviewIndex < reviewData.length) {
-                    const reviewCard = document.createElement('div');
-                    reviewCard.className = 'review-card-scroller';
-                    reviewCard.innerHTML = `
-                        <blockquote>“${reviewData[reviewIndex].text}”</blockquote>
-                        <cite>— ${reviewData[reviewIndex].name}</cite>
-                    `;
-                    column.appendChild(reviewCard);
-                    reviewIndex++;
-                }
-                galleryColumns.push(column);
-            }
-
-            // Duplicate for seamless scroll
-            const allGalleryColumns = [...galleryColumns, ...galleryColumns];
-            allGalleryColumns.forEach(col => photoGallery.appendChild(col));
-        }
-
-        function populatePapersGallery() {
-            const papersGallery = document.getElementById('papers-gallery');
-            if (!papersGallery) return;
+            const speakers = [
+                { name: 'Dr. Helen Fisher', title: 'Biological Anthropologist', image: 'assets/images/speakers/1.png', x_account: 'https://x.com/DrHelenFisher' },
+                { name: 'Esther Perel', title: 'Psychotherapist & Author', image: 'assets/images/speakers/2.png', x_account: 'https://x.com/EstherPerel' },
+                { name: 'Logan Ury', title: 'Director of Relationship Science, Hinge', image: 'assets/images/speakers/3.png', x_account: 'https://x.com/loganury' },
+                { name: 'Dan Savage', title: 'Author & Podcaster', image: 'assets/images/speakers/4.png', x_account: 'https://x.com/fakedansavage' },
+                { name: 'Geoffrey Miller', title: 'Evolutionary Psychologist', image: 'assets/images/speakers/5.png', x_account: 'https://x.com/primalpoly' },
+                { name: 'Amie M. Gordon, PhD', title: 'Social Psychologist, UCSF', image: 'assets/images/speakers/7.png', x_account: 'https://x.com/AmieMGordon' },
+                { name: 'David Buss', title: 'Evolutionary Psychologist', image: 'assets/images/speakers/9.png', x_account: 'https://x.com/profdavidbuss' },
+                { name: 'Julie Gottman', title: 'Co-founder, The Gottman Institute', image: 'assets/images/speakers/10.png', x_account: 'https://x.com/GottmanInst' },
+                { name: 'Eli Finkel', title: 'Social Psychologist, Northwestern', image: 'assets/images/speakers/11.png', x_account: 'https://x.com/EliJFinkel' },
+                { name: 'Dr. Ruth Westheimer', title: 'Sex Therapist & Media Personality', image: 'assets/images/speakers/12.png', x_account: 'https://x.com/AskDrRuth' },
+                { name: 'Daniel Jones', title: 'Editor, Modern Love at NYT', image: 'assets/images/speakers/13.png', x_account: 'https://x.com/dan___jones' },
+                { name: 'Shaan Puri', title: 'Entrepreneur & Investor', image: 'assets/images/speakers/14.png', x_account: 'https://x.com/ShaanVP' },
+            ];
             
-            // Available paper images (reversed order)
-            const paperFiles = ['58.jpg', '57.jpg', '56.jpg', '55.jpg', '20.jpg', '14.jpg', '8.jpg', '2.jpg', '1.jpg'];
-            
-            paperFiles.forEach(paperFile => {
-                const paperCard = document.createElement('div');
-                paperCard.className = 'flex-shrink-0 w-36 sm:w-40 md:w-64 bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300';
-                
-                const img = document.createElement('img');
-                img.src = `assets/images/papers/${paperFile}`;
-                img.alt = `Research Paper`;
-                img.className = 'w-full h-48 sm:h-56 md:h-80 object-cover';
-                img.onerror = function() {
-                    this.parentElement.style.display = 'none';
-                };
-                
-                paperCard.appendChild(img);
-                papersGallery.appendChild(paperCard);
-            });
-        }
+            const faqData = [
+                { question: "When and where?", answer: "The Love Symposium will run all day Friday 11/14, Saturday 11/15, and Sunday 11/16 at <strong>The Commons</strong>, a beautiful and cozy community space located at 550 Laguna St, San Francisco, CA 94102." },
+                { question: "What does it cost?", answer: "Due to limited space, when you apply to attend on Luma, we'll first ask a few questions to gauge fit. Once accepted, tickets are <strong>$200 each</strong>." },
+                { question: "Will food be provided?", answer: "We are pleased to offer the following: <ul><li class='ml-4 list-disc'>Friday: Lunch</li><li class='ml-4 list-disc'>Saturday: Breakfast and Lunch</li><li class='ml-4 list-disc'>Sunday: Breakfast</li></ul>" },
+                { question: "Is there a dress code?", answer: "The venue is shoes-off, and you might find yourself sitting on the floor at times, so we recommend dressing for comfort." },
+                { question: "Can I get a refund on my ticket?", answer: "Unfortunately tickets are non-refundable for the time being." },
+                { question: "If I'm coming from out of town, where should I stay?", answer: "There are many hotels, hostels, and Airbnbs within walking distance of The Commons. A few of the closest are <strong>The Annex at Hayes Valley</strong>, <strong>Hayes Valley Inn</strong>, and <strong>Inn at Grove</strong> (all a 5 minute walk to the venue)." }
+            ];
 
-        function populateBooksGallery() {
-            const booksGallery = document.getElementById('books-gallery');
-            if (!booksGallery) return;
-            
-            // Available book images
-            const bookFiles = ['dataclysm.jpg', 'lovefortherightreasos.jpg', 'marriagehistory.jpg'];
-            
-            bookFiles.forEach(bookFile => {
-                const bookCard = document.createElement('div');
-                bookCard.className = 'flex-shrink-0 w-36 sm:w-40 md:w-48 bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300';
-                
-                const img = document.createElement('img');
-                img.src = `assets/images/books/${bookFile}`;
-                img.alt = `Recommended Book`;
-                img.className = 'w-full h-48 sm:h-56 md:h-72 object-cover';
-                img.onerror = function() {
-                    this.parentElement.style.display = 'none';
-                };
-                
-                bookCard.appendChild(img);
-                booksGallery.appendChild(bookCard);
-            });
-        }
+            // --- DOM POPULATION FUNCTIONS ---
 
-        function addShowMoreButton(quadrant) {
-            const gallery = quadrant.querySelector('.content-gallery');
-            if (gallery.scrollHeight > gallery.clientHeight) {
-                const showMoreButton = document.createElement('div');
-                showMoreButton.className = 'show-more-button';
-                showMoreButton.innerHTML = '<span>Show More</span>';
-                showMoreButton.addEventListener('click', () => {
-                    quadrant.classList.add('expanded');
-                });
-                quadrant.appendChild(showMoreButton);
-            }
-        }
+            function populateHosts() {
+                const section = document.getElementById('hosts-section');
+                if (!section) return;
+                section.innerHTML = '';
+                hosts.forEach((host) => {
+                    const xAccountLink = host.x_account ? `<a href="${host.x_account}" target="_blank" rel="noopener noreferrer" class="text-sm text-[#8dafb9] hover:text-[var(--brand-green)] transition mt-1">@${host.x_account.split('/').pop()}</a>` : '';
 
-        function populateContentSections(contentData) {
-            if (!contentData || contentData.length === 0) return;
-            
-            const papersGallery = document.getElementById('content-papers-gallery');
-            const booksGallery = document.getElementById('content-books-gallery');
-            const tweetsGallery = document.getElementById('content-tweets-gallery');
-            const substacksGallery = document.getElementById('content-substacks-gallery');
-
-            contentData.forEach(item => {
-                switch (item.type) {
-                    case 'paper':
-                        populatePaper(item, papersGallery);
-                        break;
-                    case 'book':
-                        populateBook(item, booksGallery);
-                        break;
-                    case 'twitter':
-                        populateTweet(item, tweetsGallery);
-                        break;
-                    case 'substack':
-                        populateSubstack(item, substacksGallery);
-                        break;
-                }
-            });
-
-            document.querySelectorAll('.content-quadrant').forEach(quadrant => {
-                addShowMoreButton(quadrant);
-            });
-        }
-
-        function populatePaper(item, gallery) {
-            const paperCard = document.createElement('div');
-            paperCard.className = 'flex-shrink-0 w-36 sm:w-40 md:w-56 bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300';
-            
-            const img = document.createElement('img');
-            img.src = item.url;
-            img.alt = item.title || 'Research Paper';
-            img.className = 'w-full h-48 sm:h-56 md:h-72 object-cover';
-            img.onerror = function() {
-                this.parentElement.style.display = 'none';
-            };
-            
-            paperCard.appendChild(img);
-            gallery.appendChild(paperCard);
-        }
-
-        function populateBook(item, gallery) {
-            const bookCard = document.createElement('div');
-            bookCard.className = 'flex-shrink-0 w-36 sm:w-40 md:w-48 bg-white rounded shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300';
-            
-            const img = document.createElement('img');
-            img.src = item.url;
-            img.alt = item.title || 'Recommended Book';
-            img.className = 'w-full h-48 sm:h-56 md:h-72 object-cover';
-            img.onerror = function() {
-                this.parentElement.style.display = 'none';
-            };
-            
-            bookCard.appendChild(img);
-            gallery.appendChild(bookCard);
-        }
-
-        function populateTweet(item, gallery) {
-            const tweetMetadata = {
-                'https://x.com/Aella_Girl/status/1598794839304994816': {
-                    author_name: 'Aella',
-                    author_handle: 'Aella_Girl',
-                    author_image: 'https://pbs.twimg.com/profile_images/1759721989354098688/iN52s29g_400x400.jpg',
-                    text: 'i am going to solve love by making a dating app that is just a spreadsheet'
-                },
-                'https://x.com/SashaChapin/status/1678888711412834304': {
-                    author_name: 'Sasha Chapin',
-                    author_handle: 'SashaChapin',
-                    author_image: 'https://pbs.twimg.com/profile_images/1803539344232374272/r2F2s2u7_400x400.jpg',
-                    text: 'My girlfriend and I have a weekly meeting where we talk about our relationship. We call it The Summit. It is the best thing we do.'
-                }
-            };
-
-            const metadata = tweetMetadata[item.url];
-            if (!metadata) return;
-
-            const card = `
-                <div class="themed-tweet-card">
-                    <div class="themed-tweet-card-header">
-                        <img src="${metadata.author_image}" alt="${metadata.author_name}">
-                        <div class="themed-tweet-card-author">
-                            <div class="name">${metadata.author_name}</div>
-                            <div class="handle">@${metadata.author_handle}</div>
+                    const content = `
+                        <div class="host-card flex flex-col items-center text-center">
+                            <img src="${host.image}" alt="Photo of ${host.name}" class="w-[9rem] h-[12rem] rounded-full object-cover shadow-xl mb-6" onerror="this.onerror=null;this.src='https://placehold.co/300x300/cccccc/ffffff?text=Image+Not+Found'">
+                            <h3 class="text-2xl font-bold mb-2 text-[var(--brand-green)]">${host.name}</h3>
+                            ${xAccountLink}
                         </div>
-                    </div>
-                    <div class="themed-tweet-card-body">
-                        ${metadata.text}
-                    </div>
-                    <div class="themed-tweet-card-footer">
-                        <a href="${item.url}" target="_blank" rel="noopener noreferrer">View on X</a>
-                    </div>
-                </div>
-            `;
-            gallery.innerHTML += card;
-        }
-
-        function populateSubstack(item, gallery) {
-            const postMetadata = {
-                'https://sashachapin.substack.com/p/what-im-looking-for-in-my-marriage': {
-                    title: 'What I\'m looking for in my marriage by Sasha Chapin',
-                    description: 'the ideal of this guy'
-                },
-                'https://aella.substack.com/p/how-relationships-change-over-time': {
-                    title: 'How Relationships Change Over Time by Aella',
-                    description: 'Survey results'
-                },
-                'https://www.secondperson.dating/p/welcome-to-second-person': {
-                    title: 'Welcome to Second Person',
-                    description: ''
-                },
-                'https://aella.substack.com/p/ill-pay-you-100k-to-get-me-married': {
-                    title: 'I\'ll pay you $100k to get me married by Aella',
-                    description: ''
-                }
-            };
-
-            const metadata = postMetadata[item.url] || { title: 'Substack Article', description: '' };
-
-            const substackCard = document.createElement('div');
-            substackCard.className = 'flex-shrink-0 w-80 md:w-96 bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 p-4';
-            substackCard.style.height = '400px';
-            substackCard.style.overflow = 'hidden';
-            
-            const embedDiv = document.createElement('div');
-            embedDiv.className = 'substack-post-embed';
-            embedDiv.style.maxHeight = '360px';
-            embedDiv.style.overflow = 'hidden';
-            
-            const titleP = document.createElement('p');
-            titleP.lang = 'en';
-            titleP.textContent = metadata.title;
-            
-            const link = document.createElement('a');
-            link.setAttribute('data-post-link', '');
-            link.href = item.url;
-            link.textContent = 'Read on Substack';
-            link.target = '_blank';
-            
-            embedDiv.appendChild(titleP);
-            
-            if (metadata.description) {
-                const descP = document.createElement('p');
-                descP.textContent = metadata.description;
-                embedDiv.appendChild(descP);
-            }
-            
-            embedDiv.appendChild(link);
-            
-            substackCard.appendChild(embedDiv);
-            gallery.appendChild(substackCard);
-            
-            const script = document.createElement('script');
-            script.async = true;
-            script.src = 'https://substack.com/embedjs/embed.js';
-            script.charset = 'utf-8';
-            substackCard.appendChild(script);
-        }
-
-        function populateContentYoutube(videos) {
-            const gallery = document.getElementById('content-youtube-gallery');
-            if (!gallery) return;
-            
-            videos.forEach(video => {
-                const videoCard = document.createElement('div');
-                videoCard.className = 'flex-shrink-0 w-80 md:w-96 bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300';
-                
-                const iframe = document.createElement('iframe');
-                iframe.src = video.url;
-                iframe.width = '100%';
-                iframe.height = '240';
-                iframe.style.border = 'none';
-                iframe.style.borderRadius = '8px';
-                iframe.setAttribute('allowfullscreen', '');
-                iframe.loading = 'lazy';
-                
-                videoCard.appendChild(iframe);
-                gallery.appendChild(videoCard);
-            });
-        }
-
-        function populateTickets(ticketsData) {
-            const grid = document.getElementById('tickets-grid'); if (!grid) return; grid.innerHTML = '';
-            ticketsData.forEach(ticket => { 
-                const highlight = String(ticket.highlight).toLowerCase() === 'true';
-                const highlightClass = highlight ? 'border-[#d9bb89] border-2' : 'border-gray-200'; 
-                const buttonClass = highlight ? 'bg-[#d9bb89] text-[#30391a]' : 'bg-[#30391a] text-white'; 
-                const featuresArray = Array.isArray(ticket.features) ? ticket.features : (ticket.features || '').split(';');
-                const card = `<div class="rounded-lg shadow-lg p-8 flex flex-col bg-white border ${highlightClass}"><h3 class="text-2xl font-bold text-center text-[#30391a]">${ticket.name}</h3><p class="text-5xl font-bold text-center my-4 text-gray-800">$${ticket.price}</p><ul class="my-4 space-y-2 flex-grow text-gray-600">${featuresArray.map(feature => `<li class="flex items-center"><svg class="w-5 h-5 text-[#8dafb9] mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>${feature}</li>`).join('')}</ul><a href="#" class="w-full text-center font-bold py-3 px-6 rounded-lg ${buttonClass} hover:bg-opacity-80 transition duration-300 mt-6">${ticket.cta}</a></div>`; 
-                grid.innerHTML += card; 
-            });
-        }
-        
-        function populateFaq(faqData) {
-            const container = document.getElementById('faq-container');
-            if (!container) return;
-            container.innerHTML = '';
-            faqData.forEach(item => {
-                const faqItem = document.createElement('div');
-                faqItem.className = 'faq-item';
-
-                const questionDiv = document.createElement('div');
-                questionDiv.className = 'faq-question';
-                questionDiv.innerHTML = `<span>${item.question}</span>`;
-
-                const answerDiv = document.createElement('div');
-                answerDiv.className = 'faq-answer';
-                answerDiv.innerHTML = `<div><p>${item.answer}</p></div>`;
-
-                faqItem.appendChild(questionDiv);
-                faqItem.appendChild(answerDiv);
-                container.appendChild(faqItem);
-
-                questionDiv.addEventListener('click', () => {
-                    faqItem.classList.toggle('active');
+                    `;
+                    section.innerHTML += content;
                 });
-            });
-        }
+            }
 
+            function populateSpeakers() {
+                const container = document.getElementById('speakers-container');
+                if (!container) return;
+                container.innerHTML = '';
+                speakers.forEach(speaker => {
+                    const xAccountLink = speaker.x_account ? `<a href="${speaker.x_account}" target="_blank" rel="noopener noreferrer" class="text-sm text-[#8dafb9] hover:text-[var(--brand-green)] transition">@${speaker.x_account.split('/').pop()}</a>` : '';
+                    const speakerBubble = `
+                        <div class="speaker-card flex flex-col items-center text-center">
+                            <img src="${speaker.image}" alt="Photo of ${speaker.name}" class="w-[9rem] h-[12rem] rounded-full object-cover shadow-xl mb-6" onerror="this.onerror=null;this.src='https://placehold.co/200x200/cccccc/ffffff?text=Image+Not+Found'">
+                            <h3 class="text-2xl font-bold mb-2 text-[var(--brand-green)]">${speaker.name}</h3>
+                            <p class="text-sm text-gray-500">${speaker.title}</p>
+                            ${xAccountLink}
+                        </div>
+                    `;
+                    container.innerHTML += speakerBubble;
+                });
+            }
 
-        async function initializePage() {
-            const [speakersData, contentData] = await Promise.all([
-                fetchAndParseCsv(dataUrls.speakers, fallbackUrls.speakers, parseSpeakersCsv),
-                fetchAndParseCsv('assets/data/content.csv', 'assets/data/content.csv', parseContentCsv)
-            ]);
-            
-            allSpeakers = speakersData.length ? speakersData : localSpeakers;
-            allContentData = contentData.length ? contentData : [];
+            function populatePhotoGallery() {
+                const photoGallery = document.getElementById('photo-gallery');
+                if (!photoGallery) return;
+
+                const photoOrder = [14, 17, 5, 6, 3, 18, 10, 4, 9, 2];
+                const imagePaths = photoOrder.map(num => `assets/images/2024/${num}.jpg`);
+
+                const reviewData = [
+                    { name: 'Bjorn', text: 'The most engaging event I\'ve been to at Lighthaven.' },
+                    { name: 'Humberto', text: 'This symposium helped clarify what sparks genuine bonds.' },
+                    { name: 'Xyra', text: 'If anyone can see through the relational problem space and architect transformative tech, it\'s these folks.' },
+                    { name: 'Ari', text: 'Interesting talks ranging from embedding personalities in vector spaces to practical tips for running an orgy.' },
+                    { name: 'Suzie', text: 'The best event I attended last year.' },
+                ];
+
+                let galleryColumns = [];
+                let reviewIndex = 0;
+
+                for (let i = 0; i < imagePaths.length; i++) {
+                    const column = document.createElement('div');
+                    column.className = 'gallery-column';
+
+                    const img = document.createElement('img');
+                    img.src = imagePaths[i];
+                    img.alt = `Love Symposium 2024 Photo`;
+                    img.onerror = function() { this.style.display = 'none'; };
+                    column.appendChild(img);
+
+                    if (i % 2 !== 0) { // If this is an image-only column, make the image taller
+                        img.classList.add('img-tall');
+                    }
+                    
+                    if (i % 2 === 0 && reviewIndex < reviewData.length) { // Add a review to every other column
+                        const reviewCard = document.createElement('div');
+                        reviewCard.className = 'review-card-scroller';
+                        reviewCard.innerHTML = `
+                            <blockquote>“${reviewData[reviewIndex].text}”</blockquote>
+                            <cite>— ${reviewData[reviewIndex].name}</cite>
+                        `;
+                        column.appendChild(reviewCard);
+                        reviewIndex++;
+                    }
+                    galleryColumns.push(column);
+                }
+                
+                const allGalleryColumns = [...galleryColumns, ...galleryColumns]; // Duplicate for seamless scroll
+                allGalleryColumns.forEach(col => photoGallery.appendChild(col));
+            }
+
+            function populateFaq() {
+                const container = document.getElementById('faq-container');
+                if (!container) return;
+                container.innerHTML = '';
+                faqData.forEach(item => {
+                    const faqItem = document.createElement('div');
+                    faqItem.className = 'faq-item';
+
+                    const questionDiv = document.createElement('div');
+                    questionDiv.className = 'faq-question';
+                    questionDiv.innerHTML = `<span>${item.question}</span>`;
+
+                    const answerDiv = document.createElement('div');
+                    answerDiv.className = 'faq-answer';
+                    answerDiv.innerHTML = `<div><p>${item.answer}</p></div>`;
+
+                    faqItem.appendChild(questionDiv);
+                    faqItem.appendChild(answerDiv);
+                    container.appendChild(faqItem);
+
+                    questionDiv.addEventListener('click', () => {
+                        faqItem.classList.toggle('active');
+                    });
+                });
+            }
+
+            // --- INITIALIZE PAGE ---
+            // A single function to call all the rendering functions.
+            function renderPage() {
+                populateHosts();
+                populateSpeakers();
+                populateFaq();
+                populatePhotoGallery();
+            }
 
             renderPage();
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            initializePage();
         });
     </script>
 
