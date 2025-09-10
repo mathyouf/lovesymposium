@@ -266,6 +266,9 @@
             height: 40px; /* Thicker line */
             z-index: 10;
             margin-top: -80px; /* Lower the bubble on mobile */
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         @media (min-width: 768px) {
@@ -279,15 +282,15 @@
             bottom: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 280px; /* Mobile size */
-            height: 140px; /* Perfect semi-circle */
+            width: 240px; /* Mobile size */
+            height: 120px; /* Perfect semi-circle */
             background-color: #30391a;
-            border-radius: 140px 140px 0 0;
+            border-radius: 120px 120px 0 0;
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
             align-items: center;
-            padding-top: 45px; /* Lower the text */
+            padding-top: 20px; /* Adjust for logo */
             transition: all 0.3s ease;
         }
 
@@ -426,6 +429,62 @@
 
         .faq-item.active .faq-answer > div {
             padding-top: 1rem;
+        }
+
+        /* Event Section Styles */
+        .event-card {
+            background-color: #fdfbf7; /* Same as body background */
+            border: 1px solid #dcd0c0; /* A soft, aged paper border color */
+            padding: 2rem;
+            position: relative;
+            width: 100%;
+            max-width: 400px; /* Limit card width */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .event-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+
+        .event-card::before, .event-card::after {
+            content: '';
+            position: absolute;
+            background-color: #30391a;
+            opacity: 0.5;
+        }
+
+        /* Corner flourishes */
+        .event-card::before {
+            top: 1rem;
+            left: 1rem;
+            width: 20px;
+            height: 1px;
+        }
+        .event-card::after {
+            top: 1rem;
+            left: 1rem;
+            width: 1px;
+            height: 20px;
+        }
+
+        .event-title {
+            font-family: 'Cormorant', serif;
+            font-weight: 700;
+            font-size: 1.75rem;
+            color: #30391a;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .event-description {
+            font-family: 'Cormorant', serif;
+            font-size: 1.1rem;
+            color: #666;
+            line-height: 1.7;
+            text-align: center;
         }
 
         /* Auto-scrolling Photo Gallery */
@@ -590,6 +649,42 @@
 
         <!-- Tickets Section - Removed, price moved to FAQ -->
 
+        <!-- Events Section -->
+        <section class="py-16 md:py-24 bg-[#fdfbf7]">
+            <div class="container mx-auto px-4 text-center">
+                <img src="assets/images/logo-2025.png" alt="Love Symposium Logo" class="h-28 w-auto mx-auto mb-8">
+                <h2 class="text-4xl md:text-5xl font-romantic text-center mb-12 text-[#30391a]">Symposium Events</h2>
+                <div class="flex flex-wrap gap-8 justify-center items-stretch">
+                    
+                    <div class="event-card">
+                        <h3 class="event-title">The Art of the First Impression: A Workshop on Digital Courtship</h3>
+                        <p class="event-description">In an age of fleeting glances and digital profiles, learn the timeless principles of making a memorable first impression. This workshop combines classic etiquette with modern dating app strategies.</p>
+                    </div>
+
+                    <div class="event-card">
+                        <h3 class="event-title">Socratic Salon on Modern Polyamory</h3>
+                        <p class="event-description">A guided discussion exploring the philosophies and practicalities of non-monogamous relationships. We invite you to question, share, and refine your understanding of love's many forms.</p>
+                    </div>
+
+                    <div class="event-card">
+                        <h3 class="event-title">The Chemistry of Connection: A Scent & Pheromone Pairing</h3>
+                        <p class="event-description">An olfactory journey into the science of attraction. Participants will explore curated scents and learn how our most primal sense shapes our romantic choices. An exquisite sensory experience.</p>
+                    </div>
+
+                    <div class="event-card">
+                        <h3 class="event-title">AI as Matchmaker: A Debate on Algorithmic Love</h3>
+                        <p class="event-description">Can an algorithm truly know your heart? Join leading technologists and relationship psychologists as they debate the future of AI in matchmaking and its potential to solve, or complicate, our quest for a partner.</p>
+                    </div>
+
+                    <div class="event-card">
+                        <h3 class="event-title">The Love Letter Revival: A Calligraphy & Prose Workshop</h3>
+                        <p class="event-description">Rediscover the lost art of the love letter. In this hands-on session, you'll learn the basics of beautiful penmanship and the craft of writing prose that captures the heart. All materials provided.</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
         <!-- FAQ Section -->
         <section class="py-16 md:py-24">
             <h2 class="text-4xl md:text-5xl font-romantic text-center mb-12 text-[#30391a]">Frequently Asked Questions</h2>
@@ -611,8 +706,8 @@
         <footer class="footer-container">
             <div class="footer-semicircle">
                 <p class="font-cursive text-base md:text-xl mb-1" style="color: var(--off-white); margin-top: 0.25rem;">We'd love to hear from you.</p>
-                <a href="mailto:hosts@symposium.love" class="font-romantic text-base md:text-lg" style="color: var(--off-white);">hosts@symposium.love</a>
             </div>
+            <a href="mailto:hosts@symposium.love" class="absolute bottom-0 mb-2 font-romantic text-base md:text-lg" style="color: var(--off-white);">hosts@symposium.love</a>
         </footer>
     </div>
 
