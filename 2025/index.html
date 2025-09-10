@@ -284,7 +284,7 @@
                         <div>
                             <h3 class="text-2xl font-romantic text-[var(--brand-green)] mb-2">Ideas We Love</h3>
                             <p class="text-gray-600 mb-4">This is some of the excellent content we love.</p>
-                            <div id="ideas-we-love-container" class="grid grid-cols-2 gap-x-8 gap-y-4"></div>
+                            <div id="ideas-we-love-container" class="flex space-x-8"></div>
                     </div>
                 </div>
             </section>
@@ -404,40 +404,41 @@
                 if (!container) return;
 
                 fetch('assets/data/content.csv')
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Network response was not ok');
-                        }
-                        return response.text();
-                    })
+                    .then(response => response.ok ? response.text() : Promise.reject('Network response was not ok'))
                     .then(csvText => {
-                        const items = csvText.trim().split('\n').slice(1); // trim, split by line, and remove header
-                        
+                        const items = csvText.trim().split('\n').slice(1);
                         const groupedItems = items.reduce((acc, item) => {
                             const [type, url] = item.split(',');
                             if (type && url) {
-                                if (!acc[type]) {
-                                    acc[type] = [];
-                                }
+                                if (!acc[type]) acc[type] = [];
                                 acc[type].push(url.trim());
                             }
                             return acc;
                         }, {});
 
-                        let htmlContent = '';
-                        for (const type in groupedItems) {
-                            htmlContent += `<div><em class="capitalize text-gray-500 text-sm font-semibold">${type}</em>`;
-                            const linksHtml = groupedItems[type].map(url => {
-                                let displayUrl = url.replace(/^(https?:\/\/)?(www\.)?/, '').replace(/\/$/, '');
-                                if (displayUrl.length > 35) {
-                                    displayUrl = displayUrl.substring(0, 32) + '...';
-                                }
-                                return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="block text-gray-700 hover:text-[var(--brand-green)] transition-colors duration-200 text-sm">${displayUrl}</a>`;
-                            }).join('');
-                            htmlContent += linksHtml + `</div>`;
-                        }
+                        const categories = Object.keys(groupedItems);
+                        const midPoint = Math.ceil(categories.length / 2);
+                        const col1Categories = categories.slice(0, midPoint);
+                        const col2Categories = categories.slice(midPoint);
 
-                        container.innerHTML = htmlContent;
+                        const buildColumnHtml = (cats) => {
+                            let colHtml = '';
+                            cats.forEach(type => {
+                                colHtml += `<div class="mb-4"><em class="capitalize text-gray-500 text-sm font-semibold">${type}</em>`;
+                                const linksHtml = groupedItems[type].map(url => {
+                                    let displayUrl = url.replace(/^(https?:\/\/)?(www\.)?/, '').replace(/\/$/, '');
+                                    if (displayUrl.length > 35) displayUrl = displayUrl.substring(0, 32) + '...';
+                                    return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="block text-gray-700 hover:text-[var(--brand-green)] transition-colors duration-200 text-sm">${displayUrl}</a>`;
+                                }).join('');
+                                colHtml += linksHtml + `</div>`;
+                            });
+                            return colHtml;
+                        };
+
+                        const col1Html = `<div class="w-1/2">${buildColumnHtml(col1Categories)}</div>`;
+                        const col2Html = `<div class="w-1/2">${buildColumnHtml(col2Categories)}</div>`;
+
+                        container.innerHTML = col1Html + col2Html;
                     })
                     .catch(error => {
                         console.error('Error loading or parsing ideas we love:', error);
