@@ -599,15 +599,33 @@
 
                         renderPage();
             setupEmailCopy();
+
             document.querySelectorAll('a.scroll-link').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
-                    document.querySelector(this.getAttribute('href')).scrollIntoView({
-                        behavior: 'smooth'
-                    });
+                    const targetElement = document.querySelector(this.getAttribute('href'));
+
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+
+                        const observer = new IntersectionObserver((entries, observerInstance) => {
+                            entries.forEach(entry => {
+                                if (entry.isIntersecting) {
+                                    const emailLink = document.getElementById('copy-email-link');
+                                    if (emailLink) {
+                                        emailLink.click();
+                                    }
+                                    observerInstance.disconnect(); // Disconnect after triggering
+                                }
+                            });
+                        }, { threshold: 0.9 });
+
+                        observer.observe(targetElement);
+                    }
                 });
             });
-            setupEmailCopy();
         });
     </script>
 
