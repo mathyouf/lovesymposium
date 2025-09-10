@@ -1,28 +1,20 @@
-@keyframes un-evaporate {
+@keyframes fade-in-gently {
     from {
         opacity: 0;
-        filter: blur(20px);
-        transform: scale(1.2);
+        filter: blur(8px);
     }
     to {
         opacity: 1;
-        filter: blur(0.5px);
-        transform: scale(1);
+        filter: blur(0);
     }
 }
 
-@keyframes pulse {
-    0% {
-        filter: blur(0.5px);
-        transform: scale(1);
+@keyframes soft-breath {
+    0%, 100% {
+        transform: scale(1) translateY(0);
     }
     50% {
-        filter: blur(1.5px);
-        transform: scale(1.01);
-    }
-    100% {
-        filter: blur(0.5px);
-        transform: scale(1);
+        transform: scale(1.01) translateY(-2px);
     }
 }
 
@@ -30,39 +22,36 @@
 
 /* Main Header: "Love Symposium" */
 .animate-header {
-    animation: un-evaporate 2.5s ease-out forwards, 
-               pulse 8s ease-in-out 2.5s infinite;
+    animation: fade-in-gently 3s ease-out forwards, 
+               soft-breath 10s ease-in-out 3s infinite;
     opacity: 0;
 }
 
 /* First Subheader: "An unconference..." */
 .animate-subheader-1 {
-    animation: un-evaporate 2.5s ease-out 0.6s forwards, 
-               pulse 8s ease-in-out 3.1s infinite;
+    animation: fade-in-gently 3.2s ease-out 0.7s forwards, 
+               soft-breath 11s ease-in-out 3.9s infinite;
     opacity: 0;
 }
 
 /* Second Subheader: "The Weekend of..." */
 .animate-subheader-2 {
-    animation: un-evaporate 2.5s ease-out 1.2s forwards, 
-               pulse 8s ease-in-out 3.7s infinite;
+    animation: fade-in-gently 3.5s ease-out 1.5s forwards, 
+               soft-breath 9s ease-in-out 5s infinite;
     opacity: 0;
 }
 
-@keyframes pulse-button {
-    0% {
+@keyframes button-breath {
+    0%, 100% {
         transform: scale(1);
     }
     50% {
-        transform: scale(1.03);
-    }
-    100% {
-        transform: scale(1);
+        transform: scale(1.02);
     }
 }
 
 .animate-button-pulse {
-    animation: un-evaporate 2.5s ease-out 1.8s forwards, 
-               pulse-button 6s ease-in-out 4.3s infinite;
+    animation: fade-in-gently 8s ease-out 1s forwards, 
+               button-breath 8s ease-in-out 9s infinite;
     opacity: 0;
 }
