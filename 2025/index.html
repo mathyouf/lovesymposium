@@ -170,11 +170,61 @@
         }
 
         /* --- Footer --- */
-        .footer-container { position: absolute; bottom: 0; left: 0; right: 0; background-color: var(--brand-green); height: 40px; z-index: 10; margin-top: -80px; }
-        .footer-semicircle { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 240px; height: 120px; background-color: var(--brand-green); border-radius: 120px 120px 0 0; padding-top: 20px; }
-        @media (min-width: 768px) {
-            .footer-container { margin-top: -120px; }
-            .footer-semicircle { width: 400px; height: 200px; border-radius: 200px 200px 0 0; padding-top: 70px; }
+        /* --- Toast Notification --- */
+        .toast-notification {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--brand-green);
+            color: var(--off-white);
+            padding: 1rem 2rem;
+            border-radius: 9999px; /* pill shape */
+            z-index: 100;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s, visibility 0.5s, bottom 0.5s;
+            font-family: 'Cormorant', serif;
+            font-weight: 700;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            border: 2px solid var(--off-white);
+            text-align: center;
+        }
+        .toast-notification.hiding {
+            animation: dissolve-in-wind 7.2s ease-out forwards;
+        }
+
+        @keyframes dissolve-in-wind {
+            from {
+                opacity: 1;
+                transform: translateX(-50%) scale(1);
+                filter: blur(0);
+            }
+            to {
+                opacity: -5;
+                transform: translateX(-100%) scale(7.3);
+                filter: blur(540px);
+            }
+        }
+
+        .toast-notification.show {
+            opacity: 1;
+            visibility: visible;
+            bottom: 40px;
+        }
+
+        .footer-container {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background-color: var(--brand-green);
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
     </style>
 </head>
@@ -293,14 +343,13 @@
         <div class="w-full">
             <img src="assets/images/graphics/robots.png" alt="Love Symposium Footer Graphic" class="w-full h-auto block">
         </div>
-
-        <footer class="footer-container flex justify-center items-center">
-            <div class="footer-semicircle flex flex-col justify-start items-center">
-                <p class="font-cursive text-base md:text-xl mb-1 mt-1 text-[var(--off-white)]">We'd love to hear from you.</p>
-            </div>
-            <a href="mailto:hosts@symposium.love" class="absolute bottom-0 mb-2 font-romantic text-base md:text-lg text-[var(--off-white)]">hosts@symposium.love</a>
+        <footer class="footer-container">
+            <p class="font-cursive text-base md:text-xl text-[var(--off-white)] mb-1">We'd love to hear from you.</p>
+            <a id="copy-email-link" class="cursor-pointer font-romantic text-sm md:text-base text-[var(--off-white)] opacity-80 hover:opacity-100">hosts@symposium.love</a>
         </footer>
     </div>
+
+    <div id="toast" class="toast-notification">E-mail Copied; Talk Soon!</div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -458,7 +507,33 @@
                 populatePhotoGallery();
             }
 
+            function setupEmailCopy() {
+                const emailLink = document.getElementById('copy-email-link');
+                if (!emailLink) return;
+
+                const emailAddress = emailLink.textContent;
+                const toast = document.getElementById('toast');
+
+                emailLink.addEventListener('click', () => {
+                    navigator.clipboard.writeText(emailAddress).then(() => {
+                        if (toast) {
+                            toast.classList.add('show');
+                            setTimeout(() => {
+                                toast.classList.add('hiding');
+                                // Reset classes after animation ends
+                                setTimeout(() => {
+                                    toast.classList.remove('show', 'hiding');
+                                }, 800); // Corresponds to animation duration
+                            }, 550); // Hide after 1.5 seconds
+                        }
+                    }).catch(err => {
+                        console.error('Failed to copy email: ', err);
+                    });
+                });
+            }
+
             renderPage();
+            setupEmailCopy();
         });
     </script>
 
