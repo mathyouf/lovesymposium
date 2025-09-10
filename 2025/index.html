@@ -147,7 +147,25 @@
             font-size: 1.1rem;
             color: #666;
             line-height: 1.7;
+            padding-bottom: 1.25rem;
             margin-bottom: 1.25rem;
+            position: relative; /* Needed for pseudo-element positioning */
+        }
+
+        .sub-event-list li:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50%; /* Make the line 50% of the width */
+            height: 1px;
+            background-color: rgba(48, 57, 26, 0.4);
+        }
+
+        .sub-event-list li:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
         }
 
         /* --- Event Card Component --- */
