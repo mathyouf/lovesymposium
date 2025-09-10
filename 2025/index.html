@@ -247,6 +247,36 @@
             justify-content: center;
             align-items: center;
         }
+
+        /* --- Image Modal --- */
+        .image-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.85);
+            z-index: 200;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            cursor: pointer;
+        }
+        .image-modal.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .image-modal-content {
+            max-width: 90vw;
+            max-height: 90vh;
+            object-fit: contain;
+            box-shadow: 0 0 40px rgba(254, 255, 251, 0.3);
+            border: 2px solid var(--off-white);
+            border-radius: 4px;
+        }
     </style>
 </head>
 <body class="text-gray-800">
@@ -423,6 +453,10 @@
 
     <div id="toast" class="toast-notification">E-mail Copied; Talk Soon!</div>
 
+    <div id="image-modal" class="image-modal">
+        <img id="modal-image" src="" alt="Enlarged view of paper" class="image-modal-content">
+    </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
 
@@ -463,6 +497,10 @@
                 const container = document.getElementById('ideas-we-love-container');
                 if (!container) return;
 
+                const modal = document.getElementById('image-modal');
+                const modalImage = document.getElementById('modal-image');
+                if (!modal || !modalImage) return;
+
                 fetch('assets/data/content.csv')
                     .then(response => response.ok ? response.text() : Promise.reject('Network response was not ok'))
                     .then(csvText => {
@@ -484,13 +522,24 @@
                         const buildColumnHtml = (cats) => {
                             let colHtml = '';
                             cats.forEach(type => {
-                                colHtml += `<div class="mb-4"><em class="capitalize text-gray-500 text-sm font-semibold">${type}</em>`;
-                                const linksHtml = groupedItems[type].map(url => {
-                                    let displayUrl = url.replace(/^(https?:\/\/)?(www\.)?/, '').replace(/\/$/, '');
-                                    if (displayUrl.length > 35) displayUrl = displayUrl.substring(0, 32) + '...';
-                                    return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="block text-gray-700 hover:text-[var(--brand-green)] transition-colors duration-200 text-sm">${displayUrl}</a>`;
-                                }).join('');
-                                colHtml += linksHtml + `</div>`;
+                                                                const title = type === 'paper' ? 'Papers' : type;
+                                colHtml += `<div class="mb-4"><em class="capitalize text-gray-500 text-sm font-semibold">${title}</em>`;
+                                
+                                if (type === 'paper') {
+                                    colHtml += '<div class="flex flex-wrap gap-2 mt-2">';
+                                    groupedItems[type].forEach(url => {
+                                        colHtml += `<img src="${url}" alt="Paper thumbnail" class="paper-thumbnail h-24 w-auto rounded cursor-pointer hover:opacity-80 transition-opacity">`;
+                                    });
+                                    colHtml += '</div>';
+                                } else {
+                                    const linksHtml = groupedItems[type].map(url => {
+                                        let displayUrl = url.replace(/^(https?:\/\/)?(www\.)?/, '').replace(/\/$/, '');
+                                        if (displayUrl.length > 35) displayUrl = displayUrl.substring(0, 32) + '...';
+                                        return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="block text-gray-700 hover:text-[var(--brand-green)] transition-colors duration-200 text-sm">${displayUrl}</a>`;
+                                    }).join('');
+                                    colHtml += linksHtml;
+                                }
+                                colHtml += `</div>`;
                             });
                             return colHtml;
                         };
@@ -499,6 +548,18 @@
                         const col2Html = `<div class="w-1/2">${buildColumnHtml(col2Categories)}</div>`;
 
                         container.innerHTML = col1Html + col2Html;
+
+                        // Add event listeners for modal
+                        document.querySelectorAll('.paper-thumbnail').forEach(thumb => {
+                            thumb.addEventListener('click', () => {
+                                modalImage.src = thumb.src;
+                                modal.classList.add('show');
+                            });
+                        });
+
+                        modal.addEventListener('click', () => {
+                            modal.classList.remove('show');
+                        });
                     })
                     .catch(error => {
                         console.error('Error loading or parsing ideas we love:', error);
