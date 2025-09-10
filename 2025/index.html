@@ -563,17 +563,24 @@
             .photo-gallery-scroller .img-tall {
                 height: 320px; /* Taller images also smaller on mobile */
             }
-            .review-card-scroller {
-                width: 256px; /* w-64, narrower review cards on mobile */
-            }
-        }
 
-        .metallic-border {
-            border: 4px solid transparent;
-            background: linear-gradient(#fdfbf7, #fdfbf7) padding-box, 
-                        linear-gradient(145deg, hsl(0, 0%, 15%) 0%, hsl(0, 0%, 40%) 15%, hsl(0, 0%, 90%) 50%, hsl(0, 0%, 40%) 85%, hsl(0, 0%, 15%) 100%) border-box;
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.5), inset 0 -2px 4px rgba(255,255,255,0.5), 0 5px 10px rgba(0,0,0,0.3);
-        }
+            .review-card-scroller {
+                width: 384px; /* w-96 */
+                background-color: #fdfbf7;
+                border: 1px solid #dcd0c0;
+                border-radius: 0.5rem;
+                padding: 1.5rem;
+                margin-top: 1rem;
+                box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+            }
+
+            .review-card-scroller blockquote {
+                font-size: 1.1rem;
+                line-height: 1.6;
+                font-style: italic;
+                color: #3a2f2f;
+            }
+
 
         /* Custom styles for host and speaker cards */
         .host-card, .speaker-card {
@@ -1015,7 +1022,7 @@
 
                 const content = `
                     <div class="host-card flex flex-col items-center text-center">
-                        <img src="${host.image}" alt="Photo of ${host.name}" class="metallic-border w-[9rem] h-[12rem] rounded-full object-cover shadow-xl mb-6" onerror="this.onerror=null;this.src='https://placehold.co/300x300/cccccc/ffffff?text=Image+Not+Found'">
+                        <img src="${host.image}" alt="Photo of ${host.name}" class="w-[9rem] h-[12rem] rounded-full object-cover shadow-xl mb-6" onerror="this.onerror=null;this.src='https://placehold.co/300x300/cccccc/ffffff?text=Image+Not+Found'">
                         <h3 class="text-2xl font-bold mb-2 text-[#30391a]">${host.name}</h3>
                         ${xAccountLink}
                     </div>
@@ -1032,7 +1039,7 @@
                 const xAccountLink = speaker.x_account ? `<a href="${speaker.x_account}" target="_blank" rel="noopener noreferrer" class="text-sm text-[#8dafb9] hover:text-[#30391a] transition">@${speaker.x_account.split('/').pop()}</a>` : '';
                 const speakerBubble = `
                     <div class="speaker-card flex flex-col items-center text-center">
-                        <img src="${speaker.image}" alt="Photo of ${speaker.name}" class="w-[9rem] h-[12rem] rounded-full object-cover border-4 border-white shadow-xl mb-6" onerror="this.onerror=null;this.src='https://placehold.co/200x200/cccccc/ffffff?text=Image+Not+Found'">
+                        <img src="${speaker.image}" alt="Photo of ${speaker.name}" class="w-[9rem] h-[12rem] rounded-full object-cover shadow-xl mb-6" onerror="this.onerror=null;this.src='https://placehold.co/200x200/cccccc/ffffff?text=Image+Not+Found'">
                         <h3 class="text-2xl font-bold mb-2 text-[#30391a]">${speaker.name}</h3>
                         <p class="text-sm text-gray-500">${speaker.title}</p>
                         ${xAccountLink}
