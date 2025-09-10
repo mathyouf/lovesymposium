@@ -568,6 +568,13 @@
             }
         }
 
+        .metallic-border {
+            border: 4px solid transparent;
+            background: linear-gradient(#fdfbf7, #fdfbf7) padding-box, 
+                        linear-gradient(145deg, hsl(0, 0%, 15%) 0%, hsl(0, 0%, 40%) 15%, hsl(0, 0%, 90%) 50%, hsl(0, 0%, 40%) 85%, hsl(0, 0%, 15%) 100%) border-box;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.5), inset 0 -2px 4px rgba(255,255,255,0.5), 0 5px 10px rgba(0,0,0,0.3);
+        }
+
         /* Custom styles for host and speaker cards */
         .host-card, .speaker-card {
             width: 10rem; /* w-48 for desktop */
@@ -1008,7 +1015,7 @@
 
                 const content = `
                     <div class="host-card flex flex-col items-center text-center">
-                        <img src="${host.image}" alt="Photo of ${host.name}" class="w-48 h-48 md:w-[9rem] md:h-[12rem] rounded-full object-cover border-4 border-white shadow-xl mb-6" onerror="this.onerror=null;this.src='https://placehold.co/300x300/cccccc/ffffff?text=Image+Not+Found'">
+                        <img src="${host.image}" alt="Photo of ${host.name}" class="metallic-border w-48 h-48 md:w-[10rem] md:h-[12rem] rounded-full object-cover shadow-xl mb-6" onerror="this.onerror=null;this.src='https://placehold.co/300x300/cccccc/ffffff?text=Image+Not+Found'">
                         <h3 class="text-2xl font-bold mb-2 text-[#30391a]">${host.name}</h3>
                         ${xAccountLink}
                     </div>
