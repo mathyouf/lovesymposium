@@ -1,7 +1,7 @@
 @keyframes fade-in-gently {
     from {
         opacity: 0;
-        filter: blur(98px);
+        filter: blur(148px);
     }
     to {
         opacity: 1;
@@ -47,7 +47,7 @@
 }
 
 .animate-button-pulse {
-    animation: fade-in-gently 5s ease-out 0s forwards, 
+    animation: fade-in-gently 1.5s ease-out 0s forwards, 
                button-breath 8s ease-in-out 9s infinite;
     opacity: 0;
 }
