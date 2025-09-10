@@ -344,10 +344,20 @@
             </div>
         </section>
 
-        <section class="py-16 md:py-24">
-            <h2 class="text-4xl md:text-5xl font-romantic text-center mb-12 text-[var(--brand-green)]">Frequently Asked Questions</h2>
-            <div id="faq-container" class="faq-themed">
+        <section class="py-16 md:py-24 mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div class="md:col-span-1">
+                    <div class="text-center">
+                        <img src="assets/images/thecommons/the_commons_sf_logo.png" alt="The Commons SF Logo" class="mx-auto h-20 mb-4">
+                        <h2 class="text-4xl md:text-5xl font-romantic text-[var(--brand-green)] mb-8">The Commons</h2>
+                    </div>
+                    <div id="the-commons-gallery" class="grid grid-cols-1 sm:grid-cols-2 gap-4"></div>
                 </div>
+                <div class="md:col-span-1">
+                    <h2 class="text-4xl md:text-5xl font-romantic text-center mb-12 text-[var(--brand-green)]">Frequently Asked Questions</h2>
+                    <div id="faq-container" class="faq-themed" style="max-width: 100%;"></div>
+                </div>
+            </div>
         </section>
     </div>
 
@@ -444,6 +454,20 @@
                         console.error('Error loading or parsing ideas we love:', error);
                         container.innerHTML = '<p>Could not load content at this time.</p>';
                     });
+            }
+
+            function populateTheCommonsGallery() {
+                const gallery = document.getElementById('the-commons-gallery');
+                if (!gallery) return;
+
+                const imageCount = 6; // We have 6 images named 1.png to 6.png
+                const imagePaths = Array.from({length: imageCount}, (_, i) => `assets/images/thecommons/${i + 1}.png`);
+
+                gallery.innerHTML = imagePaths.map(path => `
+                    <div>
+                        <img src="${path}" alt="The Commons space" class="w-full h-auto object-cover rounded-lg shadow-md">
+                    </div>
+                `).join('');
             }
 
             function populateHosts() {
@@ -565,6 +589,7 @@
                 populateFaq();
                 populatePhotoGallery();
                 populateIdeasWeLove();
+                populateTheCommonsGallery();
             }
 
             function setupEmailCopy() {
