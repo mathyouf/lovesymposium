@@ -16,7 +16,7 @@
     }
     50% {
         transform: scale(1.01);
-        filter: blur(0.8px);
+        filter: blur(0.0px);
     }
 }
 
@@ -54,10 +54,10 @@
 
 @keyframes soft-blur-pulse {
     0%, 100% {
-        filter: blur(0);
+        filter: brightness(1);
     }
     50% {
-        filter: blur(0.8px);
+        filter: brightness(1.1);
     }
 }
 
