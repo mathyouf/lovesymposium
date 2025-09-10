@@ -553,6 +553,12 @@
             height: 426px; /* Taller height for image-only columns */
         }
 
+        @media (max-width: 768px) {
+            .photo-gallery-scroller {
+                animation-duration: 30s; /* Faster scroll on mobile */
+            }
+        }
+
         /* Custom styles for host and speaker cards */
         .host-card, .speaker-card {
             width: 12rem; /* w-48 for desktop */
@@ -564,7 +570,7 @@
                 margin-bottom: 1rem;
             }
             .speaker-card {
-                width: calc(33.333% - 1rem); /* 3 cards per row with gap */
+                width: calc(34.333% - 1rem); /* 3 cards per row with gap */
                 margin-bottom: 1rem;
             }
         }
@@ -630,7 +636,7 @@
                 </div>
                 
                 <!-- Hosts Section -->
-                <div class="mt-16 mb-16">
+                <div class="mt-16 mb-16 px-4 sm:px-0">
                     <h3 class="text-2xl font-romantic text-[#30391a] mb-8">Your Hosts</h3>
                     <div id="hosts-section" class="flex flex-row flex-wrap gap-8 justify-center items-center">
                         <!-- Hosts will be inserted here -->
@@ -640,7 +646,7 @@
                 <!-- Speakers Section -->
                 <div class="mt-16 mb-16">
                     <h3 class="text-2xl font-romantic text-[#30391a] mb-8">Featured Speakers</h3>
-                    <div id="speakers-container" class="flex flex-wrap gap-x-8 gap-y-12 justify-center items-start">
+                    <div id="speakers-container" class="flex flex-wrap gap-x-4 sm:gap-x-8 gap-y-12 justify-center items-start">
                         <!-- Speakers will be inserted here -->
                     </div>
                 </div>
