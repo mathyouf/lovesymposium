@@ -415,11 +415,16 @@
             color: #666666;
             line-height: 1.7;
             font-size: 1.1rem;
+            padding-top: 0;
+            transition: padding-top 0.4s ease-out;
         }
 
         .faq-item.active .faq-answer {
             grid-template-rows: 1fr;
-            margin-top: 1rem;
+        }
+
+        .faq-item.active .faq-answer > div {
+            padding-top: 1rem;
         }
 
         /* Auto-scrolling Photo Gallery */
@@ -551,17 +556,16 @@
                 <!-- Hosts Section -->
                 <div class="mt-16 mb-16">
                     <h3 class="text-2xl font-romantic text-[#293E3C] mb-8">Your Hosts</h3>
-                    <div class="flex flex-col md:flex-row gap-8 justify-center items-center">
-                        <div class="text-center">
-                            <img src="assets/images/hosts/ann-painting.png" alt="Ann Pierce" class="w-48 h-48 rounded-full object-cover border-4 shadow-xl mx-auto mb-4" style="border-color: var(--off-white);" onerror="this.onerror=null;this.src='https://placehold.co/200x200/cccccc/ffffff?text=Ann+Pierce'">
-                            <h4 class="text-xl font-bold text-[#293E3C]">Ann Pierce</h4>
-                            <a href="https://x.com/itsannpierce" target="_blank" class="text-[#8dafb9] hover:text-[#293E3C]">@itsannpierce</a>
-                        </div>
-                        <div class="text-center">
-                            <img src="assets/images/hosts/matt-painting.png" alt="Matthew Fisher" class="w-48 h-48 rounded-full object-cover border-4 shadow-xl mx-auto mb-4" style="border-color: var(--off-white);" onerror="this.onerror=null;this.src='https://placehold.co/200x200/cccccc/ffffff?text=Matthew+Fisher'">
-                            <h4 class="text-xl font-bold text-[#293E3C]">Matthew Fisher</h4>
-                            <a href="https://x.com/MathYouF" target="_blank" class="text-[#8dafb9] hover:text-[#293E3C]">@MathYouF</a>
-                        </div>
+                    <div id="hosts-section" class="flex flex-col md:flex-row gap-8 justify-center items-center">
+                        <!-- Hosts will be inserted here -->
+                    </div>
+                </div>
+
+                <!-- Speakers Section -->
+                <div class="mt-16 mb-16">
+                    <h3 class="text-2xl font-romantic text-[#293E3C] mb-8">Featured Speakers</h3>
+                    <div id="speakers-container" class="flex flex-wrap gap-x-8 gap-y-12 justify-center items-start">
+                        <!-- Speakers will be inserted here -->
                     </div>
                 </div>
             </section>
@@ -641,8 +645,30 @@
 
 
         const hosts = [
-            { name: 'Ann Pierce', image: 'assets/images/hosts/ann.jpg', statement: 'Our mission is to create a space where modern love can be explored in all its facets. We believe that by bringing together diverse voices and fostering open dialogue, we can all learn to love more deeply and authentically.', x_account: 'https://x.com/annpierce' },
-            { name: 'Matthew Fisher', image: 'assets/images/hosts/matt.jpg', statement: 'Love is the cornerstone of the human experience, yet we rarely give it the academic and intentional focus it deserves. This symposium is our answer—a chance to learn, share, and grow together in our understanding of connection.', x_account: 'https://x.com/matthewfisher' }
+            { name: 'Ann Pierce', image: 'assets/images/hosts/ann-painting.png', statement: 'Our mission is to create a space where modern love can be explored in all its facets. We believe that by bringing together diverse voices and fostering open dialogue, we can all learn to love more deeply and authentically.', x_account: 'https://x.com/itsannpierce' },
+            { name: 'Matthew Fisher', image: 'assets/images/hosts/matt-painting.png', statement: 'Love is the cornerstone of the human experience, yet we rarely give it the academic and intentional focus it deserves. This symposium is our answer—a chance to learn, share, and grow together in our understanding of connection.', x_account: 'https://x.com/MathYouF' }
+        ];
+
+        const speakers = [
+            // Example Speaker. Add more following this structure.
+            { 
+                name: 'Dr. John M. Gottman',
+                title: 'The Gottman Institute',
+                image: 'https://www.gottman.com/wp-content/uploads/2021/10/Drs-John-and-Julie-Gottman-1-1.jpg',
+                x_account: 'https://twitter.com/GottmanInst'
+            },
+            {
+                name: 'Whitney Wolfe Herd',
+                title: 'Founder, Bumble',
+                image: 'https://i.insider.com/602d50a25843000018456a23?width=1136&format=jpeg',
+                x_account: 'https://twitter.com/whitney'
+            },
+            {
+                name: 'Justin McLeod',
+                title: 'Founder & CEO, Hinge',
+                image: 'https://cdn.sanity.io/images/z342s4t3/production/d34a6e3e117f0845347204b759639f77f0c13745-1200x800.jpg?w=1200&h=800&auto=format',
+                x_account: 'https://twitter.com/justinmcleod'
+            }
         ];
 
         const reviews = [
@@ -755,8 +781,8 @@
         // =====================================================================
 
         function renderPage() {
-            if (CONFIG.showSpeakers) populateSpeakers(allSpeakers);
             if (CONFIG.showHosts) populateHosts(hosts);
+            populateSpeakers(speakers);
             // populateReviews(reviews); // Reviews section removed
             populateTickets(tickets);
             populateFaq(faqData);
@@ -798,20 +824,34 @@
             if (!section) return;
             section.innerHTML = '';
             hostsData.forEach((host, index) => {
-                const alignmentClass = index === 0 
-                    ? 'md:items-end md:text-right' 
-                    : 'md:items-start md:text-left';
                 const xAccountLink = host.x_account ? `<a href="${host.x_account}" target="_blank" rel="noopener noreferrer" class="text-sm text-[#8dafb9] hover:text-[#293E3C] transition mt-1">@${host.x_account.split('/').pop()}</a>` : '';
 
                 const content = `
-                    <div class="flex flex-col items-center text-center w-full md:w-1/2 ${alignmentClass}">
-                        <img src="${host.image}" alt="Photo of ${host.name}" class="w-32 h-32 rounded-full object-cover border-4 border-white shadow-xl mb-6" onerror="this.onerror=null;this.src='https://placehold.co/300x300/cccccc/ffffff?text=Image+Not+Found'">
+                    <div class="flex flex-col items-center text-center">
+                        <img src="${host.image}" alt="Photo of ${host.name}" class="w-48 h-48 rounded-full object-cover border-4 border-white shadow-xl mb-6" onerror="this.onerror=null;this.src='https://placehold.co/300x300/cccccc/ffffff?text=Image+Not+Found'">
                         <h3 class="text-2xl font-bold mb-2 text-[#293E3C]">${host.name}</h3>
                         ${xAccountLink}
-                        <p class="text-gray-600 leading-relaxed max-w-md mt-4">${host.statement}</p>
                     </div>
                 `;
                 section.innerHTML += content;
+            });
+        }
+
+        function populateSpeakers(speakersData) {
+            const container = document.getElementById('speakers-container');
+            if (!container) return;
+            container.innerHTML = '';
+            speakersData.forEach(speaker => {
+                const xAccountLink = speaker.x_account ? `<a href="${speaker.x_account}" target="_blank" rel="noopener noreferrer" class="text-sm text-[#8dafb9] hover:text-[#293E3C] transition">@${speaker.x_account.split('/').pop()}</a>` : '';
+                const speakerBubble = `
+                    <div class="text-center w-48">
+                        <img src="${speaker.image}" alt="Photo of ${speaker.name}" class="w-48 h-48 rounded-full object-cover border-4 border-white shadow-xl mx-auto mb-4" onerror="this.onerror=null;this.src='https://placehold.co/200x200/cccccc/ffffff?text=Image+Not+Found'">
+                        <h4 class="text-xl font-bold text-[#293E3C]">${speaker.name}</h4>
+                        <p class="text-sm text-gray-500">${speaker.title}</p>
+                        ${xAccountLink}
+                    </div>
+                `;
+                container.innerHTML += speakerBubble;
             });
         }
 
