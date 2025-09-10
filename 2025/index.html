@@ -557,6 +557,15 @@
             .photo-gallery-scroller {
                 animation-duration: 30s; /* Faster scroll on mobile */
             }
+            .photo-gallery-scroller img {
+                height: 192px; /* h-48, smaller images on mobile */
+            }
+            .photo-gallery-scroller .img-tall {
+                height: 320px; /* Taller images also smaller on mobile */
+            }
+            .review-card-scroller {
+                width: 256px; /* w-64, narrower review cards on mobile */
+            }
         }
 
         /* Custom styles for host and speaker cards */
@@ -654,9 +663,9 @@
         </main>
 
         <!-- Photo Gallery Section -->
-        <section class="py-16 md:py-24 w-full" style="background-color: var(--off-white);">
+        <section class="py-8 md:py-12 w-full" style="background-color: var(--off-white);">
             <div class="mx-auto ">
-                <h2 class="text-4xl md:text-5xl font-romantic text-center mb-8 text-[#30391a]">From Love Symposium 2024</h2>
+                <h2 class="text-4xl md:text-5xl font-romantic text-center mb-4 text-[#30391a]">From Love Symposium 2024</h2>
                 
             </div>
             
