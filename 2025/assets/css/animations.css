@@ -1,8 +1,8 @@
 @keyframes un-evaporate {
     from {
         opacity: 0;
-        filter: blur(10px);
-        transform: scale(1.1);
+        filter: blur(100px);
+        transform: scale(9.1);
     }
     to {
         opacity: 1;
@@ -26,18 +26,27 @@
     }
 }
 
-.animate-ethereal {
+/* --- Animation Classes for Specific Elements --- */
+
+/* Main Header: "Love Symposium" */
+.animate-header {
     animation: un-evaporate 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards, 
                pulse 7s ease-in-out 2s infinite;
     opacity: 0;
 }
 
-.animation-delay-300 {
-    animation-delay: 300ms;
+/* First Subheader: "An unconference..." */
+.animate-subheader-1 {
+    animation: un-evaporate 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 300ms forwards, 
+               pulse 7s ease-in-out 2.3s infinite;
+    opacity: 0;
 }
 
-.animation-delay-600 {
-    animation-delay: 600ms;
+/* Second Subheader: "The Weekend of..." */
+.animate-subheader-2 {
+    animation: un-evaporate 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) 600ms forwards, 
+               pulse 7s ease-in-out 2.6s infinite;
+    opacity: 0;
 }
 
 @keyframes pulse-button {
@@ -53,7 +62,7 @@
 }
 
 .animate-button-pulse {
-    animation: un-evaporate 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards, 
-               pulse-button 5s ease-in-out 2s infinite;
+    animation: un-evaporate 4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards, 
+               pulse-button 8s ease-in-out 2s infinite;
     opacity: 0;
 }
