@@ -1,0 +1,41 @@
+@keyframes un-evaporate {
+    from {
+        opacity: 0;
+        filter: blur(10px);
+        transform: scale(1.1);
+    }
+    to {
+        opacity: 1;
+        filter: blur(0.5px);
+        transform: scale(1);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        filter: blur(0.5px);
+        transform: scale(1);
+    }
+    50% {
+        filter: blur(1.5px);
+        transform: scale(1.01);
+    }
+    100% {
+        filter: blur(0.5px);
+        transform: scale(1);
+    }
+}
+
+.animate-ethereal {
+    animation: un-evaporate 2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards, 
+               pulse 7s ease-in-out 2s infinite;
+    opacity: 0;
+}
+
+.animation-delay-300 {
+    animation-delay: 300ms;
+}
+
+.animation-delay-600 {
+    animation-delay: 600ms;
+}

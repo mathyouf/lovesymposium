@@ -12,6 +12,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;500;700&family=Caveat:wght@700&family=Dancing+Script:wght@400;700&family=Great+Vibes&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/animations.css">
     
     <style>
         /* --- Base Styles & Variables --- */
@@ -224,11 +225,11 @@
     <header class="hero-section text-[var(--off-white)] flex flex-col items-center text-center p-4 h-[100vh]">
         <div class="absolute inset-0 bg-black opacity-30"></div>
         <div class="flex-1 flex flex-col justify-center z-10">
-            <h1 class="font-romantic text-5xl sm:text-6xl md:text-8xl lg:text-9xl text-shadow-heavy">
+            <h1 class="font-romantic text-5xl sm:text-6xl md:text-8xl lg:text-9xl text-shadow-heavy animate-ethereal">
                 Love Symposium
             </h1>
-            <p class="mt-2 text-lg sm:text-xl md:text-2xl font-bold tracking-wider text-gray-100">An unconference for people trying to solve modern relationships</p>
-            <p class="mt-4 text-base sm:text-lg md:text-xl lg:text-2xl tracking-wider text-gray-200">
+            <p class="mt-2 text-lg sm:text-xl md:text-2xl font-bold tracking-wider text-gray-100 animate-ethereal animation-delay-300">An unconference for people trying to solve modern relationships</p>
+            <p class="mt-4 text-base sm:text-lg md:text-xl lg:text-2xl tracking-wider text-gray-200 animate-ethereal animation-delay-600">
                 The Weekend of November 14-16, 2025 at 
                 <a href="https://www.google.com/maps/search/?api=1&query=The+Commons,San+Francisco,CA" target="_blank" rel="noopener noreferrer" class="location-link inline-block font-semibold px-4 py-1 rounded-full mx-1">The Commons, San Francisco</a>
             </p>
@@ -299,7 +300,7 @@
 
         <section class="pt-8 md:pt-12 w-full bg-[var(--off-white)]">
             <div class="mx-auto">
-                <h2 class="text-4xl md:text-5xl font-romantic text-center mb-4 text-[var(--brand-green)]">From Love Symposium 2024</h2>
+                <h2 class="text-4xl md:text-5xl font-romantic text-center mb-2 text-[var(--brand-green)]">From Love Symposium 2024</h2>
             </div>
             <div class="photo-gallery-container">
                  <div id="photo-gallery" class="photo-gallery-scroller">
@@ -307,7 +308,7 @@
             </div>
         </section>
 
-        <section class="py-8 md:py-12 bg-[#fdfbf7]">
+        <section class="py-8 md:py-12 bg-[#fdfbf7] px-4">
             <div class="mx-auto text-center">
                 <img src="assets/images/logo-2025.webp" alt="Love Symposium Logo" class="h-28 w-auto mx-auto mb-8">
                 <h2 class="text-4xl md:text-5xl font-romantic text-center mb-8 text-[var(--brand-green)]">Symposium Events</h2>
@@ -346,7 +347,7 @@
 
         <section class="pb-16 md:pb-24">
             <h2 class="text-4xl md:text-5xl font-romantic text-center mb-12 text-[var(--brand-green)]">Frequently Asked Questions</h2>
-            <div id="faq-container" class="max-w-4xl mx-auto"></div>
+            <div id="faq-container" class="max-w-4xl mx-auto px-4"></div>
         </section>
     </div>
 
