@@ -116,7 +116,6 @@
             position: relative;
         }
         .topic-card:hover { 
-            transform: translateY(-5px); 
             box-shadow: 0 10px 20px rgba(0,0,0,0.08); 
         }
         .topic-title {
@@ -126,6 +125,10 @@
             color: var(--brand-green);
             text-align: center;
             margin-bottom: 1rem;
+            min-height: 4.5rem; /* Ensures space for 2 lines of text */
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .topic-divider {
             font-family: 'Great Vibes', cursive;
@@ -143,8 +146,8 @@
             font-family: 'Cormorant', serif;
             font-size: 1.1rem;
             color: #666;
-            line-height: 1.8;
-            margin-bottom: 0.5rem;
+            line-height: 1.7;
+            margin-bottom: 1.25rem;
         }
 
         /* --- Event Card Component --- */
@@ -372,55 +375,55 @@
             <div class="mx-auto text-center">
                 <img src="assets/images/logo-2025.webp" alt="Love Symposium Logo" class="h-28 w-auto mx-auto mb-8">
                 <h2 class="text-4xl md:text-5xl font-romantic text-center mb-8 text-[var(--brand-green)]">Symposium Topics</h2>
-                <div class="flex flex-wrap gap-8 justify-center items-start">
+                <div class="flex flex-wrap gap-8 justify-center items-stretch">
 
                     <div class="topic-card">
-                        <h3 class="topic-title">ML for Psychometrics</h3>
+                        <h3 class="topic-title">Computational Psychometrics</h3>
                         <div class="topic-divider">❦</div>
                         <ul class="sub-event-list">
-                            <li>Workshop: Building Personality Profiles from Digital Footprints</li>
-                            <li>Debate: The Ethics of Predictive Compatibility Scores</li>
-                            <li>Talk: Latent Space of Love - Vectorizing Human Values</li>
+                            <li>Can a high-dimensional model of human personality be reverse-engineered from digital footprints?</li>
+                            <li>What are the ethical and philosophical limits of using predictive models for human compatibility?</li>
+                            <li>Is it possible to create a valid mathematical representation—a 'vector space'—for abstract human concepts like values, attraction, and love?</li>
                         </ul>
                     </div>
 
                     <div class="topic-card">
-                        <h3 class="topic-title">Relationship Outcome Prediction</h3>
+                        <h3 class="topic-title">Relationship Dynamics & Prediction</h3>
                         <div class="topic-divider">❦</div>
                         <ul class="sub-event-list">
-                            <li>Talk: Forecasting Long-Term Compatibility with GNNs</li>
-                            <li>Panel: Beyond the 'Big Five' - Novel Predictors of Success</li>
-                            <li>Deep Dive: The Half-Life of a Crush - A Statistical Model</li>
+                            <li>Beyond self-reported traits, what are the most powerful and non-obvious predictors of long-term relationship success?</li>
+                            <li>What is the theoretical upper bound on the accuracy of predicting relationship outcomes?</li>
+                            <li>How can the entire lifecycle of a relationship, from initial attraction to potential decay, be modeled statistically?</li>
                         </ul>
                     </div>
 
                     <div class="topic-card">
-                        <h3 class="topic-title">Modern Dating</h3>
+                        <h3 class="topic-title">The Sociology of Modern Dating</h3>
                         <div class="topic-divider">❦</div>
                         <ul class="sub-event-list">
-                            <li>Socratic Salon: The Paradox of Choice in Digital Dating</li>
-                            <li>Fireside Chat: Ghosting, Benching, and New Social Etiquette</li>
-                            <li>Workshop: The Art of the Profile - A Narrative Approach</li>
+                            <li>How do algorithmically-driven dating markets alter the psychology of choice and the perception of scarcity?</li>
+                            <li>In what ways is technology fundamentally rewriting the unwritten social scripts and norms of courtship?</li>
+                            <li>What is the inherent tension between strategic self-presentation online and the underlying search for authentic connection?</li>
                         </ul>
                     </div>
 
                     <div class="topic-card">
-                        <h3 class="topic-title">Dating App Design & Engineering</h3>
+                        <h3 class="topic-title">Dating Platform Design & Philosophy</h3>
                         <div class="topic-divider">❦</div>
                         <ul class="sub-event-list">
-                            <li>Hackathon: Designing for Serendipity, Not Just Swipes</li>
-                            <li>Deep Dive: Architecting Recommendation Engines for Connection</li>
-                            <li>Panel: Gamification vs. Genuine Connection</li>
+                            <li>How should a platform balance algorithmic optimization for 'matching' with the engineered serendipity required for genuine discovery?</li>
+                            <li>What is the optimal design philosophy for a product whose success is measured by its user churn (i.e., finding a partner and leaving)?</li>
+                            <li>What are the second-order consequences of applying gamification mechanics to the process of finding a human partner?</li>
                         </ul>
                     </div>
 
                     <div class="topic-card">
-                        <h3 class="topic-title">Future of Human Relationships</h3>
+                        <h3 class="topic-title">The Future of Human Connection</h3>
                         <div class="topic-divider">❦</div>
                         <ul class="sub-event-list">
-                            <li>Speculative Fiction Workshop: Relationships in 2050</li>
-                            <li>Keynote: AI Companionship and the Redefinition of 'Partner'</li>
-                            <li>Debate: Is Technology Making Us More or Less Connected?</li>
+                            <li>As technology becomes inseparable from our social lives, how will the very definition of 'relationship' and 'partner' evolve?</li>
+                            <li>What are the potential societal impacts—positive and negative—of widespread, sophisticated AI companionship?</li>
+                            <li>Will technology ultimately serve as a bridge to deeper human connection, or will it become a comfortable buffer against the risks of genuine intimacy?</li>
                         </ul>
                     </div>
 
