@@ -570,7 +570,7 @@
 
         /* Custom styles for host and speaker cards */
         .host-card, .speaker-card {
-            width: 12rem; /* w-48 for desktop */
+            width: 10rem; /* w-48 for desktop */
         }
 
 
@@ -580,7 +580,6 @@
                 margin-bottom: 1rem;
             }
             .speaker-card {
-                width: calc(47.333% - 1rem); /* 3 cards per row with gap */
                 margin-bottom: 1rem;
             }
         }
@@ -604,7 +603,7 @@
         
         <!-- Apply to Attend Button -->
         <div class="z-10 mb-16">
-            <a href="https://luma.com/71lg31j5" class="apply-button inline-block px-8 py-4 text-[#30391a] font-bold rounded-full text-lg border-4 border-[#30391a] shadow-lg" target="_blank" style="background-color: var(--off-white);">Apply to Attend</a>
+            <a href="https://luma.com/lovesymposium25" class="apply-button inline-block px-8 py-4 text-[#30391a] font-bold rounded-full text-lg border-4 border-[#30391a] shadow-lg" target="_blank" style="background-color: var(--off-white);">Apply to Attend</a>
         </div>
     </header>
 
@@ -1026,7 +1025,7 @@
                 const xAccountLink = speaker.x_account ? `<a href="${speaker.x_account}" target="_blank" rel="noopener noreferrer" class="text-sm text-[#8dafb9] hover:text-[#30391a] transition">@${speaker.x_account.split('/').pop()}</a>` : '';
                 const speakerBubble = `
                     <div class="speaker-card flex flex-col items-center text-center">
-                        <img src="${speaker.image}" alt="Photo of ${speaker.name}" class="w-48 h-48 md:w-[9rem] md:h-[12rem] rounded-full object-cover border-4 border-white shadow-xl mb-6" onerror="this.onerror=null;this.src='https://placehold.co/200x200/cccccc/ffffff?text=Image+Not+Found'">
+                        <img src="${speaker.image}" alt="Photo of ${speaker.name}" class="w-[9rem] h-[12rem] md:w-[9rem] md:h-[12rem] rounded-full object-cover border-4 border-white shadow-xl mb-6" onerror="this.onerror=null;this.src='https://placehold.co/200x200/cccccc/ffffff?text=Image+Not+Found'">
                         <h3 class="text-2xl font-bold mb-2 text-[#30391a]">${speaker.name}</h3>
                         <p class="text-sm text-gray-500">${speaker.title}</p>
                         ${xAccountLink}
