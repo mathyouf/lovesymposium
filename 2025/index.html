@@ -7,6 +7,7 @@
     <link rel="shortcut icon" type="image/png" href="../2024/assets/images/logo2.png"/>
     
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -134,17 +135,6 @@
         .event-title { font-family: 'Cormorant', serif; font-weight: 700; font-size: 1.5rem; color: var(--brand-green); text-align: center; margin-bottom: 1.5rem; line-height: 1.2; }
         .event-description { font-family: 'Cormorant', serif; font-size: 1rem; color: #666; line-height: 1.7; text-align: center; }
 
-        /* --- FAQ Component --- */
-        .faq-themed { max-width: 60%; margin: 0 auto; background-color: var(--off-white); border: 1px solid rgba(41, 62, 60, 0.1); padding: 1rem 2rem; border-radius: 8px; }
-        .faq-item { border-bottom: 1px solid rgba(41, 62, 60, 0.1); padding: 1.5rem 0; }
-        .faq-item:last-child { border-bottom: none; }
-        .faq-question { display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-family: 'Cormorant', serif; font-weight: 700; font-size: 1.25rem; color: var(--brand-green); }
-        .faq-question::after { content: '+'; font-size: 1.5rem; transition: transform 0.3s ease; }
-        .faq-item.active .faq-question::after { transform: rotate(45deg); }
-        .faq-answer { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.4s ease-out; }
-        .faq-answer > div { overflow: hidden; color: #666666; line-height: 1.7; font-size: 1.1rem; padding-top: 0; transition: padding-top 0.4s ease-out; }
-        .faq-item.active .faq-answer { grid-template-rows: 1fr; }
-        .faq-item.active .faq-answer > div { padding-top: 1rem; }
         
         /* --- Auto-scrolling Photo Gallery --- */
         @keyframes scroll-loop { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
@@ -297,7 +287,7 @@
                         </div>
                 </div>
 
-                <div class="mt-16 mb-16">
+                <div class="mt-16">
                     <h3 class="text-2xl font-romantic text-[var(--brand-green)] mb-8">Speakers</h3>
                     <div id="speakers-container" class="flex flex-wrap gap-x-4 sm:gap-x-8 gap-y-12 justify-center items-start">
                         </div>
@@ -305,7 +295,7 @@
             </section>
         </main>
 
-        <section class="py-8 md:py-12 w-full bg-[var(--off-white)]">
+        <section class="pt-8 md:pt-12 w-full bg-[var(--off-white)]">
             <div class="mx-auto">
                 <h2 class="text-4xl md:text-5xl font-romantic text-center mb-4 text-[var(--brand-green)]">From Love Symposium 2024</h2>
             </div>
@@ -344,20 +334,17 @@
             </div>
         </section>
 
-        <section class="py-16 md:py-24 mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-                <div class="md:col-span-1">
-                    <div class="text-center">
-                        <img src="assets/images/thecommons/the_commons_sf_logo.png" alt="The Commons SF Logo" class="mx-auto h-20 mb-4">
-                        <h2 class="text-4xl md:text-5xl font-romantic text-[var(--brand-green)] mb-8">The Commons</h2>
-                    </div>
-                    <div id="the-commons-gallery" class="grid grid-cols-1 sm:grid-cols-2 gap-4"></div>
-                </div>
-                <div class="md:col-span-1">
-                    <h2 class="text-4xl md:text-5xl font-romantic text-center mb-12 text-[var(--brand-green)]">Frequently Asked Questions</h2>
-                    <div id="faq-container" class="faq-themed" style="max-width: 100%;"></div>
-                </div>
+        <section class="pt-0 pb-16 md:pb-24 mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <lottie-player src="https://cdn.prod.website-files.com/62bf713af44e651aa7797a24/62c7cb8cfe2a3951fd00fb88_409974631-ic-05.json" background="transparent" speed="1" class="mx-auto h-24 w-24 mb-4" loop autoplay></lottie-player>
+                <h2 class="text-4xl md:text-5xl font-romantic text-[var(--brand-green)] mb-8">The Commons</h2>
             </div>
+            <div id="the-commons-gallery" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 max-w-5xl mx-auto"></div>
+        </section>
+
+        <section class="pb-16 md:pb-24">
+            <h2 class="text-4xl md:text-5xl font-romantic text-center mb-12 text-[var(--brand-green)]">Frequently Asked Questions</h2>
+            <div id="faq-container" class="max-w-4xl mx-auto"></div>
         </section>
     </div>
 
@@ -558,27 +545,19 @@
             function populateFaq() {
                 const container = document.getElementById('faq-container');
                 if (!container) return;
-                container.innerHTML = '';
-                faqData.forEach(item => {
-                    const faqItem = document.createElement('div');
-                    faqItem.className = 'faq-item';
 
-                    const questionDiv = document.createElement('div');
-                    questionDiv.className = 'faq-question';
-                    questionDiv.innerHTML = `<span>${item.question}</span>`;
-
-                    const answerDiv = document.createElement('div');
-                    answerDiv.className = 'faq-answer';
-                    answerDiv.innerHTML = `<div><p>${item.answer}</p></div>`;
-
-                    faqItem.appendChild(questionDiv);
-                    faqItem.appendChild(answerDiv);
-                    container.appendChild(faqItem);
-
-                    questionDiv.addEventListener('click', () => {
-                        faqItem.classList.toggle('active');
-                    });
-                });
+                container.innerHTML = ''; // Clear existing content
+                const content = faqData.map(item => `
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-baseline py-4 border-b border-gray-200">
+                        <div class="md:col-span-1">
+                            <p class="font-bold text-[var(--brand-green)] text-lg">${item.question}</p>
+                        </div>
+                        <div class="md:col-span-2">
+                            <p class="text-gray-700 leading-relaxed">${item.answer}</p>
+                        </div>
+                    </div>
+                `).join('');
+                container.innerHTML = content;
             }
 
             // --- INITIALIZE PAGE ---
