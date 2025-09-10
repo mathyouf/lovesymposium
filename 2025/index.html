@@ -1015,7 +1015,7 @@
 
                 const content = `
                     <div class="host-card flex flex-col items-center text-center">
-                        <img src="${host.image}" alt="Photo of ${host.name}" class="metallic-border w-48 h-48 md:w-[10rem] md:h-[12rem] rounded-full object-cover shadow-xl mb-6" onerror="this.onerror=null;this.src='https://placehold.co/300x300/cccccc/ffffff?text=Image+Not+Found'">
+                        <img src="${host.image}" alt="Photo of ${host.name}" class="metallic-border w-[9rem] h-[12rem] rounded-full object-cover shadow-xl mb-6" onerror="this.onerror=null;this.src='https://placehold.co/300x300/cccccc/ffffff?text=Image+Not+Found'">
                         <h3 class="text-2xl font-bold mb-2 text-[#30391a]">${host.name}</h3>
                         ${xAccountLink}
                     </div>
@@ -1032,7 +1032,7 @@
                 const xAccountLink = speaker.x_account ? `<a href="${speaker.x_account}" target="_blank" rel="noopener noreferrer" class="text-sm text-[#8dafb9] hover:text-[#30391a] transition">@${speaker.x_account.split('/').pop()}</a>` : '';
                 const speakerBubble = `
                     <div class="speaker-card flex flex-col items-center text-center">
-                        <img src="${speaker.image}" alt="Photo of ${speaker.name}" class="w-[9rem] h-[12rem] md:w-[9rem] md:h-[12rem] rounded-full object-cover border-4 border-white shadow-xl mb-6" onerror="this.onerror=null;this.src='https://placehold.co/200x200/cccccc/ffffff?text=Image+Not+Found'">
+                        <img src="${speaker.image}" alt="Photo of ${speaker.name}" class="w-[9rem] h-[12rem] rounded-full object-cover border-4 border-white shadow-xl mb-6" onerror="this.onerror=null;this.src='https://placehold.co/200x200/cccccc/ffffff?text=Image+Not+Found'">
                         <h3 class="text-2xl font-bold mb-2 text-[#30391a]">${speaker.name}</h3>
                         <p class="text-sm text-gray-500">${speaker.title}</p>
                         ${xAccountLink}
