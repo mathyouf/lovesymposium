@@ -60,7 +60,7 @@
 
         /* --- Page Sections --- */
         .hero-section {
-            background-image: url('assets/images/graphics/robotswing.webp');
+            background-image: url('assets/images/graphics/robotsarmupscale.png');
             background-size: cover;
             background-position: center;
             filter: brightness(1.1);
@@ -551,7 +551,7 @@
                                 if (type === 'paper') {
                                     colHtml += '<div class="flex flex-wrap gap-2 mt-2">';
                                     groupedItems[type].forEach(url => {
-                                        colHtml += `<img src="${url}" alt="Paper thumbnail" class="paper-thumbnail h-24 w-auto rounded cursor-pointer hover:opacity-80 transition-opacity">`;
+                                        colHtml += `<img src="${url}" alt="Paper thumbnail" class="paper-thumbnail h-24 w-20 object-cover rounded cursor-pointer hover:opacity-80 transition-opacity">`;
                                     });
                                     colHtml += '</div>';
                                 } else {
