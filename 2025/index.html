@@ -357,7 +357,7 @@
                     <div class="md:col-span-1">
                         <div>
                             <h3 class="text-2xl font-romantic text-[var(--brand-green)] mb-2">Ideas & Inspo</h3>
-                            <p class="text-gray-600 mb-4">This is some of the excellent content we love.</p>
+                            <p class="text-gray-600 mb-4">Some of the content we've seen this year that excites and interests us. E-mail us if you have any more you might like to add!</p>
                             <div id="ideas-we-love-container" class="flex flex-col space-y-8 md:flex-row md:space-y-0 md:space-x-8"></div>
                     </div>
                 </div>
@@ -527,17 +527,44 @@
                 fetch('assets/data/content.csv')
                     .then(response => response.ok ? response.text() : Promise.reject('Network response was not ok'))
                     .then(csvText => {
-                        const items = csvText.trim().split('\n').slice(1);
-                        const groupedItems = items.reduce((acc, item) => {
-                            const [type, url] = item.split(',');
-                            if (type && url) {
-                                if (!acc[type]) acc[type] = [];
-                                acc[type].push(url.trim());
+                        const lines = csvText.trim().split('\n').slice(1);
+
+                        const groupedItems = lines.reduce((acc, line) => {
+                            if (!line.trim()) return acc;
+
+                            const parts = line.split(',');
+                            const type = parts[0].trim();
+                            let entry = { type };
+
+                            if (type === 'paper' || type === 'book' || type === 'youtube') {
+                                entry.url = parts[1] ? parts[1].trim() : '';
+                            } else if (type === 'substack' || type === 'twitter') {
+                                if (parts.length >= 4) { 
+                                    entry.url = parts[1].trim();
+                                    entry.author = parts[2].trim();
+                                    entry.title = parts.slice(3).join(',').trim();
+                                }
                             }
+
+                            if (entry.type && entry.url) {
+                                if (!acc[entry.type]) {
+                                    acc[entry.type] = [];
+                                }
+                                acc[entry.type].push(entry);
+                            }
+
                             return acc;
                         }, {});
 
-                        const categories = Object.keys(groupedItems);
+                        const categoryOrder = ['paper', 'book', 'substack', 'twitter', 'youtube'];
+                        const categories = Object.keys(groupedItems).sort((a, b) => {
+                            const indexA = categoryOrder.indexOf(a);
+                            const indexB = categoryOrder.indexOf(b);
+                            if (indexA === -1) return 1; // place unknown categories at the end
+                            if (indexB === -1) return -1;
+                            return indexA - indexB;
+                        });
+
                         const midPoint = Math.ceil(categories.length / 2);
                         const col1Categories = categories.slice(0, midPoint);
                         const col2Categories = categories.slice(midPoint);
@@ -545,35 +572,52 @@
                         const buildColumnHtml = (cats) => {
                             let colHtml = '';
                             cats.forEach(type => {
-                                                                const title = type === 'paper' ? 'Papers' : type;
+                                if (!groupedItems[type] || groupedItems[type].length === 0) return;
+
+                                let title = type.charAt(0).toUpperCase() + type.slice(1);
+                                if (type === 'book') title = 'Books';
+                                if (type === 'paper') title = 'Papers';
                                 colHtml += `<div class="mb-4"><em class="capitalize text-gray-500 text-sm font-semibold">${title}</em>`;
                                 
                                 if (type === 'paper') {
                                     colHtml += '<div class="flex flex-wrap gap-2 mt-2">';
-                                    groupedItems[type].forEach(url => {
-                                        colHtml += `<img src="${url}" alt="Paper thumbnail" class="paper-thumbnail h-24 w-20 object-cover rounded cursor-pointer hover:opacity-80 transition-opacity">`;
+                                    groupedItems[type].forEach(item => {
+                                        colHtml += `<img src="${item.url}" alt="Paper thumbnail" class="paper-thumbnail h-24 w-20 object-cover rounded cursor-pointer hover:opacity-80 transition-opacity">`;
                                     });
                                     colHtml += '</div>';
-                                } else {
-                                    const linksHtml = groupedItems[type].map(url => {
-                                        let displayUrl = url.replace(/^(https?:\/\/)?(www\.)?/, '').replace(/\/$/, '');
-                                        if (displayUrl.length > 35) displayUrl = displayUrl.substring(0, 32) + '...';
-                                        return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="block text-gray-700 hover:text-[var(--brand-green)] transition-colors duration-200 text-sm">${displayUrl}</a>`;
+                                } else if (type === 'book') {
+                                    colHtml += '<div class="flex flex-wrap gap-2 mt-2">';
+                                    groupedItems[type].forEach(item => {
+                                        colHtml += `<img src="${item.url}" alt="Book thumbnail" class="book-thumbnail h-24 w-auto rounded cursor-pointer hover:opacity-80 transition-opacity">`;
+                                    });
+                                    colHtml += '</div>';
+                                } else if (type === 'twitter' || type === 'substack') {
+                                    const linksHtml = groupedItems[type].map(item => {
+                                        return `<a href="${item.url}" target="_blank" rel="noopener noreferrer" class="block py-1.5 text-gray-700 hover:text-[var(--brand-green)] transition-colors duration-200 text-sm">
+                                                    <span class="font-semibold block">${item.author}</span>
+                                                    <span class="text-gray-600">${item.title}</span>
+                                                </a>`;
                                     }).join('');
                                     colHtml += linksHtml;
-                                }
+                                } else if (type === 'youtube') {
+                                     const linksHtml = groupedItems[type].map(item => {
+                                        let displayUrl = item.url.replace('https://www.youtube.com/embed/', 'youtu.be/');
+                                        return `<a href="${item.url.replace('/embed/', '/watch?v=')}" target="_blank" rel="noopener noreferrer" class="block text-gray-700 hover:text-[var(--brand-green)] transition-colors duration-200 text-sm">${displayUrl}</a>`;
+                                    }).join('');
+                                    colHtml += linksHtml;
+                                } 
                                 colHtml += `</div>`;
                             });
                             return colHtml;
                         };
 
-                        const col1Html = `<div class="w-full md:w-1/2">${buildColumnHtml(col1Categories)}</div>`;
-                        const col2Html = `<div class="w-full md:w-1/2">${buildColumnHtml(col2Categories)}</div>`;
+                        const col1Html = `<div class="w-full md:w-1/2 pr-4">${buildColumnHtml(col1Categories)}</div>`;
+                        const col2Html = `<div class="w-full md:w-1/2 pl-4">${buildColumnHtml(col2Categories)}</div>`;
 
                         container.innerHTML = col1Html + col2Html;
 
                         // Add event listeners for modal
-                        document.querySelectorAll('.paper-thumbnail').forEach(thumb => {
+                        document.querySelectorAll('.paper-thumbnail, .book-thumbnail').forEach(thumb => {
                             thumb.addEventListener('click', () => {
                                 modalImage.src = thumb.src;
                                 modal.classList.add('show');
