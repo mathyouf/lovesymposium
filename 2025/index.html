@@ -326,7 +326,7 @@
         </div>
         
         <div class="z-10 mb-16">
-            <a href="https://luma.com/lovesymposium25" class="apply-button animate-button-pulse inline-block px-8 py-4 text-[var(--brand-green)] font-bold rounded-full text-lg border-4 border-[var(--brand-green)] shadow-lg" target="_blank">Apply to Attend</a>
+            <a href="https://luma.com/lovesymposium25" id="apply-button" class="apply-button animate-button-pulse inline-block px-8 py-4 text-[var(--brand-green)] font-bold rounded-full text-lg border-4 border-[var(--brand-green)] shadow-lg" target="_blank">Apply to Attend</a>
         </div>
     </header>
 
@@ -615,6 +615,17 @@
                 }
                 
                 const allGalleryColumns = [...galleryColumns, ...galleryColumns]; // Duplicate for seamless scroll
+
+                // --- GOOGLE ANALYTICS EVENT TRACKING ---
+                const applyButton = document.getElementById('apply-button');
+                if (applyButton) {
+                    applyButton.addEventListener('click', () => {
+                        gtag('event', 'apply_button_click', {
+                            'event_category': 'engagement',
+                            'event_label': 'Apply to Attend 2025'
+                        });
+                    });
+                }
                 allGalleryColumns.forEach(col => photoGallery.appendChild(col));
             }
 
