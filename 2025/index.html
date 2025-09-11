@@ -358,7 +358,7 @@
                         <div>
                             <h3 class="text-2xl font-romantic text-[var(--brand-green)] mb-2">Ideas & Inspo</h3>
                             <p class="text-gray-600 mb-4">Some of the content we've seen this year that excites and interests us. E-mail us if you have any more you might like to add!</p>
-                            <div id="ideas-we-love-container" class="flex flex-col space-y-8 md:flex-row md:space-y-0 md:space-x-8"></div>
+                            <div id="ideas-we-love-container" class="flex flex-col space-y-8 md:flex-row md:space-y-0 md:space-x-8 mr-8"></div>
                     </div>
                 </div>
             </section>
@@ -573,7 +573,7 @@
                                 let title = type.charAt(0).toUpperCase() + type.slice(1);
                                 if (type === 'book') title = 'Books';
                                 if (type === 'paper') title = 'Papers';
-                                colHtml += `<div class="mb-4"><em class="capitalize text-gray-500 text-sm font-semibold">${title}</em>`;
+                                colHtml += `<div class="mb-4"><em class="capitalize pl-4 text-gray-500 text-sm font-semibold">${title}</em>`;
                                 
                                 let contentHtml = '';
                                 if (type === 'paper' || type === 'book') {
@@ -602,7 +602,7 @@
                             return colHtml;
                         };
 
-                        const col1Html = `<div class="w-full md:w-1/2 pr-4">${buildColumnHtml(col1Categories)}</div>`;
+                        const col1Html = `<div class="w-full md:w-1/2 pl-4">${buildColumnHtml(col1Categories)}</div>`;
                         const col2Html = `<div class="w-full md:w-1/2 pl-4">${buildColumnHtml(col2Categories)}</div>`;
 
                         container.innerHTML = col1Html + col2Html;
