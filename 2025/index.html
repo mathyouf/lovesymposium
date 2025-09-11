@@ -531,7 +531,6 @@
 
                         const groupedItems = lines.reduce((acc, line) => {
                             if (!line.trim()) return acc;
-
                             const parts = line.split(',');
                             const type = parts[0].trim();
                             let entry = { type };
@@ -539,7 +538,7 @@
                             if (type === 'paper' || type === 'book' || type === 'youtube') {
                                 entry.url = parts[1] ? parts[1].trim() : '';
                             } else if (type === 'substack' || type === 'twitter') {
-                                if (parts.length >= 4) { 
+                                if (parts.length >= 4) {
                                     entry.url = parts[1].trim();
                                     entry.author = parts[2].trim();
                                     entry.title = parts.slice(3).join(',').trim();
@@ -547,12 +546,9 @@
                             }
 
                             if (entry.type && entry.url) {
-                                if (!acc[entry.type]) {
-                                    acc[entry.type] = [];
-                                }
+                                if (!acc[entry.type]) acc[entry.type] = [];
                                 acc[entry.type].push(entry);
                             }
-
                             return acc;
                         }, {});
 
@@ -560,7 +556,7 @@
                         const categories = Object.keys(groupedItems).sort((a, b) => {
                             const indexA = categoryOrder.indexOf(a);
                             const indexB = categoryOrder.indexOf(b);
-                            if (indexA === -1) return 1; // place unknown categories at the end
+                            if (indexA === -1) return 1;
                             if (indexB === -1) return -1;
                             return indexA - indexB;
                         });
@@ -579,34 +575,29 @@
                                 if (type === 'paper') title = 'Papers';
                                 colHtml += `<div class="mb-4"><em class="capitalize text-gray-500 text-sm font-semibold">${title}</em>`;
                                 
-                                if (type === 'paper') {
-                                    colHtml += '<div class="flex flex-wrap gap-2 mt-2">';
+                                let contentHtml = '';
+                                if (type === 'paper' || type === 'book') {
+                                    contentHtml = '<div class="flex flex-wrap gap-2 pl-4">';
                                     groupedItems[type].forEach(item => {
-                                        colHtml += `<img src="${item.url}" alt="Paper thumbnail" class="paper-thumbnail h-24 w-20 object-cover rounded cursor-pointer hover:opacity-80 transition-opacity">`;
+                                        const imgClass = type === 'paper' ? 'paper-thumbnail h-24 w-20 object-cover' : 'book-thumbnail h-24 w-auto';
+                                        contentHtml += `<img src="${item.url}" alt="${type} thumbnail" class="${imgClass} rounded cursor-pointer hover:opacity-80 transition-opacity">`;
                                     });
-                                    colHtml += '</div>';
-                                } else if (type === 'book') {
-                                    colHtml += '<div class="flex flex-wrap gap-2 mt-2">';
-                                    groupedItems[type].forEach(item => {
-                                        colHtml += `<img src="${item.url}" alt="Book thumbnail" class="book-thumbnail h-24 w-auto rounded cursor-pointer hover:opacity-80 transition-opacity">`;
-                                    });
-                                    colHtml += '</div>';
+                                    contentHtml += '</div>';
                                 } else if (type === 'twitter' || type === 'substack') {
-                                    const linksHtml = groupedItems[type].map(item => {
-                                        return `<a href="${item.url}" target="_blank" rel="noopener noreferrer" class="block py-1.5 text-gray-700 hover:text-[var(--brand-green)] transition-colors duration-200 text-sm">
-                                                    <span class="font-semibold block">${item.author}</span>
-                                                    <span class="text-gray-600">${item.title}</span>
+                                    contentHtml = '<div class="pl-4">' + groupedItems[type].map(item => {
+                                        return `<a href="${item.url}" target="_blank" rel="noopener noreferrer" class="block py-1.5 text-gray-700 hover:text-[var(--brand-green)] transition-colors duration-200">
+                                                    <span class="font-semibold block text-base leading-tight">${item.author}</span>
+                                                    <span class="text-sm text-gray-600">${item.title}</span>
                                                 </a>`;
-                                    }).join('');
-                                    colHtml += linksHtml;
+                                    }).join('') + '</div>';
                                 } else if (type === 'youtube') {
-                                     const linksHtml = groupedItems[type].map(item => {
+                                     contentHtml = '<div class="pl-4">' + groupedItems[type].map(item => {
                                         let displayUrl = item.url.replace('https://www.youtube.com/embed/', 'youtu.be/');
-                                        return `<a href="${item.url.replace('/embed/', '/watch?v=')}" target="_blank" rel="noopener noreferrer" class="block text-gray-700 hover:text-[var(--brand-green)] transition-colors duration-200 text-sm">${displayUrl}</a>`;
-                                    }).join('');
-                                    colHtml += linksHtml;
-                                } 
-                                colHtml += `</div>`;
+                                        return `<a href="${item.url.replace('/embed/', '/watch?v=')}" target="_blank" rel="noopener noreferrer" class="block py-1 text-gray-700 hover:text-[var(--brand-green)] transition-colors duration-200 text-sm">${displayUrl}</a>`;
+                                    }).join('') + '</div>';
+                                }
+
+                                colHtml += `<div class="mt-2">${contentHtml}</div></div>`;
                             });
                             return colHtml;
                         };
@@ -616,7 +607,6 @@
 
                         container.innerHTML = col1Html + col2Html;
 
-                        // Add event listeners for modal
                         document.querySelectorAll('.paper-thumbnail, .book-thumbnail').forEach(thumb => {
                             thumb.addEventListener('click', () => {
                                 modalImage.src = thumb.src;
