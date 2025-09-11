@@ -342,10 +342,10 @@
 
         <main class="mx-auto pt-16 pb-12 relative z-10">
             <section class="mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-                    <div class="md:col-span-1">
-                        <h2 class="text-4xl md:text-6xl font-romantic text-[var(--brand-green)] mb-8 text-left">If we can't RETVRN, where are we going?</h2>
-                        <div class="text-xl md:text-2xl leading-relaxed text-gray-700 space-y-6 text-left">
+                <div class="grid grid-cols-1 gap-12">
+                    <div class="max-w-4xl mx-auto">
+                        <h2 class="text-4xl md:text-6xl font-romantic text-[var(--brand-green)] mb-8 text-center">If we can't RETVRN, where are we going?</h2>
+                        <div class="text-xl md:text-2xl leading-relaxed text-gray-700 space-y-6 text-center">
                             <p class="font-bold text-2xl md:text-3xl text-gray-800">Modern life has changed love. For better or worse?</p>
                             <p class="font-bold text-2xl md:text-3xl text-gray-800 mt-2 mb-4">The future is yours to decide.</p>
                             <p>The Love Symposium is a curated event for earnest founders, experts, and intellectuals obsessed with solving our hardest relationship problems and proliferating healthy connection at scale.</p>
@@ -353,12 +353,6 @@
                             <p>This year's topics center around the dating industry, predictive AI and psychometrics for matchmaking, and the science of healthy love.</p>
                             <p>If you have a session or activity you might like to run at the Symposium, <a href="#footer" class="text-[var(--apply-button-hover-icon-color)] hover:text-[var(--brand-green)] underline scroll-link">please let us know</a>.</p>
                         </div>
-                    </div>
-                    <div class="md:col-span-1">
-                        <div>
-                            <h3 class="text-2xl font-romantic text-[var(--brand-green)] mb-2">Ideas & Inspo</h3>
-                            <p class="text-gray-600 mb-4">Some of the content we've seen this year that excites and interests us. E-mail us if you have any more you might like to add!</p>
-                            <div id="ideas-we-love-container" class="flex flex-col space-y-8 md:flex-row md:space-y-0 md:space-x-8 mr-8"></div>
                     </div>
                 </div>
             </section>
@@ -516,114 +510,6 @@
 
             // --- DOM POPULATION FUNCTIONS ---
 
-            function populateIdeasWeLove() {
-                const container = document.getElementById('ideas-we-love-container');
-                if (!container) return;
-
-                const modal = document.getElementById('image-modal');
-                const modalImage = document.getElementById('modal-image');
-                if (!modal || !modalImage) return;
-
-                fetch('assets/data/content.csv')
-                    .then(response => response.ok ? response.text() : Promise.reject('Network response was not ok'))
-                    .then(csvText => {
-                        const lines = csvText.trim().split('\n').slice(1);
-
-                        const groupedItems = lines.reduce((acc, line) => {
-                            if (!line.trim()) return acc;
-                            const parts = line.split(',');
-                            const type = parts[0].trim();
-                            let entry = { type };
-
-                            if (type === 'paper' || type === 'book' || type === 'youtube') {
-                                entry.url = parts[1] ? parts[1].trim() : '';
-                            } else if (type === 'substack' || type === 'twitter') {
-                                if (parts.length >= 4) {
-                                    entry.url = parts[1].trim();
-                                    entry.author = parts[2].trim();
-                                    entry.title = parts.slice(3).join(',').trim();
-                                }
-                            }
-
-                            if (entry.type && entry.url) {
-                                if (!acc[entry.type]) acc[entry.type] = [];
-                                acc[entry.type].push(entry);
-                            }
-                            return acc;
-                        }, {});
-
-                        const categoryOrder = ['paper', 'book', 'substack', 'twitter', 'youtube'];
-                        const categories = Object.keys(groupedItems).sort((a, b) => {
-                            const indexA = categoryOrder.indexOf(a);
-                            const indexB = categoryOrder.indexOf(b);
-                            if (indexA === -1) return 1;
-                            if (indexB === -1) return -1;
-                            return indexA - indexB;
-                        });
-
-                        const midPoint = Math.ceil(categories.length / 2);
-                        const col1Categories = categories.slice(0, midPoint);
-                        const col2Categories = categories.slice(midPoint);
-
-                        const buildColumnHtml = (cats) => {
-                            let colHtml = '';
-                            cats.forEach(type => {
-                                if (!groupedItems[type] || groupedItems[type].length === 0) return;
-
-                                let title = type.charAt(0).toUpperCase() + type.slice(1);
-                                if (type === 'book') title = 'Books';
-                                if (type === 'paper') title = 'Papers';
-                                colHtml += `<div class="mb-4"><em class="capitalize pl-4 text-gray-500 text-sm font-semibold">${title}</em>`;
-                                
-                                let contentHtml = '';
-                                if (type === 'paper' || type === 'book') {
-                                    contentHtml = '<div class="flex flex-wrap gap-2 pl-4">';
-                                    groupedItems[type].forEach(item => {
-                                        const imgClass = type === 'paper' ? 'paper-thumbnail h-24 w-20 object-cover' : 'book-thumbnail h-24 w-auto';
-                                        contentHtml += `<img src="${item.url}" alt="${type} thumbnail" class="${imgClass} rounded cursor-pointer hover:opacity-80 transition-opacity">`;
-                                    });
-                                    contentHtml += '</div>';
-                                } else if (type === 'twitter' || type === 'substack') {
-                                    contentHtml = '<div class="pl-4">' + groupedItems[type].map(item => {
-                                        return `<a href="${item.url}" target="_blank" rel="noopener noreferrer" class="block py-1.5 text-gray-700 hover:text-[var(--brand-green)] transition-colors duration-200">
-                                                    <span class="font-semibold block text-base leading-tight">${item.author}</span>
-                                                    <span class="text-sm text-gray-600">${item.title}</span>
-                                                </a>`;
-                                    }).join('') + '</div>';
-                                } else if (type === 'youtube') {
-                                     contentHtml = '<div class="pl-4">' + groupedItems[type].map(item => {
-                                        let displayUrl = item.url.replace('https://www.youtube.com/embed/', 'youtu.be/');
-                                        return `<a href="${item.url.replace('/embed/', '/watch?v=')}" target="_blank" rel="noopener noreferrer" class="block py-1 text-gray-700 hover:text-[var(--brand-green)] transition-colors duration-200 text-sm">${displayUrl}</a>`;
-                                    }).join('') + '</div>';
-                                }
-
-                                colHtml += `<div class="mt-2">${contentHtml}</div></div>`;
-                            });
-                            return colHtml;
-                        };
-
-                        const col1Html = `<div class="w-full md:w-1/2 pl-4">${buildColumnHtml(col1Categories)}</div>`;
-                        const col2Html = `<div class="w-full md:w-1/2 pl-4">${buildColumnHtml(col2Categories)}</div>`;
-
-                        container.innerHTML = col1Html + col2Html;
-
-                        document.querySelectorAll('.paper-thumbnail, .book-thumbnail').forEach(thumb => {
-                            thumb.addEventListener('click', () => {
-                                modalImage.src = thumb.src;
-                                modal.classList.add('show');
-                            });
-                        });
-
-                        modal.addEventListener('click', () => {
-                            modal.classList.remove('show');
-                        });
-                    })
-                    .catch(error => {
-                        console.error('Error loading or parsing ideas we love:', error);
-                        container.innerHTML = '<p>Could not load content at this time.</p>';
-                    });
-            }
-
             function populateTheCommonsGallery() {
                 const gallery = document.getElementById('the-commons-gallery');
                 if (!gallery) return;
@@ -748,7 +634,6 @@
                 populateSpeakers();
                 populateFaq();
                 populatePhotoGallery();
-                populateIdeasWeLove();
                 populateTheCommonsGallery();
             }
 
