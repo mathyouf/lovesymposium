@@ -347,7 +347,7 @@
                         <h2 class="text-4xl md:text-6xl font-romantic text-[var(--brand-green)] mb-8 text-left">If we can't RETVRN, where are we going?</h2>
                         <div class="text-xl md:text-2xl leading-relaxed text-gray-700 space-y-6 text-left">
                             <p class="font-bold text-2xl md:text-3xl text-gray-800">Modern life has changed love. For better or worse?</p>
-                            <p class="font-bold text-2xl md:text-3xl text-gray-800 underline decoration-4 decoration-[var(--brand-green)] mt-2 mb-4">The future is yours to decide.</p>
+                            <p class="font-bold text-2xl md:text-3xl text-gray-800 mt-2 mb-4">The future is yours to decide.</p>
                             <p>The Love Symposium is a curated event for earnest founders, experts, and intellectuals obsessed with solving our hardest relationship problems and proliferating healthy connection at scale.</p>
                             <p>There will be a weekend of interactive talks, workshops, hackathons, and late-night conversations. But our goal is to spark collaborations, action, and impact that go far beyond.</p>
                             <p>This year's topics center around the dating industry, predictive AI and psychometrics for matchmaking, and the science of healthy love.</p>
@@ -356,9 +356,9 @@
                     </div>
                     <div class="md:col-span-1">
                         <div>
-                            <h3 class="text-2xl font-romantic text-[var(--brand-green)] mb-2">Ideas We Love</h3>
+                            <h3 class="text-2xl font-romantic text-[var(--brand-green)] mb-2">Ideas & Inspo</h3>
                             <p class="text-gray-600 mb-4">This is some of the excellent content we love.</p>
-                            <div id="ideas-we-love-container" class="flex space-x-8"></div>
+                            <div id="ideas-we-love-container" class="flex flex-col space-y-8 md:flex-row md:space-y-0 md:space-x-8"></div>
                     </div>
                 </div>
             </section>
@@ -415,15 +415,6 @@
                         </ul>
                     </div>
 
-                    <div class="topic-card">
-                        <h3 class="topic-title">The Sociology of Modern Dating</h3>
-                        <div class="topic-divider">❦</div>
-                        <ul class="sub-event-list">
-                            <li>How do algorithmically-driven dating markets alter the psychology of choice and the perception of scarcity?</li>
-                            <li>In what ways is technology fundamentally rewriting the unwritten social scripts and norms of courtship?</li>
-                            <li>What is the inherent tension between strategic self-presentation online and the underlying search for authentic connection?</li>
-                        </ul>
-                    </div>
 
                     <div class="topic-card">
                         <h3 class="topic-title">Dating Platform Design & Engineering</h3>
@@ -442,6 +433,16 @@
                             <li>As technology becomes inseparable from our social lives, how will the very definition of 'relationship' and 'partner' evolve?</li>
                             <li>What are the potential societal impacts—positive and negative—of widespread, sophisticated AI companionship?</li>
                             <li>Will technology ultimately serve as a bridge to deeper human connection, or will it become a comfortable buffer against the risks of genuine intimacy?</li>
+                        </ul>
+                    </div>
+
+                    <div class="topic-card">
+                        <h3 class="topic-title">Defining Healthy Love/Community</h3>
+                        <div class="topic-divider">❦</div>
+                        <ul class="sub-event-list">
+                            <li>What does the science of attachment and developmental psychology tell us about the constituent parts of healthy love?</li>
+                            <li>How can we design social systems and cultural norms that actively promote secure attachment and prosocial behavior?</li>
+                            <li>What are the most effective strategies for disseminating these evidence-based models of healthy relationships to a mass audience?</li>
                         </ul>
                     </div>
 
@@ -566,8 +567,8 @@
                             return colHtml;
                         };
 
-                        const col1Html = `<div class="w-1/2">${buildColumnHtml(col1Categories)}</div>`;
-                        const col2Html = `<div class="w-1/2">${buildColumnHtml(col2Categories)}</div>`;
+                        const col1Html = `<div class="w-full md:w-1/2">${buildColumnHtml(col1Categories)}</div>`;
+                        const col2Html = `<div class="w-full md:w-1/2">${buildColumnHtml(col2Categories)}</div>`;
 
                         container.innerHTML = col1Html + col2Html;
 
