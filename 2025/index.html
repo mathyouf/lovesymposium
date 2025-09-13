@@ -13,6 +13,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;500;700&family=Caveat:wght@700&family=Dancing+Script:wght@400;700&family=Great+Vibes&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/animations.css">
+    <link rel="preload" href="assets/images/graphics/robotsarmupscale.webp" as="image">
 
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-7SDRRNGMNG"></script>
     <script>
@@ -394,7 +395,7 @@
 
         <section class="pt-4 md:pt-6 pb-16 md:pb-24 bg-[#fdfbf7] px-4">
             <div class="mx-auto text-center">
-                <img src="assets/images/logo-2025.webp" alt="Love Symposium Logo" class="h-28 w-auto mx-auto mb-8">
+                <img loading="lazy" src="assets/images/logo-2025.webp" alt="Love Symposium Logo" class="h-28 w-auto mx-auto mb-8">
                 <h2 class="text-4xl md:text-5xl font-romantic text-center mb-8 text-[var(--brand-green)]">Symposium Topics</h2>
                 <div class="flex flex-wrap gap-8 justify-center items-stretch">
 
@@ -469,7 +470,7 @@
 
     <div class="relative">
         <div class="w-full">
-            <img src="assets/images/graphics/robots.webp" alt="Love Symposium Footer Graphic" class="w-full h-auto block">
+            <img loading="lazy" src="assets/images/graphics/robots.webp" alt="Love Symposium Footer Graphic" class="w-full h-auto block">
         </div>
         <footer id="footer" class="footer-container">
             <p class="font-cursive text-base md:text-xl text-[var(--off-white)] mb-1">We'd love to hear from you.</p>
@@ -528,7 +529,7 @@
 
                 gallery.innerHTML = imagePaths.map(path => `
                     <div>
-                        <img src="${path}" alt="The Commons space" class="w-full h-auto object-cover rounded-lg shadow-md">
+                        <img loading="lazy" src="${path}" alt="The Commons space" class="w-full h-auto object-cover rounded-lg shadow-md">
                     </div>
                 `).join('');
             }
@@ -542,7 +543,7 @@
 
                     const content = `
                         <div class="host-card flex flex-col items-center text-center">
-                            <img src="${host.image}" alt="Photo of ${host.name}" class="w-[9rem] h-[12rem] rounded-full object-cover shadow-xl mb-6" onerror="this.onerror=null;this.src='https://placehold.co/300x300/cccccc/ffffff?text=Image+Not+Found'">
+                            <img loading="lazy" src="${host.image}" alt="Photo of ${host.name}" class="w-[9rem] h-[12rem] rounded-full object-cover shadow-xl mb-6" onerror="this.onerror=null;this.src='https://placehold.co/300x300/cccccc/ffffff?text=Image+Not+Found'">
                             <h3 class="text-2xl font-bold mb-2 text-[var(--brand-green)]">${host.name}</h3>
                             ${xAccountLink}
                         </div>
@@ -559,7 +560,7 @@
                     const xAccountLink = speaker.x_account ? `<a href="${speaker.x_account}" target="_blank" rel="noopener noreferrer" class="text-sm text-[#8dafb9] hover:text-[var(--brand-green)] transition">@${speaker.x_account.split('/').pop()}</a>` : '';
                     const speakerBubble = `
                         <div class="speaker-card flex flex-col items-center text-center">
-                            <img src="${speaker.image}" alt="Photo of ${speaker.name}" class="w-[9rem] h-[12rem] rounded-full object-cover shadow-xl mb-6" onerror="this.onerror=null;this.src='https://placehold.co/200x200/cccccc/ffffff?text=Image+Not+Found'">
+                            <img loading="lazy" src="${speaker.image}" alt="Photo of ${speaker.name}" class="w-[9rem] h-[12rem] rounded-full object-cover shadow-xl mb-6" onerror="this.onerror=null;this.src='https://placehold.co/200x200/cccccc/ffffff?text=Image+Not+Found'">
                             <h3 class="text-2xl font-bold mb-2 text-[var(--brand-green)]">${speaker.name}</h3>
                             <p class="text-sm text-gray-500">${speaker.title}</p>
                             ${xAccountLink}
@@ -594,6 +595,7 @@
                     const img = document.createElement('img');
                     img.src = imagePaths[i];
                     img.alt = `Love Symposium 2024 Photo`;
+                    img.loading = 'lazy';
                     img.onerror = function() { this.style.display = 'none'; };
                     column.appendChild(img);
 
