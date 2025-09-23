@@ -219,6 +219,7 @@
         @media (max-width: 767px) {
             .host-card { width: calc(50% - 1rem); margin-bottom: 1rem; }
             .speaker-card { margin-bottom: 1rem; }
+        .featured-speaker { transform: scale(1.1); box-shadow: 0 15px 30px rgba(0,0,0,0.2); border: 2px solid var(--brand-green); padding-top: 1rem; background: white; }
         }
 
         /* --- Footer --- */
@@ -494,24 +495,15 @@
             ];
 
             const speakers = [
-                { name: 'Suzie', title: 'And the psychometrics people she knows', image: 'assets/images/speakers/suzie.webp' },
-                { name: 'Heidie Priebe', title: 'To teach advanced attachment theory', image: 'assets/images/speakers/heidie.webp' },
-                { name: 'Sasha Chapin', title: 'Since he’s a big tpot guy', image: 'assets/images/speakers/sasha.webp' },
-                { name: 'Jacob', title: 'From the rationalist dating blog Second Person', image: 'assets/images/speakers/jacob.webp' },
-                { name: 'The Stitch CEO', title: 'To say anything at all', image: 'assets/images/speakers/stitch.webp' },
-                { name: 'Jake from Keeper AI', title: 'To give juicier details this time', image: 'assets/images/speakers/jake.webp' },
-                { name: 'Patricia Mou', title: 'Of The Commons, to speak or do a panel', image: 'assets/images/speakers/patricia.webp' },
-                { name: 'Chris Lakin and/or Ava', title: 'To host a matchmakers meetup', image: 'assets/images/speakers/chris_ava.webp' },
-                { name: 'Aella', title: 'On the topic of polyamory', image: 'assets/images/speakers/aella.webp' },
-                { name: 'Vivid Void (Gabe)', title: 'To do something about masculinity', image: 'assets/images/speakers/gabe.webp' },
-                { name: 'Emmet', title: 'On Cybernetics for better relationships', image: 'assets/images/speakers/emmet.webp' },
-                { name: 'Divvya & Swampmaker', title: 'On their dating profile feedback experiments', image: 'assets/images/speakers/divvya_swampmaker.webp' },
-                { name: 'Andrew from last yr', title: 'On something related to AI chatbots', image: 'assets/images/speakers/andrew.webp' },
-                { name: 'Whitney Wolf', title: 'Scary people', image: 'assets/images/speakers/whitney.webp' },
-                { name: 'John Gottman', title: 'Scary people', image: 'assets/images/speakers/gottman.webp' },
-                { name: 'Brooke Bowman or Taco', title: 'tpot ppl who are more casual/unaffiliated', image: 'assets/images/speakers/brooke_taco.webp' },
-                { name: 'local rationalist lady', title: 'who went viral recently for making a conflict app', image: 'assets/images/speakers/rationalist_lady.webp' },
-                { name: 'Malcolm Ocean', title: 'too prob', image: 'assets/images/speakers/malcolm.webp' }
+                { name: 'Cody Zervas', title: 'Keeper AI', image: 'assets/images/speakers/cody.jpeg', featured: true },
+                { name: 'Christine Peterson', title: 'On why men and women should date differently', image: 'assets/images/speakers/christine_peterson.webp', x_account: 'https://x.com/christineist' },
+                { name: 'Lana Li', title: 'On researching dating in 2025', image: 'assets/images/speakers/lanali.jpg' },
+                { name: 'Christine', title: 'Cuties App', image: 'assets/images/speakers/christine.webp', x_account: 'https://x.com/christineist' },
+                { name: 'Rie Yano & Adam Gries', title: 'On ambition and relationships', image: 'assets/images/speakers/foundercouple.png' },
+                { name: 'Suzie Antal', title: 'Spectra', image: 'assets/images/speakers/suzie.webp' },
+                { name: 'Vivid Void', title: 'On modern masculinity', image: 'assets/images/speakers/vivid_void.webp', x_account: 'https://x.com/VividVoid_' },
+                { name: 'Divya Venn', title: 'On ideas for the new matchmaking industry', image: 'assets/images/speakers/divya_venn.webp', x_account: 'https://x.com/divya_venn' },
+                { name: 'Allen Wang', title: 'Ditto AI', image: 'assets/images/speakers/allen_wang.webp', x_account: 'https://x.com/AllenWangzian' }
             ];
             
             const faqData = [
@@ -563,8 +555,9 @@
                 container.innerHTML = '';
                 speakers.forEach(speaker => {
                     const xAccountLink = speaker.x_account ? `<a href="${speaker.x_account}" target="_blank" rel="noopener noreferrer" class="text-sm text-[#8dafb9] hover:text-[var(--brand-green)] transition">@${speaker.x_account.split('/').pop()}</a>` : '';
+                    const featuredClass = speaker.featured ? 'featured-speaker' : '';
                     const speakerBubble = `
-                        <div class="speaker-card flex flex-col items-center text-center">
+                        <div class="speaker-card flex flex-col items-center text-center ${featuredClass}">
                             <img src="${speaker.image}" alt="Photo of ${speaker.name}" class="w-[9rem] h-[12rem] rounded-full object-cover shadow-xl mb-6" onerror="this.onerror=null;this.src='https://placehold.co/200x200/cccccc/ffffff?text=Image+Not+Found'">
                             <h3 class="text-2xl font-bold mb-2 text-[var(--brand-green)]">${speaker.name}</h3>
                             <p class="text-sm text-gray-500">${speaker.title}</p>
@@ -620,7 +613,10 @@
                     galleryColumns.push(column);
                 }
                 
-                const allGalleryColumns = [...galleryColumns, ...galleryColumns]; // Duplicate for seamless scroll
+                galleryColumns.forEach(col => photoGallery.appendChild(col));
+
+                // Duplicate for seamless scroll
+                galleryColumns.forEach(col => photoGallery.appendChild(col.cloneNode(true)));
 
                 // --- GOOGLE ANALYTICS EVENT TRACKING ---
                 const applyButton = document.getElementById('apply-button');
@@ -632,7 +628,6 @@
                         });
                     });
                 }
-                allGalleryColumns.forEach(col => photoGallery.appendChild(col));
             }
 
             function populateFaq() {
