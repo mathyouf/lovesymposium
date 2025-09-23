@@ -197,9 +197,19 @@
 
         
         /* --- Auto-scrolling Photo Gallery --- */
-        @keyframes scroll-loop { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        @keyframes scroll-loop { 
+            0% { transform: translateX(0); } 
+            100% { transform: translateX(-75%); } /* Scroll through 3 of the 4 content blocks */
+        }
         .photo-gallery-container { height: 512px; overflow: hidden; position: relative; }
-        .photo-gallery-scroller { display: flex; width: fit-content; animation: scroll-loop 60s linear infinite; will-change: transform; align-items: center; }
+        .photo-gallery-scroller { 
+            display: flex; 
+            width: fit-content; 
+            /* Animation duration is now set dynamically in JS */
+            animation: scroll-loop linear infinite; 
+            will-change: transform; 
+            align-items: center; 
+        }
         .photo-gallery-scroller img { height: 256px; transition: height 0.3s ease; width: auto; object-fit: cover; border-radius: 0.5rem; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); margin: 0 0.5rem; }
         .gallery-column { display: flex; flex-direction: column; align-items: center; margin: 0 0.5rem; flex-shrink: 0; justify-content: center; }
         .review-card-scroller { width: 384px; background-color: #fdfbf7; border: 1px solid #dcd0c0; border-radius: 0.5rem; padding: 1.5rem; margin-top: 1rem; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); }
@@ -209,7 +219,6 @@
 
         @media (max-width: 768px) {
             .photo-gallery-container { height: 420px; }
-            .photo-gallery-scroller { animation-duration: 30s; }
             .photo-gallery-scroller img { height: 192px; }
             .photo-gallery-scroller .img-tall { height: 320px; }
         }
@@ -613,8 +622,17 @@
                 
                 galleryColumns.forEach(col => photoGallery.appendChild(col));
 
-                // Duplicate for seamless scroll
-                galleryColumns.forEach(col => photoGallery.appendChild(col.cloneNode(true)));
+                // Duplicate content three times for a long, seamless scroll (4 total copies)
+                for (let i = 0; i < 3; i++) {
+                    galleryColumns.forEach(col => photoGallery.appendChild(col.cloneNode(true)));
+                }
+
+                // Dynamically set animation duration based on content width
+                // This makes the scroll speed consistent regardless of the number of items.
+                const totalWidth = photoGallery.scrollWidth / 4; // Width of one set of items
+                const animationSpeed = 50; // pixels per second
+                const duration = totalWidth / animationSpeed;
+                photoGallery.style.animationDuration = `${duration * 3}s`; // Duration to scroll through 3 copies
 
                 // --- GOOGLE ANALYTICS EVENT TRACKING ---
                 const applyButton = document.getElementById('apply-button');
