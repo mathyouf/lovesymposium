@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Love Symposium</title>
-    <link rel="shortcut icon" type="image/png" href="../2024/assets/images/logo2.png"/>
+    <link rel="shortcut icon" type="image/png" href="../2024/assets/images/logo2.webp"/>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
@@ -13,7 +13,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;500;700&family=Caveat:wght@700&family=Dancing+Script:wght@400;700&family=Great+Vibes&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/animations.css">
-    <link rel="preload" href="assets/images/graphics/robotsarmupscale.webp" as="image">
 
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-7SDRRNGMNG"></script>
     <script>
@@ -70,7 +69,7 @@
 
         /* --- Page Sections --- */
         .hero-section {
-            background-image: url('assets/images/graphics/robotsarmupscale.webp');
+            background-image: url('assets/images/graphics/robotsarmupscale.png');
             background-size: cover;
             background-position: center;
             filter: brightness(1.1);
@@ -198,9 +197,19 @@
 
         
         /* --- Auto-scrolling Photo Gallery --- */
-        @keyframes scroll-loop { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        @keyframes scroll-loop { 
+            0% { transform: translateX(0); } 
+            100% { transform: translateX(-75%); } /* Scroll through 3 of the 4 content blocks */
+        }
         .photo-gallery-container { height: 512px; overflow: hidden; position: relative; }
-        .photo-gallery-scroller { display: flex; width: fit-content; animation: scroll-loop 60s linear infinite; will-change: transform; align-items: center; }
+        .photo-gallery-scroller { 
+            display: flex; 
+            width: fit-content; 
+            /* Animation duration is now set dynamically in JS */
+            animation: scroll-loop linear infinite; 
+            will-change: transform; 
+            align-items: center; 
+        }
         .photo-gallery-scroller img { height: 256px; transition: height 0.3s ease; width: auto; object-fit: cover; border-radius: 0.5rem; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); margin: 0 0.5rem; }
         .gallery-column { display: flex; flex-direction: column; align-items: center; margin: 0 0.5rem; flex-shrink: 0; justify-content: center; }
         .review-card-scroller { width: 384px; background-color: #fdfbf7; border: 1px solid #dcd0c0; border-radius: 0.5rem; padding: 1.5rem; margin-top: 1rem; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); }
@@ -210,7 +219,6 @@
 
         @media (max-width: 768px) {
             .photo-gallery-container { height: 420px; }
-            .photo-gallery-scroller { animation-duration: 30s; }
             .photo-gallery-scroller img { height: 192px; }
             .photo-gallery-scroller .img-tall { height: 320px; }
         }
@@ -220,7 +228,7 @@
         @media (max-width: 767px) {
             .host-card { width: calc(50% - 1rem); margin-bottom: 1rem; }
             .speaker-card { margin-bottom: 1rem; }
-        }
+                }
 
         /* --- Footer --- */
         /* --- Toast Notification --- */
@@ -376,7 +384,7 @@
                 </div>
 
                 <div class="mt-16">
-                    <h3 class="text-2xl font-romantic text-[var(--brand-green)] mb-8">Who You'll Meet</h3>
+                    <h3 class="text-2xl font-romantic text-[var(--brand-green)] mb-8">Featured Speakers</h3>
                     <div id="speakers-container" class="flex flex-wrap gap-x-4 sm:gap-x-8 gap-y-12 justify-center items-start">
                         </div>
                 </div>
@@ -395,7 +403,7 @@
 
         <section class="pt-4 md:pt-6 pb-16 md:pb-24 bg-[#fdfbf7] px-4">
             <div class="mx-auto text-center">
-                <img loading="lazy" src="assets/images/logo-2025.webp" alt="Love Symposium Logo" class="h-28 w-auto mx-auto mb-8">
+                <img src="assets/images/logo-2025.webp" alt="Love Symposium Logo" class="h-28 w-auto mx-auto mb-8">
                 <h2 class="text-4xl md:text-5xl font-romantic text-center mb-8 text-[var(--brand-green)]">Symposium Topics</h2>
                 <div class="flex flex-wrap gap-8 justify-center items-stretch">
 
@@ -470,7 +478,7 @@
 
     <div class="relative">
         <div class="w-full">
-            <img loading="lazy" src="assets/images/graphics/robots.webp" alt="Love Symposium Footer Graphic" class="w-full h-auto block">
+            <img src="assets/images/graphics/robots.webp" alt="Love Symposium Footer Graphic" class="w-full h-auto block">
         </div>
         <footer id="footer" class="footer-container">
             <p class="font-cursive text-base md:text-xl text-[var(--off-white)] mb-1">We'd love to hear from you.</p>
@@ -495,18 +503,19 @@
             ];
 
             const speakers = [
-                { name: 'Authors', title: 'Weaving the narratives of modern love', image: 'assets/images/speakers/13.webp' },
-                { name: 'Psychologists', title: 'Exploring the architecture of the human heart', image: 'assets/images/speakers/5.webp' },
-                { name: 'Founders', title: 'Building the platforms that connect us', image: 'assets/images/speakers/14.webp' },
-                { name: 'Data Scientists', title: 'Finding the patterns in our romantic destinies', image: 'assets/images/speakers/3.webp' },
-                { name: 'Therapists', title: 'Guiding us through the complexities of connection', image: 'assets/images/speakers/2.webp' },
-                { name: 'Academics', title: 'Applying rigor to the study of relationship dynamics', image: 'assets/images/speakers/1.webp' },
-                { name: 'Engineers', title: 'Architecting the infrastructure of digital intimacy', image: 'assets/images/speakers/15.png' },
-                { name: 'Matchmakers', title: 'The modern-day artists of the perfect pair', image: 'assets/images/speakers/10.webp' },
-                { name: 'Podcasters', title: 'Giving voice to the stories of love and loss', image: 'assets/images/speakers/4.webp' },
-                { name: 'Researchers', title: 'Uncovering the science behind attraction', image: 'assets/images/speakers/9.webp' },
-                { name: 'Investors', title: 'Investing in the future of relationship technology', image: 'assets/images/speakers/12.webp' },
-                { name: 'Artists', title: 'Capturing the ineffable beauty of human connection', image: 'assets/images/speakers/11.webp' },
+                { name: 'Cody Zervas', title: 'Keeper AI', image: 'assets/images/speakers/cody.jpg', links: [{url: 'https://x.com/CodyZervas', text: 'CodyZervas'}] },
+                { name: 'Christine Peterson', title: 'On why men and women should date differently', image: 'assets/images/speakers/christinepeterson.jpg', links: [{url: 'https://x.com/lifeext', text: 'lifeext'}] },
+                { name: 'Lana Li', title: 'Researching dating in 2025', image: 'assets/images/speakers/lanali.jpg', links: [{url: 'https://lovemelikearobot.substack.com/', text: 'lovemelikearobot'}] },
+                { name: 'Rie Yano & Adam Gries', title: 'Propose on the First Date', image: 'assets/images/speakers/adamrie.png', links: [{url: 'https://x.com/adamgries', text: 'adamgries'}, {url: 'https://x.com/rieglobe', text: 'rieglobe'}] },
+                { name: 'Suzie Antal', title: 'Spectra', image: 'assets/images/speakers/suzieantal.png', links: [{url: 'https://www.linkedin.com/in/suzieantal/', text: 'suzieantal'}] },
+                { name: 'Vivid Void', title: 'On modern masculinity', image: 'assets/images/speakers/vividvoid.jpg', x_account: 'https://x.com/VividVoid_' },
+                { name: 'Divya Venn', title: 'On ideas for the new matchmaking industry', image: 'assets/images/speakers/divya_venn.jpg', x_account: 'https://x.com/divya_venn' },
+                { name: 'Allen Wang', title: 'Ditto AI', image: 'assets/images/speakers/allenwang2.jpeg', x_account: 'https://x.com/AllenWangzian' },
+                { name: 'Lucy Huang', title: 'On how to matchmake your friends', image: 'assets/images/speakers/lovebylucylu.jpg', links: [{url: 'https://x.com/lovebylucylu', text: 'lovebylucylu'}] },
+                { name: 'Carla Guarnay', title: 'DateSpot Matchmaking', image: 'assets/images/speakers/carlag.webp', links: [{url: 'https://www.linkedin.com/in/carla-swiryn/', text: 'carla-swiryn'}] },
+                { name: 'Ivan Vendrov', title: 'Midjourney', image: 'assets/images/speakers/ivanv.jpg', links: [{url: 'https://x.com/IvanVendrov', text: 'IvanVendrov'}] },
+                { name: 'Malcolm Ocean', title: 'On trust', image: 'assets/images/speakers/malcolmocean.jpg', links: [{url: 'https://x.com/malcolm_ocean', text: 'Malcolm_Ocean'}] },
+                { name: 'Jessica Ocean', title: 'Psych Crisis', image: 'assets/images/speakers/jessocean.jpg', links: [{url: 'https://psychcrisis.substack.com/', text: 'psychcrisis'}] }
             ];
             
             const faqData = [
@@ -529,7 +538,7 @@
 
                 gallery.innerHTML = imagePaths.map(path => `
                     <div>
-                        <img loading="lazy" src="${path}" alt="The Commons space" class="w-full h-auto object-cover rounded-lg shadow-md">
+                        <img src="${path}" alt="The Commons space" class="w-full h-auto object-cover rounded-lg shadow-md">
                     </div>
                 `).join('');
             }
@@ -543,7 +552,7 @@
 
                     const content = `
                         <div class="host-card flex flex-col items-center text-center">
-                            <img loading="lazy" src="${host.image}" alt="Photo of ${host.name}" class="w-[9rem] h-[12rem] rounded-full object-cover shadow-xl mb-6" onerror="this.onerror=null;this.src='https://placehold.co/300x300/cccccc/ffffff?text=Image+Not+Found'">
+                            <img src="${host.image}" alt="Photo of ${host.name}" class="w-[9rem] h-[12rem] rounded-full object-cover shadow-xl mb-6" onerror="this.onerror=null;this.src='https://placehold.co/300x300/cccccc/ffffff?text=Image+Not+Found'">
                             <h3 class="text-2xl font-bold mb-2 text-[var(--brand-green)]">${host.name}</h3>
                             ${xAccountLink}
                         </div>
@@ -557,13 +566,22 @@
                 if (!container) return;
                 container.innerHTML = '';
                 speakers.forEach(speaker => {
-                    const xAccountLink = speaker.x_account ? `<a href="${speaker.x_account}" target="_blank" rel="noopener noreferrer" class="text-sm text-[#8dafb9] hover:text-[var(--brand-green)] transition">@${speaker.x_account.split('/').pop()}</a>` : '';
+                    let socialLinks = '';
+                    if (speaker.links && speaker.links.length > 0) {
+                        socialLinks = speaker.links.map(link => {
+                            const displayText = link.url.includes('x.com') ? `@${link.text}` : link.text;
+                            return `<a href="${link.url}" target="_blank" rel="noopener noreferrer" class="text-sm text-[#8dafb9] hover:text-[var(--brand-green)] transition">${displayText}</a>`;
+                        }).join('<span class="mx-1"></span>');
+                    } else if (speaker.x_account) {
+                        socialLinks = `<a href="${speaker.x_account}" target="_blank" rel="noopener noreferrer" class="text-sm text-[#8dafb9] hover:text-[var(--brand-green)] transition">@${speaker.x_account.split('/').pop()}</a>`;
+                    }
+
                     const speakerBubble = `
                         <div class="speaker-card flex flex-col items-center text-center">
-                            <img loading="lazy" src="${speaker.image}" alt="Photo of ${speaker.name}" class="w-[9rem] h-[12rem] rounded-full object-cover shadow-xl mb-6" onerror="this.onerror=null;this.src='https://placehold.co/200x200/cccccc/ffffff?text=Image+Not+Found'">
+                            <img src="${speaker.image}" alt="Photo of ${speaker.name}" class="w-[9rem] h-[12rem] rounded-full object-cover shadow-xl mb-6" onerror="this.onerror=null;this.src='https://placehold.co/200x200/cccccc/ffffff?text=Image+Not+Found'">
                             <h3 class="text-2xl font-bold mb-2 text-[var(--brand-green)]">${speaker.name}</h3>
                             <p class="text-sm text-gray-500">${speaker.title}</p>
-                            ${xAccountLink}
+                            <div class="mt-1 flex flex-wrap justify-center">${socialLinks}</div>
                         </div>
                     `;
                     container.innerHTML += speakerBubble;
@@ -595,7 +613,6 @@
                     const img = document.createElement('img');
                     img.src = imagePaths[i];
                     img.alt = `Love Symposium 2024 Photo`;
-                    img.loading = 'lazy';
                     img.onerror = function() { this.style.display = 'none'; };
                     column.appendChild(img);
 
@@ -616,7 +633,19 @@
                     galleryColumns.push(column);
                 }
                 
-                const allGalleryColumns = [...galleryColumns, ...galleryColumns]; // Duplicate for seamless scroll
+                galleryColumns.forEach(col => photoGallery.appendChild(col));
+
+                // Duplicate content three times for a long, seamless scroll (4 total copies)
+                for (let i = 0; i < 3; i++) {
+                    galleryColumns.forEach(col => photoGallery.appendChild(col.cloneNode(true)));
+                }
+
+                // Dynamically set animation duration based on content width
+                // This makes the scroll speed consistent regardless of the number of items.
+                const totalWidth = photoGallery.scrollWidth / 4; // Width of one set of items
+                const animationSpeed = 50; // pixels per second
+                const duration = totalWidth / animationSpeed;
+                photoGallery.style.animationDuration = `${duration * 3}s`; // Duration to scroll through 3 copies
 
                 // --- GOOGLE ANALYTICS EVENT TRACKING ---
                 const applyButton = document.getElementById('apply-button');
@@ -628,7 +657,6 @@
                         });
                     });
                 }
-                allGalleryColumns.forEach(col => photoGallery.appendChild(col));
             }
 
             function populateFaq() {
