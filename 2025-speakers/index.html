@@ -503,20 +503,19 @@
             ];
 
             const speakers = [
-                { name: 'Cody Zervas', title: 'Keeper AI', image: 'assets/images/speakers/cody.jpg' },
-                { name: 'Christine Peterson', title: 'On why men and women should date differently', image: 'assets/images/speakers/christinepeterson.jpg', x_account: 'https://x.com/christineist' },
-                { name: 'Lana Li', title: 'On researching dating in 2025', image: 'assets/images/speakers/lanali.jpg' },
-                { name: 'Christine', title: 'Cuties App', image: 'assets/images/speakers/christineist.jpg', x_account: 'https://x.com/christineist' },
-                { name: 'Rie Yano & Adam Gries', title: 'On ambition and relationships', image: 'assets/images/speakers/adamrie.png' },
-                { name: 'Suzie Antal', title: 'Spectra', image: 'assets/images/speakers/suzieantal.png' },
+                { name: 'Cody Zervas', title: 'Keeper AI', image: 'assets/images/speakers/cody.jpg', links: [{url: 'https://x.com/CodyZervas', text: 'CodyZervas'}] },
+                { name: 'Christine Peterson', title: 'On why men and women should date differently', image: 'assets/images/speakers/christinepeterson.jpg', links: [{url: 'https://x.com/lifeext', text: 'lifeext'}] },
+                { name: 'Lana Li', title: 'Researching dating in 2025', image: 'assets/images/speakers/lanali.jpg', links: [{url: 'https://lovemelikearobot.substack.com/', text: 'lovemelikearobot'}] },
+                { name: 'Rie Yano & Adam Gries', title: 'Propose on the First Date', image: 'assets/images/speakers/adamrie.png', links: [{url: 'https://x.com/adamgries', text: 'adamgries'}, {url: 'https://x.com/rieglobe', text: 'rieglobe'}] },
+                { name: 'Suzie Antal', title: 'Spectra', image: 'assets/images/speakers/suzieantal.png', links: [{url: 'https://www.linkedin.com/in/suzieantal/', text: 'suzieantal'}] },
                 { name: 'Vivid Void', title: 'On modern masculinity', image: 'assets/images/speakers/vividvoid.jpg', x_account: 'https://x.com/VividVoid_' },
                 { name: 'Divya Venn', title: 'On ideas for the new matchmaking industry', image: 'assets/images/speakers/divya_venn.jpg', x_account: 'https://x.com/divya_venn' },
                 { name: 'Allen Wang', title: 'Ditto AI', image: 'assets/images/speakers/allenwang2.jpeg', x_account: 'https://x.com/AllenWangzian' },
-                { name: 'Lucy Huang', title: 'On how to matchmake your friends', image: 'assets/images/speakers/lovebylucylu.jpg' },
-                { name: 'Carla Guarnay', title: 'DateSpot Matchmaking', image: 'assets/images/speakers/carlag.webp' },
-                { name: 'Ivan Vendrov', title: 'Midjourney', image: 'assets/images/speakers/ivanv.jpg' },
-                { name: 'Malcolm Ocean', title: 'On trust', image: 'assets/images/speakers/malcolmocean.jpg' },
-                { name: 'Jess Ocean', title: 'Psych Crisis', image: 'assets/images/speakers/jessocean.jpg' }
+                { name: 'Lucy Huang', title: 'On how to matchmake your friends', image: 'assets/images/speakers/lovebylucylu.jpg', links: [{url: 'https://x.com/lovebylucylu', text: 'lovebylucylu'}] },
+                { name: 'Carla Guarnay', title: 'DateSpot Matchmaking', image: 'assets/images/speakers/carlag.webp', links: [{url: 'https://www.linkedin.com/in/carla-swiryn/', text: 'carla-swiryn'}] },
+                { name: 'Ivan Vendrov', title: 'Midjourney', image: 'assets/images/speakers/ivanv.jpg', links: [{url: 'https://x.com/IvanVendrov', text: 'IvanVendrov'}] },
+                { name: 'Malcolm Ocean', title: 'On trust', image: 'assets/images/speakers/malcolmocean.jpg', links: [{url: 'https://x.com/malcolm_ocean', text: 'Malcolm_Ocean'}] },
+                { name: 'Jessica Ocean', title: 'Psych Crisis', image: 'assets/images/speakers/jessocean.jpg', links: [{url: 'https://psychcrisis.substack.com/', text: 'psychcrisis'}] }
             ];
             
             const faqData = [
@@ -567,13 +566,22 @@
                 if (!container) return;
                 container.innerHTML = '';
                 speakers.forEach(speaker => {
-                    const xAccountLink = speaker.x_account ? `<a href="${speaker.x_account}" target="_blank" rel="noopener noreferrer" class="text-sm text-[#8dafb9] hover:text-[var(--brand-green)] transition">@${speaker.x_account.split('/').pop()}</a>` : '';
+                    let socialLinks = '';
+                    if (speaker.links && speaker.links.length > 0) {
+                        socialLinks = speaker.links.map(link => {
+                            const displayText = link.url.includes('x.com') ? `@${link.text}` : link.text;
+                            return `<a href="${link.url}" target="_blank" rel="noopener noreferrer" class="text-sm text-[#8dafb9] hover:text-[var(--brand-green)] transition">${displayText}</a>`;
+                        }).join('<span class="mx-1"></span>');
+                    } else if (speaker.x_account) {
+                        socialLinks = `<a href="${speaker.x_account}" target="_blank" rel="noopener noreferrer" class="text-sm text-[#8dafb9] hover:text-[var(--brand-green)] transition">@${speaker.x_account.split('/').pop()}</a>`;
+                    }
+
                     const speakerBubble = `
                         <div class="speaker-card flex flex-col items-center text-center">
                             <img src="${speaker.image}" alt="Photo of ${speaker.name}" class="w-[9rem] h-[12rem] rounded-full object-cover shadow-xl mb-6" onerror="this.onerror=null;this.src='https://placehold.co/200x200/cccccc/ffffff?text=Image+Not+Found'">
                             <h3 class="text-2xl font-bold mb-2 text-[var(--brand-green)]">${speaker.name}</h3>
                             <p class="text-sm text-gray-500">${speaker.title}</p>
-                            ${xAccountLink}
+                            <div class="mt-1 flex flex-wrap justify-center">${socialLinks}</div>
                         </div>
                     `;
                     container.innerHTML += speakerBubble;
