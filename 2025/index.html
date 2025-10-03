@@ -498,9 +498,9 @@
             // --- PAGE CONTENT DATA ---
             // All data is centralized here for easy updates.
             const hosts = [
-                { name: 'Ann Pierce', image: 'assets/images/hosts/ann-painting.webp', x_account: 'https://x.com/itsannpierce' },
-                { name: 'Matthew Fisher', image: 'assets/images/hosts/matt-painting.webp', x_account: 'https://x.com/mathyouf' },
-                { name: 'Suzie Antal', image: 'assets/images/hosts/suzie.png', x_account: 'https://spectrapersonality.com' }
+                { name: 'Ann Pierce', image: 'assets/images/hosts/ann-painting.webp', links: [{ url: 'https://x.com/itsannpierce', text: 'itsannpeirce' }] },
+                { name: 'Matthew Fisher', image: 'assets/images/hosts/matt-painting.webp', links: [{ url: 'https://x.com/mathyouf', text: 'mathyouf' }] },
+                { name: 'Suzie Antal', image: 'assets/images/hosts/suzie.png', links: [{ url: 'https://spectrapersonality.com/?tab=hello', text: 'spectra' }] }
             ];
 
             const speakers = [
@@ -549,13 +549,19 @@
                 if (!section) return;
                 section.innerHTML = '';
                 hosts.forEach((host) => {
-                    const xAccountLink = host.x_account ? `<a href="${host.x_account}" target="_blank" rel="noopener noreferrer" class="text-sm text-[#8dafb9] hover:text-[var(--brand-green)] transition mt-1">@${host.x_account.split('/').pop()}</a>` : '';
+                    let socialLinks = '';
+                    if (host.links && host.links.length > 0) {
+                        socialLinks = host.links.map(link => {
+                            const displayText = link.url.includes('x.com') ? `@${link.text}` : link.text;
+                            return `<a href="${link.url}" target="_blank" rel="noopener noreferrer" class="text-sm text-[#8dafb9] hover:text-[var(--brand-green)] transition mt-1">${displayText}</a>`;
+                        }).join('<span class="mx-1"></span>');
+                    }
 
                     const content = `
                         <div class="host-card flex flex-col items-center text-center">
                             <img src="${host.image}" alt="Photo of ${host.name}" class="w-[9rem] h-[12rem] rounded-full object-cover shadow-xl mb-6" onerror="this.onerror=null;this.src='https://placehold.co/300x300/cccccc/ffffff?text=Image+Not+Found'">
                             <h3 class="text-2xl font-bold mb-2 text-[var(--brand-green)]">${host.name}</h3>
-                            ${xAccountLink}
+                            <div class="mt-1 flex flex-wrap justify-center">${socialLinks}</div>
                         </div>
                     `;
                     section.innerHTML += content;
