@@ -465,7 +465,10 @@
         <section class="pt-0 pb-16 md:pb-24 mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center">
                 <lottie-player src="https://cdn.prod.website-files.com/62bf713af44e651aa7797a24/62c7cb8cfe2a3951fd00fb88_409974631-ic-05.json" background="transparent" speed="1" class="mx-auto h-24 w-24 mb-4" loop autoplay></lottie-player>
-                <h2 class="text-4xl md:text-5xl font-romantic text-[var(--brand-green)] mb-8">The Commons</h2>
+                <a href="https://www.thesfcommons.com/" target="_blank" rel="noopener noreferrer" class="no-underline hover:no-underline focus:no-underline active:no-underline cursor-default">
+                    <h2 class="text-4xl md:text-5xl font-romantic text-[var(--brand-green)] mb-4">The Commons</h2>
+                </a>
+                <p class="text-xl text-gray-600 -mt-2 mb-8">Many thanks to our sponsor, The Commons, for hosting us in their incredible space.</p>
             </div>
             <div id="the-commons-gallery" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 max-w-5xl mx-auto"></div>
         </section>
@@ -498,9 +501,9 @@
             // --- PAGE CONTENT DATA ---
             // All data is centralized here for easy updates.
             const hosts = [
-                { name: 'Ann Pierce', image: 'assets/images/hosts/ann-painting.webp', links: [{ url: 'https://x.com/itsannpierce', text: 'itsannpeirce' }] },
-                { name: 'Matthew Fisher', image: 'assets/images/hosts/matt-painting.webp', links: [{ url: 'https://x.com/mathyouf', text: 'mathyouf' }] },
-                { name: 'Suzie Antal', image: 'assets/images/hosts/suzie.png', links: [{ url: 'https://spectrapersonality.com/?tab=hello', text: 'spectra' }] }
+                { name: 'Ann Pierce', title: 'Co-founder of Photofeeler, conflict researcher', image: 'assets/images/hosts/ann-painting.webp', links: [{ url: 'https://x.com/itsannpierce', text: 'itsannpeirce' }] },
+                { name: 'Matthew Fisher', title: 'Personality Manifolds & Relationship Outcome Prediction Technology', image: 'assets/images/hosts/matt-painting.webp', links: [{ url: 'https://x.com/mathyouf', text: 'mathyouf' }] },
+                { name: 'Suzie Antal', title: 'Founder of Spectra Personality', image: 'assets/images/hosts/suzie.png', links: [{ url: 'https://spectrapersonality.com/?tab=hello', text: 'spectra' }] }
             ];
 
             const speakers = [
@@ -521,8 +524,8 @@
             ];
             
             const faqData = [
-                { question: "When and where?", answer: "The Love Symposium will run all day Friday 11/14, Saturday 11/15, and Sunday 11/16 at <strong>The Commons</strong>, a beautiful and cozy community space located at 550 Laguna St, San Francisco, CA 94102." },
-                { question: "What does it cost?", answer: "We do this because we love it, not to turn a profit, so we're intentionally keeping the ticket price low. Due to limited space, when you apply to attend on Luma, we'll first ask a few questions to gauge fit. Once accepted, tickets are <strong>$200 each</strong>." },
+                { question: "When and where?", answer: "The Love Symposium will unofficially begin on Thursday 11/13 with a bonus <a href=\"https://luma.com/psychometrics\" target=\"_blank\" class=\"text-[var(--apply-button-hover-icon-color)] hover:text-[var(--brand-green)] underline\">psychometrics hackathon</a>, followed by psychometrics-focused daytime programming on Friday 11/14 in a special location. <a href=\"https://luma.com/lovesymposium25\" target=\"_blank\" class=\"text-[var(--apply-button-hover-icon-color)] hover:text-[var(--brand-green)] underline\">The main conference</a> will kick off on Friday 11/14 from 6pm to 9pm at <strong>The Commons</strong>, a beautiful and cozy community space located at 550 Laguna St, San Francisco, CA 94102. Official events will continue from around 10am to 8pm on Saturday 11/15 and Sunday 11/16." },
+                { question: "What does it cost?", answer: "We do this because we love it, not to turn a profit, so we're intentionally keeping the ticket price low. Due to limited space, when you <a href=\"https://luma.com/lovesymposium25\" target=\"_blank\" class=\"text-[var(--apply-button-hover-icon-color)] hover:text-[var(--brand-green)] underline\">apply to attend on Luma</a>, we'll first ask a few questions to gauge fit. Once accepted, tickets are <strong>$200 each</strong>." },
                 { question: "Is there a dress code?", answer: "The venue is shoes-off, and you might find yourself sitting on the floor at times, so we recommend dressing for comfort." },
                 { question: "Can I get a refund on my ticket?", answer: "Unfortunately tickets are non-refundable." },
                 { question: "If I'm coming from out of town, where should I stay?", answer: "There are many hotels, hostels, and Airbnbs within walking distance of The Commons. A few of the closest are <strong>The Annex at Hayes Valley</strong>, <strong>Hayes Valley Inn</strong>, and <strong>Inn at Grove</strong> (all a 5 minute walk to the venue)." }
@@ -561,6 +564,7 @@
                         <div class="host-card flex flex-col items-center text-center">
                             <img src="${host.image}" alt="Photo of ${host.name}" class="w-[9rem] h-[12rem] rounded-full object-cover shadow-xl mb-6" onerror="this.onerror=null;this.src='https://placehold.co/300x300/cccccc/ffffff?text=Image+Not+Found'">
                             <h3 class="text-2xl font-bold mb-2 text-[var(--brand-green)]">${host.name}</h3>
+                            <p class="text-sm text-gray-500">${host.title}</p>
                             <div class="mt-1 flex flex-wrap justify-center">${socialLinks}</div>
                         </div>
                     `;
