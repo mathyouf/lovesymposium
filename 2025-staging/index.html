@@ -69,7 +69,7 @@
 
         /* --- Page Sections --- */
         .hero-section {
-            background-image: url('assets/images/graphics/robotarmbest.png');
+            background-image: url('assets/images-compressed/graphics/robotarmbest.webp');
             background-size: cover;
             background-position: center;
             filter: brightness(1.1);
@@ -403,7 +403,7 @@
 
         <section class="pt-4 md:pt-6 pb-16 md:pb-24 bg-[#fdfbf7] px-4">
             <div class="mx-auto text-center">
-                <img src="assets/images/logo-2025.webp" alt="Love Symposium Logo" class="h-28 w-auto mx-auto mb-8">
+                <img src="assets/images-compressed/logo-2025.webp" alt="Love Symposium Logo" class="h-28 w-auto mx-auto mb-8">
                 <h2 class="text-4xl md:text-5xl font-romantic text-center mb-8 text-[var(--brand-green)]">Symposium Topics</h2>
                 <div class="flex flex-wrap gap-8 justify-center items-stretch">
 
@@ -479,7 +479,7 @@
 
     <div class="relative">
         <div class="w-full">
-            <img src="assets/images/graphics/robots.webp" alt="Love Symposium Footer Graphic" class="w-full h-auto block">
+            <img src="assets/images-compressed/graphics/robots.webp" alt="Love Symposium Footer Graphic" class="w-full h-auto block">
         </div>
         <footer id="footer" class="footer-container">
             <p class="font-cursive text-base md:text-xl text-[var(--off-white)] mb-1">We'd love to hear from you.</p>
@@ -499,33 +499,33 @@
             // --- PAGE CONTENT DATA ---
             // All data is centralized here for easy updates.
             const hosts = [
-                { name: 'Ann Pierce', title: 'Co-founder @ Photofeeler, conflict research', image: 'assets/images/hosts/ann-painting.webp', links: [{ url: 'https://x.com/itsannpierce', text: 'itsannpierce' }] },
-                { name: 'Matthew Fisher', title: 'Personality manifolds, relationship outcome prediction technology', image: 'assets/images/hosts/matt-painting.webp', links: [{ url: 'https://x.com/mathyouf', text: 'mathyouf' }] },
-                { name: 'Suzie Antal', title: 'Spectra Personality', image: 'assets/images/hosts/suzie2.png', links: [{ url: 'https://spectrapersonality.com/?tab=hello', text: 'spectra' }] }
+                { name: 'Ann Pierce', title: 'Co-founder @ Photofeeler, conflict research', image: 'assets/images-compressed/hosts/ann-painting.webp', links: [{ url: 'https://x.com/itsannpierce', text: 'itsannpierce' }] },
+                { name: 'Matthew Fisher', title: 'Personality manifolds, relationship outcome prediction technology', image: 'assets/images-compressed/hosts/matt-painting.webp', links: [{ url: 'https://x.com/mathyouf', text: 'mathyouf' }] },
+                { name: 'Suzie Antal', title: 'Spectra Personality', image: 'assets/images-compressed/hosts/suzie2.webp', links: [{ url: 'https://spectrapersonality.com/?tab=hello', text: 'spectra' }] }
             ];
 
             const speakers = [
-                { name: 'Cody Zervas', title: 'Keeper AI: Love at first match', image: 'assets/images/speakers/cody.jpg', links: [{url: 'https://x.com/CodyZervas', text: 'CodyZervas'}] },
-                { name: 'Christine Peterson', title: 'On why men and women should date differently', image: 'assets/images/speakers/christinepeterson.jpg', links: [{url: 'https://x.com/lifeext', text: 'lifeext'}] },
-                { name: 'Geoffrey Miller', title: 'Author of The Mating Mind', image: 'assets/images/speakers/gmiller2.png', links: [{url: 'https://x.com/primalpoly', text: 'primalpoly'}] },
-                { name: 'Rie Yano & Adam Gries', title: 'Propose on the first date', image: 'assets/images/speakers/adamrie.png', links: [{url: 'https://x.com/adamgries', text: 'adamgries'}, {url: 'https://x.com/rieglobe', text: 'rieglobe'}] },
-                { name: 'Lana Li', title: 'Researching dating in 2025', image: 'assets/images/speakers/lanali.jpg', links: [{url: 'https://lovemelikearobot.substack.com/', text: 'lovemelikearobot'}] },
-                { name: 'Vivid Void', title: 'On modern masculinity', image: 'assets/images/speakers/vividvoid.jpg', x_account: 'https://x.com/VividVoid_' },
-                { name: 'Divya Venn', title: 'On ideas for the new matchmaking industry', image: 'assets/images/speakers/divya_venn.jpg', x_account: 'https://x.com/divya_venn' },
-                { name: 'Allen Wang', title: 'Ditto AI', image: 'assets/images/speakers/allenwang2.jpeg', x_account: 'https://x.com/AllenWangzian' },
-                { name: 'Dünya Baradari', title: 'AI dating simulation @ MIT', image: 'assets/images/speakers/dunya.jpeg', links: [{url: 'https://dunya-baradari.com/', text: 'dunya-baradari.com'}] },
-                { name: 'Carla Guarnay', title: 'DateSpot Matchmaking', image: 'assets/images/speakers/carlag.webp', links: [{url: 'https://www.datespot.love', text: 'datespot'}] },
-                { name: 'Ivan Vendrov', title: 'Collective intelligence research @ Midjourney', image: 'assets/images/speakers/ivanv.jpg', links: [{url: 'https://x.com/IvanVendrov', text: 'IvanVendrov'}] },
-                { name: 'Matthieu Huss', title: 'Mosaic AI: Conversation analysis', image: 'assets/images/speakers/matthieuhuss.jpeg', links: [{url: 'https://www.mosaicchats.com/chat-analysis', text: 'Mosaic'}] },
-                { name: 'Michael Abdo', title: 'Human personality embeddings from video', image: 'assets/images/speakers/michaelabdo.png', links: [{url: 'http://Xenodex.us', text: 'Semper Progredi'}] },
-                { name: 'Chris Lakin', title: 'Awkward social events, matchmaking', image: 'assets/images/speakers/chrislakin.jpg', links: [{url: 'https://x.com/ChrischipMonk', text: 'ChrischipMonk'}] },
-                { name: 'Lucy Huang', title: 'On how to matchmake your friends', image: 'assets/images/speakers/lovebylucylu.jpg', links: [{url: 'https://x.com/lovebylucylu', text: 'lovebylucylu'}] },
-                { name: 'Margarita Geleta', title: 'Genetics, history of marriage @ UC Berkeley, Stanford', image: 'assets/images/speakers/margarita.jpeg', links: [{url: 'https://x.com/geletavc', text: 'geletavc'}] },
-                { name: 'Malcolm Ocean', title: 'On trust', image: 'assets/images/speakers/malcolmocean.jpg', links: [{url: 'https://x.com/malcolm_ocean', text: 'Malcolm_Ocean'}] },
-                { name: 'Jessica Ocean', title: 'Psych Crisis', image: 'assets/images/speakers/jessocean.jpg', links: [{url: 'https://psychcrisis.substack.com/', text: 'psychcrisis'}] },
-                { name: 'Joshua', title: 'On software tools for cooperation', image: 'assets/images/speakers/workflowsauce.jpg', links: [{url: 'https://x.com/workflowsauce', text: 'workflowsauce'}] },
-                { name: 'Defender', title: 'Memetics science writer', image: 'assets/images/speakers/defenderofbasic.jpg', links: [{url: 'https://x.com/defenderofbasic', text: 'defenderofbasic'}] },
-                { name: 'Naman Gupta', title: 'Dating markets research @ Stanford', image: 'assets/images/speakers/nahmangupta.png', links: [{url: 'https://substack.com/@ishikawagoemon', text: 'ishikawagoemon'}] },
+                { name: 'Cody Zervas', title: 'Keeper AI: Love at first match', image: 'assets/images-compressed/speakers/cody.webp', links: [{url: 'https://x.com/CodyZervas', text: 'CodyZervas'}] },
+                { name: 'Christine Peterson', title: 'On why men and women should date differently', image: 'assets/images-compressed/speakers/christinepeterson.webp', links: [{url: 'https://x.com/lifeext', text: 'lifeext'}] },
+                { name: 'Geoffrey Miller', title: 'Author of The Mating Mind', image: 'assets/images-compressed/speakers/gmiller2.webp', links: [{url: 'https://x.com/primalpoly', text: 'primalpoly'}] },
+                { name: 'Rie Yano & Adam Gries', title: 'Propose on the first date', image: 'assets/images-compressed/speakers/adamrie.webp', links: [{url: 'https://x.com/adamgries', text: 'adamgries'}, {url: 'https://x.com/rieglobe', text: 'rieglobe'}] },
+                { name: 'Lana Li', title: 'Researching dating in 2025', image: 'assets/images-compressed/speakers/lanali.webp', links: [{url: 'https://lovemelikearobot.substack.com/', text: 'lovemelikearobot'}] },
+                { name: 'Vivid Void', title: 'On modern masculinity', image: 'assets/images-compressed/speakers/vividvoid.webp', x_account: 'https://x.com/VividVoid_' },
+                { name: 'Divya Venn', title: 'On ideas for the new matchmaking industry', image: 'assets/images-compressed/speakers/divya_venn.webp', x_account: 'https://x.com/divya_venn' },
+                { name: 'Allen Wang', title: 'Ditto AI', image: 'assets/images-compressed/speakers/allenwang2.webp', x_account: 'https://x.com/AllenWangzian' },
+                { name: 'Dünya Baradari', title: 'AI dating simulation @ MIT', image: 'assets/images-compressed/speakers/dunya.webp', links: [{url: 'https://dunya-baradari.com/', text: 'dunya-baradari.com'}] },
+                { name: 'Carla Guarnay', title: 'DateSpot Matchmaking', image: 'assets/images-compressed/speakers/carlag.webp', links: [{url: 'https://www.datespot.love', text: 'datespot'}] },
+                { name: 'Ivan Vendrov', title: 'Collective intelligence research @ Midjourney', image: 'assets/images-compressed/speakers/ivanv.webp', links: [{url: 'https://x.com/IvanVendrov', text: 'IvanVendrov'}] },
+                { name: 'Matthieu Huss', title: 'Mosaic AI: Conversation analysis', image: 'assets/images-compressed/speakers/matthieuhuss.webp', links: [{url: 'https://www.mosaicchats.com/chat-analysis', text: 'Mosaic'}] },
+                { name: 'Michael Abdo', title: 'Human personality embeddings from video', image: 'assets/images-compressed/speakers/michaelabdo.webp', links: [{url: 'http://Xenodex.us', text: 'Semper Progredi'}] },
+                { name: 'Chris Lakin', title: 'Awkward social events, matchmaking', image: 'assets/images-compressed/speakers/chrislakin.webp', links: [{url: 'https://x.com/ChrischipMonk', text: 'ChrischipMonk'}] },
+                { name: 'Lucy Huang', title: 'On how to matchmake your friends', image: 'assets/images-compressed/speakers/lovebylucylu.webp', links: [{url: 'https://x.com/lovebylucylu', text: 'lovebylucylu'}] },
+                { name: 'Margarita Geleta', title: 'Genetics, history of marriage @ UC Berkeley, Stanford', image: 'assets/images-compressed/speakers/margarita.webp', links: [{url: 'https://x.com/geletavc', text: 'geletavc'}] },
+                { name: 'Naman Gupta', title: 'Dating markets research @ Stanford', image: 'assets/images-compressed/speakers/nahmangupta.webp', links: [{url: 'https://substack.com/@ishikawagoemon', text: 'ishikawagoemon'}] },
+                { name: 'Malcolm Ocean', title: 'On trust', image: 'assets/images-compressed/speakers/malcolmocean.webp', links: [{url: 'https://x.com/malcolm_ocean', text: 'Malcolm_Ocean'}] },
+                { name: 'Jessica Ocean', title: 'Psych Crisis', image: 'assets/images-compressed/speakers/jessocean.webp', links: [{url: 'https://psychcrisis.substack.com/', text: 'psychcrisis'}] },
+                { name: 'Joshua', title: 'On software tools for cooperation', image: 'assets/images-compressed/speakers/workflowsauce.webp', links: [{url: 'https://x.com/workflowsauce', text: 'workflowsauce'}] },
+                { name: 'Defender', title: 'Memetics science writer', image: 'assets/images-compressed/speakers/defenderofbasic.webp', links: [{url: 'https://x.com/defenderofbasic', text: 'defenderofbasic'}] },
             ];
             
             const faqData = [
@@ -543,7 +543,7 @@
                 if (!gallery) return;
 
                 const imageCount = 6; // We have 6 images named 1.png to 6.png
-                const imagePaths = Array.from({length: imageCount}, (_, i) => `assets/images/thecommons/${i + 1}.webp`);
+                const imagePaths = Array.from({length: imageCount}, (_, i) => `assets/images-compressed/thecommons/${i + 1}.webp`);
 
                 gallery.innerHTML = imagePaths.map(path => `
                     <div>
